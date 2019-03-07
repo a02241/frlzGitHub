@@ -71,7 +71,7 @@ public class UserController extends Cors {
      * @param session
      * @param emailCode
      * @param checkCode
-     * @Description: 检查注册重复问题,必填字段:phonenumber或者email(暂时email),emailCode(发送邮箱验证码),checkCode(填写邮箱验证码)
+     * @Description: 检查注册重复问题,必填字段:phonenumber或者email(暂时email),password,emailCode(发送邮箱验证码),checkCode(填写邮箱验证码)
      * 返回"4"为验证码错误,"5"为注册成功
      * @return void
      * @throws 
