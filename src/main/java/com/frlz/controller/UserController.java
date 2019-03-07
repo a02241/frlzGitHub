@@ -42,6 +42,8 @@ public class UserController extends Cors {
      * @throws 
      */
 
+
+
     public boolean checkAccount(@Param("account") String account){
         return ((userService.checkPhonenumber(account) + userService.checkEmail(account)) == 0);
     }
