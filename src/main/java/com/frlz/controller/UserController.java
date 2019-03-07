@@ -1,9 +1,12 @@
 package com.frlz.controller;
 
 import com.frlz.pojo.Balance;
+import com.frlz.pojo.LoginLog;
+import com.frlz.pojo.TradeLog;
 import com.frlz.pojo.User;
 import com.frlz.service.BalanceService;
 import com.frlz.service.LoginLogService;
+import com.frlz.service.TradeLogService;
 import com.frlz.service.UserService;
 import com.frlz.util.Cors;
 import com.frlz.util.MD5;
@@ -34,11 +37,10 @@ public class UserController extends Cors {
     private BalanceService balanceService;
     @Autowired
     private UserService userService;
-
     @Autowired
     private LoginLogService loginLogService;
-
-
+    @Autowired
+    private TradeLogService tradeLogService;
 
     @RequestMapping("/checkAccount")//注册时校验账号是否重复
     /**
@@ -164,6 +166,26 @@ public class UserController extends Cors {
                         cookiePass.setMaxAge(10*24*3600);
                         resp.addCookie(cookieName);
                         resp.addCookie(cookiePass);
+                    }
+                    Date date;
+                    date = new Date();
+                    SimpleDateFormat sdf;
+                    sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    String format = sdf.format(date);
+                    Date newDate =sdf.parse(format);//创建当前时间以yyyy-MM-dd hh:mm:ss格式
+                    Date loginTime = loginLogService.getLatestLoginLog(user.getUid());
+                    String lastestTime = sdf.format(loginTime);
+                    System.out.println(format+"    "+lastestTime);
+                    if (!format.equals(lastestTime)){
+                        Balance balance = balanceService.selectFromBanlanceByUid(user.getUid());//根据uid查询余额
+                        int count = balance.getQuantumBalance() + 1;//量子余额+1
+                        System.out.println(count);
+                        balanceService.updateQuantumBalanceByUid(user.getUid(),count);//交易写入数据库
+                        TradeLog tradeLog = new TradeLog();
+                        tradeLog.setBalanceId(user.getUid());
+                        tradeLog.setTradeQuantum(1);
+                        tradeLog.setRemarks("登录奖励增加1点量子");
+                        tradeLogService.insertTradeLogMapper(tradeLog);//写入交易记录
                     }
                     loginLogService.insertLoginLog(user.getUid());//插入登陆日志
                     map.put("result",data);
