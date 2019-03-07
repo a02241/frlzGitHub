@@ -48,4 +48,9 @@ public class BalanceServiceImpl implements BalanceService {
     public List<Balance> selectAllBalance() {
         return balanceMapper.selectAllBalance();
     }
+
+    @Override
+    public void LoginAddQuantumBalanceByUid(String uid, int quantumBalance) {
+
+    }
 }
