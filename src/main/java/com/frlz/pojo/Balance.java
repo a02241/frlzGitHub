@@ -13,5 +13,6 @@ public class Balance {
     private String balanceId;//主键
     private int blockBalance;//方块余额
     private int quantumBalance;//量子余额
+    private int magicCubeBalance;//魔方余额
     private String uid;//用户表主键
 }
