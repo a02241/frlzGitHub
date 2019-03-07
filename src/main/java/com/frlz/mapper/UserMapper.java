@@ -49,7 +49,7 @@ public interface UserMapper {
             "residence," +
             "privacy," +
             "state," +
-            "code)" +
+            "code,registTime)" +
             " values( #{uid}, " +
             "#{username}, " +
             "#{password}, " +
@@ -61,7 +61,8 @@ public interface UserMapper {
             "#{residence}, " +
             "#{privacy}, " +
             "#{state}, " +
-            "#{code})")
+            "#{code}, " +
+            "#{registTime})")
     void registSave(User user);
 
     @Update("update user set icon = #{icon} where username = #{username}")
