@@ -16,4 +16,5 @@ public class TradeLog {
     private int tradeQuantum;//量子交易
     private int tradeBlock;//方块交易
     private int tradeMagicCube;//魔方交易
+    private String remarks;//备注
 }
