@@ -1,0 +1,207 @@
+body{
+    background-color: #F4F4F4 
+}
+
+.zhuti{
+    display: flex;   
+}
+.right_top{
+    display: flex;
+}
+.sekuai{
+    margin-top: 806px;
+    width: 1543px;
+    height: 255px;
+    background: linear-gradient(to right,#1C6ED3,#77EEF4);
+    box-shadow: 0px 3px 23px 5px rgba(116, 114, 114, 0.28);
+}
+.personal_top{
+    overflow: hidden;
+    margin-left: 43px;
+    margin-top: 32px;
+width: 955px;
+height: 1176px;
+border-radius: 5px;
+background-color: rgba(255, 255, 255, 1);
+box-shadow: -8px 17px 23px -16px rgba(74, 74, 74, 0.17), inset -6px -19px 56px 7px rgba(218, 218, 218, 0.09);
+}
+h2{
+    width: 88px;
+    height: 30px;
+    color: rgba(74, 144, 226, 1);
+    font-size: 22px;
+    text-align: left;
+    font-family: PingFangSC-Semibold;
+    margin-left: 66px;
+    margin-top: 36px;
+}
+.personal_menu{
+    margin-left: 83px;
+    border-bottom: 1px solid #DEDEDE;
+    padding-bottom: 18px;
+    margin-right: 38px;
+}
+.personal_page{
+    margin-left: 98px;
+    height: 885px;
+    overflow: hidden;
+    border-left: 2px solid #DEDEDE;
+}
+.menu_choice{
+    margin-right: 17px;
+color: rgba(155, 155, 155, 1);
+font-size: 16.9px;
+text-align: left;
+font-family: PingFangSC-Regular;
+}
+.choosed{
+color: rgba(74, 144, 226, 1);
+font-size: 18.9px;
+text-align: left;
+font-weight: bold;
+font-family: PingFangSC-Semibold;
+}
+.safety_factor_title{
+    width: 152px;
+    height: 26px;
+    color: rgba(74, 144, 226, 1);
+    font-size: 18.9px;
+    text-align: left;
+    font-family: PingFangSC-Semibold;
+    margin-left: 54px;
+    margin-top: 31px;
+    font-weight: bold;
+}
+.safety_pct{
+    display: flex;
+    margin-top: 33px;
+    align-items: center;
+}
+.safety_pct_1{
+    width: 608px;
+    height: 14px;
+    border-radius: 10px;
+    background-color: #E0FEE3;
+    margin-left: 51px;
+}
+.safety_pct_1_1{
+    width: 496px;
+    height: 14px;
+    border-radius: 10px;
+    background: linear-gradient(to right,#77F4B5,#1C98D3) 
+}
+.safety_pct_2{
+    color: rgba(118, 199, 139, 0.947067481884058);
+    font-size: 26px;
+    text-align: left;
+    font-family: PingFangSC-Semibold;
+    margin-left: 32px;
+}
+.safety_factor_now{
+    width: 112px;
+    height: 22px;
+    color: rgba(155, 155, 155, 1);
+    font-size: 15.9px;
+    text-align: left;
+    font-family: PingFangSC-Regular;   
+    margin-left: 547px;
+    margin-top: 26px;
+}
+table{
+    border-collapse: separate;
+    border-spacing:43px;
+}
+td{
+    width: 257px;
+}
+.col_1{
+    color: rgba(155, 155, 155, 1);
+    font-size: 15.9px;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+    display: flex;
+    align-items: center;
+}
+.col_1_1{
+    border-radius: 7px;
+    width: 14px;
+    height: 14px;
+    background-color: rgba(82, 196, 26, 1);
+    margin-right: 14px;
+}
+.col_2{
+    color: rgba(155, 155, 155, 1);
+    font-size: 15.9px;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+    margin-left: 184px;
+}
+.col_3{
+    color: rgba(74, 144, 226, 1);
+    font-size: 15.9px;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+}
+.secret_setting{
+    width: 100%;
+ 
+    border-top: 1px solid #DEDEDE;
+    padding-bottom: 17px;
+}
+.secret_setting_title{
+    color: rgba(74, 144, 226, 1);
+    font-size: 18.9px;
+    text-align: left;
+    font-family: PingFangSC-Semibold;
+    margin-left: 54px;
+    margin-top: 40px;
+}
+.secret_setting_1{
+    margin-left: 54px;
+    margin-top: 20px;
+}
+.secret_setting_1_1{
+    color: rgba(155, 155, 155, 1);
+    font-size: 15.9px;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+}
+.secret_setting_1_2{
+    line-height: 14px;
+    color: rgba(96, 98, 102, 1);
+    font-size: 14px;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+    display: flex;
+    margin-right: 320px;
+    margin-top: 20px;
+    justify-content: space-between;
+}
+.tj_btn{
+    margin-left: 64px;
+    width: 853px;
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid rgba(222, 222, 222, 1);
+}
+.tj_btn_1{
+    width: 133.9px;
+    height: 47.5px;
+    border-radius: 23px;
+    background: linear-gradient(to right,#1C6ED3,#77EEF4);
+    box-shadow: 0px 3px 23px -4px rgba(116, 114, 114, 0.28);
+    color: rgba(255, 255, 255, 1);
+    font-size: 18.2px;
+    text-align: center;
+    line-height: 47.5px;
+    font-family: PingFangSC-Regular;
+    margin-top: 38px;
+}
+.blacklist{
+    color: rgba(74, 144, 226, 1);
+    font-size: 15.9px;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+    margin-top: 32px;
+    margin-left: 638px;
+}

@@ -1,0 +1,234 @@
+#login_page{
+    background-color: rgba(74, 144, 226, 0.22);
+    width: 1920px;
+    height: 2271px;
+}
+
+/*登陆界面*/
+.login_box{
+width:652px;
+height: 739.52px;
+background: white;
+margin-left: 608px;
+margin-top: 209px;
+position: absolute;
+}
+.login_x{
+    margin-top: 40px;
+    margin-left: 570px;
+}
+.login_bg{
+    text-align:center;
+}
+.login_title{
+    
+    height: 28px;
+    color: rgba(104, 104, 104, 1);
+    font-size: 26px;
+    text-align: center;
+    font-family: PingFangSC-Regular;
+}
+.login{
+    height: 66px;
+    width: 495.52px;
+    border-bottom: 1px solid rgba(74, 144, 226, 1);
+    margin-left: 78px;
+    margin-top: 79px;;
+}
+.login_1{
+    height: 66px;
+    width: 495.52px;
+    border-bottom: 1px solid rgba(74, 144, 226, 1);
+    margin-left: 78px;
+    margin-top: 10px;;
+}
+.login_tip{
+    
+color: rgba(104, 104, 104, 0.6);
+font-size: 13px;
+text-align: left;
+font-family: PingFangSC-Regular;
+}
+.login_text{
+    width: 300px;
+    height: 20px;
+    border: 0;
+    color: rgba(104, 104, 104, 0.6) ;
+    font-size: 16.9px;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+    margin: 0;
+}
+.login_inf{
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0;
+    align-items: flex-end;
+}
+.login_zhuce{
+    margin-left: 496px;
+    margin-top: 13px;
+color: rgba(74, 144, 226, 1);
+font-size: 15.6px;
+text-align: left;
+font-family: PingFangSC-Regular;
+}
+.login_bottom{
+    display: flex;
+    width: 495.52px;
+    margin-left: 77px;
+    margin-top: 13px;
+    justify-content: space-between;
+}
+.login_auto{
+width: 150px;
+height: 18px;
+color: rgba(104, 104, 104, 0.6);
+font-size: 15.6px;
+text-align: left;
+font-family: PingFangSC-Regular;
+}
+.login_forget{
+    width: 78.24px;
+    height: 17px;
+    color: rgba(74, 144, 226, 1);
+    font-size: 15.6px;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+}
+
+.login_button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 26px;
+    color: rgba(255, 255, 255, 1);
+    font-size: 18.2px;
+    text-align: center;
+    font-family: PingFangSC-Regular;
+    width: 143px;
+    height: 54.6px;
+    border-radius: 27px;
+    background-color: rgba(74, 144, 226, 1);
+    box-shadow: -10px 22px 30px -21px rgba(74, 74, 74, 0.17), 0px 3px 5px 0px rgba(103, 103, 103, 0.5), inset -8px -25px 73px 9px rgba(218, 218, 218, 0.09);
+    position: absolute;
+    margin-top: 130px;
+    margin-left: 430px;
+}
+/*注册界面通用*/
+.box{
+    
+    width: 650px;
+    height: 1016.6px;
+    background-color: white;
+    margin-left: 608px;
+    margin-top: 209px;
+    position: absolute;
+}
+.zhuce{
+    margin-top: 46px;
+    height: 66px;
+    width: 494px;
+    margin-left: 78px;
+    margin-right: 78px;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1.3px solid rgba(74, 144, 226, 1)
+}
+.zhuce_x{
+    margin-top: 40px;
+    margin-left: 570px;
+}
+.zhuce_bg{
+    text-align: center;
+}
+.zhuce_title{
+color: rgba(104, 104, 104, 1);
+font-size: 26px;
+text-align: center;
+margin-left: 220px;
+font-family: PingFangSC-Regular;
+}
+.sendyzm{
+    margin-bottom: 8px;
+    color:white;
+    font-size: 15.6px;
+    text-align: center;
+width: 119.6px;
+height: 37.7px;
+line-height: 37.7px;
+border-radius: 18px;
+background-color: rgba(74, 144, 226, 1);
+box-shadow: -10px 22px 30px -21px rgba(74, 74, 74, 0.17), 0px 3px 5px 0px rgba(103, 103, 103, 0.5), inset -8px -25px 73px 9px rgba(218, 218, 218, 0.09);
+}
+.zhuce_tip{
+color: rgba(104, 104, 104, 0.6);
+font-size: 16.9px;
+text-align: left;
+font-family: PingFangSC-Regular;
+}
+.zhuce_text{
+border: 0;
+width: 300px;
+height: 20px;
+padding-bottom: 0;
+color: rgba(104, 104, 104, 0.6);
+font-size: 16.9px;
+text-align: left;
+font-family: PingFangSC-Regular;
+}
+input{
+    outline:none;
+}
+.zhuce_inf{
+    height: 40px; 
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0;
+    align-items: flex-end;
+    
+}
+.zhuce_change{
+    margin-left: 469px;
+    color: rgba(74, 144, 226, 1);
+    font-size: 15.6px;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+    margin-top: 13px;
+}
+.zhuce_sjh{
+    margin-top: 71px;
+}
+.zhuce_yzm{
+    margin-top: 11px;
+    margin-bottom: 8px;
+}
+.zhuce_button{
+    
+    margin-left: 1028px;
+    margin-top: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 26px;
+    color: rgba(255, 255, 255, 1);
+    font-size: 18.2px;
+    text-align: center;
+    font-family: PingFangSC-Regular;
+    width: 143px;
+    height: 54.6px;
+    border-radius: 27px;
+    background-color: rgba(74, 144, 226, 1);
+    box-shadow: -10px 22px 30px -21px rgba(74, 74, 74, 0.17), 0px 3px 5px 0px rgba(103, 103, 103, 0.5), inset -8px -25px 73px 9px rgba(218, 218, 218, 0.09);
+    position: absolute;
+}
+.zhuce_box{
+    display: none;
+}
+#phone_zhuce{
+    display: block;
+}
+#email_zhuce{
+    display: none;
+}

@@ -1,0 +1,307 @@
+body{
+    background-color: #F4F4F4 
+}
+
+.zhuti{
+    display: flex;   
+}
+
+.right_top{
+    display: flex;
+}
+
+/*轮播图*/
+ul, ol { padding: 0;}
+.banner { position: relative; overflow: auto; text-align: center;margin-top: 15px;}
+.banner li { list-style: none; }
+.banner ul li { float: left; }
+#b04 { width: 640px;}
+#b04 .dots { position: absolute; left: 0; right: 0; bottom: 20px;}
+#b04 .dots li 
+{ 
+	display: inline-block; 
+	width: 5px; 
+	height: 5px; 
+	margin: 0 4px; 
+	text-indent: -999em; 
+	border: 1px solid #fff; 
+	border-radius: 6px; 
+	cursor: pointer; 
+	opacity: .4; 
+	-webkit-transition: background .5s, opacity .5s; 
+	-moz-transition: background .5s, opacity .5s; 
+    transition: background .5s, opacity .5s;
+}
+#b04 .dots li.active 
+{
+	background: #fff;
+	opacity: 1;
+}
+#b04 .arrow { position: absolute; top: 200px;}
+#b04 #al { left: 15px;}
+#b04 #ar { right: 15px;}
+.banner1{
+    width: 954px;
+    height: 371px;
+}
+.middle{
+    width: 955px;
+    margin-left: 47px;
+}
+.middle_menu{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.middle_menu_1{
+    width: 214px;
+    height: 197px;
+    background-color: white;
+    margin-top: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #4A90E2;
+    font-size: 16.9px;
+    text-align: left;
+    font-family: PingFangSC-Semibold;
+}
+.middle_menu_1_icon{
+    margin-top: 63px;
+    margin-bottom: 30px;
+    width: 60px;
+    height: 60px;
+}
+#icon_1{
+    background: url('../img/panqianjihua.png')
+}
+#icon_1:hover{
+    background: url('../img/panqianjihua1.gif')
+}
+#icon_2{
+    background: url('../img/panzhongsuji.png')
+}
+#icon_2:hover{
+    background: url('../img/panzhongsuji1.gif')
+}
+#icon_3{
+    background: url('../img/panhouguancha.png')
+}
+#icon_3:hover{
+    background: url('../img/panhouguancha1.gif')
+}
+#icon_4{
+    background: url('../img/jiaoyilishi.png')
+}
+#icon_4:hover{
+    background: url('../img/jiaoyilishi1.gif')
+}
+/* live部分样式 */
+.middle_live{
+    width: 100%;
+    margin-top: 40px;
+    background-color: white;
+    padding-top: 36px;
+}
+.middle_live_title{
+    margin-left: 65px;
+color: #4A90E2;
+font-size: 22px;
+text-align: left;
+font-family: PingFangSC-Semibold;
+}
+.middle_live_menu{
+    margin-top: 33px;
+    margin-left: 82px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #DEDEDE;
+    width: 853px;
+}
+.middle_live_menu_1{
+    margin-right: 21px;
+color: rgba(155, 155, 155, 1);
+font-size: 16.9px;
+text-align: left;
+font-family: PingFangSC-Regular;
+}
+.middle_live_menu_1:first-child{
+    color:#4A90E2 ;
+}
+
+.news{
+    border-bottom: 2px solid #DEDEDE;
+    border-left: 2px solid #DEDEDE;
+    width: 859px;
+    margin-left: 90px;
+    padding-top: 25px;
+}
+.news_title{
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.news_title_left{
+    width: 100px;
+    
+    display: flex;
+    justify-content: space-between;
+}
+.news_title_right{
+    width: 683px;
+    margin-right: 70px;
+    display: flex;
+    justify-content: space-between;
+}
+.news_title_dian{
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    background-color: #4A90E2;
+    box-shadow: -8px 17px 23px -16px rgba(74, 74, 74, 0.17), 0px 2px 4px 0px rgba(103, 103, 103, 0.5), inset -6px -19px 56px 7px rgba(218, 218, 218, 0.09);
+}
+.news_title_time{
+    color: rgba(155, 155, 155, 1);
+    font-size: 16.9px;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+}
+.news_title_name{
+    color: #4A90E2;
+    font-size: 19.5px;
+    text-align: left;
+    font-family: PingFangSC-Semibold;
+}
+.news_content{
+    margin-left: 103px;
+    margin-top: 9px;
+    margin-bottom: 26px;
+width: 703px;
+color: rgba(155, 155, 155, 1);
+font-size: 16.9px;
+text-align: left;
+font-family: PingFangSC-Regular;
+}
+.more{
+    width: 859px;
+    height: 99px;
+    margin-left: 63px;
+    display: flex;
+    align-items: center;
+}
+.more_1{
+    margin-left: 351px;
+color: #4A90E2;
+font-size: 18.2px;
+text-align: left;
+font-family: PingFangSC-Regular;
+}
+.more_2{
+    margin-left: 355px;
+}
+
+/* 右侧部分*/
+.right{
+
+}
+.right_1{
+margin-top: 32px;
+margin-right: 40px;
+margin-left: 40px;
+ 
+}
+.right_1_1{
+    width: 455px;
+    height: 105px;
+    background-color: white;
+    margin-bottom: 21px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.num{
+    margin-left: 50px;
+}
+.num1{
+color: rgba(249, 46, 83, 0.947067481884058);
+font-size: 28.6px;
+text-align: left;
+font-family: PingFangSC-Semibold;
+}
+.num2{
+color: rgba(249, 46, 83, 0.947067481884058);
+font-size: 15.6px;
+text-align: left;
+font-family: PingFangSC-Regular;
+}
+.right_icon{
+    margin-right: 32px;
+}
+.right_2{
+    width: 455px;
+    margin-top: 37px;
+    margin-left: 43px;
+    background-color: white;
+    padding-top: 31px;
+}
+.notice_header{
+    margin-left: 45px;
+color: #4A90E2;
+font-size: 22px;
+text-align: left;
+font-family: PingFangSC-Semibold;
+}
+.notice{
+border-bottom: 1px solid rgba(222, 222, 222, 1);
+margin-left: 35px;
+width: 395px;
+
+}
+.notice_title{
+    margin-top: 23px;
+display: flex;
+justify-content: space-between;
+}
+.notice_title_name{
+    color: #4A90E2;
+    font-size: 18px;
+    text-align: left;
+    font-family: PingFangSC-Semibold;
+    
+}
+.notice_title_sc{
+    margin-right: 42px;
+}
+.notice_content{
+   
+    margin-top: 26px;
+    margin-bottom: 23px;
+color: rgba(155, 155, 155, 1);
+font-size: 16.9px;
+text-align: left;
+font-family: PingFangSC-Regular;
+}
+.notice_more{
+    height: 97px;
+    display: flex;
+  
+    align-items: center;
+}
+.notice_more_1{
+    margin-left: 173px;
+color: rgba(74, 144, 226, 1);
+font-size: 18.2px;
+text-align: left;
+font-family: PingFangSC-Regular;
+}
+.notice_more_2{
+    margin-left: 120px;
+}
+.sekuai{
+    margin-top: 48px;
+width: 1543px;
+height: 255px;
+background: linear-gradient(to right,#1C6ED3,#77EEF4);
+box-shadow: 0px 3px 23px 5px rgba(116, 114, 114, 0.28);
+}
+
