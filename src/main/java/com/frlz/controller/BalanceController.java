@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 @RestController
 public class BalanceController {
+
     @Autowired
     private BalanceService balanceService;
-
 
     @Transactional
     @RequestMapping("/quantumToBlock")

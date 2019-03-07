@@ -1,14 +1,15 @@
 package com.frlz.mapper;
 
 import com.frlz.pojo.Balance;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
 public interface BalanceMapper {
 
+    @SelectKey(keyProperty = "balanceId",resultType = String.class, before = true,
+            statement = "select replace(uuid(), '-', '')")
+    @Options(keyProperty = "balanceId", useGeneratedKeys = true)
     @Insert("insert into balance values(#{balanceId},#{blockBalance},#{quantumBalance},#{magicCubeBalance},#{uid})")
     void insertBalance(Balance balance);
 

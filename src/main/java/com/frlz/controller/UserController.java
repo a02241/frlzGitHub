@@ -1,6 +1,8 @@
 package com.frlz.controller;
 
+import com.frlz.pojo.Balance;
 import com.frlz.pojo.User;
+import com.frlz.service.BalanceService;
 import com.frlz.service.LoginLogService;
 import com.frlz.service.UserService;
 import com.frlz.util.Cors;
@@ -29,8 +31,12 @@ public class UserController extends Cors {
 
     @Autowired
     private UserService userService;
+
     @Autowired
     private LoginLogService loginLogService;
+
+    @Autowired
+    private BalanceService balanceService;
 
     @RequestMapping("/checkAccount")//注册时校验账号是否重复
     /**
@@ -101,6 +107,13 @@ public class UserController extends Cors {
                 user.setPassword(MD5.MD5Encode("fr2018<%" + user.getPassword()  + "%>lz1220"));
                 //注册信息
                 userService.registSave(user);
+                //创建余额账户
+                Balance balance = new Balance();
+                balance.setUid(user.getUid());
+                balance.setBlockBalance(0);
+                balance.setQuantumBalance(0);
+                balance.setMagicCubeBalance(0);
+                balanceService.insertBalance(balance);
             }
             response.getWriter().write(check);
         } catch (IOException e) {
