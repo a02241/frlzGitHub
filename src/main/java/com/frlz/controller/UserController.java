@@ -25,6 +25,8 @@ import static com.frlz.util.GetUername.getUsername;
 @RestController
 public class UserController extends Cors {
 
+
+
     @Autowired
     private UserService userService;
     @Autowired
