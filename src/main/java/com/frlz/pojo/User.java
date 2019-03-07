@@ -2,6 +2,8 @@ package com.frlz.pojo;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class User {
 	private String username;//用户名
@@ -20,26 +22,5 @@ public class User {
 	private String province;//省份
 	private String city;//城市
 	private Blog blog;
-
-	public User(String username, String password, String uid, String phonenumber, String email, String icon, int investmentage, String profile, String profession, String residence, int privacy, int state, String code, String province, String city, Blog blog) {
-		this.username = username;
-		this.password = password;
-		this.uid = uid;
-		this.phonenumber = phonenumber;
-		this.email = email;
-		this.icon = icon;
-		this.investmentage = investmentage;
-		this.profile = profile;
-		this.profession = profession;
-		this.residence = residence;
-		this.privacy = privacy;
-		this.state = state;
-		this.code = code;
-		this.province = province;
-		this.city = city;
-		this.blog = blog;
-	}
-
-	public User() {
-	}
+	private Date registTime;//注册时间
 }

@@ -19,6 +19,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -103,6 +106,13 @@ public class UserController extends Cors {
                 user.setState(1);
                 //默认激活码
                 user.setCode("a123");
+                //注册时间
+                Date date = new Date();
+                SimpleDateFormat sdf;
+                sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                String format = sdf.format(date);
+                Date newDate =sdf.parse(format);//创建当前时间以yyyy-MM-dd hh:mm:ss格式
+                user.setRegistTime(newDate);
                 //MD5加密
                 user.setPassword(MD5.MD5Encode("fr2018<%" + user.getPassword()  + "%>lz1220"));
                 //注册信息
@@ -116,7 +126,7 @@ public class UserController extends Cors {
                 balanceService.insertBalance(balance);
             }
             response.getWriter().write(check);
-        } catch (IOException e) {
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
     }
