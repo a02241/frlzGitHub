@@ -3,7 +3,6 @@ package com.frlz.service.serviceImpl;
 import com.frlz.mapper.UserMapper;
 import com.frlz.pojo.User;
 import com.frlz.service.UserService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -99,5 +98,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public String checkPasswordByUId(String uid) {
         return userMapper.checkPasswordByUId(uid);
+    }
+
+    @Override
+    public void deleteUserByUid(String uid) {
+        userMapper.deleteByUid(uid);
     }
 }

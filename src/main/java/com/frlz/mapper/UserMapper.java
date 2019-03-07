@@ -1,9 +1,9 @@
 package com.frlz.mapper;
 
-import java.util.List;
-
 import com.frlz.pojo.User;
 import org.apache.ibatis.annotations.*;
+
+import java.util.List;
 
 public interface UserMapper {
     @Select("select * from user")
@@ -83,5 +83,6 @@ public interface UserMapper {
     void updatePassword(User user);
 
 
+    @Delete("delete from user where uid = #{uid}")
     void deleteByUid(String uid);
 }

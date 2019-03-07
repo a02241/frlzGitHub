@@ -32,4 +32,6 @@ public interface UserService {
 	public void updatePassword(User user);
 
 	public String  checkPasswordByUId(String uid);
+
+	public void deleteUserByUid(String uid);
 }

@@ -1,9 +1,12 @@
 package com.frlz.service.serviceImpl;
 
 import com.frlz.mapper.BalanceMapper;
+import com.frlz.pojo.Balance;
 import com.frlz.service.BalanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @program: frlz
@@ -15,4 +18,34 @@ import org.springframework.stereotype.Service;
 public class BalanceServiceImpl implements BalanceService {
     @Autowired
     private BalanceMapper balanceMapper;
+
+    @Override
+    public void insertBalance(Balance balance) {
+        balanceMapper.insertBalance(balance);
+    }
+
+    @Override
+    public Balance selectFromBanlanceByUid(String uid) {
+        return balanceMapper.selectFromBanlanceByUid(uid);
+    }
+
+    @Override
+    public void updateQuantumBalanceByUid(String uid, int quantumBalance) {
+        balanceMapper.updateQuantumBalanceByUid(uid,quantumBalance);
+    }
+
+    @Override
+    public void updateBlockBalanceByUid(String uid, int blockBalance) {
+        balanceMapper.updateBlockBalanceByUid(uid,blockBalance);
+    }
+
+    @Override
+    public void updateMagicCubeBalanceByUid(String uid, int magicCubeBalance) {
+        balanceMapper.updateMagicCubeBalanceByUid(uid,magicCubeBalance);
+    }
+
+    @Override
+    public List<Balance> selectAllBalance() {
+        return balanceMapper.selectAllBalance();
+    }
 }

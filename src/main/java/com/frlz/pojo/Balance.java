@@ -15,4 +15,5 @@ public class Balance {
     private int quantumBalance;//量子余额
     private int magicCubeBalance;//魔方余额
     private String uid;//用户表主键
+    private int magicCubeBalance;//魔方余额
 }
