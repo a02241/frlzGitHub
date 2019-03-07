@@ -1,6 +1,9 @@
 package com.frlz.service.serviceImpl;
 
+import com.frlz.mapper.TradeLogMapper;
+import com.frlz.pojo.TradeLog;
 import com.frlz.service.TradeLogService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,4 +14,12 @@ import org.springframework.stereotype.Service;
  **/
 @Service
 public class TradeLogServiceImpl implements TradeLogService {
+
+    @Autowired
+    private TradeLogMapper tradeLogMapper;
+
+    @Override
+    public void insertTradeLogMapper(TradeLog tradeLog) {
+        tradeLogMapper.insertTradeLogMapper(tradeLog);
+    }
 }

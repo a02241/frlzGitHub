@@ -1,6 +1,8 @@
 package com.frlz.controller;
 
+import com.frlz.mapper.TradeLogMapper;
 import com.frlz.pojo.Balance;
+import com.frlz.pojo.TradeLog;
 import com.frlz.service.BalanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +21,9 @@ public class BalanceController {
     @Autowired
     private BalanceService balanceService;
 
+    @Autowired
+    private TradeLogMapper tradeLogMapper;
+
     @Transactional
     @RequestMapping("/quantumToBlock")
     public String quantumToBlock(String uid,int quantum){
@@ -28,6 +33,12 @@ public class BalanceController {
             balanceService.updateQuantumBalanceByUid(uid,newQuantum);
             int newBlock = balance.getBlockBalance() + quantum / 10 ;
             balanceService.updateBlockBalanceByUid(uid,newBlock);
+            TradeLog tradeLog = new TradeLog();
+            tradeLog.setBalanceId(balance.getBalanceId());
+            tradeLog.setTradeQuantum(-quantum);
+            tradeLog.setTradeBlock(quantum/10);
+            tradeLog.setRemarks("量子兑换方块");
+            tradeLogMapper.insertTradeLogMapper(tradeLog);
             return "兑换成功";
         }else {
             return "余额不足";
@@ -44,6 +55,12 @@ public class BalanceController {
             balanceService.updateQuantumBalanceByUid(uid,newQuantum);
             int newBlock = balance.getBlockBalance() - block ;
             balanceService.updateBlockBalanceByUid(uid,newBlock);
+            TradeLog tradeLog = new TradeLog();
+            tradeLog.setBalanceId(balance.getBalanceId());
+            tradeLog.setTradeQuantum(block * 10);
+            tradeLog.setTradeBlock(-block);
+            tradeLog.setRemarks("方块兑换量子");
+            tradeLogMapper.insertTradeLogMapper(tradeLog);
             return "兑换成功";
         }else {
             return "余额不足";
@@ -60,6 +77,12 @@ public class BalanceController {
             balanceService.updateBlockBalanceByUid(uid,newBlock);
             int newMagicCube = balance.getMagicCubeBalance() - magicCube;
             balanceService.updateMagicCubeBalanceByUid(uid,newMagicCube);
+            TradeLog tradeLog = new TradeLog();
+            tradeLog.setBalanceId(balance.getBalanceId());
+            tradeLog.setTradeMagicCube(-magicCube);
+            tradeLog.setTradeBlock(magicCube * 26);
+            tradeLog.setRemarks("魔方兑换方块");
+            tradeLogMapper.insertTradeLogMapper(tradeLog);
             return "兑换成功";
         }else {
             return "余额不足";
@@ -76,6 +99,12 @@ public class BalanceController {
             balanceService.updateBlockBalanceByUid(uid,newBlock);
             int newMagicCube = balance.getMagicCubeBalance() + block / 27;
             balanceService.updateMagicCubeBalanceByUid(uid,newMagicCube);
+            TradeLog tradeLog = new TradeLog();
+            tradeLog.setBalanceId(balance.getBalanceId());
+            tradeLog.setTradeMagicCube(block / 27);
+            tradeLog.setTradeBlock(-block);
+            tradeLog.setRemarks("方块兑换魔方");
+            tradeLogMapper.insertTradeLogMapper(tradeLog);
             return "兑换成功";
         }else {
             return "余额不足";

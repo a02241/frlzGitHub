@@ -49,7 +49,8 @@ public interface UserMapper {
             "residence," +
             "privacy," +
             "state," +
-            "code,registTime)" +
+            "code," +
+            "registTime)" +
             " values( #{uid}, " +
             "#{username}, " +
             "#{password}, " +

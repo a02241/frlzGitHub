@@ -38,8 +38,7 @@ public class UserController extends Cors {
     @Autowired
     private LoginLogService loginLogService;
 
-    @Autowired
-    private BalanceService balanceService;
+
 
     @RequestMapping("/checkAccount")//注册时校验账号是否重复
     /**
@@ -117,6 +116,7 @@ public class UserController extends Cors {
                 user.setPassword(MD5.MD5Encode("fr2018<%" + user.getPassword()  + "%>lz1220"));
                 //注册信息
                 userService.registSave(user);
+                loginLogService.insertLoginLog(user.getUid());//插入登陆日志
                 //创建余额账户
                 Balance balance = new Balance();
                 balance.setUid(user.getUid());
