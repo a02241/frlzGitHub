@@ -18,4 +18,6 @@ public interface BalanceService {
     void updateMagicCubeBalanceByUid(String uid,int magicCubeBalance);
 
     List<Balance> selectAllBalance();
+
+    void LoginAddQuantumBalanceByUid(String uid,int quantumBalance);
 }
