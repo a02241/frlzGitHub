@@ -78,10 +78,10 @@ public class BlogController {
         return map;
     }
 
-    @RequestMapping("/insertBlog")
+    @RequestMapping("/`                        ")
     /**
      * 添加博客
-     * @title inserBlog
+     * @title insertBlog
      * @author cz
      * @date 2019/3/1 15:48
      * @param blog
@@ -91,7 +91,7 @@ public class BlogController {
      * @throws Exception
      */
 
-    public boolean inserBlog(Blog blog,String uid)throws Exception{
+    public boolean insertBlog(Blog blog,String uid)throws Exception{
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String format = sdf.format(date);
