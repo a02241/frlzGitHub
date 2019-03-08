@@ -10,6 +10,7 @@ import com.frlz.service.UserService;
 import com.frlz.util.Cors;
 import com.frlz.util.MD5;
 import com.frlz.util.Mail;
+import com.frlz.util.SendMessage;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,13 +72,13 @@ public class UserController extends Cors {
      * @param session
      * @param emailCode
      * @param checkCode
-     * @Description: 检查注册重复问题,必填字段:phonenumber或者email(暂时email),password,emailCode(发送邮箱验证码),checkCode(填写邮箱验证码)
+     * @Description: 检查注册重复问题,必填字段:phonenumber或者email,password,sentCode(发送验证码),checkCode(填写验证码)
      * 返回"4"为验证码错误,"5"为注册成功
      * @return void
      * @throws 
      */
-    
-    public void check(User user , HttpServletResponse response,@RequestParam(defaultValue="0")String emailCode, @RequestParam(defaultValue="9")String checkCode) {
+
+    public void check(User user , HttpServletResponse response,@RequestParam(defaultValue="0")String sentCode, @RequestParam(defaultValue="9")String checkCode) {
         String username = getUsername();
         user.setUsername(username);
         String check = userService.check(user);
@@ -87,13 +88,13 @@ public class UserController extends Cors {
             user.setUsername(username);
             check = userService.check(user);
         }
-        System.out.println(emailCode + ":" + checkCode);
+        System.out.println(sentCode + ":" + checkCode);
         try {
-            if(check.equals("5") && !emailCode.equals(checkCode)) {
+            if(check.equals("5") && !sentCode.equals(checkCode)) {
                 check = "4";
             }
             System.out.println(check + "~~~~");
-            if(check.equals("5") && emailCode.equals(checkCode)) {
+            if(check.equals("5") && sentCode.equals(checkCode)) {
                 //随机用户名
                 user.setUsername(username);
                 //默认头像
@@ -179,7 +180,6 @@ public class UserController extends Cors {
                     Date newDate =sdf.parse(format);//创建当前时间以yyyy-MM-dd hh:mm:ss格式
                     Date loginTime = loginLogService.getLatestLoginLog(user.getUid());
                     String lastestTime = sdf.format(loginTime);
-                    System.out.println(format+"    "+lastestTime);
                     if (!format.equals(lastestTime)){
                         Balance balance = balanceService.selectFromBanlanceByUid(user.getUid());//根据uid查询余额
                         int count = balance.getQuantumBalance() + 1;//量子余额+1
@@ -249,6 +249,25 @@ public class UserController extends Cors {
         }
     }
 
+    @RequestMapping("sendPhonenumberMessage")
+    /**
+     *
+     * @title sendPhonenumberMessage
+     * @create by: cz
+     * @description: 必填字段phonenumber,返回sentCode(验证码)
+     * @create time: 2019/3/8 10:09
+     * @Param: phonenumber
+     * @throws
+     * @return java.util.HashMap<java.lang.String,java.lang.Object>
+     * @version V1.0
+     */
+
+    public HashMap<String,Object> sendPhonenumberMessage(String phonenumber){
+        HashMap<String,Object> map = new HashMap<>();
+        String message = SendMessage.sendMessage(phonenumber);
+        map.put("sentCode",message);
+        return map;
+    }
     @RequestMapping("/uploadUserIcon")
     /**
      * 上传头像

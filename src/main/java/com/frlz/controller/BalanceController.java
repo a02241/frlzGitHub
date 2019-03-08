@@ -26,6 +26,19 @@ public class BalanceController {
 
     @Transactional
     @RequestMapping("/quantumToBlock")
+    /**
+     * 量子换方块
+     * @title quantumToBlock
+     * @create by: cz
+     * @description: 必填字段:uid,quantum,返回中文信息
+     * @create time: 2019/3/8 10:24
+     * @Param: uid
+     * @Param: quantum
+     * @throws
+     * @return java.lang.String
+     * @version V1.0
+     */
+
     public String quantumToBlock(String uid,int quantum){
         Balance balance = balanceService.selectFromBanlanceByUid(uid);
         if (balance.getQuantumBalance() >= 10){
@@ -48,6 +61,19 @@ public class BalanceController {
 
     @Transactional
     @RequestMapping("/blockToQuantum")
+    /**
+     * 方块换量子
+     * @title blockToQuantum
+     * @create by: cz
+     * @description: 必填字段uid,block,返回中文信息
+     * @create time: 2019/3/8 10:26
+     * @Param: uid
+     * @Param: block
+     * @throws
+     * @return java.lang.String
+     * @version V1.0
+     */
+
     public String blockToQuantum(String uid,int block){
         Balance balance = balanceService.selectFromBanlanceByUid(uid);
         if (balance.getBlockBalance() > 0){
@@ -70,6 +96,19 @@ public class BalanceController {
 
     @Transactional
     @RequestMapping("/magicCubeToBlock")
+    /**
+     * 魔方换方块
+     * @title magicCubeToBlock
+     * @create by: cz
+     * @description: 必填字段uid,magicCube,返回中文参数
+     * @create time: 2019/3/8 10:27
+     * @Param: uid
+     * @Param: magicCube
+     * @throws
+     * @return java.lang.String
+     * @version V1.0
+     */
+
     public String magicCubeToBlock(String uid,int magicCube){
         Balance balance = balanceService.selectFromBanlanceByUid(uid);
         if (balance.getMagicCubeBalance() > 0){
@@ -92,6 +131,19 @@ public class BalanceController {
 
     @Transactional
     @RequestMapping("/blockToMagicCube")
+    /**
+     * 方块换魔方
+     * @title blockToMagicCube
+     * @create by: cz
+     * @description: 必填字段uid,block,返回中文参数
+     * @create time: 2019/3/8 10:28
+     * @Param: uid
+     * @Param: block
+     * @throws
+     * @return java.lang.String
+     * @version V1.0
+     */
+
     public String blockToMagicCube(String uid,int block){
         Balance balance = balanceService.selectFromBanlanceByUid(uid);
         if (balance.getBlockBalance() >= 27){

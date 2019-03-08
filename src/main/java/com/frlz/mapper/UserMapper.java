@@ -40,6 +40,7 @@ public interface UserMapper {
             statement = "select replace(uuid(), '-', '')")
     @Options(keyProperty = "uid", useGeneratedKeys = true)
     @Insert("insert into user(uid, " +
+            "phonenumber," +
             "username," +
             "password," +
             "email," +
@@ -52,6 +53,7 @@ public interface UserMapper {
             "code," +
             "registTime)" +
             " values( #{uid}, " +
+            "#{phonenumber}, " +
             "#{username}, " +
             "#{password}, " +
             "#{email}, " +

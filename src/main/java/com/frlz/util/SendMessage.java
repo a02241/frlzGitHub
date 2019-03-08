@@ -12,7 +12,7 @@ import com.aliyuncs.profile.DefaultProfile;
 import java.util.Random;
 
 public class SendMessage {
-    public String sendMessage(String phonenumber){
+    public static String sendMessage(String phonenumber){
         DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAILHEY9t3Hc4zU", "jW2VziRJssITv65isnwKyQwr7GOxoC");
         IAcsClient client = new DefaultAcsClient(profile);
         String verifyCode = String.valueOf(new Random().nextInt(899999) + 100000);
