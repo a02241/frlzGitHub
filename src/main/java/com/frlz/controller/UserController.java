@@ -190,6 +190,7 @@ public class UserController extends Cors {
                     loginLogService.insertLoginLog(user.getUid());//插入登陆日志
                     map.put("result",data);
                     map.put("Myusermane",user.getUsername());
+                    map.put("uid",user.getUid());
                 }else {
                     data = "2";//密码不同返回2
                     map.put("result",data);
