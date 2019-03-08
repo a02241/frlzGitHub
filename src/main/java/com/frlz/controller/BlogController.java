@@ -1,27 +1,18 @@
 package com.frlz.controller;
 
-import com.frlz.mapper.BlogMapper;
 import com.frlz.pojo.Blog;
-import com.frlz.pojo.Shares;
 import com.frlz.service.BlogService;
-import com.frlz.service.SharesService;
 import com.frlz.service.UserService;
 import com.frlz.util.PageBean;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @RestController
 public class BlogController {
@@ -91,7 +82,7 @@ public class BlogController {
      * @throws Exception
      */
 
-    public boolean inserBlog(Blog blog,String uid)throws Exception{
+    public boolean insertBlog(Blog blog,String uid)throws Exception{
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String format = sdf.format(date);

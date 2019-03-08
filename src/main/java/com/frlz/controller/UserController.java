@@ -1,7 +1,6 @@
 package com.frlz.controller;
 
 import com.frlz.pojo.Balance;
-import com.frlz.pojo.LoginLog;
 import com.frlz.pojo.TradeLog;
 import com.frlz.pojo.User;
 import com.frlz.service.BalanceService;
@@ -123,9 +122,14 @@ public class UserController extends Cors {
                 Balance balance = new Balance();
                 balance.setUid(user.getUid());
                 balance.setBlockBalance(0);
-                balance.setQuantumBalance(0);
+                balance.setQuantumBalance(1);
                 balance.setMagicCubeBalance(0);
                 balanceService.insertBalance(balance);
+                TradeLog tradeLog = new TradeLog();
+                tradeLog.setBalanceId(user.getUid());
+                tradeLog.setTradeQuantum(1);
+                tradeLog.setRemarks("登录奖励增加1点量子");
+                tradeLogService.insertTradeLogMapper(tradeLog);//写入交易记录
             }
             response.getWriter().write(check);
         } catch (IOException | ParseException e) {
@@ -179,7 +183,6 @@ public class UserController extends Cors {
                     if (!format.equals(lastestTime)){
                         Balance balance = balanceService.selectFromBanlanceByUid(user.getUid());//根据uid查询余额
                         int count = balance.getQuantumBalance() + 1;//量子余额+1
-                        System.out.println(count);
                         balanceService.updateQuantumBalanceByUid(user.getUid(),count);//交易写入数据库
                         TradeLog tradeLog = new TradeLog();
                         tradeLog.setBalanceId(user.getUid());
@@ -269,7 +272,7 @@ public class UserController extends Cors {
             if (type2 != null) {
                 if ("GIF".equals(type2.toUpperCase()) || "PNG".equals(type2.toUpperCase()) || "JPG".equals(type2.toUpperCase())) {
 
-                    path = "E:/img/"+ username + ".jpg";
+                    path = "/www/server/img/"+ username + ".jpg";
 
                     file.transferTo(new File(path));
 
