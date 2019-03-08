@@ -3,6 +3,7 @@ package com.frlz.service;
 
 import com.frlz.pojo.LoginLog;
 
+import java.util.Date;
 import java.util.List;
 
 public interface LoginLogService {
@@ -11,5 +12,5 @@ public interface LoginLogService {
 
     List<LoginLog> getAllLoginLog();
 
-    LoginLog getLatestLoginLog(String uid);
+    Date getLatestLoginLog(String uid);
 }

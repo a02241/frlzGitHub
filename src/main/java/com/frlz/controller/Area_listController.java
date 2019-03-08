@@ -2,7 +2,7 @@ package com.frlz.controller;
 
 import com.frlz.pojo.Area_List;
 import com.frlz.service.Area_ListService;
-import com.frlz.service.serviceImpl.Area_ListServiceImpl;
+import com.frlz.util.SendMessage;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +18,15 @@ import java.util.List;
  **/
 @RestController
 public class Area_listController {
+
+
+
+    @RequestMapping("/ll")
+    public String ll(){
+        SendMessage sendMessage = new SendMessage();
+        String str = sendMessage.sendMessage("18668588631");
+        return str;
+    }
 
     @Autowired
     private Area_ListService area_ListService;

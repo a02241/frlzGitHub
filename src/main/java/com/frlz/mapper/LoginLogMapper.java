@@ -4,6 +4,7 @@ import com.frlz.pojo.LoginLog;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.Date;
 import java.util.List;
 
 public interface LoginLogMapper {
@@ -13,6 +14,6 @@ public interface LoginLogMapper {
     @Select("select * from loginlog")
     List<LoginLog> selectAllLoginLog();
 
-    @Select("select *,max(logintime) from loginlog where uid = #{uid}")
-    LoginLog selectLatestLoginLog(String uid);
+    @Select("select max(logintime) from loginlog where uid = #{uid}")
+    Date selectLatestLoginLog(String uid);
 }

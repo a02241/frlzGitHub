@@ -6,6 +6,7 @@ import com.frlz.service.LoginLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 /**
  * @program: frlz
@@ -29,7 +30,7 @@ public class LoginLogServiceImpl implements LoginLogService {
     }
 
     @Override
-    public LoginLog getLatestLoginLog(String uid) {
+    public Date getLatestLoginLog(String uid) {
         return loginLogMapper.selectLatestLoginLog(uid);
     }
 }
