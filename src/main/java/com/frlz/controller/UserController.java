@@ -293,7 +293,9 @@ public class UserController extends Cors {
 
                     path = "/www/server/img/"+ username + ".jpg";
 
-                    file.transferTo(new File(path));
+                    File file2 = new File(path);
+
+                    file.transferTo(file2);
 
                     userService.uploadUserIcon(username,path);
 
