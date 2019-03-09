@@ -194,6 +194,7 @@ public class UserController extends Cors {
                     map.put("result",data);
                     map.put("Myusermane",user.getUsername());
                     map.put("uid",user.getUid());
+                    map.put("icon",user.getIcon());
                 }else {
                     data = "2";//密码不同返回2
                     map.put("result",data);
@@ -291,7 +292,9 @@ public class UserController extends Cors {
             if (type2 != null) {
                 if ("GIF".equals(type2.toUpperCase()) || "PNG".equals(type2.toUpperCase()) || "JPG".equals(type2.toUpperCase())) {
 
-                    path = "/www/server/img/"+ username + ".jpg";
+                    String userHome = System.getProperties().getProperty("java.home");
+
+                    path = "/usr/java/file/upload/"+  username +".jpg";
 
                     file.transferTo(new File(path));
 
@@ -300,17 +303,18 @@ public class UserController extends Cors {
                     return "上传成功";
                 }else {
                     System.out.println("文件后缀不正确");
-                    return null;
+                    return "文件后缀不正确";
                 }
             }else {
                 System.out.println("文件格式不正确");
-                return null;
+                return "文件格式不正确";
             }
         }else {
             System.out.println("文件为空");
-            return null;
+            return "文件为空";
         }
     }
+
 
     @RequestMapping("/updateUser")
     /**
