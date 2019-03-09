@@ -1,6 +1,9 @@
 package com.frlz.service.serviceImpl;
 
+import com.frlz.mapper.SecretMapper;
+import com.frlz.pojo.Secret;
 import com.frlz.service.SecretService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,4 +14,18 @@ import org.springframework.stereotype.Service;
  **/
 @Service
 public class SecretServiceImpl implements SecretService {
+
+    @Autowired
+    private SecretMapper secretMapper;
+
+    @Override
+    public void insertSecret(Secret secret, String uid) {
+        secretMapper.insertSecret(secret,uid);
+
+    }
+
+    @Override
+    public Secret selectFromSecret(String uid) {
+        return secretMapper.selectFromSecret(uid);
+    }
 }

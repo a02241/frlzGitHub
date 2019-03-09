@@ -8,6 +8,7 @@ import lombok.Data;
  * @author: cz
  * @date: 2019-03-09 10:16
  **/
+
 @Data
 public class Secret {
     private int id;//主键
