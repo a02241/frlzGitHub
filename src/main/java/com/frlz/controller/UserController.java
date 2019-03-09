@@ -395,4 +395,23 @@ public class UserController extends Cors {
         }
         return map;
     }
+
+    @RequestMapping("/seeInformation")
+    public HashMap<String,Object> seeInformation(String uid){
+        User user = userService.selectByUid(uid);
+        HashMap<String,Object> map = new HashMap<>();
+        map.put("username",user.getUsername());
+        map.put("phonenumber",user.getPhonenumber());
+        map.put("email",user.getEmail());
+        map.put("icon",user.getIcon());
+        map.put("investmentage",user.getInvestmentage());
+        map.put("profile",user.getProfile());
+        map.put("profession",user.getProfession());
+        map.put("residence",user.getResidence());
+        map.put("privacy",user.getPrivacy());
+        map.put("province",user.getProvince());
+        map.put("city",user.getCity());
+        map.put("registtime",user.getRegistTime());
+        return map;
+    }
 }
