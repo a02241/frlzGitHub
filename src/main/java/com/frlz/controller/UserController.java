@@ -342,9 +342,7 @@ public class UserController extends Cors {
                              @RequestParam(defaultValue="0")int investmentage,@RequestParam(defaultValue="")String profile,@RequestParam(defaultValue="")String profession,
                              @RequestParam(defaultValue="")String residence,@RequestParam(defaultValue="")String province,@RequestParam(defaultValue="")String city){
         User user = userService.selectByUid(uid);
-        System.out.println(user.toString()+"~~~~~~~~~~~"  + username);
         if (username.trim().length()>0){
-            System.out.println(user.toString()+"~~~~~~~~~~~");
 
             Balance balance = balanceService.selectFromBanlanceByUid(user.getUid());
             if (balance.getQuantumBalance() > 10) {
