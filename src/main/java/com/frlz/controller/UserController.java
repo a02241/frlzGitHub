@@ -338,20 +338,26 @@ public class UserController extends Cors {
      */
 
     public String updateUser(String uid,
-                             @RequestParam(defaultValue="")String usernmae,@RequestParam(defaultValue="")String phonenumber,@RequestParam(defaultValue="")String email,
+                             @RequestParam(defaultValue="")String username,@RequestParam(defaultValue="")String phonenumber,@RequestParam(defaultValue="")String email,
                              @RequestParam(defaultValue="0")int investmentage,@RequestParam(defaultValue="")String profile,@RequestParam(defaultValue="")String profession,
                              @RequestParam(defaultValue="")String residence,@RequestParam(defaultValue="")String province,@RequestParam(defaultValue="")String city){
         User user = userService.selectByUid(uid);
-        System.out.println(user.toString()+"~~~~~~~~~~~");
-        if (usernmae.trim().length()>0){
-            user.setUsername(usernmae);
+        System.out.println(user.toString()+"~~~~~~~~~~~"  + username);
+        if (username.trim().length()>0){
+            System.out.println(user.toString()+"~~~~~~~~~~~");
+
             Balance balance = balanceService.selectFromBanlanceByUid(user.getUid());
-            balanceService.updateQuantumBalanceByUid(user.getUid(),balance.getQuantumBalance() - 10);
-            TradeLog tradeLog = new TradeLog();
-            tradeLog.setTradeQuantum(-10);
-            tradeLog.setBalanceId(balance.getBalanceId());
-            tradeLog.setRemarks("修改昵称");
-            tradeLogService.insertTradeLog(tradeLog);
+            if (balance.getQuantumBalance() > 10) {
+                user.setUsername(username);
+                balanceService.updateQuantumBalanceByUid(user.getUid(), balance.getQuantumBalance() - 10);
+                TradeLog tradeLog = new TradeLog();
+                tradeLog.setTradeQuantum(-10);
+                tradeLog.setBalanceId(balance.getBalanceId());
+                tradeLog.setRemarks("修改昵称");
+                tradeLogService.insertTradeLog(tradeLog);
+            }else {
+                return "量子余额不足";
+            }
         }
         if (phonenumber.trim().length()>0){
             user.setPhonenumber(phonenumber);
