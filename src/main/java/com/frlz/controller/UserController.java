@@ -73,7 +73,7 @@ public class UserController extends Cors {
      * @param emailCode
      * @param checkCode
      * @Description: 检查注册重复问题,必填字段:phonenumber或者email,password,sentCode(发送验证码),checkCode(填写验证码)
-     * 返回"4"为验证码错误,"5"为注册成功
+     * 返回"4"为验证码错误,"5"为注册成功,2为手机被注册,3为邮箱被注册
      * @return void
      * @throws 
      */
@@ -105,8 +105,8 @@ public class UserController extends Cors {
                 user.setPrivacy(1);
                 //默认状态码
                 user.setState(1);
-                //默认激活码
-                user.setCode("a123");
+                /*//默认邀请码
+                user.setCode("a123");*/
                 //注册时间
                 Date date = new Date();
                 SimpleDateFormat sdf;

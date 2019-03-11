@@ -51,7 +51,7 @@ public class BlogController {
         if(uid.trim().length()>0||uid==null) {
             conditions.put("uid",uid);//把uid放入map集合中
         }
-        PageBean pb = blogService.findBy(conditions, 3*pageCode, 1);//conditions-->>map存放数据,pageCode-->>分页条数,从第几个开始
+        PageBean pb = blogService.findBy(conditions, 12, pageCode);//conditions-->>map存放数据,pageCode-->>分页条数,从第几个开始
         if(uid.equals("")) {
             map.put("uid","用户名已过期,请重新登录");
             return map;
