@@ -1,6 +1,6 @@
 package com.frlz.controller;
 
-import com.frlz.service.ProPlanService;
+import com.frlz.service.PrePlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date: 2019-03-11 15:09
  **/
 @RestController
-public class ProPlanController {
+public class PrePlanController {
     @Autowired
-    private ProPlanService proPlanService;
+    private PrePlanService prePlanService;
 }
