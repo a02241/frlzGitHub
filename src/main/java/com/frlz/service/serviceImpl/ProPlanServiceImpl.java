@@ -1,7 +1,7 @@
 package com.frlz.service.serviceImpl;
 
-import com.frlz.mapper.ProPlanMapper;
-import com.frlz.service.ProPlanService;
+import com.frlz.mapper.PrePlanMapper;
+import com.frlz.service.PrePlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * @date: 2019-03-11 15:08
  **/
 @Service
-public class ProPlanServiceImpl implements ProPlanService {
+public class ProPlanServiceImpl implements PrePlanService {
     @Autowired
-    ProPlanMapper proPlanMapper;
+    PrePlanMapper prePlanMapper;
 }
