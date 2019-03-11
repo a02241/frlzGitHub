@@ -51,7 +51,7 @@ public class BalanceController {
             tradeLog.setTradeQuantum(-quantum);
             tradeLog.setTradeBlock(quantum/10);
             tradeLog.setRemarks("量子兑换方块");
-            tradeLogMapper.insertTradeLogMapper(tradeLog);
+            tradeLogMapper.insertTradeLog(tradeLog);
             return "兑换成功";
         }else {
             return "余额不足";
@@ -86,7 +86,7 @@ public class BalanceController {
             tradeLog.setTradeQuantum(block * 10);
             tradeLog.setTradeBlock(-block);
             tradeLog.setRemarks("方块兑换量子");
-            tradeLogMapper.insertTradeLogMapper(tradeLog);
+            tradeLogMapper.insertTradeLog(tradeLog);
             return "兑换成功";
         }else {
             return "余额不足";
@@ -121,7 +121,7 @@ public class BalanceController {
             tradeLog.setTradeMagicCube(-magicCube);
             tradeLog.setTradeBlock(magicCube * 26);
             tradeLog.setRemarks("魔方兑换方块");
-            tradeLogMapper.insertTradeLogMapper(tradeLog);
+            tradeLogMapper.insertTradeLog(tradeLog);
             return "兑换成功";
         }else {
             return "余额不足";
@@ -156,7 +156,7 @@ public class BalanceController {
             tradeLog.setTradeMagicCube(block / 27);
             tradeLog.setTradeBlock(-block);
             tradeLog.setRemarks("方块兑换魔方");
-            tradeLogMapper.insertTradeLogMapper(tradeLog);
+            tradeLogMapper.insertTradeLog(tradeLog);
             return "兑换成功";
         }else {
             return "余额不足";

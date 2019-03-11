@@ -19,7 +19,7 @@ public class TradeLogServiceImpl implements TradeLogService {
     private TradeLogMapper tradeLogMapper;
 
     @Override
-    public void insertTradeLogMapper(TradeLog tradeLog) {
-        tradeLogMapper.insertTradeLogMapper(tradeLog);
+    public void insertTradeLog(TradeLog tradeLog) {
+        tradeLogMapper.insertTradeLog(tradeLog);
     }
 }
