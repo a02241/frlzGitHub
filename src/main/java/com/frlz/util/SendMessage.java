@@ -23,18 +23,20 @@ public class SendMessage {
         request.setVersion("2017-05-25");
         request.setAction("SendSms");
         request.putQueryParameter("PhoneNumbers", phonenumber);
-        request.putQueryParameter("SignName", "方融信息");
+        request.putQueryParameter("SignName", "方融魔方");
         request.putQueryParameter("TemplateCode", "SMS_159830064");
         request.putQueryParameter("TemplateParam","{'code':" + verifyCode + "}" );
 
         try {
             CommonResponse response = client.getCommonResponse(request);
             System.out.println(response.getData());
+
         } catch (ServerException e) {
             e.printStackTrace();
         } catch (ClientException e) {
             e.printStackTrace();
         }
+
         return verifyCode;
     }
 
