@@ -1,10 +1,10 @@
 package com.frlz.pojo;
 
 public class Area_List {
-	private long index;
-	private String code;
-	private String name;
-	private String area;
+	private long index;//主键
+	private String code;//股票代码
+	private String name;//股票名
+	private String area;//地区
 	public long getIndex() {
 		return index;
 	}
