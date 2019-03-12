@@ -39,7 +39,11 @@ public interface BlogService {
      * @date 2019年2月27日 上午10:52:32 
      * @version V1.0   
      */
-    public Blog finBlog(Blog blog)throws Exception;
+    public Blog findBlog(Blog blog)throws Exception;
 
     public void insertBlog(Blog blog)throws Exception;
+
+    public void updateLikesCount(int likes,String blogId);
+
+    public void updateDislikeCount(int dislike,String blogId);
 }

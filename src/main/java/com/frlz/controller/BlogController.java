@@ -90,7 +90,7 @@ public class BlogController {
             return false;
         }else {
             blog.setTime(newDate);
-            blog.setLike(0);
+            blog.setLikes(0);
             blog.setDislike(0);
             blog.setFansNumber(0);
             blog.setCommentsNumber(0);

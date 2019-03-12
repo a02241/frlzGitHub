@@ -48,7 +48,7 @@ public class CommentsController {
         }
         PageBean pb = commentsService.findComments(conditions, 12*pageCode, 12*pageCode-11);//conditions-->>map存放数据,pageCode-->>分页条数,从第几个开始
         map.put("pageBean", pb);
-        Blog finBlog = blogService.finBlog(blog);//根据条件查询博客信息
+        Blog finBlog = blogService.findBlog(blog);//根据条件查询博客信息
         map.put("username", username);
         map.put("message", finBlog.getMessage());
         map.put("readNumber", finBlog.getReadNumber());

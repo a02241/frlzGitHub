@@ -42,12 +42,22 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public Blog finBlog(Blog blog) throws Exception {
-        return blogMapper.finBlog(blog);
+    public Blog findBlog(Blog blog) throws Exception {
+        return blogMapper.findBlog(blog);
     }
 
     @Override
     public void insertBlog(Blog blog) throws Exception {
         blogMapper.insertBlog(blog);
+    }
+
+    @Override
+    public void updateLikesCount(int likes, String blogId) {
+        blogMapper.updateLikesCount(likes,blogId);
+    }
+
+    @Override
+    public void updateDislikeCount(int dislike, String blogId) {
+        blogMapper.updateDislikeCount(dislike,blogId);
     }
 }

@@ -44,7 +44,7 @@ public interface BlogMapper {
             " <if test=\"blogId!=null and blogId!=''\"> AND blogId = '${blogId}'</if> " +
             " </where> " +
             " </script> ")
-    public Blog finBlog(Blog blog);
+    public Blog findBlog(Blog blog);
 
 
     @SelectKey(keyProperty = "blogId",resultType = String.class, before = true,
@@ -54,7 +54,7 @@ public interface BlogMapper {
             " values( #{blogId}," +
             "#{message}, " +
             "#{time}, " +
-            "#{like}, " +
+            "#{likes}, " +
             "#{dislike}, " +
             "#{fansNumber}, " +
             "#{commentsNumber}, " +
@@ -64,4 +64,10 @@ public interface BlogMapper {
             "#{title}, " +
             "#{summary})")
     void insertBlog(Blog blog);
+
+    @Update("update blog set likes = #{likes} where blogId = #{blogId}")
+    void updateLikesCount(int likes,String blogId);
+
+    @Update("update blog set dislike = #{dislike} where blogId = #{blogId}")
+    void updateDislikeCount(int dislike,String blogId);
 }

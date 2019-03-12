@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Select;
 
 public interface CheckLikeMapper {
 
-    @Insert("insert into checkLike values(#{blogId},#{uid},#{likeId},#{state})")
+    @Insert("insert into checkLike values(default,#{blogId},#{uid},#{state})")
     void insertIntoCheckLike(CheckLike checkLike);
 
     @Select("select * from checkLike where blogId = #{blogId} and uid = #{uid}")
