@@ -43,7 +43,7 @@ public class CommentsController {
     public HashMap<String,Object> findBlog(Blog blog, @RequestParam(defaultValue="1") int pageCode, String username, String blogId) throws Exception {
         Map<String,Object> conditions = new HashMap<String,Object>();
         HashMap<String,Object> map = new HashMap<>();
-        if(blogId.trim().length()>0||blogId==null) {
+        if(blogId.trim().length() > 0 || blogId==null) {
             conditions.put("blogId",blogId);//把blogId放入map集合中
         }
         PageBean pb = commentsService.findComments(conditions, 12*pageCode, 12*pageCode-11);//conditions-->>map存放数据,pageCode-->>分页条数,从第几个开始
