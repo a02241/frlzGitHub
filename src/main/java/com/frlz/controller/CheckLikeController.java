@@ -29,6 +29,8 @@ public class CheckLikeController {
             return "+1";
         }else {
             checkLikeService.deleteFromCheckLike(checkLikeService.selectFromCheckLike(blog.getBlogId(),uid).getLikeId());
+            Blog blog2 = blogService.findBlog(blog);
+            blogService.updateLikesCount(blog2.getLikes() - 1,blog.getBlogId());
             return "-1";
         }
     }
