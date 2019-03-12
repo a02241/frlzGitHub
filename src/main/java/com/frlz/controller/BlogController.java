@@ -68,7 +68,7 @@ public class BlogController {
         return map;
     }
 
-    @RequestMapping("/`                        ")
+    @RequestMapping("/insertBlog")
     /**
      * 添加博客
      * @title insertBlog
