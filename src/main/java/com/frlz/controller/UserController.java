@@ -185,7 +185,7 @@ public class UserController extends Cors {
                         int count = balance.getQuantumBalance() + 1;//量子余额+1
                         balanceService.updateQuantumBalanceByUid(user.getUid(),count);//交易写入数据库
                         TradeLog tradeLog = new TradeLog();
-                        tradeLog.setBalanceId(user.getUid());
+                        tradeLog.setBalanceId(balance.getBalanceId());
                         tradeLog.setTradeQuantum(1);
                         tradeLog.setRemarks("登录奖励增加1点量子");
                         tradeLogService.insertTradeLog(tradeLog);//写入交易记录
