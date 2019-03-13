@@ -31,7 +31,7 @@ public class BlogController {
      * @param blog
      * @param pageCode
      * @param uid
-     * @Description: TODO 必填参数uid 选填参数pageCode(分页页码，默认从第1个开始3条数据，每请求一次多3条数据)
+     * @Description: TODO 必填参数uid 选填参数pageCode(分页页码，默认从第1个开始12条数据，每次请求为下12条条数据)
      *                  返回值:uid如果显示用户名已过期,请重新登录，则uid为空，username一样
      *                  pageBean分页类,类中datas返回Blog和User属性
      *                  Myuid为uid
