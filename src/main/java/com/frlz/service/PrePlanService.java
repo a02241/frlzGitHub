@@ -10,6 +10,4 @@ public interface PrePlanService {
 
     PrePlan selectPrePlanByUid(String uid, Date time);
 
-    void updatePrePlan(PrePlan prePlan);
-
 }

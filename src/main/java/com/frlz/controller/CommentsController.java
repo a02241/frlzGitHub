@@ -71,8 +71,7 @@ public class CommentsController {
      * @param comments
      * @param model
      * @param blogId
-     * @Description: 必填参数comments,blogId,username
-     *              返回success则为注册成功
+     * @Description: TODO 必填参数comments,blogId,username返回success则为注册成功
      * @return java.util.HashMap<java.lang.String,java.lang.Object>
      * @throws
      */
@@ -91,8 +90,7 @@ public class CommentsController {
      * @author cz
      * @date 2019/3/2 10:50
      * @param comments
-     * @Description: 删除信息,必填字段cId
-     *              删除成功返回result为success
+     * @Description: TODO 删除信息,必填字段cId删除成功返回result为success
      * @return java.lang.String
      * @throws
      */

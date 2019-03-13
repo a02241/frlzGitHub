@@ -31,14 +31,14 @@ public class BlogController {
      * @param blog
      * @param pageCode
      * @param uid
-     * @Description: 必填参数uid 选填参数pageCode(分页页码，默认从第1个开始3条数据，每请求一次多3条数据)
-     * 返回值:uid如果显示用户名已过期,请重新登录，则uid为空，username一样
-     *      pageBean分页类,类中datas返回Blog和User属性
-     *      Myuid为uid
-     *      pageCode从第几个开始
-     *      pageSize返回blog数量
-     *      allCount总数量
-     *      allPages总共翻页数量
+     * @Description: TODO 必填参数uid 选填参数pageCode(分页页码，默认从第1个开始3条数据，每请求一次多3条数据)
+     *                  返回值:uid如果显示用户名已过期,请重新登录，则uid为空，username一样
+     *                  pageBean分页类,类中datas返回Blog和User属性
+     *                  Myuid为uid
+     *                  pageCode从第几个开始
+     *                  pageSize返回blog数量
+     *                  allCount总数量
+     *                  allPages总共翻页数量
      * @return java.util.HashMap<java.lang.String,java.lang.Object>
      * @throws Exception
      */
@@ -76,7 +76,7 @@ public class BlogController {
      * @date 2019/3/1 15:48
      * @param blog
      * @param uid
-     * @Description: 必填字段uid,message(内容),summary(摘要),title(主题),返回为true则成功注册,返回false则uid为空
+     * @Description: TODO 必填字段uid,message(内容),summary(摘要),title(主题),返回为true则成功注册,返回false则uid为空
      * @return boolean
      * @throws Exception
      */

@@ -19,7 +19,7 @@ public class InvitationController {
      * 根据uid找查兑换邀请码信息
      * @title selectInvatationByUid
      * @create by: cz
-     * @description: 必填参数:uid,返回为邀请表的集合
+     * @description: TODO 必填参数:uid,返回为邀请表的集合
      * @create time: 2019/3/5 16:19
      * @Param: uid
      * @throws

@@ -23,8 +23,7 @@ public class SharesController {
      * @author cz
      * @date 2019/3/2 10:51
      * @param code
-     * @Description: 必填参数code股票代码
-     *              返回参数为股票信息的二维数组
+     * @Description: TODO 必填参数code股票代码 返回参数为股票信息的二维数组
      * @return java.lang.Object[][]
      * @throws 
      */

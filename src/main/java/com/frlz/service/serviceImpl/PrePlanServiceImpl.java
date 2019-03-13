@@ -29,8 +29,4 @@ public class PrePlanServiceImpl implements PrePlanService {
         return prePlanMapper.selectPrePlanByUid(uid,time);
     }
 
-    @Override
-    public void updatePrePlan(PrePlan prePlan) {
-        prePlanMapper.updatePrePlan(prePlan);
-    }
 }
