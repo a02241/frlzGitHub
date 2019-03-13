@@ -23,4 +23,5 @@ public class User {
 	private String city;//城市
 	private Blog blog;
 	private Date registTime;//注册时间
+	private int experience;//等级
 }
