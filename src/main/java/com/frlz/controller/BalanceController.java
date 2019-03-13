@@ -30,7 +30,7 @@ public class BalanceController {
      * 量子换方块
      * @title quantumToBlock
      * @create by: cz
-     * @description: 必填字段:uid,quantum,返回中文信息
+     * @description: TODO 必填字段:uid,quantum,返回中文信息
      * @create time: 2019/3/8 10:24
      * @Param: uid
      * @Param: quantum
@@ -65,7 +65,7 @@ public class BalanceController {
      * 方块换量子
      * @title blockToQuantum
      * @create by: cz
-     * @description: 必填字段uid,block,返回中文信息
+     * @description: TODO 必填字段uid,block,返回中文信息
      * @create time: 2019/3/8 10:26
      * @Param: uid
      * @Param: block
@@ -100,7 +100,7 @@ public class BalanceController {
      * 魔方换方块
      * @title magicCubeToBlock
      * @create by: cz
-     * @description: 必填字段uid,magicCube,返回中文参数
+     * @description: TODO 必填字段uid,magicCube,返回中文参数
      * @create time: 2019/3/8 10:27
      * @Param: uid
      * @Param: magicCube
@@ -135,7 +135,7 @@ public class BalanceController {
      * 方块换魔方
      * @title blockToMagicCube
      * @create by: cz
-     * @description: 必填字段uid,block,返回中文参数
+     * @description: TODO 必填字段uid,block,返回中文参数
      * @create time: 2019/3/8 10:28
      * @Param: uid
      * @Param: block

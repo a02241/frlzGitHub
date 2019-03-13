@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @program: frlz
- * @description: 博客回复controller
+ * @description: TODO 博客回复controller
  * @author: cz
  * @date: 2019-03-04 13:56
  **/
@@ -24,8 +24,7 @@ public class ReplysController {
      * @author cz
      * @date 2019/3/4 14:44
      * @param replys
-     * @Description: 回复评论,必填字段cId(评论的主键),username,content
-     *              成功则返回success
+     * @Description: TODO 回复评论,必填字段cId(评论的主键),username,content 成功则返回success
      * @return java.lang.String
      * @throws
      */

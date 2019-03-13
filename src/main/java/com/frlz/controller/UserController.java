@@ -48,7 +48,7 @@ public class UserController extends Cors {
      * @title checkAccount
      * @author cz
      * @date 2019/2/28 17:34
-     * @Description: 参数account(手机号或者邮箱),返回true为能注册,false不能注册
+     * @Description: TODO 参数account(手机号或者邮箱),返回true为能注册,false不能注册
      * @param account
      * @return boolean
      * @throws 
@@ -72,8 +72,8 @@ public class UserController extends Cors {
      * @param session
      * @param emailCode
      * @param checkCode
-     * @Description: 检查注册重复问题,必填字段:phonenumber或者email,password,sentCode(发送验证码),checkCode(填写验证码)
-     * 返回"4"为验证码错误,"5"为注册成功,2为手机被注册,3为邮箱被注册
+     * @Description: TODO 检查注册重复问题,必填字段:phonenumber或者email,password,sentCode(发送验证码),checkCode(填写验证码)
+     *                      返回"4"为验证码错误,"5"为注册成功,2为手机被注册,3为邮箱被注册
      * @return void
      * @throws 
      */
@@ -150,7 +150,7 @@ public class UserController extends Cors {
      * @param session
      * @param response
      * @param resp
-     * @Description: 用户登录,必填参数:username,password,选填:isRember-->>十天免登陆(参数“1”为勾选)
+     * @Description: TODO 用户登录,必填参数:username,password,选填:isRember-->>十天免登陆(参数“1”为勾选)
      * @return java.util.HashMap<java.lang.String,java.lang.String>
      * @throws
      */
@@ -223,7 +223,7 @@ public class UserController extends Cors {
      * @param request
      * @param response
      * @param session
-     * @Description: 发送邮件到邮箱 必填字段:email 发送成功返回验证码 发送失败返回error
+     * @Description: TODO 发送邮件到邮箱 必填字段:email 发送成功返回验证码 发送失败返回error
      * @return void
      * @throws
      */
@@ -259,7 +259,7 @@ public class UserController extends Cors {
      *
      * @title sendPhonenumberMessage
      * @create by: cz
-     * @description: 必填字段phonenumber,返回sentCode(验证码)
+     * @description: TODO 必填字段phonenumber,返回sentCode(验证码)
      * @create time: 2019/3/8 10:09
      * @Param: phonenumber
      * @throws
@@ -281,7 +281,7 @@ public class UserController extends Cors {
      * @date 2019/3/2 12:04
      * @param file
      * @param username
-     * @Description: 用户头像上次,必填参数:username,file文件
+     * @Description: TODO 用户头像上次,必填参数:username,file文件
      * @return java.lang.String
      * @throws
      */
@@ -336,7 +336,7 @@ public class UserController extends Cors {
      * @param profile
      * @param profession
      * @param residence
-     * @Description: 根据传递的参数进行传值,不传值默认为数据库的值,必填参数uid
+     * @Description: TODO 根据传递的参数进行传值,不传值默认为数据库的值,必填参数uid
      * @return java.lang.String
      * @throws
      */
@@ -396,8 +396,7 @@ public class UserController extends Cors {
      * @author cz
      * @date 2019/3/4 15:35
      * @param user
-     * @Description: 更新密码，必填参数uid,password，newPassword
-     *              返回success则为更改成功,false则为原密码错误
+     * @Description: TODO 更新密码，必填参数uid,password，newPassword 返回success则为更改成功,false则为原密码错误
      * @return java.lang.String
      * @throws
      */
@@ -418,6 +417,18 @@ public class UserController extends Cors {
 
 
     @RequestMapping("/seeInformation")
+    /**
+     * 根据id查询所有信息
+     * @title seeInformation
+     * @create by: cz
+     * @description: TODO 根据id查询用户信息必填字段:uid，返回为user表的信息
+     * @create time: 2019/3/13 15:45
+     * @Param: uid
+     * @throws
+     * @return java.util.HashMap<java.lang.String,java.lang.Object>
+     * @version V1.0
+     */
+
     public HashMap<String,Object> seeInformation(String uid){
         User user = userService.selectByUid(uid);
         HashMap<String,Object> map = new HashMap<>();
@@ -433,6 +444,7 @@ public class UserController extends Cors {
         map.put("province",user.getProvince());
         map.put("city",user.getCity());
         map.put("registtime",user.getRegistTime());
+        map.put("experience", String.valueOf(user.getExperience()));
         return map;
     }
 }
