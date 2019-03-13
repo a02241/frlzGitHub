@@ -188,12 +188,12 @@ public class UserController extends Cors {
                         tradeLog.setBalanceId(balance.getBalanceId());
                         tradeLog.setTradeQuantum(1);
                         tradeLog.setRemarks("登录奖励增加1点量子");
-                        tradeLogService.insertTradeLog(tradeLog);//写入交易记录
-                        loginLogService.insertLoginLog(user.getUid());//插入登陆日志
                         int experience = user.getExperience() + 1;//登录加1点经验
                         user.setExperience(experience);
                         userService.updateUser(user);//写入数据库
+                        tradeLogService.insertTradeLog(tradeLog);//写入交易记录
                     }
+                    loginLogService.insertLoginLog(user.getUid());//插入登陆日志
                     map.put("result",data);
                     map.put("Myusermane",user.getUsername());
                     map.put("uid",user.getUid());
