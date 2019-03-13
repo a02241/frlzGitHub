@@ -236,7 +236,7 @@ public class UserController extends Cors {
         System.out.println(sb.toString()); //随机生成验证码
 
         int res= Mail.sendEmail("smtp.163.com", "shiyaogame@163.com", "fr20181220", "shiyaogame@163.com", new String[]{email},
-                "短信验证",  "【方融量子科技公司】您的验证码为：" + sb.toString() ,"text/html;charset=utf-8");//发送邮箱
+                "短信验证",  "【方融魔方】您的验证码为：" + sb.toString() ,"text/html;charset=utf-8");//发送邮箱
         System.out.println("\n发送结果:"+res);
         try {
             if(res == 1) {
