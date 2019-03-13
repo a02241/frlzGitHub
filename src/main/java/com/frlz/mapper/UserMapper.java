@@ -82,7 +82,7 @@ public interface UserMapper {
             "city = #{city} ," +
             "experience = #{experience} " +
             "where uid = #{uid}")
-    public void updateUser(User user);
+    void updateUser(User user);
 
     @Update("update user set password = #{password} where uid = #{uid}")
     void updatePassword(User user);
