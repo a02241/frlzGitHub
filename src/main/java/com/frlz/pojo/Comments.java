@@ -4,11 +4,11 @@ import java.util.Date;
 
 public class Comments {
 
-	private String cId;
-	private String blogId;
-	private String comments;
-	private String username;
-	private Date commentTime;
+	private String cId;//评论主键
+	private String blogId;//外键
+	private String comments;//信息
+	private String username;//用户名
+	private Date commentTime;//提交时间
 	public String getcId() {
 		return cId;
 	}

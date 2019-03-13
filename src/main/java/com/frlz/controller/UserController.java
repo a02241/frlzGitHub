@@ -116,6 +116,7 @@ public class UserController extends Cors {
                 user.setRegistTime(newDate);
                 //MD5加密
                 user.setPassword(MD5.MD5Encode("fr2018<%" + user.getPassword()  + "%>lz1220"));
+                user.setExperience(0);
                 //注册信息
                 userService.registSave(user);
                 loginLogService.insertLoginLog(user.getUid());//插入登陆日志
@@ -176,8 +177,7 @@ public class UserController extends Cors {
                     date = new Date();
                     SimpleDateFormat sdf;
                     sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    String format = sdf.format(date);
-                    Date newDate =sdf.parse(format);//创建当前时间以yyyy-MM-dd hh:mm:ss格式
+                    String format = sdf.format(date);//创建当前时间以yyyy-MM-dd格式
                     Date loginTime = loginLogService.getLatestLoginLog(user.getUid());
                     String lastestTime = sdf.format(loginTime);
                     if (!format.equals(lastestTime)){
@@ -189,12 +189,16 @@ public class UserController extends Cors {
                         tradeLog.setTradeQuantum(1);
                         tradeLog.setRemarks("登录奖励增加1点量子");
                         tradeLogService.insertTradeLog(tradeLog);//写入交易记录
+                        loginLogService.insertLoginLog(user.getUid());//插入登陆日志
+                        int experience = user.getExperience() + 1;//登录加1点经验
+                        user.setExperience(experience);
+                        userService.updateUser(user);//写入数据库
                     }
-                    loginLogService.insertLoginLog(user.getUid());//插入登陆日志
                     map.put("result",data);
                     map.put("Myusermane",user.getUsername());
                     map.put("uid",user.getUid());
                     map.put("icon",user.getIcon());
+                    map.put("experience", String.valueOf(user.getExperience()));
                 }else {
                     data = "2";//密码不同返回2
                     map.put("result",data);

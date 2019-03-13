@@ -79,7 +79,8 @@ public interface UserMapper {
             "residence = #{residence}, " +
             "investmentage = #{investmentage} ," +
             "province = #{province} ," +
-            "city = #{city} " +
+            "city = #{city} ," +
+            "experience = #{experience} " +
             "where uid = #{uid}")
     public void updateUser(User user);
 

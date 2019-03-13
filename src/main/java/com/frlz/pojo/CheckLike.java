@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class CheckLike {
-    private String blogId;
-    private String uid;
-    private int likeId;
-    private boolean state;
+    private String blogId;//外键
+    private String uid;//外键
+    private int likeId;//主键
+    private boolean state;//状态
 }
