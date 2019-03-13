@@ -173,10 +173,8 @@ public class UserController extends Cors {
                         resp.addCookie(cookieName);
                         resp.addCookie(cookiePass);
                     }
-                    Date date;
-                    date = new Date();
-                    SimpleDateFormat sdf;
-                    sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    Date date = new Date();
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                     String format = sdf.format(date);//创建当前时间以yyyy-MM-dd格式
                     Date loginTime = loginLogService.getLatestLoginLog(user.getUid());
                     String lastestTime = sdf.format(loginTime);

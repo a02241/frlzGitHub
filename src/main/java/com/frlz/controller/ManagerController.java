@@ -73,4 +73,5 @@ public class ManagerController {
 
         return userService.getAll();
     }
+
 }
