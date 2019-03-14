@@ -47,7 +47,7 @@ public class BalanceUtil {
         balanceUtil.balanceService.updateQuantumBalanceByUid(uid,countAdd);//交易写入数据库
         TradeLog tradeLog = new TradeLog();
         tradeLog.setBalanceId(balance.getBalanceId());
-        tradeLog.setTradeQuantum(countAdd);
+        tradeLog.setTradeQuantum(count);
         tradeLog.setRemarks("奖励增加"+count+"点量子");
         balanceUtil.tradeLogService.insertTradeLog(tradeLog);//写入交易记录
     }
