@@ -3,7 +3,6 @@ package com.frlz.controller;
 import com.frlz.pojo.Blog;
 import com.frlz.pojo.User;
 import com.frlz.service.BlogService;
-import com.frlz.service.LoginLogService;
 import com.frlz.service.UserService;
 import com.frlz.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +28,7 @@ public class BlogController {
 
 
 
+    @Transactional
     @RequestMapping("/searchBlog")
     /**
      * 展示博客信息

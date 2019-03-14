@@ -1,8 +1,10 @@
 package com.frlz.controller;
 
 import com.frlz.pojo.Blog;
+import com.frlz.pojo.LoginLog;
 import com.frlz.pojo.User;
 import com.frlz.service.BlogService;
+import com.frlz.service.LoginLogService;
 import com.frlz.service.UserService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class ManagerController {
 
     @Autowired
     private BlogService blogService;
+
+    @Autowired
+    private LoginLogService loginLogService;
 
     @RequestMapping("/managerLogin")
     /**
@@ -100,4 +105,13 @@ public class ManagerController {
         return blogService.selectBlogByMonth(date);
     }
 
+    @RequestMapping("/getAllLoginLog")
+    public List<LoginLog> getAllLoginLog(){
+        return loginLogService.getAllLoginLog();
+    }
+
+    @RequestMapping("/getLoginLogByDate")
+    public List<LoginLog> getLoginLogByDate(String date){
+        return loginLogService.selectLoginLogByDate(date);
+    }
 }

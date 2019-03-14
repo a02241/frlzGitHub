@@ -33,4 +33,9 @@ public class LoginLogServiceImpl implements LoginLogService {
     public Date getLatestLoginLog(String uid) {
         return loginLogMapper.selectLatestLoginLog(uid);
     }
+
+    @Override
+    public List<LoginLog> selectLoginLogByDate(String date) {
+        return loginLogMapper.selectLoginLogByDate(date);
+    }
 }
