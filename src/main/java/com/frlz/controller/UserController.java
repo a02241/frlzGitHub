@@ -7,10 +7,7 @@ import com.frlz.service.BalanceService;
 import com.frlz.service.LoginLogService;
 import com.frlz.service.TradeLogService;
 import com.frlz.service.UserService;
-import com.frlz.util.Cors;
-import com.frlz.util.MD5;
-import com.frlz.util.Mail;
-import com.frlz.util.SendMessage;
+import com.frlz.util.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,7 +41,7 @@ public class UserController extends Cors {
     private LoginLogService loginLogService;
     @Autowired
     private TradeLogService tradeLogService;
-
+    BalanceUtil balanceUtil = new BalanceUtil();
     @RequestMapping("/checkAccount")//注册时校验账号是否重复
     /**
      * 注册时校验手机或者邮箱是否重复
@@ -472,8 +469,10 @@ public class UserController extends Cors {
         Matcher m = p.matcher(phonenumber);
         if(!m.matches()){
             return "false";
+        }else {
+            userService.updatePhonenumber(uid, phonenumber);
+            balanceUtil.addQuantumBalance(uid,5);//增加5个量子
         }
-        userService.updatePhonenumber(uid,phonenumber);
         return "success";
     }
 
@@ -500,6 +499,7 @@ public class UserController extends Cors {
         }
         if(tag == true) {
             userService.updateEmail(uid, email);
+            balanceUtil.addQuantumBalance(uid,5);//增加5个量子
         }else {
             return "false";
         }
