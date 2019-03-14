@@ -1,6 +1,8 @@
 package com.frlz.controller;
 
+import com.frlz.pojo.Blog;
 import com.frlz.pojo.User;
+import com.frlz.service.BlogService;
 import com.frlz.service.UserService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,9 @@ import java.util.List;
 public class ManagerController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private BlogService blogService;
 
     @RequestMapping("/managerLogin")
     /**
@@ -72,6 +77,27 @@ public class ManagerController {
     public List<User> selectAllUser(){
 
         return userService.getAll();
+    }
+
+    @RequestMapping("/getblog")
+    public List<Blog> getblog(int a){
+        return blogService.selectFiftyBlog((a - 1)* 20);
+    }
+
+    @RequestMapping("/deleteBlog")
+    public String deleteBlog(String blogId){
+        blogService.deleteBlog(blogId);
+        return "success";
+    }
+
+    @RequestMapping("/getBlogByDate")
+    public List<Blog> getBlogByDate(String date){
+        return blogService.selectBlogByDate(date);
+    }
+
+    @RequestMapping("/getBlogByMonth")
+    public List<Blog> getBlogByMonth(String date){
+        return blogService.selectBlogByMonth(date);
     }
 
 }

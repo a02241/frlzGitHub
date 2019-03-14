@@ -79,4 +79,7 @@ public interface BlogMapper {
 
     @Select("select * from blog where DATE_FORMAT(time, '%Y-%m-%d') = #{date}")
     List<Blog> selectBlogByDate(String date);
+
+    @Select("select * from blog where DATE_FORMAT(time, '%Y-%m') = #{date}")
+    List<Blog> selectBlogByMonth(String date);
 }
