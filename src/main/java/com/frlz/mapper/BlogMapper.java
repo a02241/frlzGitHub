@@ -85,4 +85,11 @@ public interface BlogMapper {
 
     @Delete("delete from blog where blogId = #{blogId}")
     void deleteBlog(String blogId);
+
+
+    
+
+    @Select("select * from blog where DATE_FORMAT(time, '%Y-%m') = #{date}")
+    List<Blog> selectBlogByMonth(String date);
+
 }

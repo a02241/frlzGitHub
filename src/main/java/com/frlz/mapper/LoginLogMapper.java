@@ -16,4 +16,7 @@ public interface LoginLogMapper {
 
     @Select("select max(logintime) from loginlog where uid = #{uid}")
     Date selectLatestLoginLog(String uid);
+
+    @Select("select * from loginlog where DATE_FORMAT(logintime, '%Y-%m-%d') = #{date}")
+    List<LoginLog> selectLoginLogByDate(String date);
 }

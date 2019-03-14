@@ -13,4 +13,6 @@ public interface LoginLogService {
     List<LoginLog> getAllLoginLog();
 
     Date getLatestLoginLog(String uid);
+
+    List<LoginLog> selectLoginLogByDate(String date);
 }

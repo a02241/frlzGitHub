@@ -1,6 +1,6 @@
 package com.frlz.controller;
 
-import com.frlz.mapper.ShorthandTagMapper;
+import com.frlz.service.ShorthandTagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,5 +13,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ShorthandTagController {
     @Autowired
-    private ShorthandTagMapper shorthandTagMapper;
+    private ShorthandTagService shorthandTagService;
 }

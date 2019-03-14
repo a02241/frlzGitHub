@@ -71,4 +71,24 @@ public class BlogServiceImpl implements BlogService {
     public void updateDislikeCount(int dislike, String blogId) {
         blogMapper.updateDislikeCount(dislike,blogId);
     }
+
+    @Override
+    public List<Blog> selectFiftyBlog(int a) {
+        return blogMapper.selectFiftyBlog(a);
+    }
+
+    @Override
+    public void deleteBlog(String blogId) {
+        blogMapper.deleteBlog(blogId);
+    }
+
+    @Override
+    public List<Blog> selectBlogByDate(String date) {
+        return blogMapper.selectBlogByDate(date);
+    }
+
+    @Override
+    public List<Blog> selectBlogByMonth(String date) {
+        return blogMapper.selectBlogByMonth(date);
+    }
 }
