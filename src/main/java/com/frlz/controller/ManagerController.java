@@ -96,21 +96,69 @@ public class ManagerController {
     }
 
     @RequestMapping("/getBlogByDate")
+    /**
+     * 按照日期查询博客所有信息
+     * @title getBlogByDate
+     * @create by: cz
+     * @description: TODO 必填参数:date，返回博客该日期所有数据
+     * @create time: 2019/3/14 15:24
+     * @Param: date
+     * @throws
+     * @return java.util.List<com.frlz.pojo.Blog>
+     * @version V1.0
+     */
+
     public List<Blog> getBlogByDate(String date){
         return blogService.selectBlogByDate(date);
     }
 
     @RequestMapping("/getBlogByMonth")
+    /**
+     * 按照月份查询博客所有信息
+     * @title getBlogByMonth
+     * @create by: cz
+     * @description: TODO 必填参数:date 返回博客该月份所有数据
+     * @create time: 2019/3/14 15:27
+     * @Param: date
+     * @throws
+     * @return java.util.List<com.frlz.pojo.Blog>
+     * @version V1.0
+     */
+
     public List<Blog> getBlogByMonth(String date){
         return blogService.selectBlogByMonth(date);
     }
 
     @RequestMapping("/getAllLoginLog")
+    /**
+     * 获取所有登录日志
+     * @title getAllLoginLog
+     * @create by: cz
+     * @description: TODO 返回所有登录日志
+     * @create time: 2019/3/14 15:30
+     * @Param:
+     * @throws
+     * @return java.util.List<com.frlz.pojo.LoginLog>
+     * @version V1.0
+     */
+
     public List<LoginLog> getAllLoginLog(){
         return loginLogService.getAllLoginLog();
     }
 
     @RequestMapping("/getLoginLogByDate")
+    /**
+     * 根据日期查询登录日志
+     * @title getLoginLogByDate
+     * @create by: cz
+     * @description: TODO 必填参数date，返回该日期的所有登录日志
+     * @create time: 2019/3/14 15:31
+     * @Param: date
+     * @throws
+     * @return java.util.List<com.frlz.pojo.LoginLog>
+     * @version V1.0
+     */
+
     public List<LoginLog> getLoginLogByDate(String date){
         return loginLogService.selectLoginLogByDate(date);
     }
