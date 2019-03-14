@@ -95,7 +95,7 @@ public class CommentsController {
      * @throws
      */
 
-    public HashMap<String,Object> saveComment(String content,Comments comments,ModelMap model,String blogId) throws Exception {
+    public HashMap<String,Object> saveComment(Comments comments) throws Exception {
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String format = sdf.format(date);//创建当前时间以yyyy-MM-dd格式
@@ -109,7 +109,6 @@ public class CommentsController {
         commentsService.saveComment(comments);
         HashMap<String,Object> map=new HashMap<>();
         map.put("result","success");
-        map.put("count",count);
         return map;
     }
 
