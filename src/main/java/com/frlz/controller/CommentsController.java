@@ -61,7 +61,7 @@ public class CommentsController {
         if(blogId.trim().length() > 0 || blogId==null) {
             conditions.put("blogId",blogId);//把blogId放入map集合中
         }
-        PageBean pb = commentsService.findComments(conditions, 12*pageCode, 12*pageCode-11);//conditions-->>map存放数据,pageCode-->>分页条数,从第几个开始
+        PageBean pb = commentsService.findComments(conditions, 12, pageCode);//conditions-->>map存放数据,pageCode-->>分页条数,从第几个开始
         map.put("pageBean", pb);
         Blog finBlog = blogService.findBlog(blog);//根据条件查询博客信息
         map.put("username", username);
