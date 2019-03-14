@@ -87,9 +87,9 @@ public class BlogController {
 
     public boolean insertBlog(Blog blog,String uid)throws Exception{
         Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String format = sdf.format(date);
-        Date newDate =sdf.parse(format);//创建当前时间以yyyy-MM-dd hh:mm:ss格式
+        Date newDate =sdf.parse(format);//创建当前时间以yyyy-MM-dd HH:mm:ss格式
         if(uid.trim().length()==0||uid==null){
             return false;
         }else {

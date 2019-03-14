@@ -90,6 +90,11 @@ public interface UserMapper {
     @Update("update user set password = #{password} where uid = #{uid}")
     void updatePassword(User user);
 
+    @Update("update user set phonenumber = #{phonenumber} where uid = #{uid}")
+    void updatePhonenumber(String uid,String phonenumber);
+
+    @Update("update user set email = #{email} where uid = #{uid}")
+    void updateEmail(String uid,String email);
 
     @Delete("delete from user where uid = #{uid}")
     void deleteByUid(String uid);

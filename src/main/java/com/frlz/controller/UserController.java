@@ -28,6 +28,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.frlz.util.GetUername.getUsername;
 
@@ -112,9 +114,9 @@ public class UserController extends Cors {
                 //注册时间
                 Date date = new Date();
                 SimpleDateFormat sdf;
-                sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String format = sdf.format(date);
-                Date newDate =sdf.parse(format);//创建当前时间以yyyy-MM-dd hh:mm:ss格式
+                Date newDate =sdf.parse(format);//创建当前时间以yyyy-MM-dd HH:mm:ss格式
                 user.setRegistTime(newDate);
                 //MD5加密
                 user.setPassword(MD5.MD5Encode("fr2018<%" + user.getPassword()  + "%>lz1220"));
@@ -448,5 +450,59 @@ public class UserController extends Cors {
         map.put("registtime",user.getRegistTime());
         map.put("experience", String.valueOf(user.getExperience()));
         return map;
+    }
+
+    @RequestMapping("boundPhone")
+    /**
+     * 绑定手机
+     * @title boundPhone
+     * @create by: cz
+     * @description: TODO 必填参数：uid，phonenumber
+     *                 成功返回success false为手机格式不正确
+     * @create time: 2019/3/14 14:21
+     * @Param: uid
+     * @Param: phone
+     * @throws
+     * @return java.lang.String
+     * @version V1.0
+     */
+
+    public String boundPhone(String uid , String phonenumber){
+        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0-9])|(14[5,7])| (17[0,1,3,5-8]))\\d{8}$");
+        Matcher m = p.matcher(phonenumber);
+        if(!m.matches()){
+            return "false";
+        }
+        userService.updatePhonenumber(uid,phonenumber);
+        return "success";
+    }
+
+    @RequestMapping("boundEmail")
+    /**
+     * 绑定邮箱
+     * @title boundEmail
+     * @create by: cz
+     * @description: TODO 必填参数：uid，email
+     *                 成功返回success 邮箱格式错误返回false
+     * @create time: 2019/3/14 14:28
+     * @Param: uid
+     * @Param: email
+     * @throws
+     * @return java.lang.String
+     * @version V1.0
+     */
+
+    public String boundEmail(String uid , String email){
+        String regex = "\\w+@\\w+(\\.\\w{2,3})*\\.\\w{2,3}";
+        boolean tag = true;
+        if (!email.matches(regex)) {
+            tag = false;
+        }
+        if(tag == true) {
+            userService.updateEmail(uid, email);
+        }else {
+            return "false";
+        }
+        return "success";
     }
 }

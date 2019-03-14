@@ -100,6 +100,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void updatePhonenumber(String uid, String phonenumber) {
+        userMapper.updatePhonenumber(uid,phonenumber);
+    }
+
+    @Override
+    public void updateEmail(String uid, String email) {
+        userMapper.updateEmail(uid,email);
+    }
+
+    @Override
     public String checkPasswordByUId(String uid) {
         return userMapper.checkPasswordByUId(uid);
     }

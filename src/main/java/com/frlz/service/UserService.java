@@ -33,6 +33,10 @@ public interface UserService {
 
 	public void updatePassword(User user);
 
+	public void updatePhonenumber(String uid,String phonenumber);
+
+	public void updateEmail(String uid,String email);
+
 	public String  checkPasswordByUId(String uid);
 
 	public void deleteUserByUid(String uid);
