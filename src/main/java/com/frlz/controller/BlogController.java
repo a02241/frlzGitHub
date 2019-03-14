@@ -1,7 +1,9 @@
 package com.frlz.controller;
 
 import com.frlz.pojo.Blog;
+import com.frlz.pojo.User;
 import com.frlz.service.BlogService;
+import com.frlz.service.LoginLogService;
 import com.frlz.service.UserService;
 import com.frlz.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,6 +91,16 @@ public class BlogController {
         if(uid.trim().length()==0||uid==null){
             return false;
         }else {
+            SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+            String format2 = sdf2.format(date);//创建当前时间以yyyy-MM-dd格式
+            Date writeTime = blogService.selectLatestBlogTime(uid);
+            String lastestTime = sdf2.format(writeTime);
+            if (!format2.equals(lastestTime)){
+            User user = userService.selectByUid(uid);
+            int experience = user.getExperience() + 8;//发帖加8经验
+            user.setExperience(experience);
+            userService.updateUser(user);//写入数据库
+            }
             blog.setTime(newDate);
             blog.setLikes(0);
             blog.setDislike(0);

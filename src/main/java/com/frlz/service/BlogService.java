@@ -3,6 +3,7 @@ package com.frlz.service;
 import com.frlz.pojo.Blog;
 import com.frlz.util.PageBean;
 
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -40,6 +41,8 @@ public interface BlogService {
      * @version V1.0   
      */
     public Blog findBlog(Blog blog)throws Exception;
+
+    Date selectLatestBlogTime(String uid);
 
     public void insertBlog(Blog blog)throws Exception;
 

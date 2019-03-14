@@ -3,6 +3,7 @@ package com.frlz.mapper;
 import com.frlz.pojo.Comments;
 import org.apache.ibatis.annotations.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -44,6 +45,8 @@ public interface CommentsMapper {
             " limit ${(pageCode-1)*pageSize},${pageSize}")
     public List<Comments> findComments(Map<String,Object> map)throws Exception;
 
+    @Select("select count(*) from comments where commentTime like concat('%',#{commentTime},'%') and username = #{username}")
+    public int selectCommentTimeCountByTime(Date commentTime,String username);
 
     /** 
      * @Title: saveComment 

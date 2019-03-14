@@ -3,6 +3,7 @@ package com.frlz.mapper;
 import com.frlz.pojo.Blog;
 import org.apache.ibatis.annotations.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -46,6 +47,8 @@ public interface BlogMapper {
             " </script> ")
     public Blog findBlog(Blog blog);
 
+    @Select("select max(time) from blog where uid = #{uid}")
+    Date selectLatestBlogTime(String uid);
 
     @SelectKey(keyProperty = "blogId",resultType = String.class, before = true,
             statement = "select replace(uuid(), '-', '')")
