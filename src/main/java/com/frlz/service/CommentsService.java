@@ -12,7 +12,7 @@ public interface CommentsService {
 
     public void saveComment(Comments comments)throws Exception;
 
-    public int selectCommentTimeCountByTime(Date commentTime,String username);
+    public int selectCommentTimeCountByTime(String date,String username);
 
     public void deleteComment(String cId);
 }

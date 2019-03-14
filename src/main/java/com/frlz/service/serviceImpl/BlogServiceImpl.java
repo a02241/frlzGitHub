@@ -53,6 +53,11 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    public int selectBlogCountByDateAndUid(String date, String uid) {
+        return blogMapper.selectBlogCountByDateAndUid(date,uid);
+    }
+
+    @Override
     public void insertBlog(Blog blog) throws Exception {
         blogMapper.insertBlog(blog);
     }

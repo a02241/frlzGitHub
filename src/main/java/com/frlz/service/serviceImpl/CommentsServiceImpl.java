@@ -51,8 +51,8 @@ public class CommentsServiceImpl implements CommentsService {
     }
 
     @Override
-    public int selectCommentTimeCountByTime(Date commentTime,String username) {
-        return commentsMapper.selectCommentTimeCountByTime(commentTime,username);
+    public int selectCommentTimeCountByTime(String date,String username) {
+        return commentsMapper.selectCommentTimeCountByTime(date,username);
     }
 
     @Override

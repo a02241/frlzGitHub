@@ -48,6 +48,10 @@ public class UserServiceImpl implements UserService {
         return userMapper.searchUsernameById(uid);
     }
 
+    @Override
+    public User selectUserByUsername(String username) {
+        return userMapper.selectUserByUsername(username);
+    }
 
 
     @Override

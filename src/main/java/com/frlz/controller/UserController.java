@@ -13,6 +13,7 @@ import com.frlz.util.Mail;
 import com.frlz.util.SendMessage;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -60,6 +61,7 @@ public class UserController extends Cors {
         return ((userService.checkPhonenumber(account) + userService.checkEmail(account)) == 0);
     }
 
+    @Transactional
     @RequestMapping("/check")
     /**
      * 注册时校验是否注册成功
@@ -139,6 +141,7 @@ public class UserController extends Cors {
         }
     }
 
+    @Transactional
     @RequestMapping("/userLogin")
     /**
      * 登录即10天免登陆,插入登录日志
@@ -320,6 +323,7 @@ public class UserController extends Cors {
     }
 
 
+    @Transactional
     @RequestMapping("/updateUser")
     /**
      * 更新用户信息

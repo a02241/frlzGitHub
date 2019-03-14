@@ -2,10 +2,13 @@ package com.frlz.controller;
 
 import com.frlz.pojo.Blog;
 import com.frlz.pojo.Comments;
+import com.frlz.pojo.User;
 import com.frlz.service.BlogService;
 import com.frlz.service.CommentsService;
+import com.frlz.service.UserService;
 import com.frlz.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +27,9 @@ public class CommentsController {
 
     @Autowired
     private BlogService blogService;
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("findBlog")
     /**
@@ -70,6 +76,7 @@ public class CommentsController {
         return map;
     }
 
+    @Transactional
     @RequestMapping("saveComment")
     /**
      * 保存评论信息
@@ -92,8 +99,13 @@ public class CommentsController {
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String format = sdf.format(date);//创建当前时间以yyyy-MM-dd格式
-        Date newDate = sdf.parse(format);
-        int count = commentsService.selectCommentTimeCountByTime(newDate,comments.getUsername());
+        int count = commentsService.selectCommentTimeCountByTime(format,comments.getUsername());//返回前一次当天写博客的次数
+        if(count < 3){//回帖小于三次加8经验，超过不加
+            User user = userService.selectUserByUsername(comments.getUsername());
+            int experience = user.getExperience() + 5;//发帖加8经验
+            user.setExperience(experience);
+            userService.updateUser(user);//写入数据库
+        }
         commentsService.saveComment(comments);
         HashMap<String,Object> map=new HashMap<>();
         map.put("result","success");

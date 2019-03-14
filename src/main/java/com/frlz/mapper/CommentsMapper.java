@@ -45,8 +45,8 @@ public interface CommentsMapper {
             " limit ${(pageCode-1)*pageSize},${pageSize}")
     public List<Comments> findComments(Map<String,Object> map)throws Exception;
 
-    @Select("select count(*) from comments where commentTime like concat('%',#{commentTime},'%') and username = #{username}")
-    public int selectCommentTimeCountByTime(Date commentTime,String username);
+    @Select("select count(*) from comments where DATE_FORMAT(commentTime, '%Y-%m-%d') = #{date} and username = #{username}")
+    public int selectCommentTimeCountByTime(String date,String username);
 
     /** 
      * @Title: saveComment 

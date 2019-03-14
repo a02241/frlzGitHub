@@ -7,6 +7,7 @@ import com.frlz.service.LoginLogService;
 import com.frlz.service.UserService;
 import com.frlz.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -70,6 +71,7 @@ public class BlogController {
         return map;
     }
 
+    @Transactional
     @RequestMapping("/insertBlog")
     /**
      * 添加博客
@@ -93,9 +95,8 @@ public class BlogController {
         }else {
             SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
             String format2 = sdf2.format(date);//创建当前时间以yyyy-MM-dd格式
-            Date writeTime = blogService.selectLatestBlogTime(uid);
-            String lastestTime = sdf2.format(writeTime);
-            if (!format2.equals(lastestTime)){
+            int count = blogService.selectBlogCountByDateAndUid(format2,uid);
+            if (count<1){//每天发第一次贴加8经验
             User user = userService.selectByUid(uid);
             int experience = user.getExperience() + 8;//发帖加8经验
             user.setExperience(experience);

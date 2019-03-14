@@ -42,7 +42,9 @@ public interface BlogService {
      */
     public Blog findBlog(Blog blog)throws Exception;
 
-    Date selectLatestBlogTime(String uid);
+    public Date selectLatestBlogTime(String uid);
+
+    public int selectBlogCountByDateAndUid(String date,String uid);
 
     public void insertBlog(Blog blog)throws Exception;
 
