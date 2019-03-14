@@ -28,4 +28,11 @@ public class InvitationServiceImpl implements InvitationService {
     public int findStateBycode(String code) {
         return invitationMapper.findStateBycode(code);
     }
+
+    @Override
+    public void insertInviteCode(String code) {
+        invitationMapper.insertInviteCode(code);
+    }
+
+
 }
