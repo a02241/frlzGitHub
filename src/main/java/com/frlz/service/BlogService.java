@@ -3,7 +3,7 @@ package com.frlz.service;
 import com.frlz.pojo.Blog;
 import com.frlz.util.PageBean;
 
-import java.util.List;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -42,17 +42,13 @@ public interface BlogService {
      */
     public Blog findBlog(Blog blog)throws Exception;
 
+    public Date selectLatestBlogTime(String uid);
+
+    public int selectBlogCountByDateAndUid(String date,String uid);
+
     public void insertBlog(Blog blog)throws Exception;
 
     public void updateLikesCount(int likes,String blogId);
 
     public void updateDislikeCount(int dislike,String blogId);
-
-    public List<Blog> selectFiftyBlog(int a);
-
-    void deleteBlog(String blogId);
-
-    List<Blog> selectBlogByDate(String date);
-
-    List<Blog> selectBlogByMonth(String date);
 }

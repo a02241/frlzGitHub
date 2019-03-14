@@ -7,6 +7,7 @@ import com.frlz.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -44,6 +45,16 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public Blog findBlog(Blog blog) throws Exception {
         return blogMapper.findBlog(blog);
+    }
+
+    @Override
+    public Date selectLatestBlogTime(String uid) {
+        return blogMapper.selectLatestBlogTime(uid);
+    }
+
+    @Override
+    public int selectBlogCountByDateAndUid(String date, String uid) {
+        return blogMapper.selectBlogCountByDateAndUid(date,uid);
     }
 
     @Override

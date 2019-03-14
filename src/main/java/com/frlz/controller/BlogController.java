@@ -1,10 +1,13 @@
 package com.frlz.controller;
 
 import com.frlz.pojo.Blog;
+import com.frlz.pojo.User;
 import com.frlz.service.BlogService;
+import com.frlz.service.LoginLogService;
 import com.frlz.service.UserService;
 import com.frlz.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -72,6 +75,7 @@ public class BlogController {
         return map;
     }
 
+    @Transactional
     @RequestMapping("/insertBlog")
     /**
      * 添加博客
@@ -93,6 +97,15 @@ public class BlogController {
         if(uid.trim().length()==0||uid==null){
             return false;
         }else {
+            SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+            String format2 = sdf2.format(date);//创建当前时间以yyyy-MM-dd格式
+            int count = blogService.selectBlogCountByDateAndUid(format2,uid);
+            if (count<1){//每天发第一次贴加8经验
+            User user = userService.selectByUid(uid);
+            int experience = user.getExperience() + 8;//发帖加8经验
+            user.setExperience(experience);
+            userService.updateUser(user);//写入数据库
+            }
             blog.setTime(newDate);
             blog.setLikes(0);
             blog.setDislike(0);

@@ -19,6 +19,8 @@ public interface UserService {
 
 	public String searchUsernameById(String uid);
 
+	public User selectUserByUsername(String username);
+
 	public String searchUsernameByEmail(String email);
 
 	public String check(User user);

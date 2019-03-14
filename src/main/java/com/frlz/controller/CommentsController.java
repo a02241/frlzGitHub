@@ -2,15 +2,20 @@ package com.frlz.controller;
 
 import com.frlz.pojo.Blog;
 import com.frlz.pojo.Comments;
+import com.frlz.pojo.User;
 import com.frlz.service.BlogService;
 import com.frlz.service.CommentsService;
+import com.frlz.service.UserService;
 import com.frlz.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,6 +28,9 @@ public class CommentsController {
     @Autowired
     private BlogService blogService;
 
+    @Autowired
+    private UserService userService;
+
     @RequestMapping("findBlog")
     /**
      * 展示评论信息
@@ -33,9 +41,16 @@ public class CommentsController {
      * @param pageCode
      * @param username
      * @param blogId
-     * @Description: 必填参数:blogId,username,pageCode(默认为1)
-     *              返回值username,message,readNumber,commentsNumber,title,forwordNumber,blogId,summary,uid
-     *              pageBean(分页类,内datas的List集合-->>评论的集合信息)
+     * @Description: TODO 必填参数:blogId,username,pageCode(默认为1)
+     *                  返回值username,
+     *                  message,
+     *                  commentsNumber,
+     *                  title,
+     *                  forwordNumber,
+     *                  blogId,
+     *                  summary,
+     *                  uid,
+     *                  pageBean(分页类,内datas的List集合-->>评论的集合信息)
      * @return java.util.HashMap<java.lang.String,java.lang.Object>
      * @throws
      */
@@ -61,6 +76,7 @@ public class CommentsController {
         return map;
     }
 
+    @Transactional
     @RequestMapping("saveComment")
     /**
      * 保存评论信息
@@ -71,15 +87,29 @@ public class CommentsController {
      * @param comments
      * @param model
      * @param blogId
-     * @Description: TODO 必填参数comments,blogId,username返回success则为注册成功
+     * @Description: TODO 必填参数comments,
+     *                  blogId,
+     *                  username
+     *                  返回success则为注册成功
      * @return java.util.HashMap<java.lang.String,java.lang.Object>
      * @throws
      */
 
     public HashMap<String,Object> saveComment(String content,Comments comments,ModelMap model,String blogId) throws Exception {
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String format = sdf.format(date);//创建当前时间以yyyy-MM-dd格式
+        int count = commentsService.selectCommentTimeCountByTime(format,comments.getUsername());//返回前一次当天写博客的次数
+        if(count < 3){//回帖小于三次加8经验，超过不加
+            User user = userService.selectUserByUsername(comments.getUsername());
+            int experience = user.getExperience() + 5;//发帖加8经验
+            user.setExperience(experience);
+            userService.updateUser(user);//写入数据库
+        }
         commentsService.saveComment(comments);
         HashMap<String,Object> map=new HashMap<>();
         map.put("result","success");
+        map.put("count",count);
         return map;
     }
 
