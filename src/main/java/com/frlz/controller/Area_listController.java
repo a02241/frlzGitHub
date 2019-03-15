@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -20,9 +20,9 @@ import java.util.List;
 @RestController
 public class Area_listController{
     @RequestMapping("/getip")
-    public String getip() throws IOException {
+    public String getip(HttpServletRequest request)  {
         GetIP getIP = new GetIP();
-        return getIP.getIp() + getIP.getAdress();
+        return getIP.getIp(request) ;
     }
 
 
