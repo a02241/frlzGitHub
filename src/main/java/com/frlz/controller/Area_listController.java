@@ -2,11 +2,13 @@ package com.frlz.controller;
 
 import com.frlz.pojo.Area_List;
 import com.frlz.service.Area_ListService;
+import com.frlz.util.GetIP;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -16,7 +18,13 @@ import java.util.List;
  * @date: 2019-03-02 10:55
  **/
 @RestController
-public class Area_listController {
+public class Area_listController{
+    @RequestMapping("/getip")
+    public String getip() throws IOException {
+        GetIP getIP = new GetIP();
+        return getIP.getIp() + getIP.getAdress();
+    }
+
 
 
     @Autowired
