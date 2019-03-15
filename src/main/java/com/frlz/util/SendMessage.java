@@ -42,7 +42,7 @@ public class SendMessage {
             e.printStackTrace();
         }
 
-        return null;
+        return "false";
     }
 
 
