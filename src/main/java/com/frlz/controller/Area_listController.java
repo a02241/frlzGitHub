@@ -20,7 +20,7 @@ import java.util.List;
 @RestController
 public class Area_listController{
     @RequestMapping("/getip")
-    public String getip(HttpServletRequest request)  {
+    public String getip(HttpServletRequest request) throws Exception {
         GetIP getIP = new GetIP();
         return getIP.getIp(request) ;
     }
