@@ -43,7 +43,7 @@ public class BalanceUtil {
     public void addQuantumBalance(String uid, int count){
         Balance balance = balanceUtil.balanceService.selectFromBanlanceByUid(uid);//根据uid查询余额
         System.out.println(balance.getQuantumBalance()+"~~~~~~~~~~~~~~");
-        int countAdd = balance.getQuantumBalance() + count;//量子余额+5
+        int countAdd = balance.getQuantumBalance() + count;//交易后量子余额
         balanceUtil.balanceService.updateQuantumBalanceByUid(uid,countAdd);//交易写入数据库
         TradeLog tradeLog = new TradeLog();
         tradeLog.setBalanceId(balance.getBalanceId());

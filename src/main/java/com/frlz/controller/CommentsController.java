@@ -50,6 +50,7 @@ public class CommentsController {
      *                  summary,
      *                  uid,
      *                  pageBean(分页类,内datas的List集合-->>评论的集合信息)
+     *                  result评论总数量
      * @return java.util.HashMap<java.lang.String,java.lang.Object>
      * @throws
      */
@@ -59,6 +60,10 @@ public class CommentsController {
         HashMap<String,Object> map = new HashMap<>();
         if(blogId.trim().length() > 0 || blogId==null) {
             conditions.put("blogId",blogId);//把blogId放入map集合中
+            int count = commentsService.findCommentsByBlogId(conditions);
+            map.put("result",count);
+        }else {
+            map.put("result","blogId为空");
         }
         PageBean pb = commentsService.findComments(conditions, 12, pageCode);//conditions-->>map存放数据,pageCode-->>分页条数,从第几个开始
         map.put("pageBean", pb);
@@ -74,6 +79,7 @@ public class CommentsController {
         map.put("uid", finBlog.getUid());
         return map;
     }
+
 
     @Transactional
     @RequestMapping("saveComment")
