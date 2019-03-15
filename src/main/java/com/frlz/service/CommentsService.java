@@ -10,6 +10,8 @@ public interface CommentsService {
 
     public PageBean findComments(Map<String, Object> conditions , int pageSize, int pageCode) throws Exception;
 
+    public int findCommentsByBlogId(Map<String, Object> conditions) throws Exception;
+
     public void saveComment(Comments comments)throws Exception;
 
     public int selectCommentTimeCountByTime(String date,String username);

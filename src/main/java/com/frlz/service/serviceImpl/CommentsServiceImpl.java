@@ -41,6 +41,11 @@ public class CommentsServiceImpl implements CommentsService {
     }
 
     @Override
+    public int findCommentsByBlogId(Map<String, Object> conditions) throws Exception {
+        return commentsMapper.findAllCountComments(conditions);
+    }
+
+    @Override
     public void saveComment(Comments comments) throws Exception {
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
