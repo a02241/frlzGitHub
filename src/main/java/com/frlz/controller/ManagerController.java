@@ -162,4 +162,6 @@ public class ManagerController {
     public List<LoginLog> getLoginLogByDate(String date){
         return loginLogService.selectLoginLogByDate(date);
     }
+
+
 }
