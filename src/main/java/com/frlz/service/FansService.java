@@ -9,4 +9,6 @@ public interface FansService {
     void insertFans(String uid,String fansUId);
 
     List<Fans> selectFansForOne(String uid);
+
+    void deleteFans(String fansUId);
 }

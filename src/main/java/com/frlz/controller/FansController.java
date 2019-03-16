@@ -20,10 +20,18 @@ public class FansController {
     }
 
     @Transactional
-    @RequestMapping("/fans")
-    public String fans(String uid,String fansUId){
+    @RequestMapping("/interest")
+    public String interest(String uid,String fansUId){
         fansService.insertFans(uid,fansUId);
-        userService.updateFansNumber(uid);
+        userService.updateFansNumberAdd(uid);
+        return "success";
+    }
+
+    @Transactional
+    @RequestMapping("/notInterest")
+    public String notInterest(String uid,String fansUId){
+        fansService.deleteFans(fansUId);
+        userService.updateFansNumberReduce(uid);
         return "success";
     }
 }
