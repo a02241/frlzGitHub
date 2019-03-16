@@ -41,6 +41,10 @@ public interface UserService {
 
 	void updateFansNumberReduce(String uid);
 
+	void updateInterestNumberAdd(String uid);
+
+	void updateInterestNumberReduce(String uid);
+
 	public String  checkPasswordByUId(String uid);
 
 	public void deleteUserByUid(String uid);

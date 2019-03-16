@@ -24,6 +24,7 @@ public class FansController {
     public String interest(String uid,String fansUId){
         fansService.insertFans(uid,fansUId);
         userService.updateFansNumberAdd(uid);
+        userService.updateInterestNumberAdd(fansUId);
         return "success";
     }
 
@@ -32,6 +33,7 @@ public class FansController {
     public String notInterest(String uid,String fansUId){
         fansService.deleteFans(fansUId);
         userService.updateFansNumberReduce(uid);
+        userService.updateInterestNumberReduce(fansUId);
         return "success";
     }
 }

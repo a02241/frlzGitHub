@@ -108,6 +108,12 @@ public interface UserMapper {
     @Update("update user set fansNumber = fansNumber - 1 where uid = #{uid}")
     void updateFansNumberReduce(String uid);
 
+    @Update("update user set interestNumber = interestNumber + 1 where uid = #{uid}")
+    void updateInterestNumberAdd(String uid);
+
+    @Update("update user set interestNumber = interestNumber - 1 where uid = #{uid}")
+    void updateInterestNumberReduce(String uid);
+
     @Delete("delete from user where uid = #{uid}")
     void deleteByUid(String uid);
 }

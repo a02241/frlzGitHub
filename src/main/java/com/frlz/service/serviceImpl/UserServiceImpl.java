@@ -120,6 +120,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void updateInterestNumberAdd(String uid) {
+        userMapper.updateInterestNumberAdd(uid);
+    }
+
+    @Override
+    public void updateInterestNumberReduce(String uid) {
+        userMapper.updateInterestNumberReduce(uid);
+    }
+
+    @Override
     public String checkPasswordByUId(String uid) {
         return userMapper.checkPasswordByUId(uid);
     }
