@@ -110,6 +110,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void updateFansNumberAdd(String uid) {
+        userMapper.updateFansNumberAdd(uid);
+    }
+
+    @Override
+    public void updateFansNumberReduce(String uid) {
+        userMapper.updateFansNumberReduce(uid);
+    }
+
+    @Override
     public String checkPasswordByUId(String uid) {
         return userMapper.checkPasswordByUId(uid);
     }

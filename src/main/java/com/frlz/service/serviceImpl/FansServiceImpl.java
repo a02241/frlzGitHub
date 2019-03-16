@@ -22,4 +22,9 @@ public class FansServiceImpl implements FansService {
     public List<Fans> selectFansForOne(String uid) {
         return fansMapper.selectFansForOne(uid);
     }
+
+    @Override
+    public void deleteFans(String fansUId) {
+        fansMapper.deleteFans(fansUId);
+    }
 }

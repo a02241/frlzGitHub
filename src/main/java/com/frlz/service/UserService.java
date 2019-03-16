@@ -37,6 +37,10 @@ public interface UserService {
 
 	public void updateEmail(String uid,String email);
 
+	void updateFansNumberAdd(String uid);
+
+	void updateFansNumberReduce(String uid);
+
 	public String  checkPasswordByUId(String uid);
 
 	public void deleteUserByUid(String uid);
