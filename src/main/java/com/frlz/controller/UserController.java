@@ -115,6 +115,10 @@ public class UserController extends Cors {
                 String format = sdf.format(date);
                 Date newDate = sdf.parse(format);//创建当前时间以yyyy-MM-dd HH:mm:ss格式
                 user.setRegistTime(newDate);
+                //默认粉丝数
+                user.setFansNumber(0);
+                //关注人数
+                user.setInterestNumber(0);
                 //MD5加密
                 user.setPassword(MD5.MD5Encode("fr2018<%" + user.getPassword()  + "%>lz1220"));
                 user.setExperience(0);
