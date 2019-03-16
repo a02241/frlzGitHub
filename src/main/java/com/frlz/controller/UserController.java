@@ -303,13 +303,13 @@ public class UserController extends Cors {
 
                     String userHome = System.getProperties().getProperty("java.home");
 
-                    path = "/usr/java/file/upload/"+  username +".jpg";
+                    path = "/usr/local/nginx/html/project/html/userImg"+  username +".jpg";
 
                     File file2 = new File(path);
 
                     file.transferTo(file2);
 
-                    userService.uploadUserIcon(username,path);
+                    userService.uploadUserIcon(username,username+".jpg");
 
                     return "上传成功";
                 }else {
