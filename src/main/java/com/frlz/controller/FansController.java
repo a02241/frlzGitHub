@@ -20,7 +20,7 @@ public class FansController {
     }
 
     @Transactional
-    @RequestMapping("/interest")
+    @RequestMapping("/interest")//关注
     public String interest(String uid,String fansUId){
         fansService.insertFans(uid,fansUId);
         userService.updateFansNumberAdd(uid);
@@ -29,7 +29,7 @@ public class FansController {
     }
 
     @Transactional
-    @RequestMapping("/notInterest")
+    @RequestMapping("/notInterest")//取消关注
     public String notInterest(String uid,String fansUId){
         fansService.deleteFans(fansUId);
         userService.updateFansNumberReduce(uid);
