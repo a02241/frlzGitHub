@@ -109,12 +109,48 @@ public class BlogController {
             blog.setTime(newDate);
             blog.setLikes(0);
             blog.setDislike(0);
-            blog.setFansNumber(0);
             blog.setCommentsNumber(0);
             blog.setForwordNumber(0);
             blog.setReadNumber(0);
             blog.setUid(uid);
         blogService.insertBlog(blog);}
         return true;
+    }
+
+
+    @RequestMapping("addReadNumber")
+    /**
+     * 增加阅读数
+     * @title addReadNumber
+     * @create by: cz
+     * @description: TODO 必填参数blogId
+     * @create time: 2019/3/16 14:29
+     * @Param: blogId
+     * @throws
+     * @return java.lang.String
+     * @version V1.0
+     */
+
+    public String addReadNumber(String blogId){
+        blogService.updateBlogByBlogId(blogId,1,0,0);
+        return "阅读数+1";
+    }
+
+    @RequestMapping("addForwordNumber")
+    /**
+     * 增加转发数
+     * @title addForwordNumber
+     * @create by: cz
+     * @description: TODO 必填参数blogId
+     * @create time: 2019/3/16 14:29
+     * @Param: blogId
+     * @throws
+     * @return java.lang.String
+     * @version V1.0
+     */
+
+    public String addForwordNumber(String blogId){
+        blogService.updateBlogByBlogId(blogId,0,0,1);
+        return "转发数+1";
     }
 }

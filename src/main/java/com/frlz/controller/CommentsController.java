@@ -136,22 +136,4 @@ public class CommentsController {
         map.put("result","success");
         return map;
     }
-
-    @RequestMapping("addReadNumber")
-    public String addReadNumber(String blogId){
-        blogService.updateBlogByBlogId(blogId,1,0,0);
-        return "阅读数+1";
-    }
-
-        @RequestMapping("addCommentsNumber")
-    public String addCommentsNumber(String blogId){
-        blogService.updateBlogByBlogId(blogId,0,1,0);
-        return "评论数+1";
-    }
-
-    @RequestMapping("addForwordNumber")
-    public String addForwordNumber(String blogId){
-        blogService.updateBlogByBlogId(blogId,0,0,1);
-        return "转发数+1";
-    }
 }
