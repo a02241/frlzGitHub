@@ -58,6 +58,8 @@ public interface BlogService {
 
     public List<Blog> selectFiftyBlog(int a);
 
+    public void updateBlogByBlogId(String blogId , int readNumber , int commentsNumber , int forwordNumber);
+
     void deleteBlog(String blogId);
 
     List<Blog> selectBlogByDate(String date);

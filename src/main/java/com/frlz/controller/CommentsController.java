@@ -111,6 +111,7 @@ public class CommentsController {
             user.setExperience(experience);
             userService.updateUser(user);//写入数据库
         }
+        blogService.updateBlogByBlogId(comments.getBlogId(),0,1,0);//评论数+1
         commentsService.saveComment(comments);
         HashMap<String,Object> map=new HashMap<>();
         map.put("result","success");
@@ -135,5 +136,4 @@ public class CommentsController {
         map.put("result","success");
         return map;
     }
-
 }

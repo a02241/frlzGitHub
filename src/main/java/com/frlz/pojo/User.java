@@ -24,4 +24,6 @@ public class User {
 	private Blog blog;
 	private Date registTime;//注册时间
 	private int experience;//等级
+	private int fansNumber;//粉丝数
+	private int interestNumber;//关注人数
 }

@@ -68,7 +68,6 @@ public interface BlogMapper {
             "#{time}, " +
             "#{likes}, " +
             "#{dislike}, " +
-            "#{fansNumber}, " +
             "#{commentsNumber}, " +
             "#{forwordNumber}, " +
             "#{readNumber}, " +
@@ -83,7 +82,16 @@ public interface BlogMapper {
     @Update("update blog set dislike = #{dislike} where blogId = #{blogId}")
     void updateDislikeCount(int dislike,String blogId);
 
-    @Delete("delete from blog where blogId = #{blogId}")
+    @Update("update blog set readNumber = #{readNumber} where blogId = #{blogId}")
+    void updateReadNumberByBlogId(int readNumber , String blogId);
+
+    @Update("update blog set commentsNumber = #{commentsNumber} where blogId = #{blogId}")
+    void updateCommentsNumberByBlogId(int commentsNumber , String blogId);
+
+    @Update("update blog set forwordNumber = #{forwordNumber} where blogId = #{blogId}")
+    void updateForwordNumberByBlogId(int forwordNumber , String blogId);
+
+    @Delete("delete from blog where blogId = #{blogId} ")
     void deleteBlog(String blogId);
 
 
