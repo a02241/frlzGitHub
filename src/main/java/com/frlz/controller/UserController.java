@@ -307,7 +307,7 @@ public class UserController extends Cors {
 
                     file.transferTo(file2);
 
-                    userService.uploadUserIcon(username,path);
+                    userService.uploadUserIcon(username,username +".jpg");
 
                     return "上传成功";
                 }else {
