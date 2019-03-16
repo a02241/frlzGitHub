@@ -78,7 +78,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public void updateBlogByBlogId(String blogId , int readNumber , int commentsNumber , int forwordNumber , int fansNumber) {
+    public void updateBlogByBlogId(String blogId , int readNumber , int commentsNumber , int forwordNumber) {
         Blog blog = new Blog();
         blog.setBlogId(blogId);
         blog = blogMapper.findBlog(blog);
@@ -93,10 +93,6 @@ public class BlogServiceImpl implements BlogService {
         if (forwordNumber != 0){
             int newFordNumber = blog.getForwordNumber() + 1;
             blogMapper.updateForwordNumberByBlogId(newFordNumber,blogId);
-        }
-        if (fansNumber != 0){
-            int newFansNumber = blog.getFansNumber() + 1;
-            blogMapper.updateFansNumberByBlogId(newFansNumber,blogId);
         }
     }
 

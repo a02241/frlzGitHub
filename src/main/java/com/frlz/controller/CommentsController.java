@@ -111,7 +111,7 @@ public class CommentsController {
             user.setExperience(experience);
             userService.updateUser(user);//写入数据库
         }
-        blogService.updateBlogByBlogId(comments.getBlogId(),0,1,0,0);//评论数+1
+        blogService.updateBlogByBlogId(comments.getBlogId(),0,1,0);//评论数+1
         commentsService.saveComment(comments);
         HashMap<String,Object> map=new HashMap<>();
         map.put("result","success");
@@ -139,25 +139,19 @@ public class CommentsController {
 
     @RequestMapping("addReadNumber")
     public String addReadNumber(String blogId){
-        blogService.updateBlogByBlogId(blogId,1,0,0,0);
+        blogService.updateBlogByBlogId(blogId,1,0,0);
         return "阅读数+1";
     }
 
         @RequestMapping("addCommentsNumber")
     public String addCommentsNumber(String blogId){
-        blogService.updateBlogByBlogId(blogId,0,1,0,0);
+        blogService.updateBlogByBlogId(blogId,0,1,0);
         return "评论数+1";
     }
 
     @RequestMapping("addForwordNumber")
     public String addForwordNumber(String blogId){
-        blogService.updateBlogByBlogId(blogId,0,0,1,0);
+        blogService.updateBlogByBlogId(blogId,0,0,1);
         return "转发数+1";
-    }
-
-    @RequestMapping("addFansNumber")
-    public String addFansNumber(String blogId){
-        blogService.updateBlogByBlogId(blogId,0,0,0,1);
-        return "粉丝数+1";
     }
 }

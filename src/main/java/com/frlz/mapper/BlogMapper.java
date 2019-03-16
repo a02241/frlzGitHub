@@ -68,7 +68,6 @@ public interface BlogMapper {
             "#{time}, " +
             "#{likes}, " +
             "#{dislike}, " +
-            "#{fansNumber}, " +
             "#{commentsNumber}, " +
             "#{forwordNumber}, " +
             "#{readNumber}, " +
@@ -91,9 +90,6 @@ public interface BlogMapper {
 
     @Update("update blog set forwordNumber = #{forwordNumber} where blogId = #{blogId}")
     void updateForwordNumberByBlogId(int forwordNumber , String blogId);
-
-    @Update("update blog set fansNumber = #{fansNumber} where blogId = #{blogId}")
-    void updateFansNumberByBlogId(int fansNumber , String blogId);
 
     @Delete("delete from blog where blogId = #{blogId} ")
     void deleteBlog(String blogId);

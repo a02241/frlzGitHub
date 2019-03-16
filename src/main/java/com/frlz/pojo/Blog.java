@@ -12,7 +12,6 @@ public class Blog {
 	private Date time;//时间
 	private int likes;//点赞数
 	private int dislike;//踩数
-	private int fansNumber;//粉丝数量
 	private int commentsNumber;//评论数
 	private int forwordNumber;//转发数
 	private int readNumber;//阅读数
