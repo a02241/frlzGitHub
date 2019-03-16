@@ -124,16 +124,18 @@ public class UserController extends Cors {
                 user.setExperience(0);
                 //注册信息
                 userService.registSave(user);
-                loginLogService.insertLoginLog(user.getUid());//插入登陆日志
+                User MyUser =userService.selectUserByUsername(username);
+                loginLogService.insertLoginLog(MyUser.getUid());//插入登陆日志
                 //创建余额账户
                 Balance balance = new Balance();
-                balance.setUid(user.getUid());
+                balance.setUid(MyUser.getUid());
                 balance.setBlockBalance(0);
                 balance.setQuantumBalance(1);
                 balance.setMagicCubeBalance(0);
                 balanceService.insertBalance(balance);
+                balance = balanceService.selectFromBanlanceByUid(MyUser.getUid());
                 TradeLog tradeLog = new TradeLog();
-                tradeLog.setBalanceId(user.getUid());
+                tradeLog.setBalanceId(balance.getBalanceId());
                 tradeLog.setTradeQuantum(1);
                 tradeLog.setRemarks("登录奖励增加1点量子");
                 tradeLogService.insertTradeLog(tradeLog);//写入交易记录

@@ -54,7 +54,10 @@ public interface UserMapper {
             "privacy," +
             "state," +
             "code," +
-            "registTime)" +
+            "registTime," +
+            "experience," +
+            "fansNumber," +
+            "interestNumber )" +
             " values( #{uid}, " +
             "#{phonenumber}, " +
             "#{username}, " +
@@ -68,7 +71,10 @@ public interface UserMapper {
             "#{privacy}, " +
             "#{state}, " +
             "#{code}, " +
-            "#{registTime})")
+            "#{registTime}, " +
+            "#{experience}, " +
+            "#{fansNumber}," +
+            "#{interestNumber})")
     void registSave(User user);
 
     @Update("update user set icon = #{icon} where username = #{username}")
