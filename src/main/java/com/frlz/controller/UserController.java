@@ -79,7 +79,7 @@ public class UserController extends Cors {
      * @throws 
      */
 
-    public void check(User user , HttpServletResponse response,@RequestParam(defaultValue="0")String sentCode, @RequestParam(defaultValue="9")String checkCode) {
+    public void check(User user , HttpServletResponse response,@RequestParam(defaultValue = "0")String sentCode, @RequestParam(defaultValue = "9")String checkCode) {
         String username = getUsername();
         user.setUsername(username);
         String check = userService.check(user);
@@ -113,7 +113,7 @@ public class UserController extends Cors {
                 SimpleDateFormat sdf;
                 sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String format = sdf.format(date);
-                Date newDate =sdf.parse(format);//创建当前时间以yyyy-MM-dd HH:mm:ss格式
+                Date newDate = sdf.parse(format);//创建当前时间以yyyy-MM-dd HH:mm:ss格式
                 user.setRegistTime(newDate);
                 //默认粉丝数
                 user.setFansNumber(0);
@@ -161,7 +161,7 @@ public class UserController extends Cors {
      * @throws
      */
 
-    public HashMap<String,String> userLogin(String username,String password,@RequestParam(defaultValue="")String isRember,HttpServletResponse resp) {
+    public HashMap<String,String> userLogin(String username, String password, @RequestParam(defaultValue = "")String isRember, HttpServletResponse resp) {
         HashMap<String,String> map = new HashMap<>();
         String loginStr = username;
         String data;
@@ -234,16 +234,15 @@ public class UserController extends Cors {
 
     public void emailCode(String email, HttpServletResponse response){
         System.out.println("发送邮件");
-        String str="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";//验证码筛选
-        StringBuilder sb=new StringBuilder(4);
-        for(int i=0;i<4;i++)
-        {
-            char ch=str.charAt(new Random().nextInt(str.length()));
-            sb.append(ch);
+        String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";//验证码筛选
+        StringBuilder sb = new StringBuilder(4);
+        for(int i = 0;i < 4;i++){
+            char ch = str.charAt(new Random().nextInt(str.length()));
+            sb.append (ch);
         }
         System.out.println(sb.toString()); //随机生成验证码
 
-        int res= Mail.sendEmail("smtp.163.com", "shiyaogame@163.com", "fr20181220", "shiyaogame@163.com", new String[]{email},
+        int res = Mail.sendEmail("smtp.163.com", "shiyaogame@163.com", "fr20181220", "shiyaogame@163.com", new String[]{email},
                 "短信验证",  "【方融魔方】您的验证码为：" + sb.toString() ,"text/html;charset=utf-8");//发送邮箱
         System.out.println("\n发送结果:"+res);
         try {

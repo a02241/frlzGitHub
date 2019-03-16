@@ -54,7 +54,7 @@ public class BlogController {
         HashMap<String,Object> map = new HashMap<>();
         String username = "";
         Map<String,Object> conditions = new HashMap<String,Object>();
-        if(uid.trim().length()>0||uid!=null) {
+        if(uid.trim().length() > 0 || uid != null) {
             conditions.put("uid",uid);//把uid放入map集合中
         }
         PageBean pb = blogService.findBy(conditions, 12, pageCode);//conditions-->>map存放数据,pageCode-->>分页条数,从第几个开始
@@ -94,13 +94,13 @@ public class BlogController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String format = sdf.format(date);
         Date newDate =sdf.parse(format);//创建当前时间以yyyy-MM-dd HH:mm:ss格式
-        if(uid.trim().length()==0||uid==null){
+        if(uid.trim().length() == 0 || uid == null){
             return false;
         }else {
             SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
             String format2 = sdf2.format(date);//创建当前时间以yyyy-MM-dd格式
             int count = blogService.selectBlogCountByDateAndUid(format2,uid);
-            if (count<1){//每天发第一次贴加8经验
+            if (count < 1){//每天发第一次贴加8经验
             User user = userService.selectByUid(uid);
             int experience = user.getExperience() + 8;//发帖加8经验
             user.setExperience(experience);
