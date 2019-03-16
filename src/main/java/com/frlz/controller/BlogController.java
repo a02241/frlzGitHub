@@ -123,7 +123,7 @@ public class BlogController {
      * 增加阅读数
      * @title addReadNumber
      * @create by: cz
-     * @description: TODO 必填参数blogId
+     * @description: TODO 必填参数blogId 返回阅读数+1字符串
      * @create time: 2019/3/16 14:29
      * @Param: blogId
      * @throws
@@ -141,7 +141,7 @@ public class BlogController {
      * 增加转发数
      * @title addForwordNumber
      * @create by: cz
-     * @description: TODO 必填参数blogId
+     * @description: TODO 必填参数blogId，返回转发数+1字符串
      * @create time: 2019/3/16 14:29
      * @Param: blogId
      * @throws
