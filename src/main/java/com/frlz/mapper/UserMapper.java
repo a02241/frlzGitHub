@@ -96,6 +96,9 @@ public interface UserMapper {
     @Update("update user set email = #{email} where uid = #{uid}")
     void updateEmail(String uid,String email);
 
+    @Update("update user set fansNumber = fansNumber + 1 where uid = #{uid}")
+    void updateFansNumber(String uid);
+
     @Delete("delete from user where uid = #{uid}")
     void deleteByUid(String uid);
 }

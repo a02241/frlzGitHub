@@ -37,6 +37,8 @@ public interface UserService {
 
 	public void updateEmail(String uid,String email);
 
+	void updateFansNumber(String uid);
+
 	public String  checkPasswordByUId(String uid);
 
 	public void deleteUserByUid(String uid);
