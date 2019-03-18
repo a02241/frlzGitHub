@@ -1,9 +1,9 @@
 package com.frlz.controller;
 
-import com.frlz.mapper.TradeLogMapper;
 import com.frlz.pojo.Balance;
 import com.frlz.pojo.TradeLog;
 import com.frlz.service.BalanceService;
+import com.frlz.service.TradeLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class BalanceController {
 
-    @Autowired
-    private BalanceService balanceService;
+    private final BalanceService balanceService;
+    private final TradeLogService tradeLogService;
 
     @Autowired
-    private TradeLogMapper tradeLogMapper;
+    public BalanceController(BalanceService balanceService,TradeLogService tradeLogService){
+        this.balanceService = balanceService;
+        this.tradeLogService = tradeLogService;
+    }
 
     @Transactional
     @RequestMapping("/quantumToBlock")
@@ -51,7 +54,7 @@ public class BalanceController {
             tradeLog.setTradeQuantum(-quantum);
             tradeLog.setTradeBlock(quantum/10);
             tradeLog.setRemarks("量子兑换方块");
-            tradeLogMapper.insertTradeLog(tradeLog);
+            tradeLogService.insertTradeLog(tradeLog);
             return "兑换成功";
         }else {
             return "余额不足";
@@ -86,7 +89,7 @@ public class BalanceController {
             tradeLog.setTradeQuantum(block * 10);
             tradeLog.setTradeBlock(-block);
             tradeLog.setRemarks("方块兑换量子");
-            tradeLogMapper.insertTradeLog(tradeLog);
+            tradeLogService.insertTradeLog(tradeLog);
             return "兑换成功";
         }else {
             return "余额不足";
@@ -121,7 +124,7 @@ public class BalanceController {
             tradeLog.setTradeMagicCube(-magicCube);
             tradeLog.setTradeBlock(magicCube * 26);
             tradeLog.setRemarks("魔方兑换方块");
-            tradeLogMapper.insertTradeLog(tradeLog);
+            tradeLogService.insertTradeLog(tradeLog);
             return "兑换成功";
         }else {
             return "余额不足";
@@ -156,7 +159,7 @@ public class BalanceController {
             tradeLog.setTradeMagicCube(block / 27);
             tradeLog.setTradeBlock(-block);
             tradeLog.setRemarks("方块兑换魔方");
-            tradeLogMapper.insertTradeLog(tradeLog);
+            tradeLogService.insertTradeLog(tradeLog);
             return "兑换成功";
         }else {
             return "余额不足";

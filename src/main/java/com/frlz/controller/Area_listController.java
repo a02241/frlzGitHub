@@ -25,10 +25,12 @@ public class Area_listController{
         return getIP.getIp(request) ;
     }
 
-
+    private final Area_ListService area_ListService;
 
     @Autowired
-    private Area_ListService area_ListService;
+    public Area_listController(Area_ListService area_ListService){
+        this.area_ListService = area_ListService;
+    }
 
     @RequestMapping("selectName")
     /**

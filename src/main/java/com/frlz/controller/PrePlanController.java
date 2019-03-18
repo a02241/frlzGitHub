@@ -16,8 +16,13 @@ import java.util.Date;
  **/
 @RestController
 public class PrePlanController {
+
+    private final PrePlanService prePlanService;
+
     @Autowired
-    private PrePlanService prePlanService;
+    public PrePlanController(PrePlanService prePlanService){
+        this.prePlanService = prePlanService;
+    }
 
     @RequestMapping("/getPrePlan")
     /**

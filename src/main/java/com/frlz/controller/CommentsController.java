@@ -21,14 +21,16 @@ import java.util.Map;
 @RestController
 public class CommentsController {
 
-    @Autowired
-    private CommentsService commentsService;
+    private final CommentsService commentsService;
+    private final BlogService blogService;
+    private final UserService userService;
 
     @Autowired
-    private BlogService blogService;
-
-    @Autowired
-    private UserService userService;
+    public CommentsController(CommentsService commentsService,BlogService blogService,UserService userService){
+        this.commentsService = commentsService;
+        this.blogService = blogService;
+        this.userService = userService;
+    }
 
     @RequestMapping("findBlog")
     /**

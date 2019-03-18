@@ -11,11 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class CheckLikeController {
-    @Autowired
-    private CheckLikeService checkLikeService;
+
+    private final CheckLikeService checkLikeService;
+    private final BlogService blogService;
 
     @Autowired
-    private BlogService blogService;
+    public CheckLikeController(CheckLikeService checkLikeService,BlogService blogService){
+        this.checkLikeService = checkLikeService;
+        this.blogService = blogService;
+    }
 
     @Transactional
     @RequestMapping("/clickLike")

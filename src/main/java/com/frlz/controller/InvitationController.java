@@ -11,8 +11,12 @@ import java.util.List;
 @RestController
 public class InvitationController {
 
+    private final InvitationService invitationService;
+
     @Autowired
-    InvitationService invitationService;
+    public InvitationController(InvitationService invitationService){
+        this.invitationService = invitationService;
+    }
 
     @RequestMapping("selectInvatationByUid")
     /**

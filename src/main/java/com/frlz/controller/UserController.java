@@ -33,15 +33,23 @@ import static com.frlz.util.GetUername.getUsername;
 @RestController
 public class UserController extends Cors {
 
-    @Autowired
-    private BalanceService balanceService;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private LoginLogService loginLogService;
-    @Autowired
-    private TradeLogService tradeLogService;
+    private final BalanceService balanceService;
+    private final UserService userService;
+    private final LoginLogService loginLogService;
+    private final TradeLogService tradeLogService;
+
+
+
+
     BalanceUtil balanceUtil = new BalanceUtil();
+
+    @Autowired
+    public UserController(BalanceService balanceService,UserService userService,LoginLogService loginLogService,TradeLogService tradeLogService){
+        this.balanceService = balanceService;
+        this.userService = userService;
+        this.loginLogService = loginLogService;
+        this.tradeLogService = tradeLogService;
+    }
     @RequestMapping("/checkAccount")//注册时校验账号是否重复
     /**
      * 注册时校验手机或者邮箱是否重复

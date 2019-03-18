@@ -18,12 +18,15 @@ import java.util.Map;
 
 @RestController
 public class BlogController {
-    @Autowired
-    private BlogService blogService;
+
+    private final BlogService blogService;
+    private final UserService userService;
 
     @Autowired
-    private UserService userService;
-
+    public BlogController(BlogService blogService,UserService userService){
+        this.blogService = blogService;
+        this.userService = userService;
+    }
 
 
 

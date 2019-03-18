@@ -15,14 +15,17 @@ import java.util.List;
 
 @RestController
 public class ManagerController {
-    @Autowired
-    private UserService userService;
+
+    private final UserService userService;
+    private final BlogService blogService;
+    private final LoginLogService loginLogService;
 
     @Autowired
-    private BlogService blogService;
-
-    @Autowired
-    private LoginLogService loginLogService;
+    public ManagerController(UserService userService,BlogService blogService,LoginLogService loginLogService){
+        this.userService = userService;
+        this.blogService = blogService;
+        this.loginLogService = loginLogService;
+    }
 
     @RequestMapping("/managerLogin")
     /**

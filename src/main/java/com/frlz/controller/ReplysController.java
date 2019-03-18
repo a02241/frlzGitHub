@@ -14,8 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 @RestController
 public class ReplysController {
+
+    private final ReplysService replysService;
+
     @Autowired
-    ReplysService replysService;
+    public ReplysController(ReplysService replysService){
+        this.replysService = replysService;
+    }
 
     @RequestMapping("addReplys")
     /**

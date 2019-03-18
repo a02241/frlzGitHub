@@ -1,7 +1,7 @@
 package com.frlz.controller;
 
 import com.frlz.pojo.Shares;
-import com.frlz.service.serviceImpl.SharesServiceImpl;
+import com.frlz.service.SharesService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +13,13 @@ import java.util.regex.Pattern;
 
 @RestController
 public class SharesController {
+
+    private final SharesService sharesService;
+
     @Autowired
-    private SharesServiceImpl sharesService;
+    public SharesController(SharesService sharesService){
+        this.sharesService = sharesService;
+    }
 
     @RequestMapping("/getShares")
     /**
