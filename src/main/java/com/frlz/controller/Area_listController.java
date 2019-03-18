@@ -20,10 +20,11 @@ import java.util.List;
 @RestController
 public class Area_listController{
     @RequestMapping("/getip")
-    public String getip(HttpServletRequest request) throws Exception {
+    public String getip(HttpServletRequest request){
         GetIP getIP = new GetIP();
         return getIP.getIp(request) ;
     }
+
 
     private final Area_ListService area_ListService;
 
@@ -45,8 +46,7 @@ public class Area_listController{
      * @throws 
      */
     
-    public List<Area_List> selectName (@Param("name")String name) throws Exception {
-        List<Area_List> list = area_ListService.selectName(name);
-        return list;
+    public List<Area_List> selectName (@Param("name")String name) {
+        return area_ListService.selectName(name);
     }
 }

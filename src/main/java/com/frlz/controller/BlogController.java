@@ -53,9 +53,9 @@ public class BlogController {
      * @throws Exception
      */
 
-    public HashMap<String,Object> searchBlog(Blog blog, @RequestParam(defaultValue="0") int pageCode,@RequestParam(defaultValue="")String uid) throws Exception {
+    public HashMap<String,Object> searchBlog(@RequestParam(defaultValue="0") int pageCode,@RequestParam(defaultValue="")String uid) throws Exception {
         HashMap<String,Object> map = new HashMap<>();
-        String username = "";
+        String username;
         Map<String,Object> conditions = new HashMap<String,Object>();
         if(uid.trim().length() > 0 || uid != null) {
             conditions.put("uid",uid);//把uid放入map集合中

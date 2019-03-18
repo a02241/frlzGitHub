@@ -41,7 +41,7 @@ public class UserController extends Cors {
 
 
 
-    BalanceUtil balanceUtil = new BalanceUtil();
+    private BalanceUtil balanceUtil = new BalanceUtil();
 
     @Autowired
     public UserController(BalanceService balanceService,UserService userService,LoginLogService loginLogService,TradeLogService tradeLogService){
@@ -173,11 +173,10 @@ public class UserController extends Cors {
 
     public HashMap<String,String> userLogin(String username, String password, @RequestParam(defaultValue = "")String isRember, HttpServletResponse resp) {
         HashMap<String,String> map = new HashMap<>();
-        String loginStr = username;
         String data;
-        User user = new User();
+        User user;
         try {
-            user = userService.selectUser(loginStr);
+            user = userService.selectUser(username);
             if (user != null) {
                 if (user.getPassword().equals(MD5.MD5Encode("fr2018<%" + password  + "%>lz1220"))) {
                     data = "1";//密码相同返回1
@@ -510,7 +509,7 @@ public class UserController extends Cors {
         if (!email.matches(regex)) {
             tag = false;
         }
-        if(tag == true) {
+        if(tag) {
             userService.updateEmail(uid, email);
             balanceUtil.addQuantumBalance(uid,5);//增加5个量子
         }else {
