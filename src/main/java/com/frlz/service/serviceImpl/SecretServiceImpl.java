@@ -22,7 +22,6 @@ public class SecretServiceImpl implements SecretService {
         this.secretMapper = secretMapper;
     }
 
-    @Autowired
 
 
     @Override

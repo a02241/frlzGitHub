@@ -23,7 +23,6 @@ public class UserServiceImpl implements UserService {
         this.userMapper = userMapper;
     }
 
-    @Autowired
 
 
     @Override
