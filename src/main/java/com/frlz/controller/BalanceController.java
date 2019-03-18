@@ -6,7 +6,7 @@ import com.frlz.service.BalanceService;
 import com.frlz.service.TradeLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -28,7 +28,7 @@ public class BalanceController {
     }
 
     @Transactional
-    @RequestMapping("/quantumToBlock")
+    @PostMapping("/quantumToBlock")
     /**
      * 量子换方块
      * @title quantumToBlock
@@ -63,7 +63,7 @@ public class BalanceController {
     }
 
     @Transactional
-    @RequestMapping("/blockToQuantum")
+    @PostMapping("/blockToQuantum")
     /**
      * 方块换量子
      * @title blockToQuantum
@@ -98,7 +98,7 @@ public class BalanceController {
     }
 
     @Transactional
-    @RequestMapping("/magicCubeToBlock")
+    @PostMapping("/magicCubeToBlock")
     /**
      * 魔方换方块
      * @title magicCubeToBlock
@@ -133,7 +133,7 @@ public class BalanceController {
     }
 
     @Transactional
-    @RequestMapping("/blockToMagicCube")
+    @PostMapping("/blockToMagicCube")
     /**
      * 方块换魔方
      * @title blockToMagicCube

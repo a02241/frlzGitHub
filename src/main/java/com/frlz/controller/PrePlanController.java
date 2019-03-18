@@ -3,7 +3,7 @@ package com.frlz.controller;
 import com.frlz.pojo.PrePlan;
 import com.frlz.service.PrePlanService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -24,7 +24,7 @@ public class PrePlanController {
         this.prePlanService = prePlanService;
     }
 
-    @RequestMapping("/getPrePlan")
+    @PostMapping("/getPrePlan")
     /**
      * 根据用户uid和时间获取盘前计划
      * @title getPrePlan
@@ -42,7 +42,7 @@ public class PrePlanController {
         return prePlanService.selectPrePlanByUid(uid,time);
     }
 
-    @RequestMapping("/addPrePlan")
+    @PostMapping("/addPrePlan")
     /**
      * 添加盘前计划
      * @title addPrePlan

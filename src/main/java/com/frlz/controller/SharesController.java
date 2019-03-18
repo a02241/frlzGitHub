@@ -4,7 +4,7 @@ import com.frlz.pojo.Shares;
 import com.frlz.service.SharesService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class SharesController {
         this.sharesService = sharesService;
     }
 
-    @RequestMapping("/getShares")
+    @PostMapping("/getShares")
     /**
      * 图形化界面返回二位数组
      * @title getShares

@@ -5,7 +5,7 @@ import com.frlz.service.Area_ListService;
 import com.frlz.util.GetIP;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +19,7 @@ import java.util.List;
  **/
 @RestController
 public class Area_listController{
-    @RequestMapping("/getip")
+    @PostMapping("/getip")
     public String getip(HttpServletRequest request){
         GetIP getIP = new GetIP();
         return getIP.getIp(request) ;
@@ -33,7 +33,7 @@ public class Area_listController{
         this.area_ListService = area_ListService;
     }
 
-    @RequestMapping("selectName")
+    @PostMapping("selectName")
     /**
      * 搜索股票
      * @title selectName

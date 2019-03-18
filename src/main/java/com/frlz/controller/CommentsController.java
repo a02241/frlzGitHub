@@ -9,7 +9,7 @@ import com.frlz.service.UserService;
 import com.frlz.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,7 +32,7 @@ public class CommentsController {
         this.userService = userService;
     }
 
-    @RequestMapping("findBlog")
+    @PostMapping("findBlog")
     /**
      * 展示评论信息
      * @title findBlog
@@ -84,7 +84,7 @@ public class CommentsController {
 
 
     @Transactional
-    @RequestMapping("saveComment")
+    @PostMapping("saveComment")
     /**
      * 保存评论信息
      * @title saveComment
@@ -120,7 +120,7 @@ public class CommentsController {
         return map;
     }
 
-    @RequestMapping("/deleteComment")
+    @PostMapping("/deleteComment")
     /**
      * 删除评论信息
      * @title deleteComment

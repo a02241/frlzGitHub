@@ -7,7 +7,7 @@ import com.frlz.service.UserService;
 import com.frlz.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,7 +32,7 @@ public class BlogController {
 
 
     @Transactional
-    @RequestMapping("/searchBlog")
+    @PostMapping("/searchBlog")
     /**
      * 展示博客信息
      * @title searchBlog
@@ -53,7 +53,7 @@ public class BlogController {
      * @throws Exception
      */
 
-    public HashMap<String,Object> searchBlog(@RequestParam(defaultValue="0") int pageCode,@RequestParam(defaultValue="")String uid) throws Exception {
+    public HashMap<String,Object> searchBlog(@RequestParam(defaultValue="1") int pageCode,@RequestParam(defaultValue="")String uid) throws Exception {
         HashMap<String,Object> map = new HashMap<>();
         String username;
         Map<String,Object> conditions = new HashMap<String,Object>();
@@ -79,7 +79,7 @@ public class BlogController {
     }
 
     @Transactional
-    @RequestMapping("/insertBlog")
+    @PostMapping("/insertBlog")
     /**
      * 添加博客
      * @title insertBlog
@@ -121,7 +121,7 @@ public class BlogController {
     }
 
 
-    @RequestMapping("addReadNumber")
+    @PostMapping("addReadNumber")
     /**
      * 增加阅读数
      * @title addReadNumber
@@ -139,7 +139,7 @@ public class BlogController {
         return "阅读数+1";
     }
 
-    @RequestMapping("addForwordNumber")
+    @PostMapping("addForwordNumber")
     /**
      * 增加转发数
      * @title addForwordNumber

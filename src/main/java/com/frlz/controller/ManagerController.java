@@ -8,7 +8,7 @@ import com.frlz.service.LoginLogService;
 import com.frlz.service.UserService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -27,7 +27,7 @@ public class ManagerController {
         this.loginLogService = loginLogService;
     }
 
-    @RequestMapping("/managerLogin")
+    @PostMapping("/managerLogin")
     /**
      * 管理员登录
      * @title managerLogin
@@ -51,7 +51,7 @@ public class ManagerController {
         return "manager not exist";
     }
 
-    @RequestMapping("/deleteUser")
+    @PostMapping("/deleteUser")
     /**
      * 删除用户
      * @title deleteUser
@@ -69,7 +69,7 @@ public class ManagerController {
         return "success";
     }
 
-    @RequestMapping("/selectAllUser")
+    @PostMapping("/selectAllUser")
     /**
      * 查询所有用户
      * @title selectAllUser
@@ -87,18 +87,18 @@ public class ManagerController {
         return userService.getAll();
     }
 
-    @RequestMapping("/getblog")
+    @PostMapping("/getblog")
     public List<Blog> getblog(int a){
         return blogService.selectFiftyBlog((a - 1)* 20);
     }
 
-    @RequestMapping("/deleteBlog")
+    @PostMapping("/deleteBlog")
     public String deleteBlog(String blogId){
         blogService.deleteBlog(blogId);
         return "success";
     }
 
-    @RequestMapping("/getBlogByDate")
+    @PostMapping("/getBlogByDate")
     /**
      * 按照日期查询博客所有信息
      * @title getBlogByDate
@@ -115,7 +115,7 @@ public class ManagerController {
         return blogService.selectBlogByDate(date);
     }
 
-    @RequestMapping("/getBlogByMonth")
+    @PostMapping("/getBlogByMonth")
     /**
      * 按照月份查询博客所有信息
      * @title getBlogByMonth
@@ -132,7 +132,7 @@ public class ManagerController {
         return blogService.selectBlogByMonth(date);
     }
 
-    @RequestMapping("/getAllLoginLog")
+    @PostMapping("/getAllLoginLog")
     /**
      * 获取所有登录日志
      * @title getAllLoginLog
@@ -149,7 +149,7 @@ public class ManagerController {
         return loginLogService.getAllLoginLog();
     }
 
-    @RequestMapping("/getLoginLogByDate")
+    @PostMapping("/getLoginLogByDate")
     /**
      * 根据日期查询登录日志
      * @title getLoginLogByDate

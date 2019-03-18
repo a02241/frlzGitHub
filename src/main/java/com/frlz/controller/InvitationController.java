@@ -3,7 +3,7 @@ package com.frlz.controller;
 import com.frlz.pojo.Invitation;
 import com.frlz.service.InvitationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public class InvitationController {
         this.invitationService = invitationService;
     }
 
-    @RequestMapping("selectInvatationByUid")
+    @PostMapping("selectInvatationByUid")
     /**
      * 根据uid找查兑换邀请码信息
      * @title selectInvatationByUid
@@ -35,7 +35,7 @@ public class InvitationController {
         return invitation;
     }
 
-    @RequestMapping("findStateBycode")
+    @PostMapping("findStateBycode")
     /**
      * 找查邀请码是否被使用
      * @title findStateBycode

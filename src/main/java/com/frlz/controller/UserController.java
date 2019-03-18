@@ -11,7 +11,7 @@ import com.frlz.util.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,9 +38,6 @@ public class UserController extends Cors {
     private final LoginLogService loginLogService;
     private final TradeLogService tradeLogService;
 
-
-
-
     private BalanceUtil balanceUtil = new BalanceUtil();
 
     @Autowired
@@ -50,7 +47,7 @@ public class UserController extends Cors {
         this.loginLogService = loginLogService;
         this.tradeLogService = tradeLogService;
     }
-    @RequestMapping("/checkAccount")//注册时校验账号是否重复
+    @PostMapping("/checkAccount")//注册时校验账号是否重复
     /**
      * 注册时校验手机或者邮箱是否重复
      * @title checkAccount
@@ -69,7 +66,7 @@ public class UserController extends Cors {
     }
 
     @Transactional
-    @RequestMapping("/check")
+    @PostMapping("/check")
     /**
      * 注册时校验是否注册成功
      * @title check
@@ -155,7 +152,7 @@ public class UserController extends Cors {
     }
 
     @Transactional
-    @RequestMapping("/userLogin")
+    @PostMapping("/userLogin")
     /**
      * 登录即10天免登陆,插入登录日志
      * @title userLogin
@@ -226,7 +223,7 @@ public class UserController extends Cors {
         return map;
     }
 
-    @RequestMapping("/emailCode")
+    @PostMapping("/emailCode")
     /**
      * 发送邮箱验证码
      * @title emailCode
@@ -266,7 +263,7 @@ public class UserController extends Cors {
         }
     }
 
-    @RequestMapping("sendPhonenumberMessage")
+    @PostMapping("sendPhonenumberMessage")
     /**
      *
      * @title sendPhonenumberMessage
@@ -285,7 +282,8 @@ public class UserController extends Cors {
         map.put("sentCode",message);
         return map;
     }
-    @RequestMapping("/uploadUserIcon")
+
+    @PostMapping("/uploadUserIcon")
     /**
      * 上传头像
      * @title uploadUserIcon
@@ -335,7 +333,7 @@ public class UserController extends Cors {
 
 
     @Transactional
-    @RequestMapping("/updateUser")
+    @PostMapping("/updateUser")
     /**
      * 更新用户信息
      * @title updateUser
@@ -402,7 +400,7 @@ public class UserController extends Cors {
         return "success";
     }
 
-    @RequestMapping("updatePassword")
+    @PostMapping("updatePassword")
     /**
      * 更换密码
      * @title updatePassword
@@ -429,7 +427,7 @@ public class UserController extends Cors {
 
 
 
-    @RequestMapping("/seeInformation")
+    @PostMapping("/seeInformation")
     /**
      * 根据id查询所有信息
      * @title seeInformation
@@ -461,7 +459,7 @@ public class UserController extends Cors {
         return map;
     }
 
-    @RequestMapping("boundPhone")
+    @PostMapping("boundPhone")
     /**
      * 绑定手机
      * @title boundPhone
@@ -488,7 +486,7 @@ public class UserController extends Cors {
         return "success";
     }
 
-    @RequestMapping("boundEmail")
+    @PostMapping("boundEmail")
     /**
      * 绑定邮箱
      * @title boundEmail

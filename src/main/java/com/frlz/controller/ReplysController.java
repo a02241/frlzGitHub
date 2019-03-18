@@ -3,7 +3,7 @@ package com.frlz.controller;
 import com.frlz.pojo.Replys;
 import com.frlz.service.ReplysService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -22,7 +22,7 @@ public class ReplysController {
         this.replysService = replysService;
     }
 
-    @RequestMapping("addReplys")
+    @PostMapping("addReplys")
     /**
      * 添加评论回复
      * @title addReplys

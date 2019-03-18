@@ -6,7 +6,7 @@ import com.frlz.service.BlogService;
 import com.frlz.service.CheckLikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -22,7 +22,7 @@ public class CheckLikeController {
     }
 
     @Transactional
-    @RequestMapping("/clickLike")
+    @PostMapping("/clickLike")
     /**
      * 点赞
      * @title clickLike
