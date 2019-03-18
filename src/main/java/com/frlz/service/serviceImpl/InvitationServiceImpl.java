@@ -16,8 +16,13 @@ import java.util.List;
 @Service
 public class InvitationServiceImpl implements InvitationService {
 
+
+    private final InvitationMapper invitationMapper;
+
     @Autowired
-    InvitationMapper invitationMapper;
+    public InvitationServiceImpl(InvitationMapper invitationMapper) {
+        this.invitationMapper = invitationMapper;
+    }
 
     @Override
     public List<Invitation> selectInvatationByUid(String uid) {

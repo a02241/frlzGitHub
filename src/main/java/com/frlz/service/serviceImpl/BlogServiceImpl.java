@@ -20,8 +20,12 @@ import java.util.Map;
 @Service
 public class BlogServiceImpl implements BlogService {
 
+    private final BlogMapper blogMapper;
+
     @Autowired
-    private BlogMapper blogMapper;
+    public BlogServiceImpl(BlogMapper blogMapper){
+        this.blogMapper = blogMapper;
+    }
 
     @Override
     public PageBean findBy(Map<String, Object> conditions, int pageSize, int pageCode) throws Exception {

@@ -15,8 +15,16 @@ import java.util.List;
  **/
 @Service
 public class SharesServiceImpl implements SharesService {
+
+    private final SharesMapper sharesMapper;
+
     @Autowired
-    private SharesMapper sharesMapper;
+    public SharesServiceImpl(SharesMapper sharesMapper) {
+        this.sharesMapper = sharesMapper;
+    }
+
+    @Autowired
+
 
     @Override
     public List<Shares> getShares(String code){

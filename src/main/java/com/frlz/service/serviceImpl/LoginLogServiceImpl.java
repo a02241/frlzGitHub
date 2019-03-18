@@ -16,8 +16,13 @@ import java.util.List;
  **/
 @Service
 public class LoginLogServiceImpl implements LoginLogService {
+
+    private final LoginLogMapper loginLogMapper;
+
     @Autowired
-    private LoginLogMapper loginLogMapper;
+    public LoginLogServiceImpl(LoginLogMapper loginLogMapper) {
+        this.loginLogMapper = loginLogMapper;
+    }
 
     @Override
     public void insertLoginLog(String uid) {

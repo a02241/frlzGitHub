@@ -15,8 +15,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class TradeLogServiceImpl implements TradeLogService {
 
+    private final TradeLogMapper tradeLogMapper;
+
     @Autowired
-    private TradeLogMapper tradeLogMapper;
+    public TradeLogServiceImpl(TradeLogMapper tradeLogMapper) {
+        this.tradeLogMapper = tradeLogMapper;
+    }
 
     @Override
     public void insertTradeLog(TradeLog tradeLog) {

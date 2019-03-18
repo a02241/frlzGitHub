@@ -16,9 +16,13 @@ import java.util.List;
  **/
 @Service
 public class BalanceServiceImpl implements BalanceService {
-    @Autowired
-    private BalanceMapper balanceMapper;
 
+    private final BalanceMapper balanceMapper;
+
+    @Autowired
+    public BalanceServiceImpl(BalanceMapper balanceMapper){
+        this.balanceMapper = balanceMapper;
+    }
     @Override
     public void insertBalance(Balance balance) {
         balanceMapper.insertBalance(balance);

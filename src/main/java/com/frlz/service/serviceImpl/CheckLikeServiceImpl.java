@@ -9,8 +9,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class CheckLikeServiceImpl implements CheckLikeService {
 
+    private final CheckLikeMapper checkLikeMapper;
+
     @Autowired
-    private CheckLikeMapper checkLikeMapper;
+    public CheckLikeServiceImpl(CheckLikeMapper checkLikeMapper){
+        this.checkLikeMapper = checkLikeMapper;
+    }
 
     @Override
     public void insertIntoCheckLike(CheckLike checkLike) {

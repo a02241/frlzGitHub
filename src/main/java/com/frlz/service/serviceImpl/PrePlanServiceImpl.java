@@ -16,8 +16,13 @@ import java.util.Date;
  **/
 @Service
 public class PrePlanServiceImpl implements PrePlanService {
+
+    private final PrePlanMapper prePlanMapper;
+
     @Autowired
-    PrePlanMapper prePlanMapper;
+    public PrePlanServiceImpl(PrePlanMapper prePlanMapper) {
+        this.prePlanMapper = prePlanMapper;
+    }
 
     @Override
     public void insertIntoPrePlan(PrePlan prePlan) {

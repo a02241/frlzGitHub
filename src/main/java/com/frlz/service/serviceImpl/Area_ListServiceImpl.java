@@ -16,8 +16,12 @@ import java.util.List;
 @Service
 public class Area_ListServiceImpl implements Area_ListService {
 
+    private final Area_ListMapper area_listMapper;
+
     @Autowired
-    private Area_ListMapper area_listMapper;
+    public Area_ListServiceImpl(Area_ListMapper area_listMapper){
+        this.area_listMapper = area_listMapper;
+    }
 
     @Override
     public String selectCode(String name) {

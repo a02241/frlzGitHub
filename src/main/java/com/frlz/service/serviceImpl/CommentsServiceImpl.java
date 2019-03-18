@@ -20,8 +20,12 @@ import java.util.Map;
 @Service
 public class CommentsServiceImpl implements CommentsService {
 
+    private final CommentsMapper commentsMapper;
+
     @Autowired
-    private CommentsMapper commentsMapper;
+    public CommentsServiceImpl(CommentsMapper commentsMapper) {
+        this.commentsMapper = commentsMapper;
+    }
 
     @Override
     public PageBean findComments(Map<String, Object> conditions, int pageSize, int pageCode) throws Exception {

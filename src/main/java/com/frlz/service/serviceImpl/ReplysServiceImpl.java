@@ -18,9 +18,13 @@ import java.util.Date;
  **/
 @Service
 public class ReplysServiceImpl implements ReplysService {
+    
+    private final ReplysMapper replysMapper;
 
     @Autowired
-    private ReplysMapper replysMapper;
+    public ReplysServiceImpl(ReplysMapper replysMapper) {
+        this.replysMapper = replysMapper;
+    }
 
     @Override
     public void addReplys(Replys replys) {

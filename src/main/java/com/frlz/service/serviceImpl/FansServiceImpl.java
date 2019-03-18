@@ -10,8 +10,13 @@ import java.util.List;
 
 @Service
 public class FansServiceImpl implements FansService {
+
+    private final FansMapper fansMapper;
+
     @Autowired
-    private FansMapper fansMapper;
+    public FansServiceImpl(FansMapper fansMapper) {
+        this.fansMapper = fansMapper;
+    }
 
     @Override
     public void insertFans(String uid, String fansUId) {

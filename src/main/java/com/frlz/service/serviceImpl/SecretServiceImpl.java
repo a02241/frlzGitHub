@@ -15,8 +15,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class SecretServiceImpl implements SecretService {
 
+    private final SecretMapper secretMapper;
+
     @Autowired
-    private SecretMapper secretMapper;
+    public SecretServiceImpl(SecretMapper secretMapper) {
+        this.secretMapper = secretMapper;
+    }
+
+    @Autowired
+
 
     @Override
     public void insertSecret(Secret secret, String uid) {
