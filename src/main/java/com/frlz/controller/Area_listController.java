@@ -19,8 +19,8 @@ import java.util.List;
  **/
 @RestController
 public class Area_listController{
-    @PostMapping("/getip")
-    public String getip(HttpServletRequest request){
+    @PostMapping("/getIp")
+    public String getIp(HttpServletRequest request){
         GetIP getIP = new GetIP();
         return getIP.getIp(request) ;
     }

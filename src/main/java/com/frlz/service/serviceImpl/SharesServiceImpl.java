@@ -23,8 +23,6 @@ public class SharesServiceImpl implements SharesService {
         this.sharesMapper = sharesMapper;
     }
 
-    @Autowired
-
 
     @Override
     public List<Shares> getShares(String code){
