@@ -7,7 +7,6 @@ import com.frlz.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -52,11 +51,6 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public Date selectLatestBlogTime(String uid) {
-        return blogMapper.selectLatestBlogTime(uid);
-    }
-
-    @Override
     public int selectBlogCountByDateAndUid(String date, String uid) {
         return blogMapper.selectBlogCountByDateAndUid(date,uid);
     }
@@ -69,11 +63,6 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public void updateLikesCount(int likes, String blogId) {
         blogMapper.updateLikesCount(likes,blogId);
-    }
-
-    @Override
-    public void updateDislikeCount(int dislike, String blogId) {
-        blogMapper.updateDislikeCount(dislike,blogId);
     }
 
     @Override
@@ -103,11 +92,6 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public void deleteBlog(String blogId) {
         blogMapper.deleteBlog(blogId);
-    }
-
-    @Override
-    public List<Blog> selectBlogByDate(String date) {
-        return blogMapper.selectBlogByDate(date);
     }
 
     @Override

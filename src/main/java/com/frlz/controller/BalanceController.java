@@ -1,7 +1,6 @@
 package com.frlz.controller;
 
 import com.frlz.pojo.Balance;
-import com.frlz.pojo.TradeLog;
 import com.frlz.service.BalanceService;
 import com.frlz.service.TradeLogService;
 import com.frlz.util.R;
@@ -46,16 +45,9 @@ public class BalanceController {
     public R<String> quantumToBlock(String uid, int quantum){
         Balance balance = balanceService.selectFromBanlanceByUid(uid);
         if (balance.getQuantumBalance() >= 10){
-            int newQuantum = balance.getQuantumBalance() - quantum;
-            balanceService.updateQuantumBalanceByUid(uid,newQuantum);
-            int newBlock = balance.getBlockBalance() + quantum / 10 ;
-            balanceService.updateBlockBalanceByUid(uid,newBlock);
-            TradeLog tradeLog = new TradeLog();
-            tradeLog.setBalanceId(balance.getBalanceId());
-            tradeLog.setTradeQuantum(-quantum);
-            tradeLog.setTradeBlock(quantum/10);
-            tradeLog.setRemarks("量子兑换方块");
-            tradeLogService.insertTradeLog(tradeLog);
+            balanceService.updateQuantumBalanceByUid(uid,balance.getQuantumBalance() - quantum);
+            balanceService.updateBlockBalanceByUid(uid,balance.getBlockBalance() + quantum / 10);
+            tradeLogService.insertTradeLogQuantumToBlock(balance.getBalanceId(),quantum);
             return R.isOk().msg("兑换成功");
         }else {
             return R.isFail().msg("余额不足");
@@ -81,16 +73,9 @@ public class BalanceController {
     public R<String> blockToQuantum(String uid,int block){
         Balance balance = balanceService.selectFromBanlanceByUid(uid);
         if (balance.getBlockBalance() > 0){
-            int newQuantum = balance.getQuantumBalance() + block * 10;
-            balanceService.updateQuantumBalanceByUid(uid,newQuantum);
-            int newBlock = balance.getBlockBalance() - block ;
-            balanceService.updateBlockBalanceByUid(uid,newBlock);
-            TradeLog tradeLog = new TradeLog();
-            tradeLog.setBalanceId(balance.getBalanceId());
-            tradeLog.setTradeQuantum(block * 10);
-            tradeLog.setTradeBlock(-block);
-            tradeLog.setRemarks("方块兑换量子");
-            tradeLogService.insertTradeLog(tradeLog);
+            balanceService.updateQuantumBalanceByUid(uid,balance.getQuantumBalance() + block * 10);
+            balanceService.updateBlockBalanceByUid(uid,balance.getBlockBalance() - block);
+            tradeLogService.insertTradeLogBlockToQuantum(balance.getBalanceId(),block);
             return R.isOk().msg("兑换成功");
         }else {
             return R.isFail().msg("余额不足");
@@ -116,16 +101,9 @@ public class BalanceController {
     public R<String> magicCubeToBlock(String uid,int magicCube){
         Balance balance = balanceService.selectFromBanlanceByUid(uid);
         if (balance.getMagicCubeBalance() > 0){
-            int newBlock = balance.getBlockBalance() + magicCube * 26;
-            balanceService.updateBlockBalanceByUid(uid,newBlock);
-            int newMagicCube = balance.getMagicCubeBalance() - magicCube;
-            balanceService.updateMagicCubeBalanceByUid(uid,newMagicCube);
-            TradeLog tradeLog = new TradeLog();
-            tradeLog.setBalanceId(balance.getBalanceId());
-            tradeLog.setTradeMagicCube(-magicCube);
-            tradeLog.setTradeBlock(magicCube * 26);
-            tradeLog.setRemarks("魔方兑换方块");
-            tradeLogService.insertTradeLog(tradeLog);
+            balanceService.updateBlockBalanceByUid(uid,balance.getBlockBalance() + magicCube * 26);
+            balanceService.updateMagicCubeBalanceByUid(uid,balance.getMagicCubeBalance() - magicCube);
+            tradeLogService.insertTradeLogMagicCubeToBlock(balance.getBalanceId(),magicCube);
             return R.isOk().msg("兑换成功");
         }else {
             return R.isFail().msg("余额不足");
@@ -151,16 +129,9 @@ public class BalanceController {
     public R<String> blockToMagicCube(String uid,int block){
         Balance balance = balanceService.selectFromBanlanceByUid(uid);
         if (balance.getBlockBalance() >= 27){
-            int newBlock = balance.getBlockBalance() - block;
-            balanceService.updateBlockBalanceByUid(uid,newBlock);
-            int newMagicCube = balance.getMagicCubeBalance() + block / 27;
-            balanceService.updateMagicCubeBalanceByUid(uid,newMagicCube);
-            TradeLog tradeLog = new TradeLog();
-            tradeLog.setBalanceId(balance.getBalanceId());
-            tradeLog.setTradeMagicCube(block / 27);
-            tradeLog.setTradeBlock(-block);
-            tradeLog.setRemarks("方块兑换魔方");
-            tradeLogService.insertTradeLog(tradeLog);
+            balanceService.updateBlockBalanceByUid(uid,balance.getBlockBalance() - block);
+            balanceService.updateMagicCubeBalanceByUid(uid,balance.getMagicCubeBalance() + block / 27);
+            tradeLogService.insertTradeLogBlockToMagicCube(balance.getBalanceId(),block);
             return R.isOk().msg("兑换成功");
         }else {
             return R.isFail().msg("余额不足");

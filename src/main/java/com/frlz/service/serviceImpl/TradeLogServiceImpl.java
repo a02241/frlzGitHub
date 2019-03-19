@@ -26,4 +26,44 @@ public class TradeLogServiceImpl implements TradeLogService {
     public void insertTradeLog(TradeLog tradeLog) {
         tradeLogMapper.insertTradeLog(tradeLog);
     }
+
+    @Override
+    public void insertTradeLogQuantumToBlock(String balanceId,int quantum){
+        TradeLog tradeLog = new TradeLog();
+        tradeLog.setBalanceId(balanceId);
+        tradeLog.setTradeQuantum(-quantum);
+        tradeLog.setTradeBlock(quantum/10);
+        tradeLog.setRemarks("量子兑换方块");
+        tradeLogMapper.insertTradeLog(tradeLog);
+    }
+
+    @Override
+    public void insertTradeLogBlockToQuantum(String balanceId, int block) {
+        TradeLog tradeLog = new TradeLog();
+        tradeLog.setBalanceId(balanceId);
+        tradeLog.setTradeQuantum(block * 10);
+        tradeLog.setTradeBlock(-block);
+        tradeLog.setRemarks("方块兑换量子");
+        tradeLogMapper.insertTradeLog(tradeLog);
+    }
+
+    @Override
+    public void insertTradeLogMagicCubeToBlock(String balanceId, int magicCube) {
+        TradeLog tradeLog = new TradeLog();
+        tradeLog.setBalanceId(balanceId);
+        tradeLog.setTradeMagicCube(-magicCube);
+        tradeLog.setTradeBlock(magicCube * 26);
+        tradeLog.setRemarks("魔方兑换方块");
+        tradeLogMapper.insertTradeLog(tradeLog);
+    }
+
+    @Override
+    public void insertTradeLogBlockToMagicCube(String balanceId, int block) {
+        TradeLog tradeLog = new TradeLog();
+        tradeLog.setBalanceId(balanceId);
+        tradeLog.setTradeMagicCube(block / 27);
+        tradeLog.setTradeBlock(-block);
+        tradeLog.setRemarks("方块兑换魔方");
+        tradeLogMapper.insertTradeLog(tradeLog);
+    }
 }
