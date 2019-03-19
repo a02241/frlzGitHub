@@ -3,9 +3,9 @@ package com.frlz.service.serviceImpl;
 import com.frlz.mapper.TradeLogMapper;
 import com.frlz.pojo.TradeLog;
 import com.frlz.service.TradeLogService;
-import com.frlz.util.BalanceUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @program: frlz
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
  * @author: cz
  * @date: 2019-03-07 15:41
  **/
+@Transactional
 @Service
 public class TradeLogServiceImpl implements TradeLogService {
 
