@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -68,8 +69,8 @@ public class CommentsController {
         }else {
             map.put("result","blogId为空");
         }
-        PageBean pb = commentsService.findComments(conditions, 12, pageCode);//conditions-->>map存放数据,pageCode-->>分页条数,从第几个开始
-        map.put("pageBean", pb);
+        List<Comments> comments = commentsService.findComments(conditions, 12, pageCode);//conditions-->>map存放数据,pageCode-->>分页条数,从第几个开始
+        map.put("comments", comments);
         Blog finBlog = blogService.findBlog(blog);//根据条件查询博客信息
         map.put("username", username);
         map.put("message", finBlog.getMessage());
