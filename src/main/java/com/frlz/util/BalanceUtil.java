@@ -40,11 +40,11 @@ public class BalanceUtil {
         balanceUtil.userService = this.userService;
         balanceUtil.loginLogService = this.loginLogService;
     }
-    public void addQuantumBalance(String uid, int count){
+    public void addQuantumBalance(String uid, int count,String remarks){
         Balance balance = balanceUtil.balanceService.selectFromBanlanceByUid(uid);//根据uid查询余额
         System.out.println(balance.getQuantumBalance()+"~~~~~~~~~~~~~~");
         int countAdd = balance.getQuantumBalance() + count;//交易后量子余额
         balanceUtil.balanceService.updateQuantumBalanceByUid(uid,countAdd);//交易写入数据库
-        balanceUtil.tradeLogService.insertTradeLog(balance.getBalanceId(),count,0,0,"奖励增加"+count+"点量子");//写入交易记录
+        balanceUtil.tradeLogService.insertTradeLog(balance.getBalanceId(),count,0,0,remarks);//写入交易记录
     }
 }
