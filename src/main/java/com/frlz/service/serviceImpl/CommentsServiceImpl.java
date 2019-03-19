@@ -28,7 +28,7 @@ public class CommentsServiceImpl implements CommentsService {
     }
 
     @Override
-    public PageBean findComments(Map<String, Object> conditions, int pageSize, int pageCode) throws Exception {
+    public List<Comments> findComments(Map<String, Object> conditions, int pageSize, int pageCode) throws Exception {
         PageBean pb = new PageBean();
         int allCount = commentsMapper.findAllCountComments(conditions);//查询数据总数
         pb.setAllCount(allCount);//把数据总数放入分页类
@@ -40,8 +40,7 @@ public class CommentsServiceImpl implements CommentsService {
         conditions.put("pageSize", pageSize);
         conditions.put("pageCode", pageCode);
         List<Comments> list = commentsMapper.findComments(conditions);
-        pb.setDatas(list);
-        return pb;
+        return list;
     }
 
     @Override

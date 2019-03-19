@@ -26,7 +26,7 @@ public interface BlogService {
      * @return PageBean
      * @throws Exception
      */
-    public PageBean findBy(Map<String, Object> conditions , int pageSize, int pageCode) throws Exception;
+    public List<Blog> findBy(Map<String, Object> conditions , int pageSize, int pageCode) throws Exception;
 
     /** 
      * @Title: finBlog 

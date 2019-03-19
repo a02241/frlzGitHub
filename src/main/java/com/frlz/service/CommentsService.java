@@ -4,11 +4,12 @@ import com.frlz.pojo.Comments;
 import com.frlz.util.PageBean;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 public interface CommentsService {
 
-    public PageBean findComments(Map<String, Object> conditions , int pageSize, int pageCode) throws Exception;
+    public List<Comments> findComments(Map<String, Object> conditions , int pageSize, int pageCode) throws Exception;
 
     public int findCommentsByBlogId(Map<String, Object> conditions) throws Exception;
 
