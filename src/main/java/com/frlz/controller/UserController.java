@@ -20,14 +20,11 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static com.frlz.util.GetUername.getUsername;
 
 @RestController
 public class UserController extends Cors {
@@ -94,7 +91,7 @@ public class UserController extends Cors {
                 return R.isFail().msg("插入登陆日志失败");
             }
             //创建余额账户
-            Balance balance = null;
+            Balance balance;
             try {
                 balanceService.insertBalance(0,1,0,MyUid);
                 balance = balanceService.selectFromBanlanceByUid(MyUid);
@@ -155,7 +152,7 @@ public class UserController extends Cors {
                         tradeLog.setBalanceId(balance.getBalanceId());
                         tradeLog.setTradeQuantum(1);
                         tradeLog.setRemarks("登录奖励增加1点量子");
-                        int experience = user.getExperience() + 5;//登录加1点经验
+                        int experience = user.getExperience() + 1;//登录加1点经验
                         user.setExperience(experience);
                         userService.updateUser(user);//写入数据库
                         tradeLogService.insertTradeLog(tradeLog);//写入交易记录
