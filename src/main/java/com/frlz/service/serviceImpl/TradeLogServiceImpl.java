@@ -3,6 +3,7 @@ package com.frlz.service.serviceImpl;
 import com.frlz.mapper.TradeLogMapper;
 import com.frlz.pojo.TradeLog;
 import com.frlz.service.TradeLogService;
+import com.frlz.util.BalanceUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

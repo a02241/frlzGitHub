@@ -419,7 +419,7 @@ public class UserController extends Cors {
             return R.isFail().msg("false");
         }else {
             userService.updatePhonenumber(uid, phonenumber);
-            balanceUtil.addQuantumBalance(uid,5);//增加5个量子
+            balanceUtil.addQuantumBalance(uid,5,"绑定手机增加5个量子");//增加5个量子
         }
         return R.isOk().msg("success");
     }
@@ -447,7 +447,7 @@ public class UserController extends Cors {
         }
         if(tag) {
             userService.updateEmail(uid, email);
-            balanceUtil.addQuantumBalance(uid,5);//增加5个量子
+            balanceUtil.addQuantumBalance(uid,5,"绑定邮箱增加5个量子");//增加5个量子
         }else {
             return R.isFail().msg("false");
         }
