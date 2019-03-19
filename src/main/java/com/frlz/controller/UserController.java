@@ -102,11 +102,7 @@ public class UserController extends Cors {
                 return R.isFail().msg("创建余额账户失败");
             }
             try {
-                TradeLog tradeLog = new TradeLog();
-                tradeLog.setBalanceId(balance.getBalanceId());
-                tradeLog.setTradeQuantum(1);
-                tradeLog.setRemarks("登录奖励增加1点量子");
-                tradeLogService.insertTradeLog(tradeLog);//写入交易记录
+                tradeLogService.insertTradeLog(balance.getBalanceId(),1,0,0,"登录奖励增加1点量子");//写入交易记录
             } catch (Exception e) {
                 return R.isFail().msg("写入交易记录失败");
             }

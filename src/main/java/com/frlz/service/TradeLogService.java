@@ -3,7 +3,7 @@ package com.frlz.service;
 import com.frlz.pojo.TradeLog;
 
 public interface TradeLogService {
-    void insertTradeLog(TradeLog tradeLog);
+    void insertTradeLog(String balanceId,int tradeQuantum,int tradeBlock,int tradeMagicCube,String remarks);
 
     void insertTradeLogQuantumToBlock(String balanceId,int quantum);
 

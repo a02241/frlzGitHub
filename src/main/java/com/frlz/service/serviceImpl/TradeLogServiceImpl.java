@@ -23,7 +23,12 @@ public class TradeLogServiceImpl implements TradeLogService {
     }
 
     @Override
-    public void insertTradeLog(TradeLog tradeLog) {
+    public void insertTradeLog(String balanceId,int tradeQuantum,int tradeBlock,int tradeMagicCube,String remarks) {
+        TradeLog tradeLog = new TradeLog();
+        tradeLog.setBalanceId(balanceId);
+        tradeLog.setTradeQuantum(tradeQuantum);
+        tradeLog.setTradeBlock(tradeBlock);
+        tradeLog.setTradeMagicCube(tradeMagicCube);
         tradeLogMapper.insertTradeLog(tradeLog);
     }
 
