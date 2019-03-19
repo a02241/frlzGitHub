@@ -28,7 +28,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public PageBean findBy(Map<String, Object> conditions, int pageSize, int pageCode) throws Exception {
+    public List<Blog> findBy(Map<String, Object> conditions, int pageSize, int pageCode) throws Exception {
         PageBean pb = new PageBean();
         int allCount = blogMapper.findAllCountLike(conditions);//查询数据总数
         pb.setAllCount(allCount);//把数据总数放入分页类
@@ -42,8 +42,7 @@ public class BlogServiceImpl implements BlogService {
         conditions.put("pageSize", pageSize);
         conditions.put("pageCode", pageCode);
         List<Blog> list = blogMapper.find(conditions);
-        pb.setDatas(list);
-        return pb;
+        return list;
     }
 
     @Override

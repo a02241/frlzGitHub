@@ -18,13 +18,13 @@ public interface BlogMapper {
     public int findAllCountLike(Map<String,Object> map);
 
     @Select("<script> " +
-            "select * from blog where uid=#{uid}" +
+            "select blogId,time,likes,title,summary,commentsNumber,forwordNumber,readNumber from blog where uid=#{uid}" +
             "order by time desc limit ${(pageCode-1)*pageSize},${pageSize} "+
             " </script> ")
-    @Results({
+    /*@Results({
             @Result(property = "user", column = "uid",
                     many = @Many(select = "com.frlz.mapper.UserMapper.searchUserById"))
-    })
+    })*/
     public List<Blog> find(Map<String,Object> map);
 
 
