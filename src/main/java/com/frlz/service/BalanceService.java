@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface BalanceService {
 
-    void insertBalance(Balance balance);
+    void insertBalance(int blockBalance,int quantumBalance,int magicCubeBalance,String uid);
 
     Balance selectFromBanlanceByUid(String uid);
 

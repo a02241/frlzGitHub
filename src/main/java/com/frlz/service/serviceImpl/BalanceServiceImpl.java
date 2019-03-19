@@ -24,8 +24,9 @@ public class BalanceServiceImpl implements BalanceService {
         this.balanceMapper = balanceMapper;
     }
     @Override
-    public void insertBalance(Balance balance) {
-        if (balance.getQuantumBalance() == 0){
+    public void insertBalance(int blockBalance,int quantumBalance,int magicCubeBalance,String uid) {
+        Balance balance = new Balance();
+        if (quantumBalance == 0){
             balance.setQuantumBalance(1);
         }
         balanceMapper.insertBalance(balance);
