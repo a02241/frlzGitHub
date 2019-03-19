@@ -93,13 +93,13 @@ public class BlogController {
      * @throws Exception
      */
 
-    public boolean insertBlog(Blog blog,String uid)throws Exception{
+    public R<Boolean> insertBlog(Blog blog,String uid)throws Exception{
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String format = sdf.format(date);
         Date newDate =sdf.parse(format);//创建当前时间以yyyy-MM-dd HH:mm:ss格式
         if(uid.trim().length() == 0 || uid == null){
-            return false;
+            return R.isFail();
         }else {
             SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
             String format2 = sdf2.format(date);//创建当前时间以yyyy-MM-dd格式
@@ -118,7 +118,7 @@ public class BlogController {
             blog.setReadNumber(0);
             blog.setUid(uid);
         blogService.insertBlog(blog);}
-        return true;
+        return R.isOk();
     }
 
 
@@ -135,9 +135,9 @@ public class BlogController {
      * @version V1.0
      */
 
-    public String addReadNumber(String blogId){
+    public R<String> addReadNumber(String blogId){
         blogService.updateBlogByBlogId(blogId,1,0,0);
-        return "阅读数+1";
+        return R.isOk().msg("阅读数+1");
     }
 
     @PostMapping("addForwordNumber")
@@ -153,8 +153,8 @@ public class BlogController {
      * @version V1.0
      */
 
-    public String addForwordNumber(String blogId){
+    public R<String> addForwordNumber(String blogId){
         blogService.updateBlogByBlogId(blogId,0,0,1);
-        return "转发数+1";
+        return R.isOk().msg("转发数+1");
     }
 }

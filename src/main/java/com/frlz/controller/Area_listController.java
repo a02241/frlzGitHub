@@ -1,8 +1,8 @@
 package com.frlz.controller;
 
-import com.frlz.pojo.Area_List;
 import com.frlz.service.Area_ListService;
 import com.frlz.util.GetIP;
+import com.frlz.util.R;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,7 +46,7 @@ public class Area_listController{
      * @throws 
      */
     
-    public List<Area_List> selectName (@Param("name")String name) {
-        return area_ListService.selectName(name);
+    public R<List> selectName (@Param("name")String name) {
+        return R.isOk().data(area_ListService.selectName(name));
     }
 }

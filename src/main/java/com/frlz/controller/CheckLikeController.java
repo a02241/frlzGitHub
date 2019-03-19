@@ -4,6 +4,7 @@ import com.frlz.pojo.Blog;
 import com.frlz.pojo.CheckLike;
 import com.frlz.service.BlogService;
 import com.frlz.service.CheckLikeService;
+import com.frlz.util.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,7 +37,7 @@ public class CheckLikeController {
      * @version V1.0
      */
 
-    public String clickLike(Blog blog, String uid) throws Exception{
+    public R<String> clickLike(Blog blog, String uid) throws Exception{
         if (null == checkLikeService.selectFromCheckLike(blog.getBlogId(),uid)) {
             Blog blog2 = blogService.findBlog(blog);
             blogService.updateLikesCount(blog2.getLikes() + 1,blog.getBlogId());
@@ -45,12 +46,12 @@ public class CheckLikeController {
             checkLike.setUid(uid);
             checkLike.setState(true);
             checkLikeService.insertIntoCheckLike(checkLike);
-            return "+1";
+            return R.isOk().msg("+1");
         }else {
             checkLikeService.deleteFromCheckLike(checkLikeService.selectFromCheckLike(blog.getBlogId(),uid).getLikeId());
             Blog blog2 = blogService.findBlog(blog);
             blogService.updateLikesCount(blog2.getLikes() - 1,blog.getBlogId());
-            return "-1";
+            return R.isOk().msg("-1");
         }
     }
 }
