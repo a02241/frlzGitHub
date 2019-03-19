@@ -1,7 +1,6 @@
 package com.frlz.controller;
 
 import com.frlz.pojo.Balance;
-import com.frlz.pojo.TradeLog;
 import com.frlz.pojo.User;
 import com.frlz.service.BalanceService;
 import com.frlz.service.LoginLogService;
@@ -148,14 +147,10 @@ public class UserController extends Cors {
                         Balance balance = balanceService.selectFromBanlanceByUid(user.getUid());//根据uid查询余额
                         int count = balance.getQuantumBalance() + 1;//量子余额+1
                         balanceService.updateQuantumBalanceByUid(user.getUid(),count);//交易写入数据库
-                        TradeLog tradeLog = new TradeLog();
-                        tradeLog.setBalanceId(balance.getBalanceId());
-                        tradeLog.setTradeQuantum(1);
-                        tradeLog.setRemarks("登录奖励增加1点量子");
                         int experience = user.getExperience() + 1;//登录加1点经验
                         user.setExperience(experience);
                         userService.updateUser(user);//写入数据库
-                        tradeLogService.insertTradeLog(tradeLog);//写入交易记录
+                        tradeLogService.insertTradeLog(balance.getBalanceId(),1,0,0,"登录奖励增加1点量子");//写入交易记录
                     }
                     loginLogService.insertLoginLog(user.getUid());//插入登陆日志
                     map.put("result",data);
@@ -310,11 +305,7 @@ public class UserController extends Cors {
             if (balance.getQuantumBalance() > 10) {
                 user.setUsername(username);
                 balanceService.updateQuantumBalanceByUid(user.getUid(), balance.getQuantumBalance() - 10);
-                TradeLog tradeLog = new TradeLog();
-                tradeLog.setTradeQuantum(-10);
-                tradeLog.setBalanceId(balance.getBalanceId());
-                tradeLog.setRemarks("修改昵称");
-                tradeLogService.insertTradeLog(tradeLog);
+                tradeLogService.insertTradeLog(balance.getBalanceId(),-10,0,0,"修改昵称花费10量子");
             }else {
                 return R.isFail().msg("量子余额不足");
             }
