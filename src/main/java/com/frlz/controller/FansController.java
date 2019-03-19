@@ -2,6 +2,7 @@ package com.frlz.controller;
 
 import com.frlz.service.FansService;
 import com.frlz.service.UserService;
+import com.frlz.util.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,19 +22,19 @@ public class FansController {
 
     @Transactional
     @PostMapping("/interest")//关注
-    public String interest(String uid,String fansUId){
+    public R<String> interest(String uid, String fansUId){
         fansService.insertFans(uid,fansUId);
         userService.updateFansNumberAdd(uid);
         userService.updateInterestNumberAdd(fansUId);
-        return "success";
+        return R.isOk().msg("success");
     }
 
     @Transactional
     @PostMapping("/notInterest")//取消关注
-    public String notInterest(String uid,String fansUId){
+    public R<String> notInterest(String uid,String fansUId){
         fansService.deleteFans(fansUId);
         userService.updateFansNumberReduce(uid);
         userService.updateInterestNumberReduce(fansUId);
-        return "success";
+        return R.isOk().msg("success");
     }
 }

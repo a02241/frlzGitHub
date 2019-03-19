@@ -7,6 +7,7 @@ import com.frlz.service.BlogService;
 import com.frlz.service.CommentsService;
 import com.frlz.service.UserService;
 import com.frlz.util.PageBean;
+import com.frlz.util.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,7 +58,7 @@ public class CommentsController {
      * @throws
      */
 
-    public HashMap<String,Object> findBlog(Blog blog, @RequestParam(defaultValue="1") int pageCode, String username, String blogId) throws Exception {
+    public R<HashMap<String,Object>> findBlog(Blog blog, @RequestParam(defaultValue="1") int pageCode, String username, String blogId) throws Exception {
         Map<String,Object> conditions = new HashMap<String,Object>();
         HashMap<String,Object> map = new HashMap<>();
         if(blogId.trim().length() > 0 || blogId==null) {
@@ -79,7 +80,7 @@ public class CommentsController {
         map.put("blogId", blogId);
         map.put("summary", finBlog.getSummary());
         map.put("uid", finBlog.getUid());
-        return map;
+        return R.isOk().data(map);
     }
 
 
@@ -102,7 +103,7 @@ public class CommentsController {
      * @throws
      */
 
-    public HashMap<String,Object> saveComment(Comments comments) throws Exception {
+    public R<HashMap<String,Object>> saveComment(Comments comments) throws Exception {
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String format = sdf.format(date);//创建当前时间以yyyy-MM-dd格式
@@ -117,7 +118,7 @@ public class CommentsController {
         commentsService.saveComment(comments);
         HashMap<String,Object> map=new HashMap<>();
         map.put("result","success");
-        return map;
+        return R.isOk().data(map);
     }
 
     @PostMapping("/deleteComment")
@@ -132,10 +133,10 @@ public class CommentsController {
      * @throws
      */
 
-    public HashMap<String,Object> deleteComment(Comments comments){
+    public R<HashMap<String,Object>> deleteComment(Comments comments){
         commentsService.deleteComment(comments.getcId());
         HashMap<String,Object> map=new HashMap<>();
         map.put("result","success");
-        return map;
+        return R.isOk().data(map);
     }
 }

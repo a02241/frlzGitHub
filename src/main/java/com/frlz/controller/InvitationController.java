@@ -2,6 +2,7 @@ package com.frlz.controller;
 
 import com.frlz.pojo.Invitation;
 import com.frlz.service.InvitationService;
+import com.frlz.util.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,9 +31,9 @@ public class InvitationController {
      * @return java.util.List<com.frlz.pojo.Invitation>
      * @version V1.0
      */
-    public List<Invitation> selectInvatationByUid(String uid) throws Exception{
+    public R<List<Invitation>> selectInvatationByUid(String uid) throws Exception{
         List<Invitation> invitation = invitationService.selectInvatationByUid(uid);
-        return invitation;
+        return R.isOk().data(invitation);
     }
 
     @PostMapping("findStateBycode")
@@ -48,12 +49,12 @@ public class InvitationController {
      * @version V1.0
      */
 
-    public Boolean findStateBycode(String code){
+    public R<Boolean> findStateBycode(String code){
         int returnResult = invitationService.findStateBycode(code);
         if (returnResult>0){
-            return true;
+            return R.isOk();
         }else {
-            return false;
+            return R.isFail();
         }
     }
 
