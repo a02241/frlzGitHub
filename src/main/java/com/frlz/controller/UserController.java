@@ -96,9 +96,7 @@ public class UserController extends Cors {
             //创建余额账户
             Balance balance = null;
             try {
-                balance = new Balance();
-                balance.setUid(MyUid);
-                balanceService.insertBalance(balance);
+                balanceService.insertBalance(0,1,0,MyUid);
                 balance = balanceService.selectFromBanlanceByUid(MyUid);
             } catch (Exception e) {
                 return R.isFail().msg("创建余额账户失败");
