@@ -141,18 +141,41 @@ public class UserController extends Cors {
                         resp.addCookie(cookiePass);
                     }
                     String format = DateTime.getNowTimeToString();
-                    Date loginTime = loginLogService.getLatestLoginLog(user.getUid());
+                    Date loginTime = null;
+                    try {
+                        loginTime = loginLogService.getLatestLoginLog(user.getUid());
+                    } catch (Exception e) {
+                        return R.isFail().data("无法查到该用户信息");
+                    }
                     String lastestTime = DateTime.getTimeByDateToString(loginTime);
                     if (!format.equals(lastestTime)){
-                        Balance balance = balanceService.selectFromBanlanceByUid(user.getUid());//根据uid查询余额
-                        int count = balance.getQuantumBalance() + 1;//量子余额+1
-                        balanceService.updateQuantumBalanceByUid(user.getUid(),count);//交易写入数据库
-                        int experience = user.getExperience() + 1;//登录加1点经验
+                        Balance balance = null;//根据uid查询余额
+                        int experience = 0;//登录加1点经验
+                        try {
+                            balance = balanceService.selectFromBanlanceByUid(user.getUid());
+                            int count = balance.getQuantumBalance() + 1;//量子余额+1
+                            balanceService.updateQuantumBalanceByUid(user.getUid(),count);//交易写入数据库
+                            experience = user.getExperience() + 1;
+                        } catch (Exception e) {
+                            return R.isFail().data("写入交易账号失败");
+                        }
                         user.setExperience(experience);
-                        userService.updateUser(user);//写入数据库
-                        tradeLogService.insertTradeLog(balance.getBalanceId(),1,0,0,"登录奖励增加1点量子");//写入交易记录
+                        try {
+                            userService.updateUser(user);//写入数据库
+                        } catch (Exception e) {
+                            return R.isFail().data("写入用户信息失败");
+                        }
+                        try {
+                            tradeLogService.insertTradeLog(balance.getBalanceId(),1,0,0,"登录奖励增加1点量子");//写入交易记录
+                        } catch (Exception e) {
+                            return R.isFail().data("写入交易记录失败");
+                        }
                     }
-                    loginLogService.insertLoginLog(user.getUid());//插入登陆日志
+                    try {
+                        loginLogService.insertLoginLog(user.getUid());//插入登陆日志
+                    } catch (Exception e) {
+                        return R.isFail().data("插入登陆日志失败");
+                    }
                     map.put("result",data);
                     map.put("Myusermane",user.getUsername());
                     map.put("uid",user.getUid());
@@ -161,10 +184,12 @@ public class UserController extends Cors {
                 }else {
                     data = "2";//密码不同返回2
                     map.put("result",data);
+                    return R.isFail().data(map);
                 }
             }else {
                 data = "3";//信息为空返回3
                 map.put("result",data);
+                return R.isFail().data(map);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -256,7 +281,11 @@ public class UserController extends Cors {
 
                     file.transferTo(file2);
 
-                    userService.uploadUserIcon(username,username+".jpg");
+                    try {
+                        userService.uploadUserIcon(username,username+".jpg");
+                    } catch (Exception e) {
+                        return R.isFail().msg("更新用户信息失败");
+                    }
 
                     return R.isOk().msg("上传成功");
                 }else {
@@ -299,41 +328,46 @@ public class UserController extends Cors {
                              @RequestParam(defaultValue="0")int investmentage,@RequestParam(defaultValue="")String profile,@RequestParam(defaultValue="")String profession,
                              @RequestParam(defaultValue="")String residence,@RequestParam(defaultValue="")String province,@RequestParam(defaultValue="")String city){
         User user = userService.selectByUid(uid);
-        if (username.trim().length()>0){
-            Balance balance = balanceService.selectFromBanlanceByUid(user.getUid());
-            if (balance.getQuantumBalance() > 10) {
-                user.setUsername(username);
-                balanceService.updateQuantumBalanceByUid(user.getUid(), balance.getQuantumBalance() - 10);
-                tradeLogService.insertTradeLog(balance.getBalanceId(),-10,0,0,"修改昵称花费10量子");
-            }else {
-                return R.isFail().msg("量子余额不足");
+        if(user != null) {
+            if (username.trim().length() > 0) {
+                Balance balance = balanceService.selectFromBanlanceByUid(user.getUid());
+                if (balance.getQuantumBalance() > 10) {
+                    user.setUsername(username);
+                        balanceService.updateQuantumBalanceByUid(user.getUid(), balance.getQuantumBalance() - 10);
+
+                    tradeLogService.insertTradeLog(balance.getBalanceId(), -10, 0, 0, "修改昵称花费10量子");
+                } else {
+                    return R.isFail().msg("量子余额不足");
+                }
             }
+            if (phonenumber.trim().length() > 0) {
+                user.setPhonenumber(phonenumber);
+            }
+            if (!"".equals(email)) {
+                user.setEmail(email);
+            }
+            if (investmentage != 0) {
+                user.setInvestmentage(investmentage);
+            }
+            if (!"".equals(profile)) {
+                user.setProfile(profile);
+            }
+            if (!"".equals(profession)) {
+                user.setProfession(profession);
+            }
+            if (!"".equals(residence)) {
+                user.setResidence(residence);
+            }
+            if (!"".equals(province)) {
+                user.setProvince(province);
+            }
+            if (!"".equals(city)) {
+                user.setCity(city);
+            }
+            userService.updateUser(user);
+        }else {
+            return R.isFail().msg("false");
         }
-        if (phonenumber.trim().length()>0){
-            user.setPhonenumber(phonenumber);
-        }
-        if (!"".equals(email)){
-            user.setEmail(email);
-        }
-        if (investmentage != 0){
-            user.setInvestmentage(investmentage);
-        }
-        if (!"".equals(profile)){
-            user.setProfile(profile);
-        }
-        if (!"".equals(profession)){
-            user.setProfession(profession);
-        }
-        if (!"".equals(residence)){
-            user.setResidence(residence);
-        }
-        if (!"".equals(province)){
-            user.setProvince(province);
-        }
-        if (!"".equals(city)){
-            user.setCity(city);
-        }
-        userService.updateUser(user);
         return R.isOk().msg("success");
     }
 
@@ -349,17 +383,15 @@ public class UserController extends Cors {
      * @throws
      */
 
-    public R<HashMap<String,Object>> updatePassword(User user,String newPassword){
-        HashMap<String,Object> map = new HashMap<>();
+    public R<String> updatePassword(User user,String newPassword){
         if(userService.checkPasswordByUId(user.getUid()).equals(
                 MD5.MD5Encode("fr2018<%" + user.getPassword()  + "%>lz1220"))){
             user.setPassword(MD5.MD5Encode("fr2018<%" + newPassword  + "%>lz1220"));
             userService.updatePassword(user);
-            map.put("result","success");
+            return R.isOk().data("success");
         }else {
-            map.put("result","false");
+            return R.isOk().data("false");
         }
-        return R.isOk().data(map);
     }
 
 
@@ -379,6 +411,7 @@ public class UserController extends Cors {
 
     public R<HashMap<String,Object>> seeInformation(String uid){
         User user = userService.selectByUid(uid);
+        if(user != null){
         HashMap<String,Object> map = new HashMap<>();
         map.put("username",user.getUsername());
         map.put("phonenumber",user.getPhonenumber());
@@ -394,6 +427,9 @@ public class UserController extends Cors {
         map.put("registtime",user.getRegistTime());
         map.put("experience", String.valueOf(user.getExperience()));
         return R.isOk().data(map);
+        }else {
+            return R.isFail().data("false");
+        }
     }
 
     @PostMapping("boundPhone")
