@@ -25,7 +25,7 @@ public interface UserService {
 
 	public String check(User user);
 
-	public void registSave(User user);
+	public String registSave(User user);
 
 	public void uploadUserIcon(String username,String icon);
 

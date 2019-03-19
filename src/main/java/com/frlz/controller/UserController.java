@@ -9,11 +9,9 @@ import com.frlz.service.TradeLogService;
 import com.frlz.service.UserService;
 import com.frlz.util.*;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,7 +20,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -58,11 +55,8 @@ public class UserController extends Cors {
      * @Description: TODO 参数account(手机号或者邮箱),返回true为能注册,false不能注册
      * @param account
      * @return boolean
-     * @throws 
+     * @throws
      */
-
-
-
     public R<Boolean> checkAccount(@Param("account") String account){
         return R.isOk().data(((userService.checkPhonenumber(account) + userService.checkEmail(account)) == 0));
     }
@@ -87,68 +81,37 @@ public class UserController extends Cors {
      */
 
     public  R<Object> check(User user , HttpServletResponse response,@RequestParam(defaultValue = "0")String sentCode, @RequestParam(defaultValue = "9")String checkCode) {
-        String username = getUsername();
-        user.setUsername(username);
         String check = userService.check(user);
-        //如果用户名重复，再随机生成一个用户名
-        if(check.equals("1")) {
-            username = getUsername();
-            user.setUsername(username);
-            check = userService.check(user);
-        }
-        System.out.println(sentCode + ":" + checkCode);
-        try {
-            if(check.equals("5") && !sentCode.equals(checkCode)) {
-                check = "4";
+        if(!sentCode.equals(checkCode)) {
+            return R.isFail().data("4");
+        }else {
+            user.setUsername(check);
+            check = "5";
+            String MyUid = userService.registSave(user);
+            try {
+                loginLogService.insertLoginLog(MyUid);//插入登陆日志
+            } catch (Exception e) {
+                return R.isFail().msg("插入登陆日志失败");
             }
-            System.out.println(check + "~~~~");
-            if(check.equals("5") && sentCode.equals(checkCode)) {
-                //随机用户名
-                user.setUsername(username);
-                //默认头像
-                user.setIcon("default.png");
-                //默认投资年龄
-                user.setInvestmentage(1);
-                //默认投资简介
-                user.setPrivacy(1);
-                //默认状态码
-                user.setState(1);
-                /*//默认邀请码
-                user.setCode("a123");*/
-                //注册时间
-                Date date = new Date();
-                SimpleDateFormat sdf;
-                sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String format = sdf.format(date);
-                Date newDate = sdf.parse(format);//创建当前时间以yyyy-MM-dd HH:mm:ss格式
-                user.setRegistTime(newDate);
-                //默认粉丝数
-                user.setFansNumber(0);
-                //关注人数
-                user.setInterestNumber(0);
-                //MD5加密
-                user.setPassword(MD5.MD5Encode("fr2018<%" + user.getPassword()  + "%>lz1220"));
-                user.setExperience(0);
-                //注册信息
-                userService.registSave(user);
-                User MyUser =userService.selectUserByUsername(username);
-                loginLogService.insertLoginLog(MyUser.getUid());//插入登陆日志
-                //创建余额账户
-                Balance balance = new Balance();
-                balance.setUid(MyUser.getUid());
-                balance.setBlockBalance(0);
-                balance.setQuantumBalance(1);
-                balance.setMagicCubeBalance(0);
+            //创建余额账户
+            Balance balance = null;
+            try {
+                balance = new Balance();
+                balance.setUid(MyUid);
                 balanceService.insertBalance(balance);
-                balance = balanceService.selectFromBanlanceByUid(MyUser.getUid());
+                balance = balanceService.selectFromBanlanceByUid(MyUid);
+            } catch (Exception e) {
+                return R.isFail().msg("创建余额账户失败");
+            }
+            try {
                 TradeLog tradeLog = new TradeLog();
                 tradeLog.setBalanceId(balance.getBalanceId());
                 tradeLog.setTradeQuantum(1);
                 tradeLog.setRemarks("登录奖励增加1点量子");
                 tradeLogService.insertTradeLog(tradeLog);//写入交易记录
+            } catch (Exception e) {
+                return R.isFail().msg("写入交易记录失败");
             }
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
         return R.isOk().data(check);
     }
@@ -187,11 +150,9 @@ public class UserController extends Cors {
                         resp.addCookie(cookieName);
                         resp.addCookie(cookiePass);
                     }
-                    Date date = new Date();
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    String format = sdf.format(date);//创建当前时间以yyyy-MM-dd格式
+                    String format = DateTime.getNowTimeToString();
                     Date loginTime = loginLogService.getLatestLoginLog(user.getUid());
-                    String lastestTime = sdf.format(loginTime);
+                    String lastestTime = DateTime.getTimeByDateToString(loginTime);
                     if (!format.equals(lastestTime)){
                         Balance balance = balanceService.selectFromBanlanceByUid(user.getUid());//根据uid查询余额
                         int count = balance.getQuantumBalance() + 1;//量子余额+1
