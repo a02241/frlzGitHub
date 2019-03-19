@@ -46,8 +46,4 @@ public class SharesServiceImpl implements SharesService {
         return obj;
     }
 
-    @Override
-    public int getCount(String code){
-        return sharesMapper.selectCount(code);
-    }
 }
