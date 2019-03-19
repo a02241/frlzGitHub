@@ -300,7 +300,6 @@ public class UserController extends Cors {
                              @RequestParam(defaultValue="")String residence,@RequestParam(defaultValue="")String province,@RequestParam(defaultValue="")String city){
         User user = userService.selectByUid(uid);
         if (username.trim().length()>0){
-
             Balance balance = balanceService.selectFromBanlanceByUid(user.getUid());
             if (balance.getQuantumBalance() > 10) {
                 user.setUsername(username);
