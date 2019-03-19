@@ -45,10 +45,6 @@ public class BalanceUtil {
         System.out.println(balance.getQuantumBalance()+"~~~~~~~~~~~~~~");
         int countAdd = balance.getQuantumBalance() + count;//交易后量子余额
         balanceUtil.balanceService.updateQuantumBalanceByUid(uid,countAdd);//交易写入数据库
-        TradeLog tradeLog = new TradeLog();
-        tradeLog.setBalanceId(balance.getBalanceId());
-        tradeLog.setTradeQuantum(count);
-        tradeLog.setRemarks("奖励增加"+count+"点量子");
-        balanceUtil.tradeLogService.insertTradeLog(tradeLog);//写入交易记录
+        balanceUtil.tradeLogService.insertTradeLog(balance.getBalanceId(),count,0,0,"奖励增加"+count+"点量子");//写入交易记录
     }
 }
