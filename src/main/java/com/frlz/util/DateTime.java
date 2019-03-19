@@ -67,4 +67,12 @@ public class DateTime {
         return NowTime;
     }
 
+    public static Date getDate() throws Exception{
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String format = sdf.format(date);
+        Date newDate =sdf.parse(format);
+        return newDate;
+    }
+
 }

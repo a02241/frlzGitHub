@@ -31,9 +31,8 @@ public class InvitationController {
      * @return java.util.List<com.frlz.pojo.Invitation>
      * @version V1.0
      */
-    public R<List<Invitation>> selectInvatationByUid(String uid) throws Exception{
-        List<Invitation> invitation = invitationService.selectInvatationByUid(uid);
-        return R.isOk().data(invitation);
+    public R<List<Invitation>> selectInvatationByUid(String uid) {
+        return R.isOk().data(invitationService.selectInvatationByUid(uid));
     }
 
     @PostMapping("findStateBycode")
@@ -50,8 +49,7 @@ public class InvitationController {
      */
 
     public R<Boolean> findStateBycode(String code){
-        int returnResult = invitationService.findStateBycode(code);
-        if (returnResult>0){
+        if (invitationService.findStateBycode(code) > 0){
             return R.isOk();
         }else {
             return R.isFail();

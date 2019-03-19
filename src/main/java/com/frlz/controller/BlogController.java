@@ -4,7 +4,6 @@ import com.frlz.pojo.Blog;
 import com.frlz.pojo.User;
 import com.frlz.service.BlogService;
 import com.frlz.service.UserService;
-import com.frlz.util.PageBean;
 import com.frlz.util.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,11 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @RestController
 public class BlogController {
@@ -55,23 +50,16 @@ public class BlogController {
      * @throws Exception
      */
 
-    public R<HashMap<String,Object>> searchBlog(@RequestParam(defaultValue="1") int pageCode, @RequestParam(defaultValue="")String uid) throws Exception {
-        HashMap<String,Object> map = new HashMap<>();
+    public R<HashMap<String,Object>> searchBlog(@RequestParam(defaultValue="1") int pageCode, @RequestParam(defaultValue="")String uid) {
+        HashMap<String,Object> map = blogService.searchBlog(pageCode,uid);
         String username;
-        Map<String,Object> conditions = new HashMap<String,Object>();
-        if(uid.trim().length() > 0 || uid != null) {
-            conditions.put("uid",uid);//把uid放入map集合中
-        }
-        List<Blog> blogs = blogService.findBy(conditions, 12, pageCode);//conditions-->>map存放数据,pageCode-->>分页条数,从第几个开始
         if(uid.equals("")) {
             map.put("uid","用户名已过期,请重新登录");
             return R.isOk().data(map);
         }else {
             username = userService.searchUsernameById(uid);//根据uid查询用户名
         }
-        map.put("blogs", blogs);
         map.put("username", username);
-        map.put("pageCode", pageCode);
         if(username.equals("")) {
             map.put("username","用户名已过期,请重新登录");
             return R.isOk().data(map);
@@ -94,30 +82,16 @@ public class BlogController {
      */
 
     public R<Boolean> insertBlog(Blog blog,String uid)throws Exception{
-        Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String format = sdf.format(date);
-        Date newDate =sdf.parse(format);//创建当前时间以yyyy-MM-dd HH:mm:ss格式
         if(uid.trim().length() == 0 || uid == null){
             return R.isFail();
         }else {
-            SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-            String format2 = sdf2.format(date);//创建当前时间以yyyy-MM-dd格式
-            int count = blogService.selectBlogCountByDateAndUid(format2,uid);
+            int count = blogService.insertBlog(blog,uid);
             if (count < 1){//每天发第一次贴加8经验
-            User user = userService.selectByUid(uid);
-            int experience = user.getExperience() + 8;//发帖加8经验
-            user.setExperience(experience);
-            userService.updateUser(user);//写入数据库
+                User user = userService.selectByUid(uid);
+                user.setExperience(user.getExperience() + 8);//发帖加8经验
+                userService.updateUser(user);//写入数据库
             }
-            blog.setTime(newDate);
-            blog.setLikes(0);
-            blog.setDislike(0);
-            blog.setCommentsNumber(0);
-            blog.setForwordNumber(0);
-            blog.setReadNumber(0);
-            blog.setUid(uid);
-        blogService.insertBlog(blog);}
+        }
         return R.isOk();
     }
 

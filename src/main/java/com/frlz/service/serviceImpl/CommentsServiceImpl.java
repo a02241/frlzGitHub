@@ -3,11 +3,11 @@ package com.frlz.service.serviceImpl;
 import com.frlz.mapper.CommentsMapper;
 import com.frlz.pojo.Comments;
 import com.frlz.service.CommentsService;
+import com.frlz.util.DateTime;
 import com.frlz.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -50,10 +50,7 @@ public class CommentsServiceImpl implements CommentsService {
 
     @Override
     public void saveComment(Comments comments) throws Exception {
-        Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String newtime = sdf.format(date);
-        Date time = sdf.parse(newtime);
+        Date time = DateTime.getDate();
         comments.setCommentTime(time);
         commentsMapper.saveComment(comments);
     }

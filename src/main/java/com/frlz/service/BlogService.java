@@ -1,10 +1,9 @@
 package com.frlz.service;
 
 import com.frlz.pojo.Blog;
-import com.frlz.util.PageBean;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Project: frlz
@@ -17,16 +16,6 @@ import java.util.Map;
 
 public interface BlogService {
 
-    /**
-     * @title findBy
-     * @author cz
-     * @date 2019/3/1 10:49
-     * @param conditions
-     * @Description:
-     * @return PageBean
-     * @throws Exception
-     */
-    public List<Blog> findBy(Map<String, Object> conditions , int pageSize, int pageCode) throws Exception;
 
     /** 
      * @Title: finBlog 
@@ -40,11 +29,15 @@ public interface BlogService {
      * @date 2019年2月27日 上午10:52:32 
      * @version V1.0   
      */
-    public Blog findBlog(Blog blog)throws Exception;
+    public HashMap<String,Object> findBlog(Blog blog)throws Exception;
+
+    Blog getBlog(Blog blog);
+
+    HashMap<String,Object> searchBlog(int pageCode,String uid);
 
     public int selectBlogCountByDateAndUid(String date,String uid);
 
-    public void insertBlog(Blog blog)throws Exception;
+    public int insertBlog(Blog blog, String uid)throws Exception;
 
     public void updateLikesCount(int likes,String blogId);
 

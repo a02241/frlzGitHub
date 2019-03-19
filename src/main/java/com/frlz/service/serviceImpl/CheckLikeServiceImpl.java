@@ -1,6 +1,7 @@
 package com.frlz.service.serviceImpl;
 
 import com.frlz.mapper.CheckLikeMapper;
+import com.frlz.pojo.Blog;
 import com.frlz.pojo.CheckLike;
 import com.frlz.service.CheckLikeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,12 @@ public class CheckLikeServiceImpl implements CheckLikeService {
     }
 
     @Override
-    public void insertIntoCheckLike(CheckLike checkLike) {
+    public void insertIntoCheckLike(Blog blog, String uid) {
+
+        CheckLike checkLike = new CheckLike();
+        checkLike.setBlogId(blog.getBlogId());
+        checkLike.setUid(uid);
+        checkLike.setState(true);
         checkLikeMapper.insertIntoCheckLike(checkLike);
     }
 

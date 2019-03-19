@@ -1,7 +1,6 @@
 package com.frlz.controller;
 
 import com.frlz.pojo.Blog;
-import com.frlz.pojo.CheckLike;
 import com.frlz.service.BlogService;
 import com.frlz.service.CheckLikeService;
 import com.frlz.util.R;
@@ -39,17 +38,13 @@ public class CheckLikeController {
 
     public R<String> clickLike(Blog blog, String uid) throws Exception{
         if (null == checkLikeService.selectFromCheckLike(blog.getBlogId(),uid)) {
-            Blog blog2 = blogService.findBlog(blog);
+            Blog blog2 = blogService.getBlog(blog);
             blogService.updateLikesCount(blog2.getLikes() + 1,blog.getBlogId());
-            CheckLike checkLike = new CheckLike();
-            checkLike.setBlogId(blog.getBlogId());
-            checkLike.setUid(uid);
-            checkLike.setState(true);
-            checkLikeService.insertIntoCheckLike(checkLike);
+            checkLikeService.insertIntoCheckLike(blog,uid);
             return R.isOk().msg("+1");
         }else {
             checkLikeService.deleteFromCheckLike(checkLikeService.selectFromCheckLike(blog.getBlogId(),uid).getLikeId());
-            Blog blog2 = blogService.findBlog(blog);
+            Blog blog2 = blogService.getBlog(blog);
             blogService.updateLikesCount(blog2.getLikes() - 1,blog.getBlogId());
             return R.isOk().msg("-1");
         }

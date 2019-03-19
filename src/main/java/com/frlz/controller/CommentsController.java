@@ -6,7 +6,7 @@ import com.frlz.pojo.User;
 import com.frlz.service.BlogService;
 import com.frlz.service.CommentsService;
 import com.frlz.service.UserService;
-import com.frlz.util.PageBean;
+import com.frlz.util.DateTime;
 import com.frlz.util.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -61,26 +59,17 @@ public class CommentsController {
 
     public R<HashMap<String,Object>> findBlog(Blog blog, @RequestParam(defaultValue="1") int pageCode, String username, String blogId) throws Exception {
         Map<String,Object> conditions = new HashMap<String,Object>();
-        HashMap<String,Object> map = new HashMap<>();
-        if(blogId.trim().length() > 0 || blogId==null) {
+        HashMap<String,Object> map;
+        if(blogId.trim().length() > 0 || blogId != null) {
             conditions.put("blogId",blogId);//把blogId放入map集合中
             int count = commentsService.findCommentsByBlogId(conditions);
+            map = blogService.findBlog(blog);
             map.put("result",count);
         }else {
-            map.put("result","blogId为空");
+            return R.isFail().msg("blogId为空");
         }
-        List<Comments> comments = commentsService.findComments(conditions, 12, pageCode);//conditions-->>map存放数据,pageCode-->>分页条数,从第几个开始
-        map.put("comments", comments);
-        Blog finBlog = blogService.findBlog(blog);//根据条件查询博客信息
+        map.put("comments", commentsService.findComments(conditions, 12, pageCode));//conditions-->>map存放数据,pageCode-->>分页条数,从第几个开始
         map.put("username", username);
-        map.put("message", finBlog.getMessage());
-        map.put("readNumber", finBlog.getReadNumber());
-        map.put("commentsNumber", finBlog.getCommentsNumber());
-        map.put("title", finBlog.getTitle());
-        map.put("forwordNumber", finBlog.getForwordNumber());
-        map.put("blogId", blogId);
-        map.put("summary", finBlog.getSummary());
-        map.put("uid", finBlog.getUid());
         return R.isOk().data(map);
     }
 
@@ -105,21 +94,16 @@ public class CommentsController {
      */
 
     public R<HashMap<String,Object>> saveComment(Comments comments) throws Exception {
-        Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String format = sdf.format(date);//创建当前时间以yyyy-MM-dd格式
+        String format = DateTime.getTimeByDateToString(new Date());//创建当前时间以yyyy-MM-dd格式
         int count = commentsService.selectCommentTimeCountByTime(format,comments.getUsername());//返回前一次当天写博客的次数
         if(count < 3){//回帖小于三次加8经验，超过不加
             User user = userService.selectUserByUsername(comments.getUsername());
-            int experience = user.getExperience() + 5;//发帖加8经验
-            user.setExperience(experience);
+            user.setExperience(user.getExperience() + 5);//发帖加8经验
             userService.updateUser(user);//写入数据库
         }
         blogService.updateBlogByBlogId(comments.getBlogId(),0,1,0);//评论数+1
         commentsService.saveComment(comments);
-        HashMap<String,Object> map=new HashMap<>();
-        map.put("result","success");
-        return R.isOk().data(map);
+        return R.isOk().data("success");
     }
 
     @PostMapping("/deleteComment")
@@ -136,8 +120,6 @@ public class CommentsController {
 
     public R<HashMap<String,Object>> deleteComment(Comments comments){
         commentsService.deleteComment(comments.getcId());
-        HashMap<String,Object> map=new HashMap<>();
-        map.put("result","success");
-        return R.isOk().data(map);
+        return R.isOk().data("success");
     }
 }
