@@ -2,6 +2,7 @@ package com.frlz.controller;
 
 import com.frlz.pojo.Shares;
 import com.frlz.service.SharesService;
+import com.frlz.util.R;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +34,7 @@ public class SharesController {
      * @throws 
      */
     
-    public Object[][] getShares(@Param("code") String code){
+    public R<Object[][]> getShares(@Param("code") String code){
         String regEx="[^0-9]";
         Pattern p = Pattern.compile(regEx);
         Matcher m = p.matcher(code);
@@ -48,7 +49,7 @@ public class SharesController {
             obj[i][3]=list.get(i).getLow();
             obj[i][4]=list.get(i).getHigh();
         }
-        return obj;
+        return R.isOk().data(obj);
 
     }
 }

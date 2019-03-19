@@ -2,6 +2,7 @@ package com.frlz.controller;
 
 import com.frlz.pojo.Replys;
 import com.frlz.service.ReplysService;
+import com.frlz.util.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,8 +35,8 @@ public class ReplysController {
      * @throws
      */
 
-    public String addReplys(Replys replys){
+    public R<String> addReplys(Replys replys){
         replysService.addReplys(replys);
-        return "success";
+        return R.isOk().msg("success");
     }
 }

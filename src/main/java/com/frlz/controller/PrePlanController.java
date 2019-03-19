@@ -2,6 +2,7 @@ package com.frlz.controller;
 
 import com.frlz.pojo.PrePlan;
 import com.frlz.service.PrePlanService;
+import com.frlz.util.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,8 +39,8 @@ public class PrePlanController {
      * @version V1.0
      */
 
-    public PrePlan getPrePlan(String uid, Date time){
-        return prePlanService.selectPrePlanByUid(uid,time);
+    public R<PrePlan> getPrePlan(String uid, Date time){
+        return R.isOk().data(prePlanService.selectPrePlanByUid(uid,time));
     }
 
     @PostMapping("/addPrePlan")
@@ -55,8 +56,8 @@ public class PrePlanController {
      * @version V1.0
      */
 
-    public String addPrePlan(PrePlan prePlan){
+    public R<String> addPrePlan(PrePlan prePlan){
         prePlanService.insertIntoPrePlan(prePlan);
-        return "success";
+        return R.isOk().msg("success");
     }
 }

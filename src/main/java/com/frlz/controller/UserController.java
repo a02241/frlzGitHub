@@ -63,8 +63,8 @@ public class UserController extends Cors {
 
 
 
-    public boolean checkAccount(@Param("account") String account){
-        return ((userService.checkPhonenumber(account) + userService.checkEmail(account)) == 0);
+    public R<Boolean> checkAccount(@Param("account") String account){
+        return R.isOk().data(((userService.checkPhonenumber(account) + userService.checkEmail(account)) == 0));
     }
 
     @Transactional
@@ -240,7 +240,7 @@ public class UserController extends Cors {
      * @throws
      */
 
-    public void emailCode(String email, HttpServletResponse response){
+    public R<String> emailCode(String email, HttpServletResponse response){
         System.out.println("发送邮件");
         String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";//验证码筛选
         StringBuilder sb = new StringBuilder(4);
@@ -253,16 +253,11 @@ public class UserController extends Cors {
         int res = Mail.sendEmail("smtp.163.com", "shiyaogame@163.com", "fr20181220", "shiyaogame@163.com", new String[]{email},
                 "短信验证",  "【方融魔方】您的验证码为：" + sb.toString() ,"text/html;charset=utf-8");//发送邮箱
         System.out.println("\n发送结果:"+res);
-        try {
             if(res == 1) {
-                response.getWriter().write(sb.toString());
+                return R.isOk().data(sb.toString());
             }else {
-                response.getWriter().write("error");
+                return R.isFail().msg("error");
             }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @PostMapping("sendPhonenumberMessage")
@@ -278,11 +273,9 @@ public class UserController extends Cors {
      * @version V1.0
      */
 
-    public HashMap<String,Object> sendPhonenumberMessage(String phonenumber){
-        HashMap<String,Object> map = new HashMap<>();
+    public R<String> sendPhonenumberMessage(String phonenumber){
         String message = SendMessage.sendMessage(phonenumber);
-        map.put("sentCode",message);
-        return map;
+        return R.isOk().data(message);
     }
 
     @PostMapping("/uploadUserIcon")
@@ -297,7 +290,7 @@ public class UserController extends Cors {
      * @return java.lang.String
      * @throws
      */
-    public String uploadUserIcon(MultipartFile file,@Param("username") String username) throws IOException{
+    public R<String> uploadUserIcon(MultipartFile file,@Param("username") String username) throws IOException{
         System.out.println(file + username);
         if (file != null) {// 检查文件是否为空
             String path;
@@ -318,18 +311,18 @@ public class UserController extends Cors {
 
                     userService.uploadUserIcon(username,username+".jpg");
 
-                    return "上传成功";
+                    return R.isOk().msg("上传成功");
                 }else {
                     System.out.println("文件后缀不正确");
-                    return "文件后缀不正确";
+                    return R.isFail().msg("文件后缀不正确");
                 }
             }else {
                 System.out.println("文件格式不正确");
-                return "文件格式不正确";
+                return R.isFail().msg("文件格式不正确");
             }
         }else {
             System.out.println("文件为空");
-            return "文件为空";
+            return R.isFail().msg("文件为空");
         }
     }
 
@@ -354,7 +347,7 @@ public class UserController extends Cors {
      * @throws
      */
 
-    public String updateUser(String uid,
+    public R<String> updateUser(String uid,
                              @RequestParam(defaultValue="")String username,@RequestParam(defaultValue="")String phonenumber,@RequestParam(defaultValue="")String email,
                              @RequestParam(defaultValue="0")int investmentage,@RequestParam(defaultValue="")String profile,@RequestParam(defaultValue="")String profession,
                              @RequestParam(defaultValue="")String residence,@RequestParam(defaultValue="")String province,@RequestParam(defaultValue="")String city){
@@ -371,7 +364,7 @@ public class UserController extends Cors {
                 tradeLog.setRemarks("修改昵称");
                 tradeLogService.insertTradeLog(tradeLog);
             }else {
-                return "量子余额不足";
+                return R.isFail().msg("量子余额不足");
             }
         }
         if (phonenumber.trim().length()>0){
@@ -399,7 +392,7 @@ public class UserController extends Cors {
             user.setCity(city);
         }
         userService.updateUser(user);
-        return "success";
+        return R.isOk().msg("success");
     }
 
     @PostMapping("updatePassword")
@@ -414,7 +407,7 @@ public class UserController extends Cors {
      * @throws
      */
 
-    public HashMap<String,Object> updatePassword(User user,String newPassword){
+    public R<HashMap<String,Object>> updatePassword(User user,String newPassword){
         HashMap<String,Object> map = new HashMap<>();
         if(userService.checkPasswordByUId(user.getUid()).equals(
                 MD5.MD5Encode("fr2018<%" + user.getPassword()  + "%>lz1220"))){
@@ -424,7 +417,7 @@ public class UserController extends Cors {
         }else {
             map.put("result","false");
         }
-        return map;
+        return R.isOk().data(map);
     }
 
 
@@ -442,7 +435,7 @@ public class UserController extends Cors {
      * @version V1.0
      */
 
-    public HashMap<String,Object> seeInformation(String uid){
+    public R<HashMap<String,Object>> seeInformation(String uid){
         User user = userService.selectByUid(uid);
         HashMap<String,Object> map = new HashMap<>();
         map.put("username",user.getUsername());
@@ -458,7 +451,7 @@ public class UserController extends Cors {
         map.put("city",user.getCity());
         map.put("registtime",user.getRegistTime());
         map.put("experience", String.valueOf(user.getExperience()));
-        return map;
+        return R.isOk().data(map);
     }
 
     @PostMapping("boundPhone")
@@ -476,16 +469,16 @@ public class UserController extends Cors {
      * @version V1.0
      */
 
-    public String boundPhone(String uid , String phonenumber){
+    public R<String> boundPhone(String uid , String phonenumber){
         Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0-9])|(14[5,7])| (17[0,1,3,5-8]))\\d{8}$");
         Matcher m = p.matcher(phonenumber);
         if(!m.matches()){
-            return "false";
+            return R.isFail().msg("false");
         }else {
             userService.updatePhonenumber(uid, phonenumber);
             balanceUtil.addQuantumBalance(uid,5);//增加5个量子
         }
-        return "success";
+        return R.isOk().msg("success");
     }
 
     @PostMapping("boundEmail")
@@ -503,7 +496,7 @@ public class UserController extends Cors {
      * @version V1.0
      */
 
-    public String boundEmail(String uid , String email){
+    public R<String> boundEmail(String uid , String email){
         String regex = "\\w+@\\w+(\\.\\w{2,3})*\\.\\w{2,3}";
         boolean tag = true;
         if (!email.matches(regex)) {
@@ -513,17 +506,8 @@ public class UserController extends Cors {
             userService.updateEmail(uid, email);
             balanceUtil.addQuantumBalance(uid,5);//增加5个量子
         }else {
-            return "false";
+            return R.isFail().msg("false");
         }
-        return "success";
-    }
-
-    @RequestMapping("ok")
-    public R<User> ok(){
-        User user = new User();
-        user.setCity("123");
-        user.setFansNumber(233);
-        user.setExperience(324);
-        return R.isOk().data(user);
+        return R.isOk().msg("success");
     }
 }

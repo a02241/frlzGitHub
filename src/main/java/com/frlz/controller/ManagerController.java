@@ -6,6 +6,7 @@ import com.frlz.pojo.User;
 import com.frlz.service.BlogService;
 import com.frlz.service.LoginLogService;
 import com.frlz.service.UserService;
+import com.frlz.util.R;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,14 +42,14 @@ public class ManagerController {
      * @version V1.0
      */
 
-    public String managerLogin(@Param("manager") String manager, @Param("password") String password){
+    public R<String> managerLogin(@Param("manager") String manager, @Param("password") String password){
         if ("managercz".equals(manager)){
             if ("123".equals(password)){
-                return "success";
+                return R.isOk().msg("success");
             }
-            return "password is wrong";
+            return R.isFail().msg("password is wrong");
         }
-        return "manager not exist";
+        return R.isFail().msg("manager not exist");
     }
 
     @PostMapping("/deleteUser")
@@ -64,9 +65,9 @@ public class ManagerController {
      * @version V1.0
      */
 
-    public String deleteUser(String uid){
+    public R<String> deleteUser(String uid){
         userService.deleteUserByUid(uid);
-        return "success";
+        return R.isOk().msg("success");
     }
 
     @PostMapping("/selectAllUser")
@@ -82,20 +83,20 @@ public class ManagerController {
      * @version V1.0
      */
 
-    public List<User> selectAllUser(){
-
-        return userService.getAll();
+    public R<List<User>> selectAllUser(){
+        return R.isOk().data(userService.getAll());
     }
 
     @PostMapping("/getblog")
-    public List<Blog> getblog(int a){
-        return blogService.selectFiftyBlog((a - 1)* 20);
+    public R<List<Blog>> getblog(int a){
+
+        return R.isOk().data(blogService.selectFiftyBlog((a - 1)* 20));
     }
 
     @PostMapping("/deleteBlog")
-    public String deleteBlog(String blogId){
+    public R<String> deleteBlog(String blogId){
         blogService.deleteBlog(blogId);
-        return "success";
+        return R.isOk().msg("success");
     }
 
     @PostMapping("/getBlogByDate")
@@ -111,8 +112,8 @@ public class ManagerController {
      * @version V1.0
      */
 
-    public List<Blog> getBlogByDate(String date){
-        return blogService.selectBlogByDate(date);
+    public R<List<Blog>> getBlogByDate(String date){
+        return R.isOk().data(blogService.selectBlogByMonth(date));
     }
 
     @PostMapping("/getBlogByMonth")
@@ -128,8 +129,8 @@ public class ManagerController {
      * @version V1.0
      */
 
-    public List<Blog> getBlogByMonth(String date){
-        return blogService.selectBlogByMonth(date);
+    public R<List<Blog>> getBlogByMonth(String date){
+        return R.isOk().data(blogService.selectBlogByMonth(date));
     }
 
     @PostMapping("/getAllLoginLog")
@@ -145,8 +146,8 @@ public class ManagerController {
      * @version V1.0
      */
 
-    public List<LoginLog> getAllLoginLog(){
-        return loginLogService.getAllLoginLog();
+    public R<List<LoginLog>> getAllLoginLog(){
+        return R.isOk().data(loginLogService.getAllLoginLog());
     }
 
     @PostMapping("/getLoginLogByDate")
@@ -162,8 +163,8 @@ public class ManagerController {
      * @version V1.0
      */
 
-    public List<LoginLog> getLoginLogByDate(String date){
-        return loginLogService.selectLoginLogByDate(date);
+    public R<List<LoginLog>> getLoginLogByDate(String date){
+        return R.isOk().data(loginLogService.selectLoginLogByDate(date));
     }
 
 
