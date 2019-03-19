@@ -12,6 +12,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -84,7 +85,7 @@ public class UserController extends Cors {
      * @throws 
      */
 
-    public void check(User user , HttpServletResponse response,@RequestParam(defaultValue = "0")String sentCode, @RequestParam(defaultValue = "9")String checkCode) {
+    public  R<Object> check(User user , HttpServletResponse response,@RequestParam(defaultValue = "0")String sentCode, @RequestParam(defaultValue = "9")String checkCode) {
         String username = getUsername();
         user.setUsername(username);
         String check = userService.check(user);
@@ -145,10 +146,10 @@ public class UserController extends Cors {
                 tradeLog.setRemarks("登录奖励增加1点量子");
                 tradeLogService.insertTradeLog(tradeLog);//写入交易记录
             }
-            response.getWriter().write(check);
-        } catch (IOException | ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
+        return R.isOk().data(check);
     }
 
     @Transactional
@@ -168,7 +169,7 @@ public class UserController extends Cors {
      * @throws
      */
 
-    public HashMap<String,String> userLogin(String username, String password, @RequestParam(defaultValue = "")String isRember, HttpServletResponse resp) {
+    public R<HashMap<String,String>> userLogin(String username, String password, @RequestParam(defaultValue = "")String isRember, HttpServletResponse resp) {
         HashMap<String,String> map = new HashMap<>();
         String data;
         User user;
@@ -220,7 +221,7 @@ public class UserController extends Cors {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return map;
+        return R.isOk().data(map);
     }
 
     @PostMapping("/emailCode")
@@ -514,5 +515,14 @@ public class UserController extends Cors {
             return "false";
         }
         return "success";
+    }
+
+    @RequestMapping("ok")
+    public R<User> ok(){
+        User user = new User();
+        user.setCity("123");
+        user.setFansNumber(233);
+        user.setExperience(324);
+        return R.isOk().data(user);
     }
 }

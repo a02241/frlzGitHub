@@ -5,6 +5,7 @@ import com.frlz.pojo.User;
 import com.frlz.service.BlogService;
 import com.frlz.service.UserService;
 import com.frlz.util.PageBean;
+import com.frlz.util.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,7 +54,7 @@ public class BlogController {
      * @throws Exception
      */
 
-    public HashMap<String,Object> searchBlog(@RequestParam(defaultValue="1") int pageCode,@RequestParam(defaultValue="")String uid) throws Exception {
+    public R<HashMap<String,Object>> searchBlog(@RequestParam(defaultValue="1") int pageCode, @RequestParam(defaultValue="")String uid) throws Exception {
         HashMap<String,Object> map = new HashMap<>();
         String username;
         Map<String,Object> conditions = new HashMap<String,Object>();
@@ -63,7 +64,7 @@ public class BlogController {
         PageBean pb = blogService.findBy(conditions, 12, pageCode);//conditions-->>map存放数据,pageCode-->>分页条数,从第几个开始
         if(uid.equals("")) {
             map.put("uid","用户名已过期,请重新登录");
-            return map;
+            return R.isOk().data(map);
         }else {
             username = userService.searchUsernameById(uid);//根据uid查询用户名
         }
@@ -73,9 +74,9 @@ public class BlogController {
         map.put("Myuid", uid);
         if(username.equals("")) {
             map.put("username","用户名已过期,请重新登录");
-            return map;
+            return R.isOk().data(map);
         }
-        return map;
+        return R.isOk().data(map);
     }
 
     @Transactional
