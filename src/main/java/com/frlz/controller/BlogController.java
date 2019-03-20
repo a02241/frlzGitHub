@@ -69,6 +69,18 @@ public class BlogController {
 
     @Transactional
     @PostMapping("/searchBlogChoice")
+    /**
+     * TODO 精选博客
+     * @title searchBlogChoice
+     * @create by: cz
+     * @description: TODO 选填参数pageCode 默认为1
+     * @create time: 2019/3/20 17:44
+     * @Param: pageCode
+     * @throws
+     * @return com.frlz.util.R<java.util.HashMap<java.lang.String,java.lang.Object>>
+     * @version V1.0
+     */
+
     public R<HashMap<String,Object>> searchBlogChoice(@RequestParam(defaultValue="1") int pageCode){
         HashMap<String,Object> map = blogService.searchBlog(pageCode,"",2);
         return R.isOk().data(map);
@@ -160,7 +172,7 @@ public class BlogController {
      * TODO 增加点赞数
      * @title addLikes
      * @create by: cz
-     * @description: TODO
+     * @description: TODO 必填参数blogId，choice(choice为1是则点赞，2则取消点赞)
      * @create time: 2019/3/20 17:01
      * @Param: blogId
      * @throws
