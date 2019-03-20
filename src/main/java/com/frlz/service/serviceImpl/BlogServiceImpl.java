@@ -52,7 +52,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public HashMap<String, Object> searchBlog(int pageCode,String uid) {
+    public HashMap<String, Object> searchBlog(int pageCode,String uid,int choice) {
         HashMap<String,Object> map = new HashMap<>();
         Map<String,Object> conditions = new HashMap<String,Object>();
         if(uid.trim().length() > 0 || uid != null) {
@@ -68,7 +68,15 @@ public class BlogServiceImpl implements BlogService {
         pb.setPageCode(pageCode);
         conditions.put("pageSize", 12);
         conditions.put("pageCode", pageCode);
-        List<Blog> blogs = blogMapper.find(conditions);
+        List<Blog> blogs = null;
+        if (choice == 1){
+            blogs = blogMapper.find(conditions);
+        }else if (choice == 2){
+            blogs = blogMapper.findChoice(conditions);
+        }else {
+            map.put("result","false");
+            return map;
+        }
         map.put("blogs", blogs);
         map.put("pageCode", pageCode);
         return map;

@@ -33,7 +33,7 @@ public interface BlogService {
 
     Blog getBlog(Blog blog);
 
-    HashMap<String,Object> searchBlog(int pageCode,String uid);
+    HashMap<String,Object> searchBlog(int pageCode,String uid,int choice);
 
     public int selectBlogCountByDateAndUid(String date,String uid);
 

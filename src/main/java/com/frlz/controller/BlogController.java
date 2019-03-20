@@ -51,7 +51,7 @@ public class BlogController {
      */
 
     public R<HashMap<String,Object>> searchBlog(@RequestParam(defaultValue="1") int pageCode, @RequestParam(defaultValue="")String uid) {
-        HashMap<String,Object> map = blogService.searchBlog(pageCode,uid);
+        HashMap<String,Object> map = blogService.searchBlog(pageCode,uid,1);
         String username;
         if(uid.equals("")) {
             map.put("uid","用户名已过期,请重新登录");
@@ -67,6 +67,12 @@ public class BlogController {
         return R.isOk().data(map);
     }
 
+    @Transactional
+    @PostMapping("/searchBlogChoice")
+    public R<HashMap<String,Object>> searchBlogChoice(@RequestParam(defaultValue="1") int pageCode){
+        HashMap<String,Object> map = blogService.searchBlog(pageCode,"",2);
+        return R.isOk().data(map);
+    }
     @Transactional
     @PostMapping("/insertBlog")
     /**

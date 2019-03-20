@@ -19,7 +19,7 @@ public interface BlogMapper {
 
     @Select("<script> " +
             "select blogId,time,likes,title,summary,message,commentsNumber,forwordNumber,readNumber from blog where uid=#{uid}" +
-            "order by time desc limit ${(pageCode-1)*pageSize},${pageSize} "+
+            " order by time desc limit ${(pageCode-1)*pageSize},${pageSize} "+
             " </script> ")
     /*@Results({
             @Result(property = "user", column = "uid",
@@ -29,7 +29,7 @@ public interface BlogMapper {
 
     @Select("<script> " +
             "select blogId,time,likes,title,summary,message,commentsNumber,forwordNumber,readNumber from blog" +
-            "order by time desc limit ${(pageCode-1)*pageSize},${pageSize} "+
+            " order by weight desc limit ${(pageCode-1)*pageSize},${pageSize} "+
             " </script> ")
     public List<Blog> findChoice(Map<String,Object> map);
     /** 
