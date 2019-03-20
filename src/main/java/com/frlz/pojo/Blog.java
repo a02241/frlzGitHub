@@ -11,7 +11,7 @@ public class Blog {
 	private String message;//信息
 	private Date time;//时间
 	private int likes;//点赞数
-	private int dislike;//踩数
+	private double weight;//权重
 	private int commentsNumber;//评论数
 	private int forwordNumber;//转发数
 	private int readNumber;//阅读数

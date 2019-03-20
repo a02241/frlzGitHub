@@ -120,7 +120,7 @@ public class BalanceController {
      * @description: TODO 必填字段uid,block,返回中文参数
      * @create time: 2019/3/8 10:28
      * @Param: uid
-     * @Param: block
+     * @Param: block
      * @throws
      * @return java.lang.String
      * @version V1.0

@@ -6,6 +6,7 @@ import com.frlz.util.R;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -48,5 +49,10 @@ public class Area_listController{
     
     public R<List> selectName (@Param("name")String name) {
         return R.isOk().data(area_ListService.selectName(name));
+    }
+
+    @RequestMapping("selectAllShares")
+    public R<List> selectAllShares (@Param("name")String name) {
+        return R.isOk().data(area_ListService.selectAll());
     }
 }

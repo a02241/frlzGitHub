@@ -87,7 +87,7 @@ public class BlogServiceImpl implements BlogService {
         int count = blogMapper.selectBlogCountByDateAndUid(format2,uid);
         blog.setTime(date);
         blog.setLikes(0);
-        blog.setDislike(0);
+        blog.setWeight(0);
         blog.setCommentsNumber(0);
         blog.setForwordNumber(0);
         blog.setReadNumber(0);

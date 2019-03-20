@@ -29,6 +29,11 @@ public class Area_ListServiceImpl implements Area_ListService {
     }
 
     @Override
+    public List<Area_List> selectAll() {
+        return area_listMapper.selectAll();
+    }
+
+    @Override
     public List<Area_List> selectName(String name) {
         return area_listMapper.selectName(name);
     }

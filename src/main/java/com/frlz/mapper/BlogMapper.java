@@ -18,8 +18,8 @@ public interface BlogMapper {
     public int findAllCountLike(Map<String,Object> map);
 
     @Select("<script> " +
-            "select blogId,time,likes,title,summary,commentsNumber,forwordNumber,readNumber from blog where uid=#{uid}" +
-            "order by time desc limit ${(pageCode-1)*pageSize},${pageSize} "+
+            "select blogId,time,likes,title,summary,message,commentsNumber,forwordNumber,readNumber from blog where uid=#{uid}" +
+            "order by time desc lim it ${(pageCode-1)*pageSize},${pageSize} "+
             " </script> ")
     /*@Results({
             @Result(property = "user", column = "uid",
@@ -27,7 +27,11 @@ public interface BlogMapper {
     })*/
     public List<Blog> find(Map<String,Object> map);
 
-
+    @Select("<script> " +
+            "select blogId,time,likes,title,summary,message,commentsNumber,forwordNumber,readNumber from blog" +
+            "order by time desc lim it ${(pageCode-1)*pageSize},${pageSize} "+
+            " </script> ")
+    public List<Blog> findChoice(Map<String,Object> map);
     /** 
      * @Title: finBlog 
      * @Description: TODO(查询博客信息) 
