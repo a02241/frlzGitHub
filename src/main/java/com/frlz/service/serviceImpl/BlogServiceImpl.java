@@ -98,7 +98,7 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public void updateLikesCount(int likes, String blogId) {
-        blogMapper.updateLikesCount(likes,blogId);
+        blogMapper.updateLikesCount(blogId);
     }
 
     @Override
@@ -107,21 +107,24 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public void updateBlogByBlogId(String blogId , int readNumber , int commentsNumber , int forwordNumber) {
-        Blog blog = new Blog();
-        blog.setBlogId(blogId);
-        blog = blogMapper.findBlog(blog);
-        if (readNumber != 0){
-            int newReadNumber = blog.getReadNumber() + 1;
-            blogMapper.updateReadNumberByBlogId(newReadNumber,blogId);
+    public void updateBlogByBlogId(String blogId,int choice) {
+        if (choice==1){//更新点赞数量
+            blogMapper.updateLikesCount(blogId);
         }
-        if (commentsNumber != 0){
-            int newCommentsNumber = blog.getCommentsNumber() + 1;
-            blogMapper.updateCommentsNumberByBlogId(newCommentsNumber,blogId);
+        if (choice==2){//更新评论数量
+            blogMapper.updateCommentsNumberByBlogId(blogId);
         }
-        if (forwordNumber != 0){
-            int newFordNumber = blog.getForwordNumber() + 1;
-            blogMapper.updateForwordNumberByBlogId(newFordNumber,blogId);
+        if (choice==3){//更新转发数量
+            blogMapper.updateForwordNumberByBlogId(blogId);
+        }
+        if (choice==4){//更新粉丝数量
+            blogMapper.updateFansNumberByBlogId(blogId);
+        }
+        if (choice==5){//更新阅读数
+            blogMapper.updateReadNumberByBlogId(blogId);
+        }
+        if (choice==6){//取消点赞
+            blogMapper.updateReduceLikesCount(blogId);
         }
     }
 

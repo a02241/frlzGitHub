@@ -19,7 +19,7 @@ public interface BlogMapper {
 
     @Select("<script> " +
             "select blogId,time,likes,title,summary,message,commentsNumber,forwordNumber,readNumber from blog where uid=#{uid}" +
-            "order by time desc lim it ${(pageCode-1)*pageSize},${pageSize} "+
+            "order by time desc limit ${(pageCode-1)*pageSize},${pageSize} "+
             " </script> ")
     /*@Results({
             @Result(property = "user", column = "uid",
@@ -29,7 +29,7 @@ public interface BlogMapper {
 
     @Select("<script> " +
             "select blogId,time,likes,title,summary,message,commentsNumber,forwordNumber,readNumber from blog" +
-            "order by time desc lim it ${(pageCode-1)*pageSize},${pageSize} "+
+            "order by time desc limit ${(pageCode-1)*pageSize},${pageSize} "+
             " </script> ")
     public List<Blog> findChoice(Map<String,Object> map);
     /** 
@@ -71,7 +71,7 @@ public interface BlogMapper {
             "#{message}, " +
             "#{time}, " +
             "#{likes}, " +
-            "#{dislike}, " +
+            "#{weight}, " +
             "#{commentsNumber}, " +
             "#{forwordNumber}, " +
             "#{readNumber}, " +
@@ -80,26 +80,26 @@ public interface BlogMapper {
             "#{summary})")
     void insertBlog(Blog blog);
 
-    @Update("update blog set likes = #{likes} where blogId = #{blogId}")
-    void updateLikesCount(int likes,String blogId);
+    @Update("update blog set likes = likes + 1,weight = weight + 0.1 where blogId = #{blogId}")
+    void updateLikesCount(String blogId);
 
-    @Update("update blog set dislike = #{dislike} where blogId = #{blogId}")
-    void updateDislikeCount(int dislike,String blogId);
+    @Update("update blog set likes = likes -1 ,weight = weight - 0.1 where blogId = #{blogId}")
+    void updateReduceLikesCount(String blogId);
 
-    @Update("update blog set readNumber = #{readNumber} where blogId = #{blogId}")
-    void updateReadNumberByBlogId(int readNumber , String blogId);
+    @Update("update blog set readNumber = readNumber + 1 where blogId = #{blogId}")
+    void updateReadNumberByBlogId(String blogId);
 
-    @Update("update blog set commentsNumber = #{commentsNumber} where blogId = #{blogId}")
-    void updateCommentsNumberByBlogId(int commentsNumber , String blogId);
+    @Update("update blog set commentsNumber = commentsNumber + 1,weight = weight + 0.5 where blogId = #{blogId}")
+    void updateCommentsNumberByBlogId(String blogId);
 
-    @Update("update blog set forwordNumber = #{forwordNumber} where blogId = #{blogId}")
-    void updateForwordNumberByBlogId(int forwordNumber , String blogId);
+    @Update("update blog set forwordNumber = forwordNumber + 1 ,weight = weight + 1.0 where blogId = #{blogId}")
+    void updateForwordNumberByBlogId(String blogId);
+
+    @Update("update blog set fansNumber = fansNumber + 1 where blogId = #{blogId}")
+    void updateFansNumberByBlogId(String blogId);
 
     @Delete("delete from blog where blogId = #{blogId} ")
     void deleteBlog(String blogId);
-
-
-    
 
     @Select("select * from blog where DATE_FORMAT(time, '%Y-%m') = #{date}")
     List<Blog> selectBlogByMonth(String date);

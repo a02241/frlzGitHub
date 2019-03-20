@@ -101,7 +101,7 @@ public class CommentsController {
             user.setExperience(user.getExperience() + 5);//发帖加8经验
             userService.updateUser(user);//写入数据库
         }
-        blogService.updateBlogByBlogId(comments.getBlogId(),0,1,0);//评论数+1
+        blogService.updateBlogByBlogId(comments.getBlogId(),2);//评论数+1
         commentsService.saveComment(comments);
         return R.isOk().data("success");
     }
