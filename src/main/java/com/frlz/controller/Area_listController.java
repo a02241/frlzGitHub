@@ -1,15 +1,13 @@
 package com.frlz.controller;
 
 import com.frlz.service.Area_ListService;
-import com.frlz.util.GetIP;
+import com.frlz.service.QuizService;
 import com.frlz.util.R;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -20,18 +18,14 @@ import java.util.List;
  **/
 @RestController
 public class Area_listController{
-    @PostMapping("/getIp")
-    public String getIp(HttpServletRequest request){
-        GetIP getIP = new GetIP();
-        return getIP.getIp(request) ;
-    }
-
 
     private final Area_ListService area_ListService;
+    private final QuizService quizService;
 
     @Autowired
-    public Area_listController(Area_ListService area_ListService){
+    public Area_listController(Area_ListService area_ListService,QuizService quizService){
         this.area_ListService = area_ListService;
+        this.quizService = quizService;
     }
 
     @PostMapping("selectName")
@@ -51,8 +45,13 @@ public class Area_listController{
         return R.isOk().data(area_ListService.selectName(name));
     }
 
-    @RequestMapping("selectAllShares")
+    @PostMapping("selectAllShares")
     public R<List> selectAllShares (@Param("name")String name) {
         return R.isOk().data(area_ListService.selectAll());
+    }
+
+    @PostMapping("startQuiz")
+    public R<List> startQuiz(){
+        return R.isOk().data(quizService.getAllQuestion());
     }
 }
