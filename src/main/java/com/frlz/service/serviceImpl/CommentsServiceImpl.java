@@ -56,12 +56,12 @@ public class CommentsServiceImpl implements CommentsService {
     }
 
     @Override
-    public int selectCommentTimeCountByTime(String date,String username) {
+    public int selectCommentTimeCountByTime(String date,String username) throws Exception{
         return commentsMapper.selectCommentTimeCountByTime(date,username);
     }
 
     @Override
-    public void deleteComment(String cId){
+    public void deleteComment(String cId) throws Exception{
         commentsMapper.deleteComment(cId);
     }
 }

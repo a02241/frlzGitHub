@@ -7,45 +7,45 @@ import java.util.List;
 
 public interface UserService {
 
-	public List<User> getAll();
+	public List<User> getAll() throws Exception;
 
-	public User selectUser(String account);
+	public User selectUser(String account) throws Exception;
 
-	public User selectByUid(String uid);
+	public User selectByUid(String uid) throws Exception;
 
-	public int checkPhonenumber(String phonenumber);
+	public int checkPhonenumber(String phonenumber) throws Exception;
 
-	public int checkEmail(String email);
+	public int checkEmail(String email) throws Exception;
 
-	public String searchUsernameById(String uid);
+	public String searchUsernameById(String uid) throws Exception;
 
-	public User selectUserByUsername(String username);
+	public User selectUserByUsername(String username) throws Exception;
 
-	public String searchUsernameByEmail(String email);
+	public String searchUsernameByEmail(String email) throws Exception;
 
-	public String check(User user);
+	public String check(User user) throws Exception;
 
-	public String registSave(User user);
+	public String registSave(User user) throws Exception;
 
-	public void uploadUserIcon(String username,String icon);
+	public void uploadUserIcon(String username,String icon) throws Exception;
 
-	public void updateUser(User user);
+	public void updateUser(User user) throws Exception;
 
-	public void updatePassword(User user);
+	public void updatePassword(User user) throws Exception;
 
-	public void updatePhonenumber(String uid,String phonenumber);
+	public void updatePhonenumber(String uid,String phonenumber) throws Exception;
 
-	public void updateEmail(String uid,String email);
+	public void updateEmail(String uid,String email) throws Exception;
 
-	void updateFansNumberAdd(String uid);
+	void updateFansNumberAdd(String uid) throws Exception;
 
-	void updateFansNumberReduce(String uid);
+	void updateFansNumberReduce(String uid) throws Exception;
 
-	void updateInterestNumberAdd(String uid);
+	void updateInterestNumberAdd(String uid) throws Exception;
 
-	void updateInterestNumberReduce(String uid);
+	void updateInterestNumberReduce(String uid) throws Exception;
 
-	public String  checkPasswordByUId(String uid);
+	public String  checkPasswordByUId(String uid) throws Exception;
 
-	public void deleteUserByUid(String uid);
+	public void deleteUserByUid(String uid) throws Exception;
 }

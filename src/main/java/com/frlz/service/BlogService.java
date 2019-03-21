@@ -31,21 +31,21 @@ public interface BlogService {
      */
     public HashMap<String,Object> findBlog(Blog blog)throws Exception;
 
-    Blog getBlog(Blog blog);
+    Blog getBlog(Blog blog) throws Exception;
 
-    HashMap<String,Object> searchBlog(int pageCode,String uid,int choice);
+    HashMap<String,Object> searchBlog(int pageCode,String uid,int choice) throws Exception;
 
-    public int selectBlogCountByDateAndUid(String date,String uid);
+    public int selectBlogCountByDateAndUid(String date,String uid) throws Exception;
 
     public int insertBlog(Blog blog, String uid)throws Exception;
 
-    public void updateLikesCount(int likes,String blogId);
+    public void updateLikesCount(int likes,String blogId) throws Exception;
 
-    public List<Blog> selectFiftyBlog(int a);
+    public List<Blog> selectFiftyBlog(int a) throws Exception;
 
-    public void updateBlogByBlogId(String blogId,int choice);
+    public void updateBlogByBlogId(String blogId,int choice) throws Exception;
 
-    public void deleteBlog(String blogId);
+    public void deleteBlog(String blogId) throws Exception;
 
-    List<Blog> selectBlogByMonth(String date);
+    List<Blog> selectBlogByMonth(String date) throws Exception;
 }

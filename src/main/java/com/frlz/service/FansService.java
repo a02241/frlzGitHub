@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface FansService {
 
-    void insertFans(String uid,String fansUId);
+    void insertFans(String uid,String fansUId) throws Exception;
 
-    List<Fans> selectFansForOne(String uid);
+    List<Fans> selectFansForOne(String uid) throws Exception;
 
-    void deleteFans(String fansUId);
+    void deleteFans(String fansUId) throws Exception;
 }

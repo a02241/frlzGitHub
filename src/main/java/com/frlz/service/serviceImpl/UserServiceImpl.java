@@ -34,48 +34,48 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public List<User> getAll(){
+    public List<User> getAll()throws Exception{
         return userMapper.selectAll();
     }
 
     @Override
-    public User selectUser(String account){
+    public User selectUser(String account)throws Exception{
         return userMapper.loginSelect(account);
     }
 
     @Override
-    public User selectByUid(String uid) {
+    public User selectByUid(String uid)throws Exception {
         return userMapper.selectByUid(uid);
     }
 
     @Override
-    public int checkPhonenumber(String phonenumber){
+    public int checkPhonenumber(String phonenumber)throws Exception{
         return userMapper.checkPhonenumber(phonenumber);
     }
 
     @Override
-    public int checkEmail(String email){
+    public int checkEmail(String email)throws Exception{
         return userMapper.checkEmail(email);
     }
 
     @Override
-    public String searchUsernameById(String uid){
+    public String searchUsernameById(String uid)throws Exception{
         return userMapper.searchUsernameById(uid);
     }
 
     @Override
-    public User selectUserByUsername(String username) {
+    public User selectUserByUsername(String username)throws Exception {
         return userMapper.selectUserByUsername(username);
     }
 
 
     @Override
-    public String searchUsernameByEmail(String email){
+    public String searchUsernameByEmail(String email)throws Exception{
         return userMapper.searchUsernameByEmail(email);
     }
 
     @Override
-    public String check(User user) {
+    public String check(User user)throws Exception {
         String username = GetUername.getUsername();
         boolean checkUsername = true;
         int checkPhonenumber = userMapper.checkPhonenumber(user.getPhonenumber());
@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String registSave(User user) {
+    public String registSave(User user)throws Exception {
         //默认头像
         user.setIcon("default.png");
         //默认投资年龄
@@ -108,8 +108,6 @@ public class UserServiceImpl implements UserService {
         user.setPrivacy(1);
         //默认状态码
         user.setState(1);
-        /*//默认邀请码
-        user.setCode("a123");*/
         //注册时间
         Date date = new Date();
         SimpleDateFormat sdf;
@@ -128,64 +126,63 @@ public class UserServiceImpl implements UserService {
         user.setInterestNumber(0);
         //MD5加密
         user.setPassword(MD5.MD5Encode("fr2018<%" + user.getPassword()  + "%>lz1220"));
-        user.setExperience(0);
         userMapper.registSave(user);
         user = userMapper.selectUserByUsername(user.getUsername());
         return user.getUid();
     }
 
     @Override
-    public void uploadUserIcon(String username, String icon) {
+    public void uploadUserIcon(String username, String icon)throws Exception {
         userMapper.uploadUserIcon(username,icon);
     }
 
     @Override
-    public void updateUser(User user) {
+    public void updateUser(User user)throws Exception {
         userMapper.updateUser(user);
     }
 
     @Override
-    public void updatePassword(User user) {
+    public void updatePassword(User user)throws Exception {
         userMapper.updatePassword(user);
     }
 
     @Override
-    public void updatePhonenumber(String uid, String phonenumber) {
+    public void updatePhonenumber(String uid, String phonenumber)throws Exception {
         userMapper.updatePhonenumber(uid,phonenumber);
     }
 
     @Override
-    public void updateEmail(String uid, String email) {
+    public void updateEmail(String uid, String email)throws Exception {
         userMapper.updateEmail(uid,email);
     }
 
     @Override
-    public void updateFansNumberAdd(String uid) {
+    public void updateFansNumberAdd(String uid)throws Exception {
         userMapper.updateFansNumberAdd(uid);
     }
 
     @Override
-    public void updateFansNumberReduce(String uid) {
+    public void updateFansNumberReduce(String uid)throws Exception {
         userMapper.updateFansNumberReduce(uid);
     }
 
     @Override
-    public void updateInterestNumberAdd(String uid) {
+    public void updateInterestNumberAdd(String uid)throws Exception {
         userMapper.updateInterestNumberAdd(uid);
     }
 
     @Override
-    public void updateInterestNumberReduce(String uid) {
+    public void updateInterestNumberReduce(String uid)throws Exception {
         userMapper.updateInterestNumberReduce(uid);
     }
 
     @Override
-    public String checkPasswordByUId(String uid) {
+    public String checkPasswordByUId(String uid)throws Exception {
         return userMapper.checkPasswordByUId(uid);
     }
 
     @Override
-    public void deleteUserByUid(String uid) {
+    public void deleteUserByUid(String uid)throws Exception {
         userMapper.deleteByUid(uid);
     }
 }

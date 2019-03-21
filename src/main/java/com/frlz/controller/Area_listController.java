@@ -47,12 +47,12 @@ public class Area_listController{
      * @throws 
      */
     
-    public R<List> selectName (@Param("name")String name) {
+    public R<List> selectName (@Param("name")String name) throws Exception {
         return R.isOk().data(area_ListService.selectName(name));
     }
 
     @RequestMapping("selectAllShares")
-    public R<List> selectAllShares (@Param("name")String name) {
+    public R<List> selectAllShares (@Param("name")String name) throws Exception {
         return R.isOk().data(area_ListService.selectAll());
     }
 }

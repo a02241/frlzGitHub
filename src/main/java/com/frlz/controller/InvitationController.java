@@ -31,7 +31,7 @@ public class InvitationController {
      * @return java.util.List<com.frlz.pojo.Invitation>
      * @version V1.0
      */
-    public R<List<Invitation>> selectInvatationByUid(String uid) {
+    public R<List<Invitation>> selectInvatationByUid(String uid) throws Exception {
         return R.isOk().data(invitationService.selectInvatationByUid(uid));
     }
 
@@ -48,10 +48,18 @@ public class InvitationController {
      * @version V1.0
      */
 
-    public R<Boolean> findStateBycode(String code){
-        if (invitationService.findStateBycode(code) > 0){
-            return R.isOk();
-        }else {
+    public R<Boolean> findStateBycode(String code) throws Exception {
+        int result = invitationService.findStateBycode(code);
+        if (result == 0){
+            return R.isFail().data("没有该邀请码");
+        }
+        if (result ==1){
+            return R.isFail().data("邀请码未被使用");
+        }
+        if (result ==2){
+            return R.isOk().data("邀请码已被使用");
+        }
+        else {
             return R.isFail();
         }
     }

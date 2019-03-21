@@ -29,7 +29,7 @@ public class SharesController {
      * @throws 
      */
     
-    public R<Object[][]> getShares(@Param("code") String code){
+    public R<Object[][]> getShares(@Param("code") String code) throws Exception {
         Object[][] obj = sharesService.getShares(code);
         return R.isOk().data(obj);
 

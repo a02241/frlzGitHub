@@ -15,7 +15,7 @@ public interface CommentsService {
 
     public void saveComment(Comments comments)throws Exception;
 
-    public int selectCommentTimeCountByTime(String date,String username);
+    public int selectCommentTimeCountByTime(String date,String username) throws Exception;
 
-    public void deleteComment(String cId);
+    public void deleteComment(String cId) throws Exception;
 }

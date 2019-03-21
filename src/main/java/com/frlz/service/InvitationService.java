@@ -6,9 +6,11 @@ import java.util.List;
 
 public interface InvitationService {
 
-    public List<Invitation> selectInvatationByUid(String uid);
+    public List<Invitation> selectInvatationByUid(String uid) throws Exception;
 
-    public int findStateBycode(String code);
+    public int findStateBycode(String code) throws Exception;
 
-    void insertInviteCode(String code);
+    public void insertInviteCode(String code) throws Exception;
+
+    public void updateInviteState(String code) throws Exception;
 }

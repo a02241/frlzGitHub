@@ -39,7 +39,7 @@ public class PrePlanController {
      * @version V1.0
      */
 
-    public R<PrePlan> getPrePlan(String uid, Date time){
+    public R<PrePlan> getPrePlan(String uid, Date time) throws Exception {
         return R.isOk().data(prePlanService.selectPrePlanByUid(uid,time));
     }
 
@@ -56,7 +56,7 @@ public class PrePlanController {
      * @version V1.0
      */
 
-    public R<String> addPrePlan(PrePlan prePlan){
+    public R<String> addPrePlan(PrePlan prePlan) throws Exception {
         prePlanService.insertIntoPrePlan(prePlan);
         return R.isOk().msg("success");
     }

@@ -50,7 +50,7 @@ public class BlogController {
      * @throws Exception
      */
 
-    public R<HashMap<String,Object>> searchBlog(@RequestParam(defaultValue="1") int pageCode, @RequestParam(defaultValue="")String uid) {
+    public R<HashMap<String,Object>> searchBlog(@RequestParam(defaultValue="1") int pageCode, @RequestParam(defaultValue="")String uid) throws Exception {
         HashMap<String,Object> map = blogService.searchBlog(pageCode,uid,1);
         String username;
         if(uid.equals("")) {
@@ -81,7 +81,7 @@ public class BlogController {
      * @version V1.0
      */
 
-    public R<HashMap<String,Object>> searchBlogChoice(@RequestParam(defaultValue="1") int pageCode){
+    public R<HashMap<String,Object>> searchBlogChoice(@RequestParam(defaultValue="1") int pageCode) throws Exception {
         HashMap<String,Object> map = blogService.searchBlog(pageCode,"",2);
         return R.isOk().data(map);
     }
@@ -106,8 +106,12 @@ public class BlogController {
             int count = blogService.insertBlog(blog,uid);
             if (count < 1){//每天发第一次贴加8经验
                 User user = userService.selectByUid(uid);
-                user.setExperience(user.getExperience() + 8);//发帖加8经验
-                userService.updateUser(user);//写入数据库
+                if (user.getExperience()<0){//0级不给经验
+                    return R.isOk().data("当前等级为0级,答题后可增加经验");
+                }else {
+                    user.setExperience(user.getExperience() + 8);//发帖加8经验
+                    userService.updateUser(user);//写入数据库
+                }
             }
         }
         return R.isOk();
@@ -127,7 +131,7 @@ public class BlogController {
      * @version V1.0
      */
 
-    public R<String> addReadNumber(String blogId){
+    public R<String> addReadNumber(String blogId) throws Exception {
         blogService.updateBlogByBlogId(blogId,4);
         return R.isOk().msg("阅读数+1");
     }
@@ -144,7 +148,7 @@ public class BlogController {
      * @return java.lang.String
      * @version V1.0
      */
-    public R<String> addForwordNumber(String blogId){
+    public R<String> addForwordNumber(String blogId) throws Exception {
         blogService.updateBlogByBlogId(blogId,3);
         return R.isOk().msg("转发数+1");
     }
@@ -162,7 +166,7 @@ public class BlogController {
      * @version V1.0
      */
 
-    public R<String> addLikes(String blogId,int choice){
+    public R<String> addLikes(String blogId,int choice) throws Exception {
         if (choice==1){
             blogService.updateBlogByBlogId(blogId,1);
             return R.isOk().msg("点赞数+1");

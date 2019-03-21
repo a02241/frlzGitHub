@@ -19,17 +19,17 @@ public class FansServiceImpl implements FansService {
     }
 
     @Override
-    public void insertFans(String uid, String fansUId) {
+    public void insertFans(String uid, String fansUId) throws Exception{
         fansMapper.insertFans(uid,fansUId);
     }
 
     @Override
-    public List<Fans> selectFansForOne(String uid) {
+    public List<Fans> selectFansForOne(String uid) throws Exception{
         return fansMapper.selectFansForOne(uid);
     }
 
     @Override
-    public void deleteFans(String fansUId) {
+    public void deleteFans(String fansUId) throws Exception{
         fansMapper.deleteFans(fansUId);
     }
 }

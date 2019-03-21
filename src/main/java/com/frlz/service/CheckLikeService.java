@@ -5,9 +5,9 @@ import com.frlz.pojo.CheckLike;
 
 public interface CheckLikeService {
 
-    public void insertIntoCheckLike(Blog blog, String uid);
+    public void insertIntoCheckLike(Blog blog, String uid) throws Exception;
 
-    public CheckLike selectFromCheckLike(String blogId,String uid);
+    public CheckLike selectFromCheckLike(String blogId,String uid) throws Exception;
 
-    public void deleteFromCheckLike(int likeId);
+    public void deleteFromCheckLike(int likeId) throws Exception;
 }

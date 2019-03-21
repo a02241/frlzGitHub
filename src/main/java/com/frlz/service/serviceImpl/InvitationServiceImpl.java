@@ -25,18 +25,34 @@ public class InvitationServiceImpl implements InvitationService {
     }
 
     @Override
-    public List<Invitation> selectInvatationByUid(String uid) {
+    public List<Invitation> selectInvatationByUid(String uid) throws Exception{
         return invitationMapper.selectInvatationByUid(uid);
     }
 
     @Override
-    public int findStateBycode(String code) {
-        return invitationMapper.findStateBycode(code);
+    public int findStateBycode(String code) throws Exception{
+        int result = 0;//默认为0，没有该邀请码
+        Invitation invitation =invitationMapper.findStateBycode(code);
+        if (invitation!=null){
+            if (invitation.getState()==1){
+                result = 1;//1位为邀请码未被使用
+                return result;
+            }if (invitation.getState()==2){
+                result = 2;//2为邀请码已被使用
+                return result;
+            }
+        }
+        return result;
     }
 
     @Override
-    public void insertInviteCode(String code) {
+    public void insertInviteCode(String code) throws Exception{
         invitationMapper.insertInviteCode(code);
+    }
+
+    @Override
+    public void updateInviteState(String code) throws Exception{
+        invitationMapper.updateInviteState(code);
     }
 
 

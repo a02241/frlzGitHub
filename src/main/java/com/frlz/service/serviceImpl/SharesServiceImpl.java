@@ -28,7 +28,7 @@ public class SharesServiceImpl implements SharesService {
 
 
     @Override
-    public Object[][] getShares(String code){
+    public Object[][] getShares(String code)throws Exception{
         String regEx="[^0-9]";
         Pattern p = Pattern.compile(regEx);
         Matcher m = p.matcher(code);

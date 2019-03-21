@@ -2,10 +2,7 @@ package com.frlz.controller;
 
 import com.frlz.pojo.Balance;
 import com.frlz.pojo.User;
-import com.frlz.service.BalanceService;
-import com.frlz.service.LoginLogService;
-import com.frlz.service.TradeLogService;
-import com.frlz.service.UserService;
+import com.frlz.service.*;
 import com.frlz.util.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,15 +29,17 @@ public class UserController extends Cors {
     private final UserService userService;
     private final LoginLogService loginLogService;
     private final TradeLogService tradeLogService;
+    private final InvitationService invitationService;
 
     private BalanceUtil balanceUtil = new BalanceUtil();
 
     @Autowired
-    public UserController(BalanceService balanceService,UserService userService,LoginLogService loginLogService,TradeLogService tradeLogService){
+    public UserController(BalanceService balanceService, UserService userService, LoginLogService loginLogService, TradeLogService tradeLogService, InvitationService invitationService){
         this.balanceService = balanceService;
         this.userService = userService;
         this.loginLogService = loginLogService;
         this.tradeLogService = tradeLogService;
+        this.invitationService = invitationService;
     }
     @PostMapping("/checkAccount")//注册时校验账号是否重复
     /**
@@ -53,7 +52,7 @@ public class UserController extends Cors {
      * @return boolean
      * @throws
      */
-    public R<Boolean> checkAccount(@Param("account") String account){
+    public R<Boolean> checkAccount(@Param("account") String account) throws Exception {
         return R.isOk().data(((userService.checkPhonenumber(account) + userService.checkEmail(account)) == 0));
     }
 
@@ -75,18 +74,25 @@ public class UserController extends Cors {
      * @return void
      * @throws 
      */
-
-    public  R<Object> check(User user , HttpServletResponse response,@RequestParam(defaultValue = "0")String sentCode, @RequestParam(defaultValue = "9")String checkCode) {
+    public  R<Object> check(User user , HttpServletResponse response,@RequestParam(defaultValue = "0")String sentCode, @RequestParam(defaultValue = "9")String checkCode,@RequestParam(defaultValue = "")String code) throws Exception {
         String check = userService.check(user);
         if(!sentCode.equals(checkCode)) {
             return R.isFail().data("4");
         }else {
             user.setUsername(check);
             check = "5";
+            //有邀请码
+            if (code.trim().length() > 0){
+                user.setExperience(0);//有邀请码经验为0
+                invitationService.updateInviteState(code);
+            }else {
+                user.setExperience(-1);//无邀请码经验为-1
+            }
             String MyUid = userService.registSave(user);
             try {
                 loginLogService.insertLoginLog(MyUid);//插入登陆日志
             } catch (Exception e) {
+                e.printStackTrace();
                 return R.isFail().msg("插入登陆日志失败");
             }
             //创建余额账户
@@ -95,11 +101,13 @@ public class UserController extends Cors {
                 balanceService.insertBalance(0,1,0,MyUid);
                 balance = balanceService.selectFromBanlanceByUid(MyUid);
             } catch (Exception e) {
+                e.printStackTrace();
                 return R.isFail().msg("创建余额账户失败");
             }
             try {
                 tradeLogService.insertTradeLog(balance.getBalanceId(),1,0,0,"登录奖励增加1点量子");//写入交易记录
             } catch (Exception e) {
+                e.printStackTrace();
                 return R.isFail().msg("写入交易记录失败");
             }
         }
@@ -326,14 +334,23 @@ public class UserController extends Cors {
     public R<String> updateUser(String uid,
                              @RequestParam(defaultValue="")String username,@RequestParam(defaultValue="")String phonenumber,@RequestParam(defaultValue="")String email,
                              @RequestParam(defaultValue="0")int investmentage,@RequestParam(defaultValue="")String profile,@RequestParam(defaultValue="")String profession,
-                             @RequestParam(defaultValue="")String residence,@RequestParam(defaultValue="")String province,@RequestParam(defaultValue="")String city){
+                             @RequestParam(defaultValue="")String residence,@RequestParam(defaultValue="")String province,@RequestParam(defaultValue="")String city) throws Exception {
         User user = userService.selectByUid(uid);
         if(user != null) {
             if (username.trim().length() > 0) {
-                Balance balance = balanceService.selectFromBanlanceByUid(user.getUid());
+                Balance balance = null;
+                try {
+                    balance = balanceService.selectFromBanlanceByUid(user.getUid());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 if (balance.getQuantumBalance() > 10) {
                     user.setUsername(username);
+                    try {
                         balanceService.updateQuantumBalanceByUid(user.getUid(), balance.getQuantumBalance() - 10);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
                     tradeLogService.insertTradeLog(balance.getBalanceId(), -10, 0, 0, "修改昵称花费10量子");
                 } else {
@@ -383,7 +400,7 @@ public class UserController extends Cors {
      * @throws
      */
 
-    public R<String> updatePassword(User user,String newPassword){
+    public R<String> updatePassword(User user,String newPassword) throws Exception {
         if(userService.checkPasswordByUId(user.getUid()).equals(
                 MD5.MD5Encode("fr2018<%" + user.getPassword()  + "%>lz1220"))){
             user.setPassword(MD5.MD5Encode("fr2018<%" + newPassword  + "%>lz1220"));
@@ -409,7 +426,7 @@ public class UserController extends Cors {
      * @version V1.0
      */
 
-    public R<HashMap<String,Object>> seeInformation(String uid){
+    public R<HashMap<String,Object>> seeInformation(String uid) throws Exception {
         User user = userService.selectByUid(uid);
         if(user != null){
         HashMap<String,Object> map = new HashMap<>();
@@ -447,7 +464,7 @@ public class UserController extends Cors {
      * @version V1.0
      */
 
-    public R<String> boundPhone(String uid , String phonenumber){
+    public R<String> boundPhone(String uid , String phonenumber) throws Exception {
         Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0-9])|(14[5,7])| (17[0,1,3,5-8]))\\d{8}$");
         Matcher m = p.matcher(phonenumber);
         if(!m.matches()){
@@ -474,7 +491,7 @@ public class UserController extends Cors {
      * @version V1.0
      */
 
-    public R<String> boundEmail(String uid , String email){
+    public R<String> boundEmail(String uid , String email) throws Exception {
         String regex = "\\w+@\\w+(\\.\\w{2,3})*\\.\\w{2,3}";
         boolean tag = true;
         if (!email.matches(regex)) {

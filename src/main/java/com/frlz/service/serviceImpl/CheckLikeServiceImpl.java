@@ -18,7 +18,7 @@ public class CheckLikeServiceImpl implements CheckLikeService {
     }
 
     @Override
-    public void insertIntoCheckLike(Blog blog, String uid) {
+    public void insertIntoCheckLike(Blog blog, String uid) throws Exception{
 
         CheckLike checkLike = new CheckLike();
         checkLike.setBlogId(blog.getBlogId());
@@ -28,12 +28,12 @@ public class CheckLikeServiceImpl implements CheckLikeService {
     }
 
     @Override
-    public CheckLike selectFromCheckLike(String blogId, String uid) {
+    public CheckLike selectFromCheckLike(String blogId, String uid) throws Exception{
         return checkLikeMapper.selectFromCheckLike(blogId,uid);
     }
 
     @Override
-    public void deleteFromCheckLike(int likeId) {
+    public void deleteFromCheckLike(int likeId) throws Exception{
         checkLikeMapper.deleteFromCheckLike(likeId);
     }
 }

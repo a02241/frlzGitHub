@@ -35,7 +35,7 @@ public class FansController {
      * @version V1.0
      */
 
-    public R<String> interest(String uid, String fansUId){
+    public R<String> interest(String uid, String fansUId) throws Exception {
         fansService.insertFans(uid,fansUId);
         userService.updateFansNumberAdd(uid);
         userService.updateInterestNumberAdd(fansUId);
@@ -57,7 +57,7 @@ public class FansController {
      * @version V1.0
      */
 
-    public R<String> notInterest(String uid,String fansUId){
+    public R<String> notInterest(String uid,String fansUId) throws Exception {
         fansService.deleteFans(fansUId);
         userService.updateFansNumberReduce(uid);
         userService.updateInterestNumberReduce(fansUId);

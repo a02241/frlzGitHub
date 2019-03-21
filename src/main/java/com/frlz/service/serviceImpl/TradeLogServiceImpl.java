@@ -25,7 +25,7 @@ public class TradeLogServiceImpl implements TradeLogService {
     }
 
     @Override
-    public void insertTradeLog(String balanceId,int tradeQuantum,int tradeBlock,int tradeMagicCube,String remarks) {
+    public void insertTradeLog(String balanceId,int tradeQuantum,int tradeBlock,int tradeMagicCube,String remarks) throws Exception{
         TradeLog tradeLog = new TradeLog();
         tradeLog.setBalanceId(balanceId);
         tradeLog.setTradeQuantum(tradeQuantum);
@@ -35,7 +35,7 @@ public class TradeLogServiceImpl implements TradeLogService {
     }
 
     @Override
-    public void insertTradeLogQuantumToBlock(String balanceId,int quantum){
+    public void insertTradeLogQuantumToBlock(String balanceId,int quantum)throws Exception{
         TradeLog tradeLog = new TradeLog();
         tradeLog.setBalanceId(balanceId);
         tradeLog.setTradeQuantum(-quantum);
@@ -45,7 +45,7 @@ public class TradeLogServiceImpl implements TradeLogService {
     }
 
     @Override
-    public void insertTradeLogBlockToQuantum(String balanceId, int block) {
+    public void insertTradeLogBlockToQuantum(String balanceId, int block) throws Exception{
         TradeLog tradeLog = new TradeLog();
         tradeLog.setBalanceId(balanceId);
         tradeLog.setTradeQuantum(block * 10);
@@ -55,7 +55,7 @@ public class TradeLogServiceImpl implements TradeLogService {
     }
 
     @Override
-    public void insertTradeLogMagicCubeToBlock(String balanceId, int magicCube) {
+    public void insertTradeLogMagicCubeToBlock(String balanceId, int magicCube) throws Exception{
         TradeLog tradeLog = new TradeLog();
         tradeLog.setBalanceId(balanceId);
         tradeLog.setTradeMagicCube(-magicCube);
@@ -65,7 +65,7 @@ public class TradeLogServiceImpl implements TradeLogService {
     }
 
     @Override
-    public void insertTradeLogBlockToMagicCube(String balanceId, int block) {
+    public void insertTradeLogBlockToMagicCube(String balanceId, int block) throws Exception{
         TradeLog tradeLog = new TradeLog();
         tradeLog.setBalanceId(balanceId);
         tradeLog.setTradeMagicCube(block / 27);
