@@ -1,7 +1,7 @@
 package com.frlz.controller;
 
 import com.frlz.service.Area_ListService;
-import com.frlz.util.GetIP;
+import com.frlz.service.QuizService;
 import com.frlz.util.R;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
