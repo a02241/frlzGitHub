@@ -32,17 +32,7 @@ public interface BlogMapper {
             " order by weight desc limit ${(pageCode-1)*pageSize},${pageSize} "+
             " </script> ")
     public List<Blog> findChoice(Map<String,Object> map);
-    /** 
-     * @Title: finBlog 
-     * @Description: TODO(查询博客信息) 
-     * @param @param blog
-     * @param @return    入参
-     * @return Blog    返回类型
-     * @author cz 
-     * @throws
-     * @date 2019年2月27日 上午10:33:14 
-     * @version V1.0   
-     */
+
     @Select("<script> " +
             "select * from blog" +
             " <where> " +
@@ -94,9 +84,6 @@ public interface BlogMapper {
 
     @Update("update blog set forwordNumber = forwordNumber + 1 ,weight = weight + 1.0 where blogId = #{blogId}")
     void updateForwordNumberByBlogId(String blogId);
-
-    @Update("update blog set fansNumber = fansNumber + 1 where blogId = #{blogId}")
-    void updateFansNumberByBlogId(String blogId);
 
     @Delete("delete from blog where blogId = #{blogId} ")
     void deleteBlog(String blogId);

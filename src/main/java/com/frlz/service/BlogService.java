@@ -45,7 +45,7 @@ public interface BlogService {
 
     public void updateBlogByBlogId(String blogId,int choice);
 
-    void deleteBlog(String blogId);
+    public void deleteBlog(String blogId);
 
     List<Blog> selectBlogByMonth(String date);
 }
