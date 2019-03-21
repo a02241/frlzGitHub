@@ -22,6 +22,19 @@ public class FansController {
 
     @Transactional
     @PostMapping("/interest")//关注
+    /**
+     * TODO 关注
+     * @title interest
+     * @create by: cz
+     * @description: TODO 必填参数uid,fansUid
+     * @create time: 2019/3/21 10:43
+     * @Param: uid
+     * @Param: fansUId
+     * @throws
+     * @return com.frlz.util.R<java.lang.String>
+     * @version V1.0
+     */
+
     public R<String> interest(String uid, String fansUId){
         fansService.insertFans(uid,fansUId);
         userService.updateFansNumberAdd(uid);
@@ -31,6 +44,19 @@ public class FansController {
 
     @Transactional
     @PostMapping("/notInterest")//取消关注
+    /**
+     * TODO 取消关注
+     * @title notInterest
+     * @create by: cz
+     * @description: TODO 必填参数uid,fansUid
+     * @create time: 2019/3/21 10:43
+     * @Param: uid
+     * @Param: fansUId
+     * @throws
+     * @return com.frlz.util.R<java.lang.String>
+     * @version V1.0
+     */
+
     public R<String> notInterest(String uid,String fansUId){
         fansService.deleteFans(fansUId);
         userService.updateFansNumberReduce(uid);
