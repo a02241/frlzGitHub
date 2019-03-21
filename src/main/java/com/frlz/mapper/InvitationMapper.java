@@ -18,6 +18,6 @@ public interface InvitationMapper {
     @Insert("insert into invitation values(default,#{code},null,1)")
     void insertInviteCode(String code);
 
-    @Update("update invitation set state = 2 where code = #{code}")
-    void updateInviteState(String code);
+    @Update("update invitation set state = 2 ,uid = #{uid} where code = #{code}")
+    void updateInviteState(String code,String uid);
 }

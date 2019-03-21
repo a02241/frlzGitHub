@@ -12,5 +12,5 @@ public interface InvitationService {
 
     public void insertInviteCode(String code) throws Exception;
 
-    public void updateInviteState(String code) throws Exception;
+    public void updateInviteState(String code ,String uid) throws Exception;
 }

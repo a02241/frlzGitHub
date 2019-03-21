@@ -18,7 +18,6 @@ public class User {
 	private String residence;//居住地 
 	private int privacy;//隐私识别码 
 	private int state;//状态码 
-	private String code;//激活码
 	private String province;//省份
 	private String city;//城市
 	private Blog blog;

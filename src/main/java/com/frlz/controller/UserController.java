@@ -90,10 +90,11 @@ public class UserController extends Cors {
             check = "5";
             //有邀请码
             String MyUid = null;
+            int result = 0;
             try {
-                if (code.trim().length() > 0){
+                result = invitationService.findStateBycode(code);
+                if (code.trim().length() > 0&& result == 1){
                     user.setExperience(0);//有邀请码经验为0
-                    invitationService.updateInviteState(code);
                 }else {
                     user.setExperience(-1);//无邀请码经验为-1
                 }
@@ -102,6 +103,15 @@ public class UserController extends Cors {
                 e.printStackTrace();
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 return R.isFail(new Exception()).msg("用户插入失败");
+            }
+            try {
+                    if (result==1){
+                        invitationService.updateInviteState(code,MyUid);
+                    }
+            } catch (Exception e) {
+                e.printStackTrace();
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+                return R.isFail(new Exception()).msg("邀请码注册失败");
             }
             try {
                 loginLogService.insertLoginLog(MyUid);//插入登陆日志

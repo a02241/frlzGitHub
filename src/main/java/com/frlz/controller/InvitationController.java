@@ -5,6 +5,7 @@ import com.frlz.service.InvitationService;
 import com.frlz.util.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -48,16 +49,19 @@ public class InvitationController {
      * @version V1.0
      */
 
-    public R<Boolean> findStateBycode(String code) throws Exception {
+    public R<Boolean> findStateBycode(@RequestParam(defaultValue = "")String code) throws Exception {
         int result = invitationService.findStateBycode(code);
+        if (code.trim().length()==0){
+            return R.isOk().data("未填写邀请码");
+        }
         if (result == 0){
             return R.isFail().data("没有该邀请码");
         }
         if (result ==1){
-            return R.isFail().data("邀请码未被使用");
+            return R.isOk().data("邀请码未被使用");
         }
         if (result ==2){
-            return R.isOk().data("邀请码已被使用");
+            return R.isFail().data("邀请码已被使用");
         }
         else {
             return R.isFail();

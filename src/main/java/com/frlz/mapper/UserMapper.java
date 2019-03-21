@@ -53,7 +53,6 @@ public interface UserMapper {
             "residence," +
             "privacy," +
             "state," +
-            "code," +
             "registTime," +
             "experience," +
             "fansNumber," +
@@ -70,7 +69,6 @@ public interface UserMapper {
             "#{residence}, " +
             "#{privacy}, " +
             "#{state}, " +
-            "#{code}, " +
             "#{registTime}, " +
             "#{experience}, " +
             "#{fansNumber}," +

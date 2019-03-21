@@ -53,8 +53,8 @@ public class InvitationServiceImpl implements InvitationService {
     }
 
     @Override
-    public void updateInviteState(String code) throws Exception{
-        invitationMapper.updateInviteState(code);
+    public void updateInviteState(String code,String uid) throws Exception{
+        invitationMapper.updateInviteState(code,uid);
     }
 
 
