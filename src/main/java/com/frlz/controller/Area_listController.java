@@ -20,18 +20,14 @@ import java.util.List;
  **/
 @RestController
 public class Area_listController{
-    @PostMapping("/getIp")
-    public String getIp(HttpServletRequest request){
-        GetIP getIP = new GetIP();
-        return getIP.getIp(request) ;
-    }
-
 
     private final Area_ListService area_ListService;
+    private final QuizService quizService;
 
     @Autowired
-    public Area_listController(Area_ListService area_ListService){
+    public Area_listController(Area_ListService area_ListService,QuizService quizService){
         this.area_ListService = area_ListService;
+        this.quizService = quizService;
     }
 
     @PostMapping("selectName")
@@ -54,5 +50,10 @@ public class Area_listController{
     @RequestMapping("selectAllShares")
     public R<List> selectAllShares (@Param("name")String name) throws Exception {
         return R.isOk().data(area_ListService.selectAll());
+    }
+
+    @PostMapping("startQuiz")
+    public R<List> startQuiz(){
+        return R.isOk().data(quizService.getAllQuestion());
     }
 }
