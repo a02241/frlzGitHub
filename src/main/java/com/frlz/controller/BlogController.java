@@ -128,7 +128,7 @@ public class BlogController {
      */
 
     public R<String> addReadNumber(String blogId){
-        blogService.updateBlogByBlogId(blogId,5);
+        blogService.updateBlogByBlogId(blogId,4);
         return R.isOk().msg("阅读数+1");
     }
 
@@ -149,24 +149,6 @@ public class BlogController {
         return R.isOk().msg("转发数+1");
     }
 
-    @PostMapping("addFansNumber")
-    /**
-     * TODO 增加粉丝数
-     * @title addFansNumber
-     * @create by: cz
-     * @description: TODO 必填参数blogId
-     * @create time: 2019/3/20 17:01
-     * @Param: blogId
-     * @throws
-     * @return com.frlz.util.R<java.lang.String>
-     * @version V1.0
-     */
-
-    public R<String> addFansNumber(String blogId){
-        blogService.updateBlogByBlogId(blogId,4);
-        return R.isOk().msg("粉丝数+1");
-    }
-
     @PostMapping("addLikes")
     /**
      * TODO 增加点赞数
@@ -185,7 +167,7 @@ public class BlogController {
             blogService.updateBlogByBlogId(blogId,1);
             return R.isOk().msg("点赞数+1");
         }if (choice==2){
-            blogService.updateBlogByBlogId(blogId,6);
+            blogService.updateBlogByBlogId(blogId,5);
             return R.isOk().msg("点赞数-1");
         }else {
             return R.isFail().msg("操作错误");

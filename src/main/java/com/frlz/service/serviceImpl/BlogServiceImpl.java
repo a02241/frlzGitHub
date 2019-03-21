@@ -125,13 +125,10 @@ public class BlogServiceImpl implements BlogService {
         if (choice==3){//更新转发数量
             blogMapper.updateForwordNumberByBlogId(blogId);
         }
-        if (choice==4){//更新粉丝数量
-            blogMapper.updateFansNumberByBlogId(blogId);
-        }
-        if (choice==5){//更新阅读数
+        if (choice==4){//更新阅读数
             blogMapper.updateReadNumberByBlogId(blogId);
         }
-        if (choice==6){//取消点赞
+        if (choice==5){//取消点赞
             blogMapper.updateReduceLikesCount(blogId);
         }
     }
