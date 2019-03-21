@@ -29,6 +29,7 @@ public class BalanceServiceImpl implements BalanceService {
         if (quantumBalance == 0){
             balance.setQuantumBalance(1);
         }
+        balance.setUid(uid);
         balanceMapper.insertBalance(balance);
     }
 

@@ -5,6 +5,7 @@ import com.frlz.pojo.LoginLog;
 import com.frlz.service.LoginLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
  * @author: cz
  * @date: 2019-03-01 10:51
  **/
+@Transactional
 @Service
 public class LoginLogServiceImpl implements LoginLogService {
 

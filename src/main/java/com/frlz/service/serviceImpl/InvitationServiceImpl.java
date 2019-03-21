@@ -5,6 +5,7 @@ import com.frlz.pojo.Invitation;
 import com.frlz.service.InvitationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 /**
@@ -13,6 +14,7 @@ import java.util.List;
  * @author: cz
  * @date: 2019-03-01 10:51
  **/
+@Transactional
 @Service
 public class InvitationServiceImpl implements InvitationService {
 

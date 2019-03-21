@@ -7,6 +7,7 @@ import com.frlz.util.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -82,17 +83,23 @@ public class UserController extends Cors {
             user.setUsername(check);
             check = "5";
             //有邀请码
-            if (code.trim().length() > 0){
-                user.setExperience(0);//有邀请码经验为0
-                invitationService.updateInviteState(code);
-            }else {
-                user.setExperience(-1);//无邀请码经验为-1
+            String MyUid = null;
+            try {
+                if (code.trim().length() > 0){
+                    user.setExperience(0);//有邀请码经验为0
+                    invitationService.updateInviteState(code);
+                }else {
+                    user.setExperience(-1);//无邀请码经验为-1
+                }
+                MyUid = userService.registSave(user);
+            } catch (Exception e) {
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+                return R.isFail().msg("用户插入失败");
             }
-            String MyUid = userService.registSave(user);
             try {
                 loginLogService.insertLoginLog(MyUid);//插入登陆日志
             } catch (Exception e) {
-                e.printStackTrace();
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 return R.isFail().msg("插入登陆日志失败");
             }
             //创建余额账户
@@ -101,17 +108,17 @@ public class UserController extends Cors {
                 balanceService.insertBalance(0,1,0,MyUid);
                 balance = balanceService.selectFromBanlanceByUid(MyUid);
             } catch (Exception e) {
-                e.printStackTrace();
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 return R.isFail().msg("创建余额账户失败");
             }
             try {
                 tradeLogService.insertTradeLog(balance.getBalanceId(),1,0,0,"登录奖励增加1点量子");//写入交易记录
             } catch (Exception e) {
-                e.printStackTrace();
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 return R.isFail().msg("写入交易记录失败");
             }
         }
-        return R.isOk().data(check);
+        return R.isOk().msg("注册成功").data(check);
     }
 
     @Transactional
