@@ -75,8 +75,14 @@ public class UserController extends Cors {
      * @return void
      * @throws 
      */
-    public  R<Object> check(User user , HttpServletResponse response,@RequestParam(defaultValue = "0")String sentCode, @RequestParam(defaultValue = "9")String checkCode,@RequestParam(defaultValue = "")String code) throws Exception {
-        String check = userService.check(user);
+    public  R<Object> check(User user , HttpServletResponse response,@RequestParam(defaultValue = "0")String sentCode, @RequestParam(defaultValue = "9")String checkCode,@RequestParam(defaultValue = "")String code){
+        String check = null;
+        try {
+            check = userService.check(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
         if(!sentCode.equals(checkCode)) {
             return R.isFail().data("4");
         }else {
@@ -93,12 +99,14 @@ public class UserController extends Cors {
                 }
                 MyUid = userService.registSave(user);
             } catch (Exception e) {
+                e.printStackTrace();
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-                return R.isFail().msg("用户插入失败");
+                return R.isFail(new Exception()).msg("用户插入失败");
             }
             try {
                 loginLogService.insertLoginLog(MyUid);//插入登陆日志
             } catch (Exception e) {
+                e.printStackTrace();
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 return R.isFail().msg("插入登陆日志失败");
             }
@@ -108,14 +116,16 @@ public class UserController extends Cors {
                 balanceService.insertBalance(0,1,0,MyUid);
                 balance = balanceService.selectFromBanlanceByUid(MyUid);
             } catch (Exception e) {
+                e.printStackTrace();
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-                return R.isFail().msg("创建余额账户失败");
+                return R.isFail().msg(new Exception("uid不正确")).data("创建余额账户失败");
             }
             try {
                 tradeLogService.insertTradeLog(balance.getBalanceId(),1,0,0,"登录奖励增加1点量子");//写入交易记录
             } catch (Exception e) {
+                e.printStackTrace();
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-                return R.isFail().msg("写入交易记录失败");
+                return R.isFail().msg(new Exception("balanceId不正确")).msg("写入交易记录失败");
             }
         }
         return R.isOk().msg("注册成功").data(check);
