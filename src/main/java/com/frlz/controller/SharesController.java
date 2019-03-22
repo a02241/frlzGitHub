@@ -33,7 +33,7 @@ public class SharesController {
      * @throws 
      */
     
-    public R<Object[][]> getShares(@Param("code") String code ,@RequestParam(defaultValue="")String before ,@RequestParam(defaultValue="")String end) throws Exception {
+    public R<Object[][]> getShares(@Param("code") String code ,@RequestParam(defaultValue="")String before ,@RequestParam(defaultValue="")String end) {
         String nowEnd = DateTime.getNowTimeToString();
         String nowbefore = DateTime.getBeforeTwoYearTimeToString();
         if ("".equals(before)){

@@ -37,7 +37,7 @@ public class ReplysController {
      * @throws
      */
 
-    public R<String> addReplys(Replys replys) throws Exception {
+    public R<String> addReplys(Replys replys){
         replysService.addReplys(replys);
         return R.isOk().msg("success");
     }

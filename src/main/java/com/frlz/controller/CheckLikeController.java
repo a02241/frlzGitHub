@@ -38,7 +38,7 @@ public class CheckLikeController {
      * @version V1.0
      */
 
-    public R<String> clickLike(Blog blog, String uid) throws Exception{
+    public R<String> clickLike(Blog blog, String uid){
         if (null == checkLikeService.selectFromCheckLike(blog.getBlogId(),uid)) {
             Blog blog2 = blogService.getBlog(blog);
             blogService.updateLikesCount(blog2.getLikes() + 1,blog.getBlogId());
