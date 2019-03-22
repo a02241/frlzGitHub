@@ -47,7 +47,7 @@ public class DateTime {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c = Calendar.getInstance();
         c.setTime(new Date());
-        c.add(Calendar.YEAR, -1);
+        c.add(Calendar.YEAR, -3);
         Date twoYearDate = c.getTime();
         String beforeTwoYear = sdf.format(twoYearDate);
         return beforeTwoYear;
