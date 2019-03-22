@@ -75,8 +75,7 @@ public class UserController extends Cors {
      * @throws 
      */
     public  R<Object> check(User user , HttpServletResponse response,@RequestParam(defaultValue = "0")String sentCode, @RequestParam(defaultValue = "9")String checkCode,@RequestParam(defaultValue = "")String code){
-        String check = null;
-            check = userService.check(user);
+        String check = userService.check(user);
         if(!sentCode.equals(checkCode)) {
             return R.isFail().data("4");
         }else {
@@ -139,8 +138,7 @@ public class UserController extends Cors {
                         resp.addCookie(cookiePass);
                     }
                     String format = DateTime.getNowTimeToString();
-                    Date loginTime = null;
-                        loginTime = loginLogService.getLatestLoginLog(user.getUid());
+                    Date loginTime = loginLogService.getLatestLoginLog(user.getUid());
                     String lastestTime = DateTime.getTimeByDateToString(loginTime);
                     if (!format.equals(lastestTime)){
                         Balance balance = null;//根据uid查询余额
@@ -247,17 +245,11 @@ public class UserController extends Cors {
             type2 = fileName.indexOf(".") != -1?fileName.substring(fileName.lastIndexOf(".")+1):null;
             if (type2 != null) {
                 if ("GIF".equals(type2.toUpperCase()) || "PNG".equals(type2.toUpperCase()) || "JPG".equals(type2.toUpperCase())) {
-
                     String userHome = System.getProperties().getProperty("java.home");
-
                     path = "/usr/local/nginx/html/project/html/userImg"+  username +".jpg";
-
                     File file2 = new File(path);
-
                     file.transferTo(file2);
-
                         userService.uploadUserIcon(username,username+".jpg");
-
                     return R.isOk().msg("上传成功");
                 }else {
                     System.out.println("文件后缀不正确");
@@ -301,8 +293,7 @@ public class UserController extends Cors {
         User user = userService.selectByUid(uid);
         if(user != null) {
             if (username.trim().length() > 0) {
-                Balance balance = null;
-                    balance = balanceService.selectFromBanlanceByUid(user.getUid());
+                Balance balance = balance = balanceService.selectFromBanlanceByUid(user.getUid());
                 if (balance.getQuantumBalance() > 10) {
                     user.setUsername(username);
                         balanceService.updateQuantumBalanceByUid(user.getUid(), balance.getQuantumBalance() - 10);
@@ -356,8 +347,7 @@ public class UserController extends Cors {
      */
 
     public R<String> updatePassword(User user,String newPassword)  {
-        String uid = null;
-            uid = userService.checkPasswordByUId(user.getUid());
+        String uid = userService.checkPasswordByUId(user.getUid());
         if(uid.equals(MD5.MD5Encode("fr2018<%" + user.getPassword()  + "%>lz1220"))){
             user.setPassword(MD5.MD5Encode("fr2018<%" + newPassword  + "%>lz1220"));
             userService.updatePassword(user);
@@ -383,8 +373,7 @@ public class UserController extends Cors {
      */
 
     public R<HashMap<String,Object>> seeInformation(String uid)  {
-        User user = null;
-            user = userService.selectByUid(uid);
+        User user = userService.selectByUid(uid);
         if(user != null){
         HashMap<String,Object> map = new HashMap<>();
         map.put("username",user.getUsername());
