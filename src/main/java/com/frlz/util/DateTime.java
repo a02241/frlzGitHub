@@ -2,6 +2,7 @@ package com.frlz.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -28,6 +29,28 @@ public class DateTime {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String NowTime = sdf.format(date);
         return NowTime;
+    }
+
+    /**
+     *
+     * @title getBeforeTwoYearTimeToString
+     * @create by: cz
+     * @description: TODO 获取两年前的时间String类型
+     * @create time: 2019/3/22 14:03
+     * @Param: null
+     * @throws
+     * @return
+     * @version V1.0
+     */
+
+    public static String getBeforeTwoYearTimeToString(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date());
+        c.add(Calendar.YEAR, -1);
+        Date twoYearDate = c.getTime();
+        String beforeTwoYear = sdf.format(twoYearDate);
+        return beforeTwoYear;
     }
 
     /**
