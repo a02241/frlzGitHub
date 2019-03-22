@@ -59,7 +59,7 @@ public class CommentsController {
      * @throws
      */
 
-    public R<HashMap<String,Object>> findBlog(Blog blog, @RequestParam(defaultValue="1") int pageCode, String username, String blogId) throws Exception {
+    public R<HashMap<String,Object>> findBlog(Blog blog, @RequestParam(defaultValue="1") int pageCode, String username, String blogId) {
         Map<String,Object> conditions = new HashMap<String,Object>();
         HashMap<String,Object> map;
         if(blogId.trim().length() > 0 || blogId != null) {
@@ -95,7 +95,7 @@ public class CommentsController {
      * @throws
      */
 
-    public R<HashMap<String,Object>> saveComment(Comments comments) throws Exception {
+    public R<HashMap<String,Object>> saveComment(Comments comments) {
         String format = DateTime.getTimeByDateToString(new Date());//创建当前时间以yyyy-MM-dd格式
         int count = commentsService.selectCommentTimeCountByTime(format,comments.getUsername());//返回前一次当天写博客的次数
         if(count < 3){//回帖小于三次加8经验，超过不加
@@ -124,7 +124,7 @@ public class CommentsController {
      * @throws
      */
 
-    public R<HashMap<String,Object>> deleteComment(Comments comments) throws Exception {
+    public R<HashMap<String,Object>> deleteComment(Comments comments){
         commentsService.deleteComment(comments.getcId());
         return R.isOk().data("success");
     }

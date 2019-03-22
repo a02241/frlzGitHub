@@ -67,7 +67,7 @@ public class ManagerController {
      * @version V1.0
      */
 
-    public R<String> deleteUser(String uid) throws Exception {
+    public R<String> deleteUser(String uid){
         userService.deleteUserByUid(uid);
         return R.isOk().msg("success");
     }
@@ -85,18 +85,18 @@ public class ManagerController {
      * @version V1.0
      */
 
-    public R<List<User>> selectAllUser() throws Exception {
+    public R<List<User>> selectAllUser(){
         return R.isOk().data(userService.getAll());
     }
 
     @PostMapping("/getblog")
-    public R<List<Blog>> getblog(int a) throws Exception {
+    public R<List<Blog>> getblog(int a){
 
         return R.isOk().data(blogService.selectFiftyBlog((a - 1)* 20));
     }
 
     @PostMapping("/deleteBlog")
-    public R<String> deleteBlog(String blogId) throws Exception {
+    public R<String> deleteBlog(String blogId){
         blogService.deleteBlog(blogId);
         return R.isOk().msg("success");
     }
@@ -114,7 +114,7 @@ public class ManagerController {
      * @version V1.0
      */
 
-    public R<List<Blog>> getBlogByDate(String date) throws Exception {
+    public R<List<Blog>> getBlogByDate(String date){
         return R.isOk().data(blogService.selectBlogByMonth(date));
     }
 
@@ -131,7 +131,7 @@ public class ManagerController {
      * @version V1.0
      */
 
-    public R<List<Blog>> getBlogByMonth(String date) throws Exception {
+    public R<List<Blog>> getBlogByMonth(String date){
         return R.isOk().data(blogService.selectBlogByMonth(date));
     }
 
@@ -148,7 +148,7 @@ public class ManagerController {
      * @version V1.0
      */
 
-    public R<List<LoginLog>> getAllLoginLog() throws Exception {
+    public R<List<LoginLog>> getAllLoginLog(){
         return R.isOk().data(loginLogService.getAllLoginLog());
     }
 
@@ -165,7 +165,7 @@ public class ManagerController {
      * @version V1.0
      */
 
-    public R<List<LoginLog>> getLoginLogByDate(String date) throws Exception {
+    public R<List<LoginLog>> getLoginLogByDate(String date){
         return R.isOk().data(loginLogService.selectLoginLogByDate(date));
     }
 

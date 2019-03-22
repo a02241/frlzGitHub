@@ -44,24 +44,11 @@ public class BalanceController {
      * @version V1.0
      */
 
-    public R<String> quantumToBlock(String uid, int quantum) throws Exception {
-        Balance balance = null;
-        try {
-            balance = balanceService.selectFromBanlanceByUid(uid);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public R<String> quantumToBlock(String uid, int quantum) {
+        Balance balance = balanceService.selectFromBanlanceByUid(uid);
         if (balance.getQuantumBalance() >= 10){
-            try {
-                balanceService.updateQuantumBalanceByUid(uid,balance.getQuantumBalance() - quantum);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                balanceService.updateBlockBalanceByUid(uid,balance.getBlockBalance() + quantum / 10);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            balanceService.updateQuantumBalanceByUid(uid,balance.getQuantumBalance() - quantum);
+            balanceService.updateBlockBalanceByUid(uid,balance.getBlockBalance() + quantum / 10);
             tradeLogService.insertTradeLogQuantumToBlock(balance.getBalanceId(),quantum);
             return R.isOk().msg("兑换成功");
         }else {
@@ -86,28 +73,11 @@ public class BalanceController {
      */
 
     public R<String> blockToQuantum(String uid,int block){
-        Balance balance = null;
-        try {
-            balance = balanceService.selectFromBanlanceByUid(uid);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Balance balance = balanceService.selectFromBanlanceByUid(uid);
         if (balance.getBlockBalance() > 0){
-            try {
-                balanceService.updateQuantumBalanceByUid(uid,balance.getQuantumBalance() + block * 10);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                balanceService.updateBlockBalanceByUid(uid,balance.getBlockBalance() - block);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                tradeLogService.insertTradeLogBlockToQuantum(balance.getBalanceId(),block);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            balanceService.updateQuantumBalanceByUid(uid,balance.getQuantumBalance() + block * 10);
+            balanceService.updateBlockBalanceByUid(uid,balance.getBlockBalance() - block);
+            tradeLogService.insertTradeLogBlockToQuantum(balance.getBalanceId(),block);
             return R.isOk().msg("兑换成功");
         }else {
             return R.isFail().msg("余额不足");
@@ -131,28 +101,11 @@ public class BalanceController {
      */
 
     public R<String> magicCubeToBlock(String uid,int magicCube){
-        Balance balance = null;
-        try {
-            balance = balanceService.selectFromBanlanceByUid(uid);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Balance balance = balanceService.selectFromBanlanceByUid(uid);
         if (balance.getMagicCubeBalance() > 0){
-            try {
-                balanceService.updateBlockBalanceByUid(uid,balance.getBlockBalance() + magicCube * 26);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                balanceService.updateMagicCubeBalanceByUid(uid,balance.getMagicCubeBalance() - magicCube);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                tradeLogService.insertTradeLogMagicCubeToBlock(balance.getBalanceId(),magicCube);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            balanceService.updateBlockBalanceByUid(uid,balance.getBlockBalance() + magicCube * 26);
+            balanceService.updateMagicCubeBalanceByUid(uid,balance.getMagicCubeBalance() - magicCube);
+            tradeLogService.insertTradeLogMagicCubeToBlock(balance.getBalanceId(),magicCube);
             return R.isOk().msg("兑换成功");
         }else {
             return R.isFail().msg("余额不足");
@@ -176,28 +129,11 @@ public class BalanceController {
      */
 
     public R<String> blockToMagicCube(String uid,int block){
-        Balance balance = null;
-        try {
-            balance = balanceService.selectFromBanlanceByUid(uid);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Balance balance = balanceService.selectFromBanlanceByUid(uid);
         if (balance.getBlockBalance() >= 27){
-            try {
-                balanceService.updateBlockBalanceByUid(uid,balance.getBlockBalance() - block);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                balanceService.updateMagicCubeBalanceByUid(uid,balance.getMagicCubeBalance() + block / 27);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                tradeLogService.insertTradeLogBlockToMagicCube(balance.getBalanceId(),block);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            balanceService.updateBlockBalanceByUid(uid,balance.getBlockBalance() - block);
+            balanceService.updateMagicCubeBalanceByUid(uid,balance.getMagicCubeBalance() + block / 27);
+            tradeLogService.insertTradeLogBlockToMagicCube(balance.getBalanceId(),block);
             return R.isOk().msg("兑换成功");
         }else {
             return R.isFail().msg("余额不足");

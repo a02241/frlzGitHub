@@ -2,7 +2,6 @@ package com.frlz.controller;
 
 import com.frlz.service.FansService;
 import com.frlz.service.UserService;
-import com.frlz.util.BusinessException;
 import com.frlz.util.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,7 +57,7 @@ public class FansController {
      * @version V1.0
      */
 
-    public R<String> notInterest(String uid,String fansUId) throws Exception {
+    public R<String> notInterest(String uid,String fansUId) {
         fansService.deleteFans(fansUId);
         userService.updateFansNumberReduce(uid);
         userService.updateInterestNumberReduce(fansUId);

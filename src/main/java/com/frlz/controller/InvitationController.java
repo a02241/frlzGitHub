@@ -34,7 +34,7 @@ public class InvitationController {
      * @return java.util.List<com.frlz.pojo.Invitation>
      * @version V1.0
      */
-    public R<List<Invitation>> selectInvatationByUid(String uid) throws Exception {
+    public R<List<Invitation>> selectInvatationByUid(String uid){
         return R.isOk().data(invitationService.selectInvatationByUid(uid));
     }
 
@@ -51,7 +51,7 @@ public class InvitationController {
      * @version V1.0
      */
 
-    public R<Boolean> findStateBycode(@RequestParam(defaultValue = "")String code) throws Exception {
+    public R<Boolean> findStateBycode(@RequestParam(defaultValue = "")String code){
         int result = invitationService.findStateBycode(code);
         if (code.trim().length()==0){
             return R.isOk().data("未填写邀请码");

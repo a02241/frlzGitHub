@@ -49,7 +49,7 @@ public class BlogController {
      * @throws Exception
      */
 
-    public R<HashMap<String,Object>> searchBlog(@RequestParam(defaultValue="1") int pageCode, @RequestParam(defaultValue="")String uid) throws Exception {
+    public R<HashMap<String,Object>> searchBlog(@RequestParam(defaultValue="1") int pageCode, @RequestParam(defaultValue="")String uid)  {
         HashMap<String,Object> map = blogService.searchBlog(pageCode,uid,1);
         String username;
         if(uid.equals("")) {
@@ -80,7 +80,7 @@ public class BlogController {
      * @version V1.0
      */
 
-    public R<HashMap<String,Object>> searchBlogChoice(@RequestParam(defaultValue="1") int pageCode) throws Exception {
+    public R<HashMap<String,Object>> searchBlogChoice(@RequestParam(defaultValue="1") int pageCode) {
         HashMap<String,Object> map = blogService.searchBlog(pageCode,"",2);
         return R.isOk().data(map);
     }
@@ -98,7 +98,7 @@ public class BlogController {
      * @throws Exception
      */
 
-    public R<Boolean> insertBlog(Blog blog,String uid)throws Exception{
+    public R<Boolean> insertBlog(Blog blog,String uid){
         if(uid.trim().length() == 0 || uid == null){
             return R.isFail();
         }else {
@@ -130,7 +130,7 @@ public class BlogController {
      * @version V1.0
      */
 
-    public R<String> addReadNumber(String blogId) throws Exception {
+    public R<String> addReadNumber(String blogId){
         blogService.updateBlogByBlogId(blogId,4);
         return R.isOk().msg("阅读数+1");
     }
@@ -147,7 +147,7 @@ public class BlogController {
      * @return java.lang.String
      * @version V1.0
      */
-    public R<String> addForwordNumber(String blogId) throws Exception {
+    public R<String> addForwordNumber(String blogId) {
         blogService.updateBlogByBlogId(blogId,3);
         return R.isOk().msg("转发数+1");
     }
@@ -165,7 +165,7 @@ public class BlogController {
      * @version V1.0
      */
 
-    public R<String> addLikes(String blogId,int choice) throws Exception {
+    public R<String> addLikes(String blogId,int choice) {
         if (choice==1){
             blogService.updateBlogByBlogId(blogId,1);
             return R.isOk().msg("点赞数+1");
