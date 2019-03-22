@@ -4,7 +4,7 @@ import com.frlz.pojo.Secret;
 
 public interface SecretService {
 
-    void insertSecret(Secret secret, String uid) throws Exception;
+    void insertSecret(Secret secret, String uid);
 
-    Secret selectFromSecret(String uid) throws Exception;
+    Secret selectFromSecret(String uid);
 }

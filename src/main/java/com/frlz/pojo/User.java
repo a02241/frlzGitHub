@@ -2,12 +2,14 @@ package com.frlz.pojo;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
 public class User {
 	private String username;//用户名
 	private String password;//密码
+	@NotNull(message = "用户UID不能为空")
 	private String uid;//用户识别码
 	private String phonenumber;//手机 
 	private String email;//邮箱 

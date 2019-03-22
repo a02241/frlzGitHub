@@ -34,7 +34,7 @@ public class BlogServiceImpl implements BlogService {
 
 
     @Override
-    public HashMap<String,Object> findBlog(Blog blog)  throws Exception{
+    public HashMap<String,Object> findBlog(Blog blog)  {
         HashMap<String,Object> map = new HashMap<>();
         Blog finBlog = blogMapper.findBlog(blog);
         map.put("message", finBlog.getMessage());
@@ -49,12 +49,12 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public Blog getBlog(Blog blog) throws Exception{
+    public Blog getBlog(Blog blog) {
         return blogMapper.findBlog(blog);
     }
 
     @Override
-    public HashMap<String, Object> searchBlog(int pageCode,String uid,int choice) throws Exception{
+    public HashMap<String, Object> searchBlog(int pageCode,String uid,int choice) {
         HashMap<String,Object> map = new HashMap<>();
         Map<String,Object> conditions = new HashMap<String,Object>();
         if(uid.trim().length() > 0 || uid != null) {
@@ -85,13 +85,18 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public int selectBlogCountByDateAndUid(String date, String uid) throws Exception{
+    public int selectBlogCountByDateAndUid(String date, String uid) {
         return blogMapper.selectBlogCountByDateAndUid(date,uid);
     }
 
     @Override
-    public int insertBlog(Blog blog, String uid) throws Exception {
-        Date date = DateTime.getDate();
+    public int insertBlog(Blog blog, String uid)  {
+        Date date = null;
+        try {
+            date = DateTime.getDate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
         String format2 = sdf2.format(date);//创建当前时间以yyyy-MM-dd格式
         int count = blogMapper.selectBlogCountByDateAndUid(format2,uid);
@@ -107,17 +112,17 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public void updateLikesCount(int likes, String blogId) throws Exception{
+    public void updateLikesCount(int likes, String blogId) {
         blogMapper.updateLikesCount(blogId);
     }
 
     @Override
-    public List<Blog> selectFiftyBlog(int a)throws Exception {
+    public List<Blog> selectFiftyBlog(int a) {
         return blogMapper.selectFiftyBlog(a);
     }
 
     @Override
-    public void updateBlogByBlogId(String blogId,int choice) throws Exception{
+    public void updateBlogByBlogId(String blogId,int choice) {
         if (choice==1){//更新点赞数量
             blogMapper.updateLikesCount(blogId);
         }
@@ -136,12 +141,12 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public void deleteBlog(String blogId) throws Exception{
+    public void deleteBlog(String blogId) {
         blogMapper.deleteBlog(blogId);
     }
 
     @Override
-    public List<Blog> selectBlogByMonth(String date) throws Exception{
+    public List<Blog> selectBlogByMonth(String date) {
         return blogMapper.selectBlogByMonth(date);
     }
 }

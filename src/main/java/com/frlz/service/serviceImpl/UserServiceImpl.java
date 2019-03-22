@@ -34,48 +34,48 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public List<User> getAll()throws Exception{
+    public List<User> getAll(){
         return userMapper.selectAll();
     }
 
     @Override
-    public User selectUser(String account)throws Exception{
+    public User selectUser(String account){
         return userMapper.loginSelect(account);
     }
 
     @Override
-    public User selectByUid(String uid)throws Exception {
+    public User selectByUid(String uid) {
         return userMapper.selectByUid(uid);
     }
 
     @Override
-    public int checkPhonenumber(String phonenumber)throws Exception{
+    public int checkPhonenumber(String phonenumber){
         return userMapper.checkPhonenumber(phonenumber);
     }
 
     @Override
-    public int checkEmail(String email)throws Exception{
+    public int checkEmail(String email){
         return userMapper.checkEmail(email);
     }
 
     @Override
-    public String searchUsernameById(String uid)throws Exception{
+    public String searchUsernameById(String uid){
         return userMapper.searchUsernameById(uid);
     }
 
     @Override
-    public User selectUserByUsername(String username)throws Exception {
+    public User selectUserByUsername(String username) {
         return userMapper.selectUserByUsername(username);
     }
 
 
     @Override
-    public String searchUsernameByEmail(String email)throws Exception{
+    public String searchUsernameByEmail(String email){
         return userMapper.searchUsernameByEmail(email);
     }
 
     @Override
-    public String check(User user)throws Exception {
+    public String check(User user){
         String username = GetUername.getUsername();
         boolean checkUsername = true;
         int checkPhonenumber = userMapper.checkPhonenumber(user.getPhonenumber());
@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String registSave(User user)throws Exception {
+    public String registSave(User user){
         //默认头像
         user.setIcon("default.png");
         //默认投资年龄
@@ -132,57 +132,57 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void uploadUserIcon(String username, String icon)throws Exception {
+    public void uploadUserIcon(String username, String icon) {
         userMapper.uploadUserIcon(username,icon);
     }
 
     @Override
-    public void updateUser(User user)throws Exception {
+    public void updateUser(User user) {
         userMapper.updateUser(user);
     }
 
     @Override
-    public void updatePassword(User user)throws Exception {
+    public void updatePassword(User user) {
         userMapper.updatePassword(user);
     }
 
     @Override
-    public void updatePhonenumber(String uid, String phonenumber)throws Exception {
+    public void updatePhonenumber(String uid, String phonenumber) {
         userMapper.updatePhonenumber(uid,phonenumber);
     }
 
     @Override
-    public void updateEmail(String uid, String email)throws Exception {
+    public void updateEmail(String uid, String email) {
         userMapper.updateEmail(uid,email);
     }
 
     @Override
-    public void updateFansNumberAdd(String uid)throws Exception {
+    public void updateFansNumberAdd(String uid){
         userMapper.updateFansNumberAdd(uid);
     }
 
     @Override
-    public void updateFansNumberReduce(String uid)throws Exception {
+    public void updateFansNumberReduce(String uid) {
         userMapper.updateFansNumberReduce(uid);
     }
 
     @Override
-    public void updateInterestNumberAdd(String uid)throws Exception {
+    public void updateInterestNumberAdd(String uid){
         userMapper.updateInterestNumberAdd(uid);
     }
 
     @Override
-    public void updateInterestNumberReduce(String uid)throws Exception {
+    public void updateInterestNumberReduce(String uid) {
         userMapper.updateInterestNumberReduce(uid);
     }
 
     @Override
-    public String checkPasswordByUId(String uid)throws Exception {
+    public String checkPasswordByUId(String uid) {
         return userMapper.checkPasswordByUId(uid);
     }
 
     @Override
-    public void deleteUserByUid(String uid)throws Exception {
+    public void deleteUserByUid(String uid) {
         userMapper.deleteByUid(uid);
     }
 }

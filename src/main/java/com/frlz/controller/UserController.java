@@ -8,9 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
@@ -23,6 +21,7 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@RestControllerAdvice
 @RestController
 public class UserController extends Cors {
 
@@ -53,7 +52,7 @@ public class UserController extends Cors {
      * @return boolean
      * @throws
      */
-    public R<Boolean> checkAccount(@Param("account") String account) throws Exception {
+    public R<Boolean> checkAccount(@Param("account") String account)  {
         return R.isOk().data(((userService.checkPhonenumber(account) + userService.checkEmail(account)) == 0));
     }
 
@@ -77,12 +76,7 @@ public class UserController extends Cors {
      */
     public  R<Object> check(User user , HttpServletResponse response,@RequestParam(defaultValue = "0")String sentCode, @RequestParam(defaultValue = "9")String checkCode,@RequestParam(defaultValue = "")String code){
         String check = null;
-        try {
             check = userService.check(user);
-        } catch (Exception e) {
-            e.printStackTrace();
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-        }
         if(!sentCode.equals(checkCode)) {
             return R.isFail().data("4");
         }else {
@@ -91,7 +85,6 @@ public class UserController extends Cors {
             //有邀请码
             String MyUid = null;
             int result = 0;
-            try {
                 result = invitationService.findStateBycode(code);
                 if (code.trim().length() > 0&& result == 1){
                     user.setExperience(0);//有邀请码经验为0
@@ -99,44 +92,15 @@ public class UserController extends Cors {
                     user.setExperience(-1);//无邀请码经验为-1
                 }
                 MyUid = userService.registSave(user);
-            } catch (Exception e) {
-                e.printStackTrace();
-                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-                return R.isFail(new Exception()).msg("用户插入失败");
-            }
-            try {
                     if (result==1){
                         invitationService.updateInviteState(code,MyUid);
                     }
-            } catch (Exception e) {
-                e.printStackTrace();
-                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-                return R.isFail(new Exception()).msg("邀请码注册失败");
-            }
-            try {
                 loginLogService.insertLoginLog(MyUid);//插入登陆日志
-            } catch (Exception e) {
-                e.printStackTrace();
-                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-                return R.isFail().msg("插入登陆日志失败");
-            }
             //创建余额账户
             Balance balance;
-            try {
                 balanceService.insertBalance(0,1,0,MyUid);
                 balance = balanceService.selectFromBanlanceByUid(MyUid);
-            } catch (Exception e) {
-                e.printStackTrace();
-                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-                return R.isFail().msg(new Exception("uid不正确")).data("创建余额账户失败");
-            }
-            try {
                 tradeLogService.insertTradeLog(balance.getBalanceId(),1,0,0,"登录奖励增加1点量子");//写入交易记录
-            } catch (Exception e) {
-                e.printStackTrace();
-                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-                return R.isFail().msg(new Exception("balanceId不正确")).msg("写入交易记录失败");
-            }
         }
         return R.isOk().msg("注册成功").data(check);
     }
@@ -162,7 +126,6 @@ public class UserController extends Cors {
         HashMap<String,String> map = new HashMap<>();
         String data;
         User user;
-        try {
             user = userService.selectUser(username);
             if (user != null) {
                 if (user.getPassword().equals(MD5.MD5Encode("fr2018<%" + password  + "%>lz1220"))) {
@@ -177,40 +140,20 @@ public class UserController extends Cors {
                     }
                     String format = DateTime.getNowTimeToString();
                     Date loginTime = null;
-                    try {
                         loginTime = loginLogService.getLatestLoginLog(user.getUid());
-                    } catch (Exception e) {
-                        return R.isFail().data("无法查到该用户信息");
-                    }
                     String lastestTime = DateTime.getTimeByDateToString(loginTime);
                     if (!format.equals(lastestTime)){
                         Balance balance = null;//根据uid查询余额
                         int experience = 0;//登录加1点经验
-                        try {
                             balance = balanceService.selectFromBanlanceByUid(user.getUid());
                             int count = balance.getQuantumBalance() + 1;//量子余额+1
                             balanceService.updateQuantumBalanceByUid(user.getUid(),count);//交易写入数据库
                             experience = user.getExperience() + 1;
-                        } catch (Exception e) {
-                            return R.isFail().data("写入交易账号失败");
-                        }
                         user.setExperience(experience);
-                        try {
                             userService.updateUser(user);//写入数据库
-                        } catch (Exception e) {
-                            return R.isFail().data("写入用户信息失败");
-                        }
-                        try {
                             tradeLogService.insertTradeLog(balance.getBalanceId(),1,0,0,"登录奖励增加1点量子");//写入交易记录
-                        } catch (Exception e) {
-                            return R.isFail().data("写入交易记录失败");
-                        }
                     }
-                    try {
                         loginLogService.insertLoginLog(user.getUid());//插入登陆日志
-                    } catch (Exception e) {
-                        return R.isFail().data("插入登陆日志失败");
-                    }
                     map.put("result",data);
                     map.put("Myusermane",user.getUsername());
                     map.put("uid",user.getUid());
@@ -226,9 +169,6 @@ public class UserController extends Cors {
                 map.put("result",data);
                 return R.isFail().data(map);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return R.isOk().data(map);
     }
 
@@ -316,11 +256,7 @@ public class UserController extends Cors {
 
                     file.transferTo(file2);
 
-                    try {
                         userService.uploadUserIcon(username,username+".jpg");
-                    } catch (Exception e) {
-                        return R.isFail().msg("更新用户信息失败");
-                    }
 
                     return R.isOk().msg("上传成功");
                 }else {
@@ -361,23 +297,15 @@ public class UserController extends Cors {
     public R<String> updateUser(String uid,
                              @RequestParam(defaultValue="")String username,@RequestParam(defaultValue="")String phonenumber,@RequestParam(defaultValue="")String email,
                              @RequestParam(defaultValue="0")int investmentage,@RequestParam(defaultValue="")String profile,@RequestParam(defaultValue="")String profession,
-                             @RequestParam(defaultValue="")String residence,@RequestParam(defaultValue="")String province,@RequestParam(defaultValue="")String city) throws Exception {
+                             @RequestParam(defaultValue="")String residence,@RequestParam(defaultValue="")String province,@RequestParam(defaultValue="")String city)  {
         User user = userService.selectByUid(uid);
         if(user != null) {
             if (username.trim().length() > 0) {
                 Balance balance = null;
-                try {
                     balance = balanceService.selectFromBanlanceByUid(user.getUid());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
                 if (balance.getQuantumBalance() > 10) {
                     user.setUsername(username);
-                    try {
                         balanceService.updateQuantumBalanceByUid(user.getUid(), balance.getQuantumBalance() - 10);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
 
                     tradeLogService.insertTradeLog(balance.getBalanceId(), -10, 0, 0, "修改昵称花费10量子");
                 } else {
@@ -408,7 +336,7 @@ public class UserController extends Cors {
             if (!"".equals(city)) {
                 user.setCity(city);
             }
-            userService.updateUser(user);
+                userService.updateUser(user);
         }else {
             return R.isFail().msg("false");
         }
@@ -427,9 +355,10 @@ public class UserController extends Cors {
      * @throws
      */
 
-    public R<String> updatePassword(User user,String newPassword) throws Exception {
-        if(userService.checkPasswordByUId(user.getUid()).equals(
-                MD5.MD5Encode("fr2018<%" + user.getPassword()  + "%>lz1220"))){
+    public R<String> updatePassword(User user,String newPassword)  {
+        String uid = null;
+            uid = userService.checkPasswordByUId(user.getUid());
+        if(uid.equals(MD5.MD5Encode("fr2018<%" + user.getPassword()  + "%>lz1220"))){
             user.setPassword(MD5.MD5Encode("fr2018<%" + newPassword  + "%>lz1220"));
             userService.updatePassword(user);
             return R.isOk().data("success");
@@ -453,8 +382,9 @@ public class UserController extends Cors {
      * @version V1.0
      */
 
-    public R<HashMap<String,Object>> seeInformation(String uid) throws Exception {
-        User user = userService.selectByUid(uid);
+    public R<HashMap<String,Object>> seeInformation(String uid)  {
+        User user = null;
+            user = userService.selectByUid(uid);
         if(user != null){
         HashMap<String,Object> map = new HashMap<>();
         map.put("username",user.getUsername());
@@ -491,13 +421,13 @@ public class UserController extends Cors {
      * @version V1.0
      */
 
-    public R<String> boundPhone(String uid , String phonenumber) throws Exception {
+    public R<String> boundPhone(String uid , String phonenumber)  {
         Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0-9])|(14[5,7])| (17[0,1,3,5-8]))\\d{8}$");
         Matcher m = p.matcher(phonenumber);
         if(!m.matches()){
             return R.isFail().msg("false");
         }else {
-            userService.updatePhonenumber(uid, phonenumber);
+                userService.updatePhonenumber(uid, phonenumber);
             balanceUtil.addQuantumBalance(uid,5,"绑定手机增加5个量子");//增加5个量子
         }
         return R.isOk().msg("success");
@@ -518,14 +448,14 @@ public class UserController extends Cors {
      * @version V1.0
      */
 
-    public R<String> boundEmail(String uid , String email) throws Exception {
+    public R<String> boundEmail(String uid , String email)  {
         String regex = "\\w+@\\w+(\\.\\w{2,3})*\\.\\w{2,3}";
         boolean tag = true;
         if (!email.matches(regex)) {
             tag = false;
         }
         if(tag) {
-            userService.updateEmail(uid, email);
+                userService.updateEmail(uid, email);
             balanceUtil.addQuantumBalance(uid,5,"绑定邮箱增加5个量子");//增加5个量子
         }else {
             return R.isFail().msg("false");

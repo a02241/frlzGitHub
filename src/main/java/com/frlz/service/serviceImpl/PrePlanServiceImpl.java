@@ -25,12 +25,12 @@ public class PrePlanServiceImpl implements PrePlanService {
     }
 
     @Override
-    public void insertIntoPrePlan(PrePlan prePlan) throws Exception{
+    public void insertIntoPrePlan(PrePlan prePlan) {
         prePlanMapper.insertIntoPrePlan(prePlan);
     }
 
     @Override
-    public PrePlan selectPrePlanByUid(String uid, Date time) throws Exception{
+    public PrePlan selectPrePlanByUid(String uid, Date time) {
         return prePlanMapper.selectPrePlanByUid(uid,time);
     }
 

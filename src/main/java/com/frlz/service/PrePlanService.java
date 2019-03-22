@@ -6,8 +6,8 @@ import java.util.Date;
 
 public interface PrePlanService {
 
-    void insertIntoPrePlan(PrePlan prePlan) throws Exception;
+    void insertIntoPrePlan(PrePlan prePlan);
 
-    PrePlan selectPrePlanByUid(String uid, Date time) throws Exception;
+    PrePlan selectPrePlanByUid(String uid, Date time);
 
 }

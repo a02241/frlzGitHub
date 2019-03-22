@@ -27,22 +27,22 @@ public class LoginLogServiceImpl implements LoginLogService {
     }
 
     @Override
-    public void insertLoginLog(String uid) throws Exception{
+    public void insertLoginLog(String uid){
         loginLogMapper.insertLoginLog(uid);
     }
 
     @Override
-    public List<LoginLog> getAllLoginLog() throws Exception{
+    public List<LoginLog> getAllLoginLog() {
         return loginLogMapper.selectAllLoginLog();
     }
 
     @Override
-    public Date getLatestLoginLog(String uid) throws Exception{
+    public Date getLatestLoginLog(String uid) {
         return loginLogMapper.selectLatestLoginLog(uid);
     }
 
     @Override
-    public List<LoginLog> selectLoginLogByDate(String date) throws Exception{
+    public List<LoginLog> selectLoginLogByDate(String date) {
         return loginLogMapper.selectLoginLogByDate(date);
     }
 }

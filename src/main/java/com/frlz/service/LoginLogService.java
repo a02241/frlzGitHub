@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface LoginLogService {
 
-    void insertLoginLog(String uid) throws Exception;
+    void insertLoginLog(String uid);
 
-    List<LoginLog> getAllLoginLog() throws Exception;
+    List<LoginLog> getAllLoginLog();
 
-    Date getLatestLoginLog(String uid) throws Exception;
+    Date getLatestLoginLog(String uid);
 
-    List<LoginLog> selectLoginLogByDate(String date) throws Exception;
+    List<LoginLog> selectLoginLogByDate(String date);
 }

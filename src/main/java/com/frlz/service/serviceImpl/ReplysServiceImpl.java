@@ -27,7 +27,7 @@ public class ReplysServiceImpl implements ReplysService {
     }
 
     @Override
-    public void addReplys(Replys replys) throws Exception{
+    public void addReplys(Replys replys) {
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String newtime = sdf.format(date);

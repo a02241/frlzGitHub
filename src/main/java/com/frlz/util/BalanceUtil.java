@@ -40,7 +40,7 @@ public class BalanceUtil {
         balanceUtil.userService = this.userService;
         balanceUtil.loginLogService = this.loginLogService;
     }
-    public void addQuantumBalance(String uid, int count,String remarks) throws Exception {
+    public void addQuantumBalance(String uid, int count,String remarks)  {
         Balance balance = null;//根据uid查询余额
         try {
             balance = balanceUtil.balanceService.selectFromBanlanceByUid(uid);

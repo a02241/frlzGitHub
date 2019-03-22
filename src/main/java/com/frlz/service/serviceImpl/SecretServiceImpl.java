@@ -25,13 +25,13 @@ public class SecretServiceImpl implements SecretService {
 
 
     @Override
-    public void insertSecret(Secret secret, String uid) throws Exception{
+    public void insertSecret(Secret secret, String uid) {
         secretMapper.insertSecret(secret,uid);
 
     }
 
     @Override
-    public Secret selectFromSecret(String uid) throws Exception{
+    public Secret selectFromSecret(String uid) {
         return secretMapper.selectFromSecret(uid);
     }
 }

@@ -33,7 +33,7 @@ public interface CommentsMapper {
      * @Description: TODO(根据博客id查询评论信息) 
      * @param @param map
      * @param @return
-     * @param @throws Exception    入参
+     * @param @    入参
      * @return List<Comments>    返回类型
      * @author cz 
      * @throws
@@ -43,7 +43,7 @@ public interface CommentsMapper {
     @Select("select * from comments where blogId = #{blogId}" +
             " order by commentTime" +
             " limit ${(pageCode-1)*pageSize},${pageSize}")
-    public List<Comments> findComments(Map<String,Object> map)throws Exception;
+    public List<Comments> findComments(Map<String,Object> map);
 
     @Select("select count(*) from comments where DATE_FORMAT(commentTime, '%Y-%m-%d') = #{date} and username = #{username}")
     public int selectCommentTimeCountByTime(String date,String username);
@@ -52,7 +52,7 @@ public interface CommentsMapper {
      * @Title: saveComment 
      * @Description: TODO(保存评论信息) 
      * @param @param comments
-     * @param @throws Exception    入参
+     * @param @    入参
      * @return void    返回类型
      * @author cz 
      * @throws
@@ -64,7 +64,7 @@ public interface CommentsMapper {
     @Options(keyProperty = "cId", useGeneratedKeys = true)
     @Insert("insert into comments(blogId, comments,cId,username,commentTime)" +
             " values( #{blogId},#{comments}, #{cId}, #{username}, #{commentTime})")
-    public void saveComment(Comments comments)throws Exception;
+    public void saveComment(Comments comments);
 
 
     @Delete("delete from comments where cId = #{cId}")

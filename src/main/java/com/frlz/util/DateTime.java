@@ -65,10 +65,15 @@ public class DateTime {
      * @version V1.0
      */
 
-    public static Date getDateToDate(Date date) throws ParseException {
+    public static Date getDateToDate(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String SDate = sdf.format(date);
-        Date NewDate = sdf.parse(SDate);
+        Date NewDate = null;
+        try {
+            NewDate = sdf.parse(SDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return NewDate;
     }
 
@@ -90,11 +95,16 @@ public class DateTime {
         return NowTime;
     }
 
-    public static Date getDate() throws Exception{
+    public static Date getDate(){
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String format = sdf.format(date);
-        Date newDate =sdf.parse(format);
+        Date newDate = null;
+        try {
+            newDate = sdf.parse(format);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return newDate;
     }
 

@@ -2,12 +2,13 @@ package com.frlz.controller;
 
 import com.frlz.service.FansService;
 import com.frlz.service.UserService;
+import com.frlz.util.BusinessException;
 import com.frlz.util.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@RestControllerAdvice
 @RestController
 public class FansController {
 
@@ -21,7 +22,7 @@ public class FansController {
     }
 
     @Transactional
-    @PostMapping("/interest")//关注
+    @RequestMapping("/interest")//关注
     /**
      * TODO 关注
      * @title interest
@@ -35,11 +36,11 @@ public class FansController {
      * @version V1.0
      */
 
-    public R<String> interest(String uid, String fansUId) throws Exception {
-        fansService.insertFans(uid,fansUId);
-        userService.updateFansNumberAdd(uid);
-        userService.updateInterestNumberAdd(fansUId);
-        return R.isOk().msg("success");
+    public R<String> interest(@PathVariable String uid,@PathVariable String fansUId){
+            fansService.insertFans(uid,fansUId);
+            userService.updateFansNumberAdd(uid);
+            userService.updateInterestNumberAdd(fansUId);
+            return R.isOk().msg("success");
     }
 
     @Transactional

@@ -6,6 +6,7 @@ import com.frlz.util.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * @program: frlz
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author: cz
  * @date: 2019-03-04 13:56
  **/
+@RestControllerAdvice
 @RestController
 public class ReplysController {
 

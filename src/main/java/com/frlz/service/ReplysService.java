@@ -3,5 +3,5 @@ package com.frlz.service;
 import com.frlz.pojo.Replys;
 
 public interface ReplysService {
-    public void addReplys(Replys replys) throws Exception;
+    public void addReplys(Replys replys);
 }

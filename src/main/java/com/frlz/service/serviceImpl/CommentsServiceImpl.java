@@ -28,7 +28,7 @@ public class CommentsServiceImpl implements CommentsService {
     }
 
     @Override
-    public List<Comments> findComments(Map<String, Object> conditions, int pageSize, int pageCode) throws Exception {
+    public List<Comments> findComments(Map<String, Object> conditions, int pageSize, int pageCode)  {
         PageBean pb = new PageBean();
         int allCount = commentsMapper.findAllCountComments(conditions);//查询数据总数
         pb.setAllCount(allCount);//把数据总数放入分页类
@@ -44,24 +44,24 @@ public class CommentsServiceImpl implements CommentsService {
     }
 
     @Override
-    public int findCommentsByBlogId(Map<String, Object> conditions) throws Exception {
+    public int findCommentsByBlogId(Map<String, Object> conditions)  {
         return commentsMapper.findAllCountComments(conditions);
     }
 
     @Override
-    public void saveComment(Comments comments) throws Exception {
+    public void saveComment(Comments comments)  {
         Date time = DateTime.getDate();
         comments.setCommentTime(time);
         commentsMapper.saveComment(comments);
     }
 
     @Override
-    public int selectCommentTimeCountByTime(String date,String username) throws Exception{
+    public int selectCommentTimeCountByTime(String date,String username) {
         return commentsMapper.selectCommentTimeCountByTime(date,username);
     }
 
     @Override
-    public void deleteComment(String cId) throws Exception{
+    public void deleteComment(String cId) {
         commentsMapper.deleteComment(cId);
     }
 }

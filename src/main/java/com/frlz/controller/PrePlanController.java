@@ -6,6 +6,7 @@ import com.frlz.util.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.Date;
 
@@ -15,6 +16,7 @@ import java.util.Date;
  * @author: cz
  * @date: 2019-03-11 15:09
  **/
+@RestControllerAdvice
 @RestController
 public class PrePlanController {
 

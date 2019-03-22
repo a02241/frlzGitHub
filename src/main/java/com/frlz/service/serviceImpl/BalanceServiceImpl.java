@@ -24,7 +24,7 @@ public class BalanceServiceImpl implements BalanceService {
         this.balanceMapper = balanceMapper;
     }
     @Override
-    public void insertBalance(int blockBalance,int quantumBalance,int magicCubeBalance,String uid) throws Exception{
+    public void insertBalance(int blockBalance,int quantumBalance,int magicCubeBalance,String uid){
         Balance balance = new Balance();
         if (quantumBalance == 0){
             balance.setQuantumBalance(1);
@@ -34,32 +34,32 @@ public class BalanceServiceImpl implements BalanceService {
     }
 
     @Override
-    public Balance selectFromBanlanceByUid(String uid) throws Exception{
+    public Balance selectFromBanlanceByUid(String uid){
         return balanceMapper.selectFromBanlanceByUid(uid);
     }
 
     @Override
-    public void updateQuantumBalanceByUid(String uid, int quantumBalance) throws Exception{
+    public void updateQuantumBalanceByUid(String uid, int quantumBalance) {
         balanceMapper.updateQuantumBalanceByUid(uid,quantumBalance);
     }
 
     @Override
-    public void updateBlockBalanceByUid(String uid, int blockBalance) throws Exception{
+    public void updateBlockBalanceByUid(String uid, int blockBalance) {
         balanceMapper.updateBlockBalanceByUid(uid,blockBalance);
     }
 
     @Override
-    public void updateMagicCubeBalanceByUid(String uid, int magicCubeBalance) throws Exception{
+    public void updateMagicCubeBalanceByUid(String uid, int magicCubeBalance) {
         balanceMapper.updateMagicCubeBalanceByUid(uid,magicCubeBalance);
     }
 
     @Override
-    public List<Balance> selectAllBalance() throws Exception{
+    public List<Balance> selectAllBalance() {
         return balanceMapper.selectAllBalance();
     }
 
     @Override
-    public void LoginAddQuantumBalanceByUid (String uid, int quantumBalance) throws Exception{
+    public void LoginAddQuantumBalanceByUid (String uid, int quantumBalance) {
 
     }
 }

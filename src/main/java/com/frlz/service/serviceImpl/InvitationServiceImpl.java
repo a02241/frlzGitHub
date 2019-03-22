@@ -27,12 +27,12 @@ public class InvitationServiceImpl implements InvitationService {
     }
 
     @Override
-    public List<Invitation> selectInvatationByUid(String uid) throws Exception{
+    public List<Invitation> selectInvatationByUid(String uid) {
         return invitationMapper.selectInvatationByUid(uid);
     }
 
     @Override
-    public int findStateBycode(String code) throws Exception{
+    public int findStateBycode(String code){
         int result = 0;//默认为0，没有该邀请码
         Invitation invitation =invitationMapper.findStateBycode(code);
         if (invitation!=null){
@@ -48,12 +48,12 @@ public class InvitationServiceImpl implements InvitationService {
     }
 
     @Override
-    public void insertInviteCode(String code) throws Exception{
+    public void insertInviteCode(String code) {
         invitationMapper.insertInviteCode(code);
     }
 
     @Override
-    public void updateInviteState(String code,String uid) throws Exception{
+    public void updateInviteState(String code,String uid){
         invitationMapper.updateInviteState(code,uid);
     }
 

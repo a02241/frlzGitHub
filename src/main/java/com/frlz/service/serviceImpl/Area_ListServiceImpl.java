@@ -24,22 +24,22 @@ public class Area_ListServiceImpl implements Area_ListService {
     }
 
     @Override
-    public String selectCode(String name) throws Exception{
+    public String selectCode(String name) {
         return area_listMapper.selectCode(name);
     }
 
     @Override
-    public List<Area_List> selectAll() throws Exception{
+    public List<Area_List> selectAll() {
         return area_listMapper.selectAll();
     }
 
     @Override
-    public List<Area_List> selectName(String name) throws Exception{
+    public List<Area_List> selectName(String name) {
         return area_listMapper.selectName(name);
     }
 
     @Override
-    public String selectRealName(String realcode) throws Exception{
+    public String selectRealName(String realcode) {
         return area_listMapper.selectRealName(realcode);
     }
 }
