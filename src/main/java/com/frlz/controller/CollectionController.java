@@ -19,7 +19,7 @@ public class CollectionController {
     }
 
     @PostMapping("/addCollection")
-    public R addCollection(Collection collection){
+    public R addCollection(Collection collection){//collection只需传uid，blogId这两个值
         collectionService.addCollection(collection);
         return R.isOk();
     }
