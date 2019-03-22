@@ -15,6 +15,9 @@ public interface UserMapper {
     @Select("select * from user where uid = #{uid} limit 1")
     User selectByUid(String uid);
 
+    @Select("select username from user where uid = #{uid} limit 1")
+    String selectUsernameByUid(String uid);
+
     @Select("select count(*) from user where phonenumber = #{phonenumber}")
     int checkPhonenumber(String phonenumber);
 
