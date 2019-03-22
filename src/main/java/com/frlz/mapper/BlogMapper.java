@@ -41,6 +41,9 @@ public interface BlogMapper {
             " </script> ")
     public Blog findBlog(Blog blog);
 
+    @Select("select * from blog where blogId = #{blogId}")
+    Blog selectBlogByBlogId(String blogId);
+
     @Select("select * from blog where DATE_FORMAT(time, '%Y-%m-%d') = #{date}")
     List<Blog> selectBlogByDate(String date);
 

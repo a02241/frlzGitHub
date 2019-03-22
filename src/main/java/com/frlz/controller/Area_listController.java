@@ -31,23 +31,6 @@ public class Area_listController{
         this.quizService = quizService;
     }
 
-    @PostMapping("selectName")
-    /**
-     * 搜索股票
-     * @title selectName
-     * @author cz
-     * @date 2019/3/2 10:56
-     * @param name
-     * @Description: TODO 根据股票名或者股票代码模糊搜索前5条信息
-     *                  返回
-     * @return java.util.List<com.frlz.pojo.Area_List>
-     * @throws 
-     */
-    
-    public R<List> selectName (@Param("name")String name) throws Exception {
-        return R.isOk().data(area_ListService.selectName(name));
-    }
-
     @RequestMapping("selectAllShares")
     public R<List> selectAllShares (@Param("name")String name) throws Exception {
         return R.isOk().data(area_ListService.selectAll());

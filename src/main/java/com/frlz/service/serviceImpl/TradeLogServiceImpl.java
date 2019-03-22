@@ -31,6 +31,7 @@ public class TradeLogServiceImpl implements TradeLogService {
         tradeLog.setTradeQuantum(tradeQuantum);
         tradeLog.setTradeBlock(tradeBlock);
         tradeLog.setTradeMagicCube(tradeMagicCube);
+        tradeLog.setRemarks(remarks);
         tradeLogMapper.insertTradeLog(tradeLog);
     }
 
