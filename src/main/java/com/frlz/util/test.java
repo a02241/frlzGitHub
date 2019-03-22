@@ -12,5 +12,7 @@ import com.frlz.pojo.User;
 
 public class  test {
     public static void main(String[] args) {
+        System.out.println(DateTime.getBeforeTwoYearTimeToString());
+
     }
 }

@@ -9,8 +9,8 @@ import java.util.List;
 public interface SharesMapper {
 
     @SelectProvider(type = Provider.class,method = "queryShares")
-    List<Shares> selectShares(String code);
+    List<Shares> selectShares(String code ,String before ,String end);
 
     @SelectProvider(type = Provider.class,method = "querySharesCount")
-    int selectCount(String code);
+    int selectCount(String code ,String before ,String end);
 }
