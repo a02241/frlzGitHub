@@ -7,7 +7,6 @@ import com.frlz.util.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -329,11 +328,12 @@ public class UserController extends Cors {
             if (!"".equals(signature)){
                 userService.changeSignature(signature,uid);
             }
-                userService.updateUser(user);
+            userService.updateUser(user);
+            return R.isOk().msg("success");
         }else {
             return R.isFail().msg("false");
         }
-        return R.isOk().msg("success");
+
     }
 
     @PostMapping("updatePassword")
