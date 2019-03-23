@@ -287,7 +287,7 @@ public class UserController extends Cors {
 
     public R<String> updateUser(String uid,
                                 @RequestParam(defaultValue="")String username, @RequestParam(defaultValue="")String phonenumber, @RequestParam(defaultValue="")String email,
-                                @RequestParam(defaultValue="0")int investmentage, @RequestParam(defaultValue="")String profile, @RequestParam(defaultValue="")String profession,
+                                @RequestParam(defaultValue="0")int investmentage, @RequestParam(defaultValue="")String profession,
                                 @RequestParam(defaultValue="")String residence, @RequestParam(defaultValue="")String province, @RequestParam(defaultValue="")String city,
                                 @RequestParam(defaultValue = "")String signature)  {
         User user = userService.selectByUid(uid);
@@ -311,9 +311,6 @@ public class UserController extends Cors {
             }
             if (investmentage != 0) {
                 user.setInvestmentage(investmentage);
-            }
-            if (!"".equals(profile)) {
-                user.setProfile(profile);
             }
             if (!"".equals(profession)) {
                 user.setProfession(profession);
