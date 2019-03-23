@@ -15,6 +15,9 @@ public interface UserMapper {
     @Select("select * from user where uid = #{uid} limit 1")
     User selectByUid(String uid);
 
+    @Select("select count(*) from user where uid = #{uid} limit 1")
+    int selectByUidIsture(String uid);
+
     @Select("select username from user where uid = #{uid} limit 1")
     String selectUsernameByUid(String uid);
 
@@ -120,5 +123,8 @@ public interface UserMapper {
     void deleteByUid(String uid);
 
     @Update("update user set signature = #{signature} where uid = #{uid}")
-    void updateSignature(String signature,String user);
+    void updateSignature(String signature,String uid);
+
+    @Update("update user set profile = #{profile} where uid = #{uid}")
+    void updateProfile(String profile,String uid);
 }

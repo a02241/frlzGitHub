@@ -7,11 +7,13 @@ import com.frlz.util.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
@@ -451,5 +453,14 @@ public class UserController extends Cors {
             return R.isFail().msg("false");
         }
         return R.isOk().msg("success");
+    }
+
+    @PostMapping("changeProfile")
+    public R<String> changeProfile(String profile, @Valid String uid){
+        String result = userService.updateProfile(profile,uid);
+        if (result.equals("false")){
+            return R.isFail().msg("uid错误");
+        }
+        return  R.isOk().msg("更新成功");
     }
 }

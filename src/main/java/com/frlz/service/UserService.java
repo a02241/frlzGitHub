@@ -45,6 +45,8 @@ public interface UserService {
 
 	void updateInterestNumberReduce(String uid);
 
+	String updateProfile(String profile,String uid);
+
 	public String  checkPasswordByUId(String uid);
 
 	public void deleteUserByUid(String uid);

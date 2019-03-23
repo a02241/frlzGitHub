@@ -177,6 +177,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public String updateProfile(String profile, String uid) {
+        int count =userMapper.selectByUidIsture(uid);
+        if (count==0){
+            return "false";
+        }
+            userMapper.updateProfile(profile, uid);
+            return "true";
+    }
+
+    @Override
     public String checkPasswordByUId(String uid) {
         return userMapper.checkPasswordByUId(uid);
     }
