@@ -56,7 +56,8 @@ public interface UserMapper {
             "registTime," +
             "experience," +
             "fansNumber," +
-            "interestNumber )" +
+            "interestNumber," +
+            "signature )" +
             " values( #{uid}, " +
             "#{phonenumber}, " +
             "#{username}, " +
@@ -72,7 +73,7 @@ public interface UserMapper {
             "#{registTime}, " +
             "#{experience}, " +
             "#{fansNumber}," +
-            "#{interestNumber})")
+            "#{interestNumber},'快来添加你的个性签名吧！')")
     void registSave(User user);
 
     @Update("update user set icon = #{icon} where username = #{username}")
@@ -114,4 +115,7 @@ public interface UserMapper {
 
     @Delete("delete from user where uid = #{uid}")
     void deleteByUid(String uid);
+
+    @Update("update user set signature = #{signature} where uid = #{uid}")
+    void updateSignature(String signature,String user);
 }

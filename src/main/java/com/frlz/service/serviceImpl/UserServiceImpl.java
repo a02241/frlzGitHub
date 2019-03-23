@@ -185,4 +185,9 @@ public class UserServiceImpl implements UserService {
     public void deleteUserByUid(String uid) {
         userMapper.deleteByUid(uid);
     }
+
+    @Override
+    public void changeSignature(String signature, String uid) {
+        userMapper.updateSignature(signature,uid);
+    }
 }

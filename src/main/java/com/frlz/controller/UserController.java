@@ -7,8 +7,10 @@ import com.frlz.util.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
@@ -74,7 +76,7 @@ public class UserController extends Cors {
      * @return void
      * @throws 
      */
-    public  R<Object> check(User user , HttpServletResponse response,@RequestParam(defaultValue = "0")String sentCode, @RequestParam(defaultValue = "9")String checkCode,@RequestParam(defaultValue = "")String code){
+    public  R<Object> check(User user ,@RequestParam(defaultValue = "0")String sentCode, @RequestParam(defaultValue = "9")String checkCode,@RequestParam(defaultValue = "")String code){
         String check = userService.check(user);
         if(!sentCode.equals(checkCode)) {
             return R.isFail().data("4");
@@ -375,20 +377,21 @@ public class UserController extends Cors {
     public R<HashMap<String,Object>> seeInformation(String uid)  {
         User user = userService.selectByUid(uid);
         if(user != null){
-        HashMap<String,Object> map = new HashMap<>();
-        map.put("username",user.getUsername());
-        map.put("phonenumber",user.getPhonenumber());
-        map.put("email",user.getEmail());
-        map.put("icon",user.getIcon());
-        map.put("investmentage",user.getInvestmentage());
-        map.put("profile",user.getProfile());
-        map.put("profession",user.getProfession());
-        map.put("residence",user.getResidence());
-        map.put("privacy",user.getPrivacy());
-        map.put("province",user.getProvince());
-        map.put("city",user.getCity());
-        map.put("registtime",user.getRegistTime());
-        map.put("experience", String.valueOf(user.getExperience()));
+            HashMap<String,Object> map = new HashMap<>();
+            map.put("username",user.getUsername());
+            map.put("phonenumber",user.getPhonenumber());
+            map.put("email",user.getEmail());
+            map.put("icon",user.getIcon());
+            map.put("investmentage",user.getInvestmentage());
+            map.put("profile",user.getProfile());
+            map.put("profession",user.getProfession());
+            map.put("residence",user.getResidence());
+            map.put("privacy",user.getPrivacy());
+            map.put("province",user.getProvince());
+            map.put("city",user.getCity());
+            map.put("registtime",user.getRegistTime());
+            map.put("experience", String.valueOf(user.getExperience()));
+            map.put("signature",user.getSignature());
         return R.isOk().data(map);
         }else {
             return R.isFail().data("false");
@@ -450,5 +453,11 @@ public class UserController extends Cors {
             return R.isFail().msg("false");
         }
         return R.isOk().msg("success");
+    }
+
+    @PostMapping("/changeSignature")
+    public R changeSignature(String signature,String uid){
+        userService.changeSignature(signature,uid);
+        return R.isOk().data(signature).msg("修改成功");
     }
 }

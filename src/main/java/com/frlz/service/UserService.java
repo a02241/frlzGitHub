@@ -48,4 +48,6 @@ public interface UserService {
 	public String  checkPasswordByUId(String uid);
 
 	public void deleteUserByUid(String uid);
+
+	void changeSignature(String signature,String uid);
 }
