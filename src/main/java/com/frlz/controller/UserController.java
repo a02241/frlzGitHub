@@ -7,10 +7,7 @@ import com.frlz.util.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
@@ -289,9 +286,10 @@ public class UserController extends Cors {
      */
 
     public R<String> updateUser(String uid,
-                             @RequestParam(defaultValue="")String username,@RequestParam(defaultValue="")String phonenumber,@RequestParam(defaultValue="")String email,
-                             @RequestParam(defaultValue="0")int investmentage,@RequestParam(defaultValue="")String profile,@RequestParam(defaultValue="")String profession,
-                             @RequestParam(defaultValue="")String residence,@RequestParam(defaultValue="")String province,@RequestParam(defaultValue="")String city)  {
+                                @RequestParam(defaultValue="")String username, @RequestParam(defaultValue="")String phonenumber, @RequestParam(defaultValue="")String email,
+                                @RequestParam(defaultValue="0")int investmentage, @RequestParam(defaultValue="")String profile, @RequestParam(defaultValue="")String profession,
+                                @RequestParam(defaultValue="")String residence, @RequestParam(defaultValue="")String province, @RequestParam(defaultValue="")String city,
+                                @RequestParam(defaultValue = "")String signature)  {
         User user = userService.selectByUid(uid);
         if(user != null) {
             if (username.trim().length() > 0) {
@@ -328,6 +326,9 @@ public class UserController extends Cors {
             }
             if (!"".equals(city)) {
                 user.setCity(city);
+            }
+            if (!"".equals(signature)){
+                userService.changeSignature(signature,uid);
             }
                 userService.updateUser(user);
         }else {
@@ -453,11 +454,5 @@ public class UserController extends Cors {
             return R.isFail().msg("false");
         }
         return R.isOk().msg("success");
-    }
-
-    @PostMapping("/changeSignature")
-    public R changeSignature(String signature,String uid){
-        userService.changeSignature(signature,uid);
-        return R.isOk().data(signature).msg("修改成功");
     }
 }
