@@ -7,10 +7,12 @@ import com.frlz.util.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.File;
@@ -286,7 +288,7 @@ public class UserController extends Cors {
         User user = userService.selectByUid(uid);
         if(user != null) {
             if (username.trim().length() > 0) {
-                Balance balance = balance = balanceService.selectFromBanlanceByUid(user.getUid());
+                Balance balance = balanceService.selectFromBanlanceByUid(user.getUid());
                 if (balance.getQuantumBalance() > 10) {
                     user.setUsername(username);
                         balanceService.updateQuantumBalanceByUid(user.getUid(), balance.getQuantumBalance() - 10);
@@ -325,7 +327,6 @@ public class UserController extends Cors {
         }else {
             return R.isFail().msg("false");
         }
-
     }
 
     @PostMapping("updatePassword")
