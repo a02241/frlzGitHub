@@ -3,10 +3,13 @@ package com.frlz.controller;
 import com.frlz.pojo.Replys;
 import com.frlz.service.ReplysService;
 import com.frlz.util.R;
+import com.frlz.utilPojo.UtilReplys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.HashMap;
 
 /**
  * @program: frlz
@@ -23,6 +26,14 @@ public class ReplysController {
     @Autowired
     public ReplysController(ReplysService replysService){
         this.replysService = replysService;
+    }
+
+
+    @PostMapping("showAllRelysByCId")
+    public R<HashMap<String,Object>> showAllRelysByCId(String cId){
+        HashMap<String,Object> map = new HashMap<>();
+        map.put("replys",replysService.selectRelysAllByCId(cId));
+        return R.isOk().data(map);
     }
 
     @PostMapping("addReplys")

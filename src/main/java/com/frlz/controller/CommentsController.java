@@ -5,9 +5,11 @@ import com.frlz.pojo.Comments;
 import com.frlz.pojo.User;
 import com.frlz.service.BlogService;
 import com.frlz.service.CommentsService;
+import com.frlz.service.ReplysService;
 import com.frlz.service.UserService;
 import com.frlz.util.DateTime;
 import com.frlz.util.R;
+import com.frlz.utilPojo.UtilReplys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestControllerAdvice
@@ -26,12 +29,14 @@ public class CommentsController {
     private final CommentsService commentsService;
     private final BlogService blogService;
     private final UserService userService;
+    private final ReplysService replysService;
 
     @Autowired
-    public CommentsController(CommentsService commentsService,BlogService blogService,UserService userService){
+    public CommentsController(CommentsService commentsService, BlogService blogService, UserService userService, ReplysService replysService){
         this.commentsService = commentsService;
         this.blogService = blogService;
         this.userService = userService;
+        this.replysService = replysService;
     }
 
     @PostMapping("findBlog")
@@ -70,7 +75,12 @@ public class CommentsController {
         }else {
             return R.isFail().msg("blogId为空");
         }
-        map.put("comments", commentsService.findComments(conditions, 12, pageCode));//conditions-->>map存放数据,pageCode-->>分页条数,从第几个开始
+        List<Comments> comments =commentsService.findComments(conditions, 12, pageCode);
+        for (int i = 0 ;i < comments.size() ; i++){
+            comments.get(i).setUtilReplys(replysService.selectRelysByCId(comments.get(i).getCId()));
+            System.out.println(comments.get(i).getCId());
+        }
+        map.put("comments", comments);//conditions-->>map存放数据,pageCode-->>分页条数,从第几个开始
         map.put("username", username);
         return R.isOk().data(map);
     }
@@ -125,7 +135,7 @@ public class CommentsController {
      */
 
     public R<HashMap<String,Object>> deleteComment(Comments comments){
-        commentsService.deleteComment(comments.getcId());
+        commentsService.deleteComment(comments.getCId());
         return R.isOk().data("success");
     }
 }
