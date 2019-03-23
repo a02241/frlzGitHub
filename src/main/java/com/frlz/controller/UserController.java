@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
@@ -123,7 +122,7 @@ public class UserController extends Cors {
      * @throws
      */
 
-    public R<HashMap<String,String>> userLogin(String username, String password, @RequestParam(defaultValue = "")String isRember, HttpServletResponse resp) {
+    public R<HashMap<String,String>> userLogin(String username, String password) {
         HashMap<String,String> map = new HashMap<>();
         String data;
         User user;
@@ -179,7 +178,7 @@ public class UserController extends Cors {
      * @throws
      */
 
-    public R<String> emailCode(String email, HttpServletResponse response){
+    public R<String> emailCode(String email){
         System.out.println("发送邮件");
         String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";//验证码筛选
         StringBuilder sb = new StringBuilder(4);
