@@ -15,7 +15,7 @@ public class User {
 	private String email;//邮箱 
 	private String icon;//头像
 	private int investmentage;//投资年龄 
-	private String profile;//个人简介 
+	private String profile;//头衔
 	private String profession;//职业 
 	private String residence;//居住地 
 	private int privacy;//隐私识别码 
