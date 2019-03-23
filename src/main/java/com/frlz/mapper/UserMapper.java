@@ -68,7 +68,7 @@ public interface UserMapper {
             "#{email}, " +
             "#{icon}, " +
             "#{investmentage}, " +
-            "#'普通用户', " +
+            "'普通用户', " +
             "#{profession}, " +
             "#{residence}, " +
             "#{privacy}, " +
