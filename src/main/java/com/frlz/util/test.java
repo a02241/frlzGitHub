@@ -1,8 +1,6 @@
 package com.frlz.util;
 
 
-import com.frlz.pojo.User;
-
 /**
  * @program: frlz
  * @description: 测试
@@ -13,6 +11,5 @@ import com.frlz.pojo.User;
 public class  test {
     public static void main(String[] args) {
         System.out.println(DateTime.getBeforeTwoYearTimeToString());
-
     }
 }
