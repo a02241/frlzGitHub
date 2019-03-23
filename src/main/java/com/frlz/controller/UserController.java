@@ -129,14 +129,6 @@ public class UserController extends Cors {
             if (user != null) {
                 if (user.getPassword().equals(MD5.MD5Encode("fr2018<%" + password  + "%>lz1220"))) {
                     data = "1";//密码相同返回1
-                    if("1".equals(isRember)){//10天免登陆
-                        Cookie cookieName = new Cookie("Myusermane", user.getUsername());
-                        Cookie cookiePass = new Cookie("Mypassword", user.getPassword());
-                        cookieName.setMaxAge(10*24*3600);
-                        cookiePass.setMaxAge(10*24*3600);
-                        resp.addCookie(cookieName);
-                        resp.addCookie(cookiePass);
-                    }
                     String format = DateTime.getNowTimeToString();
                     Date loginTime = loginLogService.getLatestLoginLog(user.getUid());
                     String lastestTime = DateTime.getTimeByDateToString(loginTime);
