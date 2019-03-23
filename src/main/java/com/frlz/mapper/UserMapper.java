@@ -85,7 +85,6 @@ public interface UserMapper {
     @Update("update user set username = #{username}, " +
             "phonenumber = #{phonenumber}, " +
             "email =#{email}, " +
-            "profile = #{profile}, " +
             "profession = #{profession}, " +
             "residence = #{residence}, " +
             "investmentage = #{investmentage} ," +
