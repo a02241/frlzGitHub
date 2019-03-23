@@ -1,6 +1,7 @@
 package com.frlz.mapper;
 
 import com.frlz.pojo.Blog;
+import com.frlz.utilPojo.UitlBlog;
 import org.apache.ibatis.annotations.*;
 
 import java.util.Date;
@@ -18,20 +19,24 @@ public interface BlogMapper {
     public int findAllCountLike(Map<String,Object> map);
 
     @Select("<script> " +
-            "select blogId,time,likes,title,summary,message,commentsNumber,forwordNumber,readNumber from blog where uid=#{uid}" +
+            "select uid,blogId,time,likes,title,summary,message,commentsNumber,forwordNumber,readNumber from blog where uid=#{uid}" +
             " order by time desc limit ${(pageCode-1)*pageSize},${pageSize} "+
             " </script> ")
-    /*@Results({
-            @Result(property = "user", column = "uid",
-                    many = @Many(select = "com.frlz.mapper.UserMapper.searchUserById"))
-    })*/
-    public List<Blog> find(Map<String,Object> map);
+    @Results({
+            @Result(property = "username", column = "uid",
+                    many = @Many(select = "com.frlz.mapper.UserMapper.selectUsernameByUid"))
+    })
+    public List<UitlBlog> find(Map<String,Object> map);
 
     @Select("<script> " +
-            "select blogId,time,likes,title,summary,message,commentsNumber,forwordNumber,readNumber from blog" +
+            "select uid,blogId,time,likes,title,summary,message,commentsNumber,forwordNumber,readNumber from blog" +
             " order by weight desc limit ${(pageCode-1)*pageSize},${pageSize} "+
             " </script> ")
-    public List<Blog> findChoice(Map<String,Object> map);
+    @Results({
+            @Result(property = "username", column = "uid",
+                    many = @Many(select = "com.frlz.mapper.UserMapper.selectUsernameByUid"))
+    })
+    public List<UitlBlog> findChoice(Map<String,Object> map);
 
     @Select("<script> " +
             "select * from blog" +

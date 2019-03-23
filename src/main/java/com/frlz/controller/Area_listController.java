@@ -23,21 +23,15 @@ import java.util.List;
 public class Area_listController{
 
     private final Area_ListService area_ListService;
-    private final QuizService quizService;
 
     @Autowired
-    public Area_listController(Area_ListService area_ListService,QuizService quizService){
+    public Area_listController(Area_ListService area_ListService){
         this.area_ListService = area_ListService;
-        this.quizService = quizService;
     }
 
     @RequestMapping("selectAllShares")
-    public R<List> selectAllShares (@Param("name")String name) throws Exception {
+    public R<List> selectAllShares (@Param("name")String name){
         return R.isOk().data(area_ListService.selectAll());
     }
 
-    @PostMapping("startQuiz")
-    public R<List> startQuiz(){
-        return R.isOk().data(quizService.getAllQuestion());
-    }
 }

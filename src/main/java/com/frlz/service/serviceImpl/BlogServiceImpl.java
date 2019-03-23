@@ -5,15 +5,13 @@ import com.frlz.pojo.Blog;
 import com.frlz.service.BlogService;
 import com.frlz.util.DateTime;
 import com.frlz.util.PageBean;
+import com.frlz.utilPojo.UitlBlog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @program: frlz
@@ -70,7 +68,7 @@ public class BlogServiceImpl implements BlogService {
         pb.setPageCode(pageCode);
         conditions.put("pageSize", 12);
         conditions.put("pageCode", pageCode);
-        List<Blog> blogs = null;
+        List<UitlBlog> blogs = null;
         if (choice == 1){
             blogs = blogMapper.find(conditions);
         }else if (choice == 2){
