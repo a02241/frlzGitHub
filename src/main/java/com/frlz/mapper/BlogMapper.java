@@ -4,7 +4,6 @@ import com.frlz.pojo.Blog;
 import com.frlz.utilPojo.UitlBlog;
 import org.apache.ibatis.annotations.*;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -49,14 +48,8 @@ public interface BlogMapper {
     @Select("select * from blog where blogId = #{blogId}")
     Blog selectBlogByBlogId(String blogId);
 
-    @Select("select * from blog where DATE_FORMAT(time, '%Y-%m-%d') = #{date}")
-    List<Blog> selectBlogByDate(String date);
-
     @Select("select count(*) from blog where DATE_FORMAT(time, '%Y-%m-%d') = #{date} and uid = #{uid}")
     int selectBlogCountByDateAndUid(String date,String uid);
-
-    @Select("select max(time) from blog where uid = #{uid}")
-    Date selectLatestBlogTime(String uid);
 
     @Select("select * from blog order by time desc limit #{a},20")
     List<Blog> selectFiftyBlog(int a);
