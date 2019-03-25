@@ -26,7 +26,7 @@ public interface BlogService {
 
     public int insertBlog(Blog blog, String uid);
 
-    public void updateLikesCount(int likes,String blogId);
+    public void updateLikesCount(String blogId);
 
     public List<Blog> selectFiftyBlog(int a);
 

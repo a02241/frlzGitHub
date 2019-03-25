@@ -110,7 +110,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public void updateLikesCount(int likes, String blogId) {
+    public void updateLikesCount(String blogId) {
         blogMapper.updateLikesCount(blogId);
     }
 

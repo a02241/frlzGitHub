@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 @RestController
 public class ShorthandTagController {
-    @Autowired
+
     private ShorthandTagService shorthandTagService;
+    @Autowired
+    public ShorthandTagController(ShorthandTagService shorthandTagService){
+        this.shorthandTagService = shorthandTagService;
+    }
+
 }
