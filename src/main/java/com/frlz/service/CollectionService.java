@@ -13,4 +13,6 @@ public interface CollectionService {
     List<Blog> getCollectBlog(String uid);
 
     List<User> getCollectUser(String blogId);
+
+    void deleteCollection(String uid,String blogId);
 }

@@ -24,6 +24,12 @@ public class CollectionController {
         return R.isOk();
     }
 
+    @PostMapping("/deleteCollection")
+    public R deleteCollection(String uid,String blogId){
+        collectionService.deleteCollection(uid,blogId);
+        return R.isOk();
+    }
+
     @PostMapping("/getCollectBlog")
     public R<Blog> getCollectBlog(String uid){
         return R.isOk().data(collectionService.getCollectBlog(uid));//根据uid获取用户已收藏的博客,最新的收藏在第一位
