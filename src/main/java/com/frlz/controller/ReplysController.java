@@ -30,6 +30,18 @@ public class ReplysController {
 
 
     @PostMapping("showAllRelysByCId")
+    /**
+     * 根据cId获取该评论的所有回复
+     * @title showAllRelysByCId
+     * @create by: cz
+     * @description: TODO 必填参数cId
+     * @create time: 2019/3/25 10:23
+     * @Param: cId
+     * @throws
+     * @return com.frlz.util.R<java.util.HashMap<java.lang.String,java.lang.Object>>
+     * @version V1.0
+     */
+
     public R<HashMap<String,Object>> showAllRelysByCId(String cId){
         HashMap<String,Object> map = new HashMap<>();
         map.put("replys",replysService.selectRelysAllByCId(cId));

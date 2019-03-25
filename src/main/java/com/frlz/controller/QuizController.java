@@ -27,6 +27,18 @@ public class QuizController {
     }
 
     @PostMapping("startQuiz")
+    /**
+     * 
+     * @title startQuiz
+     * @create by: cz
+     * @description: TODO
+     * @create time: 2019/3/25 10:20
+     * @Param: 
+     * @throws 
+     * @return com.frlz.util.R<java.util.List>
+     * @version V1.0
+     */
+    
     public R<List> startQuiz(){
         return R.isOk().data(quizService.getAllQuestion());
     }
