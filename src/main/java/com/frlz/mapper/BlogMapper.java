@@ -16,7 +16,7 @@ public interface BlogMapper {
             " <if test=\"uid!=null and uid!=''\"> AND uid=#{uid}</if> " +
             " </where> " +
             " </script> ")
-    public int findAllCountLike(Map<String,Object> map);
+    int findAllCountLike(Map<String,Object> map);
 
     @Select("<script> " +
             "select uid,blogId,time,likes,title,summary,message,commentsNumber,forwordNumber,readNumber from blog where uid=#{uid}" +
@@ -26,7 +26,7 @@ public interface BlogMapper {
             @Result(property = "username", column = "uid",
                     many = @Many(select = "com.frlz.mapper.UserMapper.selectUsernameByUid"))
     })
-    public List<UitlBlog> find(Map<String,Object> map);
+    List<UitlBlog> find(Map<String,Object> map);
 
     @Select("<script> " +
             "select uid,blogId,time,likes,title,summary,message,commentsNumber,forwordNumber,readNumber from blog" +
@@ -36,7 +36,7 @@ public interface BlogMapper {
             @Result(property = "username", column = "uid",
                     many = @Many(select = "com.frlz.mapper.UserMapper.selectUsernameByUid"))
     })
-    public List<UitlBlog> findChoice(Map<String,Object> map);
+    List<UitlBlog> findChoice(Map<String,Object> map);
 
     @Select("<script> " +
             "select * from blog" +
@@ -44,7 +44,7 @@ public interface BlogMapper {
             " <if test=\"blogId!=null and blogId!=''\"> AND blogId = '${blogId}'</if> " +
             " </where> " +
             " </script> ")
-    public Blog findBlog(Blog blog);
+    Blog findBlog(Blog blog);
 
     @Select("select * from blog where blogId = #{blogId}")
     Blog selectBlogByBlogId(String blogId);
