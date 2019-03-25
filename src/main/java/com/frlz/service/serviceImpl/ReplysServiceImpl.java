@@ -1,14 +1,18 @@
 package com.frlz.service.serviceImpl;
 
 import com.frlz.mapper.ReplysMapper;
+import com.frlz.pojo.Comments;
 import com.frlz.pojo.Replys;
 import com.frlz.service.ReplysService;
+import com.frlz.utilPojo.UtilReplys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @program: frlz
@@ -39,5 +43,15 @@ public class ReplysServiceImpl implements ReplysService {
         }
 
         replysMapper.addReplys(replys);
+    }
+
+    @Override
+    public List<UtilReplys> selectRelysByCId(String cId) {
+        return replysMapper.selectReplysByCId(cId);
+    }
+
+    @Override
+    public List<UtilReplys> selectRelysAllByCId(String cId) {
+        return replysMapper.selectReplysAllByCId(cId);
     }
 }
