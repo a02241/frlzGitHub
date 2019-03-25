@@ -115,6 +115,12 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    public void updateReduceLikesCount(String blogId) {
+        blogMapper.updateReduceLikesCount(blogId);
+    }
+
+
+    @Override
     public List<Blog> selectFiftyBlog(int a) {
         return blogMapper.selectFiftyBlog(a);
     }

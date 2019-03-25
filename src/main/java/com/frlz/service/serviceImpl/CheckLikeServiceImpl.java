@@ -18,10 +18,10 @@ public class CheckLikeServiceImpl implements CheckLikeService {
     }
 
     @Override
-    public void insertIntoCheckLike(Blog blog, String uid) {
+    public void insertIntoCheckLike(String blogId, String uid) {
 
         CheckLike checkLike = new CheckLike();
-        checkLike.setBlogId(blog.getBlogId());
+        checkLike.setBlogId(blogId);
         checkLike.setUid(uid);
         checkLike.setState(true);
         checkLikeMapper.insertIntoCheckLike(checkLike);

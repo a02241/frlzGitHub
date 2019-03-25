@@ -28,6 +28,8 @@ public interface BlogService {
 
     public void updateLikesCount(String blogId);
 
+    void updateReduceLikesCount(String blogId);
+
     public List<Blog> selectFiftyBlog(int a);
 
     public void updateBlogByBlogId(String blogId,int choice);
