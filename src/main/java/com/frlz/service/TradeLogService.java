@@ -1,7 +1,5 @@
 package com.frlz.service;
 
-import com.frlz.pojo.TradeLog;
-
 public interface TradeLogService {
     void insertTradeLog(String balanceId,int tradeQuantum,int tradeBlock,int tradeMagicCube,String remarks);
 

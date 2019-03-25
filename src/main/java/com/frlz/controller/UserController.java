@@ -441,7 +441,7 @@ public class UserController extends Cors {
             tag = false;
         }
         if(tag) {
-                userService.updateEmail(uid, email);
+            userService.updateEmail(uid, email);
             balanceUtil.addQuantumBalance(uid,5,"绑定邮箱增加5个量子");//增加5个量子
         }else {
             return R.isFail().msg("false");

@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 @RestController
 public class ShorthandPhotoController {
-    @Autowired
+
     private ShorthandPhotoService shorthandPhotoService;
+    @Autowired
+    public ShorthandPhotoController(ShorthandPhotoService shorthandPhotoService){
+        this.shorthandPhotoService = shorthandPhotoService;
+    }
 }

@@ -41,13 +41,13 @@ public class CheckLikeController {
     public R<String> clickLike(Blog blog, String uid){
         if (null == checkLikeService.selectFromCheckLike(blog.getBlogId(),uid)) {
             Blog blog2 = blogService.getBlog(blog);
-            blogService.updateLikesCount(blog2.getLikes() + 1,blog.getBlogId());
+            blogService.updateLikesCount(blog.getBlogId());
             checkLikeService.insertIntoCheckLike(blog,uid);
             return R.isOk().msg("+1");
         }else {
             checkLikeService.deleteFromCheckLike(checkLikeService.selectFromCheckLike(blog.getBlogId(),uid).getLikeId());
             Blog blog2 = blogService.getBlog(blog);
-            blogService.updateLikesCount(blog2.getLikes() - 1,blog.getBlogId());
+            blogService.updateLikesCount(blog.getBlogId());
             return R.isOk().msg("-1");
         }
     }
