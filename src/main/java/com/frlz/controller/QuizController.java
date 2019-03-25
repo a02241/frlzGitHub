@@ -1,6 +1,6 @@
 package com.frlz.controller;
 
-import com.frlz.service.Area_ListService;
+import com.frlz.pojo.Quiz;
 import com.frlz.service.QuizService;
 import com.frlz.util.R;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,6 +29,16 @@ public class QuizController {
 
     @PostMapping("startQuiz")
     public R<List> startQuiz(){
-        return R.isOk().data(quizService.getAllQuestion());
+        List<Quiz> quizList = quizService.getAllQuestion();
+        List<String> questionList = new ArrayList<>();
+        for (Quiz q : quizList){
+            questionList.add(q.getQuestion());
+        }
+        return R.isOk().data(questionList);
+    }
+
+    @PostMapping("checkAnswer")//传入大写ABCD的答案字符串，返回int答对的题数
+    public R<Integer> checkAnswer(String answer){
+        return R.isOk().data(quizService.checkAnswer(answer));
     }
 }

@@ -6,6 +6,9 @@ import com.frlz.service.SecretService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @program: frlz
  * @description: 密保接口实现类
@@ -31,8 +34,13 @@ public class SecretServiceImpl implements SecretService {
     }
 
     @Override
-    public Secret selectFromSecret(String uid) {
-        return secretMapper.selectFromSecret(uid);
+    public Map<String,String> selectFromSecret(String uid) {
+        Secret secret = secretMapper.selectFromSecret(uid);
+        Map<String,String> secretMap = new HashMap<>();
+        secretMap.put("questionOne",secret.getQuestionOne());
+        secretMap.put("questionTwo",secret.getQuestionTwo());
+        secretMap.put("questionThree",secret.getQuestionThree());
+        return secretMap;
     }
 
     @Override
@@ -51,5 +59,21 @@ public class SecretServiceImpl implements SecretService {
             secret.setAnswerThree(secretOld.getAnswerThree());
         }
         secretMapper.updateSecret(secret);
+    }
+
+    @Override
+    public int checkSecret(String uid,String answer1,String answer2,String answer3) {
+        Secret secret = secretMapper.selectFromSecret(uid);
+        int n = 0;
+        if (answer1.equals(secret.getAnswerOne())){
+            n += 1;
+        }
+        if (answer2.equals(secret.getAnswerTwo())){
+            n += 10;
+        }
+        if (answer3.equals(secret.getAnswerThree())){
+            n += 100;
+        }
+        return n;
     }
 }

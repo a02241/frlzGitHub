@@ -9,4 +9,6 @@ public interface QuizService {
     List<Quiz> getAllQuestion();
 
     void addQuestionToQuiz(Quiz quiz);
+
+    int checkAnswer(String answer);
 }
