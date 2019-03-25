@@ -33,9 +33,9 @@ public class QuizServiceImpl implements QuizService {
         char[] answerList = answer.toCharArray();
         List<Quiz> quizList = quizMapper.selectAll();
         int n = 0;
-        for (int i = 0,b = quizList.size();i < b;i++){
-            if (AnswerChange.answer(quizList.get(i).getAnswer()).equals(answerList[i])){
-                n += 1;
+        for (int i = 0,b = answerList.length;i < b;i++){
+            if (AnswerChange.answer(quizList.get(i).getAnswer()) == (answerList[i])){
+                n++;
             }
         }
         return n;

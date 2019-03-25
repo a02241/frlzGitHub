@@ -1,16 +1,16 @@
 package com.frlz.util;
 
 public class AnswerChange {
-    public static String answer(int a){
+    public static char answer(int a){
         if (a == 1){
-            return "A";
+            return 'A';
         }
         if (a == 2){
-            return "B";
+            return 'B';
         }
         if (a == 3){
-            return "C";
+            return 'C';
         }
-        return "D";
+        return 'D';
     }
 }
