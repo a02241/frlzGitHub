@@ -18,9 +18,6 @@ public interface UserMapper {
     @Select("select count(*) from user where uid = #{uid} limit 1")
     int selectByUidIsture(String uid);
 
-    @Select("select username from user where uid = #{uid} limit 1")
-    String selectUsernameByUid(String uid);
-
     @Select("select count(*) from user where phonenumber = #{phonenumber}")
     int checkPhonenumber(String phonenumber);
 
@@ -32,9 +29,6 @@ public interface UserMapper {
 
     @Select("select * from user where username = #{username}")
     User selectUserByUsername(String username);
-
-    @Select("select * from user where uid = #{uid}")
-    User searchUserById(String uid);
 
     @Select("select username from user where email=#{email}")
     String searchUsernameByEmail(String email);

@@ -1,5 +1,6 @@
 package com.frlz.mapper;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
@@ -15,4 +16,7 @@ public interface CollectionMapper {
 
     @Select("select uid from collection where blogId = #{blogId} order by collectTime")
     List<String> selectFromCollectionByBlogId(String blogId);
+
+    @Delete("delete from collection where uid = #{uid} and blogId = #{blogId}")
+    void deleteCollection(String uid,String blogId);
 }

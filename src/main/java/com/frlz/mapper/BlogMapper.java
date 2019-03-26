@@ -4,7 +4,6 @@ import com.frlz.pojo.Blog;
 import com.frlz.utilPojo.UitlBlog;
 import org.apache.ibatis.annotations.*;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +15,7 @@ public interface BlogMapper {
             " <if test=\"uid!=null and uid!=''\"> AND uid=#{uid}</if> " +
             " </where> " +
             " </script> ")
-    public int findAllCountLike(Map<String,Object> map);
+    int findAllCountLike(Map<String,Object> map);
 
     @Select("<script> " +
             "select uid,blogId,time,likes,title,summary,message,commentsNumber,forwordNumber,readNumber from blog where uid=#{uid}" +
@@ -24,9 +23,9 @@ public interface BlogMapper {
             " </script> ")
     @Results({
             @Result(property = "username", column = "uid",
-                    many = @Many(select = "com.frlz.mapper.UserMapper.selectUsernameByUid"))
+                    many = @Many(select = "com.frlz.mapper.UserMapper.searchUsernameById"))
     })
-    public List<UitlBlog> find(Map<String,Object> map);
+    List<UitlBlog> find(Map<String,Object> map);
 
     @Select("<script> " +
             "select uid,blogId,time,likes,title,summary,message,commentsNumber,forwordNumber,readNumber from blog" +
@@ -36,7 +35,7 @@ public interface BlogMapper {
             @Result(property = "username", column = "uid",
                     many = @Many(select = "com.frlz.mapper.UserMapper.selectUsernameByUid"))
     })
-    public List<UitlBlog> findChoice(Map<String,Object> map);
+    List<UitlBlog> findChoice(Map<String,Object> map);
 
     @Select("<script> " +
             "select * from blog" +
@@ -44,19 +43,13 @@ public interface BlogMapper {
             " <if test=\"blogId!=null and blogId!=''\"> AND blogId = '${blogId}'</if> " +
             " </where> " +
             " </script> ")
-    public Blog findBlog(Blog blog);
+    Blog findBlog(Blog blog);
 
     @Select("select * from blog where blogId = #{blogId}")
     Blog selectBlogByBlogId(String blogId);
 
-    @Select("select * from blog where DATE_FORMAT(time, '%Y-%m-%d') = #{date}")
-    List<Blog> selectBlogByDate(String date);
-
     @Select("select count(*) from blog where DATE_FORMAT(time, '%Y-%m-%d') = #{date} and uid = #{uid}")
     int selectBlogCountByDateAndUid(String date,String uid);
-
-    @Select("select max(time) from blog where uid = #{uid}")
-    Date selectLatestBlogTime(String uid);
 
     @Select("select * from blog order by time desc limit #{a},20")
     List<Blog> selectFiftyBlog(int a);

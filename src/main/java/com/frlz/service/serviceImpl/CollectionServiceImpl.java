@@ -50,4 +50,9 @@ public class CollectionServiceImpl implements CollectionService {
         }
         return userList;
     }
+
+    @Override
+    public void deleteCollection(String uid, String blogId) {
+        collectionMapper.deleteCollection(uid,blogId);
+    }
 }

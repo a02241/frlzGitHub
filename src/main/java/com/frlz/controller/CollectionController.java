@@ -36,6 +36,12 @@ public class CollectionController {
         return R.isOk();
     }
 
+    @PostMapping("/deleteCollection")
+    public R deleteCollection(String uid,String blogId){
+        collectionService.deleteCollection(uid,blogId);
+        return R.isOk();
+    }
+
     @PostMapping("/getCollectBlog")
     /**
      *

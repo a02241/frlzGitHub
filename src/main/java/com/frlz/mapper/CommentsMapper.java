@@ -3,7 +3,6 @@ package com.frlz.mapper;
 import com.frlz.pojo.Comments;
 import org.apache.ibatis.annotations.*;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +25,7 @@ public interface CommentsMapper {
             " <if test=\"blogId!=null and blogId!=''\"> AND blogId = #{blogId}</if> " +
             " </where> " +
             " </script> ")
-    public int findAllCountComments(Map<String,Object> map);
+    int findAllCountComments(Map<String,Object> map);
 
     /** 
      * @Title: findComments 
@@ -43,10 +42,10 @@ public interface CommentsMapper {
     @Select("select * from comments where blogId = #{blogId}" +
             " order by commentTime" +
             " limit ${(pageCode-1)*pageSize},${pageSize}")
-    public List<Comments> findComments(Map<String,Object> map);
+    List<Comments> findComments(Map<String,Object> map);
 
     @Select("select count(*) from comments where DATE_FORMAT(commentTime, '%Y-%m-%d') = #{date} and username = #{username}")
-    public int selectCommentTimeCountByTime(String date,String username);
+    int selectCommentTimeCountByTime(String date,String username);
 
     /** 
      * @Title: saveComment 
@@ -64,7 +63,7 @@ public interface CommentsMapper {
     @Options(keyProperty = "cId", useGeneratedKeys = true)
     @Insert("insert into comments(blogId, comments,cId,username,commentTime)" +
             " values( #{blogId},#{comments}, #{cId}, #{username}, #{commentTime})")
-    public void saveComment(Comments comments);
+    void saveComment(Comments comments);
 
 
     @Delete("delete from comments where cId = #{cId}")

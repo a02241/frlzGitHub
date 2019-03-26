@@ -228,26 +228,21 @@ public class UserController extends Cors {
      * @return java.lang.String
      * @throws
      */
-    public R<String> uploadUserIcon(MultipartFile file,@Param("username") String username) throws IOException{
-        System.out.println(file + username);
-        if (file != null) {// 检查文件是否为空
+    public R<String> uploadUserIcon(String file,@Param("username") String username) throws IOException{
+        MultipartFile multipartFile = Base64Decode.base64Convert(file);
+        if (multipartFile != null) {// 检查文件是否为空
             String path;
             String type2;
-            String fileName = file.getOriginalFilename();
+            String fileName = multipartFile.getOriginalFilename();
             // 检查文件类型
             type2 = fileName.indexOf(".") != -1?fileName.substring(fileName.lastIndexOf(".")+1):null;
             if (type2 != null) {
-                if ("GIF".equals(type2.toUpperCase()) || "PNG".equals(type2.toUpperCase()) || "JPG".equals(type2.toUpperCase())) {
-                    String userHome = System.getProperties().getProperty("java.home");
-                    path = "/usr/local/nginx/html/project/html/userImg"+  username +".jpg";
-                    File file2 = new File(path);
-                    file.transferTo(file2);
-                        userService.uploadUserIcon(username,username+".jpg");
-                    return R.isOk().msg("上传成功");
-                }else {
-                    System.out.println("文件后缀不正确");
-                    return R.isFail().msg("文件后缀不正确");
-                }
+                String userHome = System.getProperties().getProperty("java.home");
+                path = "/usr/local/nginx/html/project/html/userImg"+  username +".jpg";
+                File file2 = new File(path);
+                multipartFile.transferTo(file2);
+                userService.uploadUserIcon(username,username+".jpg");
+                return R.isOk().msg("上传成功");
             }else {
                 System.out.println("文件格式不正确");
                 return R.isFail().msg("文件格式不正确");
