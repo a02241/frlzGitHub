@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestController
 public class TradeLogController {
 
-    @Autowired
     private TradeLogService tradeLogService;
+    @Autowired
+    public TradeLogController(TradeLogService tradeLogService){
+        this.tradeLogService = tradeLogService;
+    }
 }
