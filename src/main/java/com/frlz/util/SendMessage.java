@@ -30,9 +30,7 @@ public class SendMessage {
 
         try {
             CommonResponse response = client.getCommonResponse(request);
-            System.out.print(response.getData());
             JSONObject jsonObject = JSONObject.parseObject(response.getData());
-            System.out.println();
             if ("OK".equals(jsonObject.getString("Message"))){
                 return verifyCode;
             }
