@@ -19,11 +19,11 @@ public class R<T> implements Serializable {
     // 省略 set get
 
     public static R isOk() {
-        return new R().msg("成功");
+        return new R().msg("success");
     }
 
     public static R isFail() {
-        return new R().status(1).msg("失败");
+        return new R().status(1).msg("fail");
     }
 
     public static R isFail(Throwable e) {
