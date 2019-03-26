@@ -10,5 +10,4 @@ public class Shares {
 	private String high;
 	private String close;
 	private String low;
-
 }
