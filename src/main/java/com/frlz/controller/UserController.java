@@ -231,14 +231,11 @@ public class UserController extends Cors {
     public R<String> uploadUserIcon(String file,@Param("username") String username) throws IOException{
         MultipartFile multipartFile = Base64Decode.base64Convert(file);
         if (multipartFile != null) {// 检查文件是否为空
-            String path;
-            String type2;
             String fileName = multipartFile.getOriginalFilename();
             // 检查文件类型
-            type2 = fileName.indexOf(".") != -1?fileName.substring(fileName.lastIndexOf(".")+1):null;
+            String type2 = fileName.indexOf(".") != -1?fileName.substring(fileName.lastIndexOf(".")+1):null;
             if (type2 != null) {
-                String userHome = System.getProperties().getProperty("java.home");
-                path = "/usr/local/nginx/html/project/html/userImg"+  username +".jpg";
+                String path = "/usr/local/nginx/html/project/html/userImg"+  username +".jpg";
                 File file2 = new File(path);
                 multipartFile.transferTo(file2);
                 userService.uploadUserIcon(username,username+".jpg");
