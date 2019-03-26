@@ -22,12 +22,37 @@ public class SecretController {
     }
 
     @PostMapping("/addSecret")
+    /**
+     * TODO 添加密保
+     * @title addSecret
+     * @create by: cz
+     * @description: TODO 必填参数uid,secret
+     * @create time: 2019/3/26 17:46
+     * @Param: uid
+     * @Param: secret
+     * @throws
+     * @return com.frlz.util.R
+     * @version V1.0
+     */
+
     public R addSecret(String uid, Secret secret){
         secretService.insertSecret(secret,uid);
         return R.isOk();
     }
 
     @PostMapping("/getSecret")
+    /**
+     * 
+     * @title getSecret
+     * @create by: cz
+     * @description: TODO
+     * @create time: 2019/3/26 17:47
+     * @Param: uid
+     * @throws 
+     * @return com.frlz.util.R<java.util.Map<java.lang.String,java.lang.String>>
+     * @version V1.0
+     */
+    
     public R<Map<String,String>> getSecret(String uid){
         return R.isOk().data(secretService.selectFromSecret(uid));
     }
