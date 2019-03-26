@@ -33,8 +33,13 @@ public interface BlogMapper {
             " </script> ")
     @Results({
             @Result(property = "username", column = "uid",
-                    many = @Many(select = "com.frlz.mapper.UserMapper.selectUsernameByUid"))
+                    many = @Many(select = "com.frlz.mapper.UserMapper.searchUsernameById")),
+            @Result(property = "uid", column = "uid",
+                    many = @Many(select = "com.frlz.mapper.UserMapper.searchUidById")),
+            @Result(property = "icon", column = "uid",
+                    many = @Many(select = "com.frlz.mapper.UserMapper.searchIconById"))
     })
+
     List<UitlBlog> findChoice(Map<String,Object> map);
 
     @Select("<script> " +
