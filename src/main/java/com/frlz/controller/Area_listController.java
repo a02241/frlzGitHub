@@ -1,11 +1,8 @@
 package com.frlz.controller;
 
 import com.frlz.service.Area_ListService;
-import com.frlz.service.QuizService;
 import com.frlz.util.R;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -30,7 +27,7 @@ public class Area_listController{
     }
 
     @RequestMapping("selectAllShares")
-    public R<List> selectAllShares (@Param("name")String name){
+    public R<List> selectAllShares (){
         return R.isOk().data(area_ListService.selectAll());
     }
 
