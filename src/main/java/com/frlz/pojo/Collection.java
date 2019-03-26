@@ -8,6 +8,6 @@ import java.util.Date;
 public class Collection {
     private int collectionId;
     private String uid;
-    private String blogId;
+    private String newsAddress;
     private Date collectTime;
 }
