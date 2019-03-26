@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface ReplysMapper {
 
-    @Select("select * from replys where cId = #{cId} order by contentTime desc")
+    @Select("select * from replys where cId = #{cId} order by contentTime limit 1,1")
     List<UtilReplys> selectReplysByCId(String cId);
 
     @Select("select * from replys where cId = #{cId} order by contentTime")
