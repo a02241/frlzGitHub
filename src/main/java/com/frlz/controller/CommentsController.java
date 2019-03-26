@@ -75,9 +75,6 @@ public class CommentsController {
             return R.isFail().msg("blogId为空");
         }
         List<Comments> comments =commentsService.findComments(conditions, 12, pageCode);
-        for (int i = 0 ;i < comments.size() ; i++){
-            comments.get(i).setUtilReplys(replysService.selectRelysByCId(comments.get(i).getCId()));
-        }
         map.put("comments", comments);//conditions-->>map存放数据,pageCode-->>分页条数,从第几个开始
         map.put("username", username);
         return R.isOk().data(map);
