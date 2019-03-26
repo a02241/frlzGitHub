@@ -7,7 +7,9 @@ import com.frlz.util.AnswerChange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class QuizServiceImpl implements QuizService {
@@ -19,8 +21,19 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public List<Quiz> getAllQuestion() {
-        return quizMapper.selectAll();
+    public Map<String,Map> getAllQuestion() {
+        List<Quiz> quizList = quizMapper.selectAll();
+        Map<String,Map> questionMap = new HashMap<>();
+        for (int i = 0;i < 30;i++){
+            Map<String,String> map = new HashMap<>();
+            map.put("question",quizList.get(i).getQuestion());
+            map.put("optionOne",quizList.get(i).getOptionOne());
+            map.put("optionTwo",quizList.get(i).getOptionTwo());
+            map.put("optionThree",quizList.get(i).getOptionThree());
+            map.put("optionFour",quizList.get(i).getOptionFour());
+            questionMap.put("question" + i,map);
+        }
+        return questionMap;
     }
 
     @Override

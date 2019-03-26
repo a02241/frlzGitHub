@@ -2,11 +2,11 @@ package com.frlz.service;
 
 import com.frlz.pojo.Quiz;
 
-import java.util.List;
+import java.util.Map;
 
 public interface QuizService {
 
-    List<Quiz> getAllQuestion();
+    Map<String,Map> getAllQuestion();
 
     void addQuestionToQuiz(Quiz quiz);
 
