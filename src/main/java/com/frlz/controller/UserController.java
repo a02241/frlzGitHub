@@ -125,41 +125,40 @@ public class UserController extends Cors {
     public R<HashMap<String,String>> userLogin(String username, String password) {
         HashMap<String,String> map = new HashMap<>();
         String data;
-        User user;
-            user = userService.selectUser(username);
-            if (user != null) {
-                if (user.getPassword().equals(MD5.MD5Encode("fr2018<%" + password  + "%>lz1220"))) {
-                    data = "1";//密码相同返回1
-                    String format = DateTime.getNowTimeToString();
-                    Date loginTime = loginLogService.getLatestLoginLog(user.getUid());
-                    String lastestTime = DateTime.getTimeByDateToString(loginTime);
-                    if (!format.equals(lastestTime)){
-                        Balance balance;//根据uid查询余额
-                        int experience;//登录加1点经验
-                        balance = balanceService.selectFromBanlanceByUid(user.getUid());
-                        int count = balance.getQuantumBalance() + 1;//量子余额+1
-                        balanceService.updateQuantumBalanceByUid(user.getUid(),count);//交易写入数据库
-                        experience = user.getExperience() + 1;
-                        user.setExperience(experience);
-                            userService.updateUser(user);//写入数据库
-                            tradeLogService.insertTradeLog(balance.getBalanceId(),1,0,0,"登录奖励增加1点量子");//写入交易记录
-                    }
-                        loginLogService.insertLoginLog(user.getUid());//插入登陆日志
-                    map.put("result",data);
-                    map.put("Myusermane",user.getUsername());
-                    map.put("uid",user.getUid());
-                    map.put("icon",user.getIcon());
-                    map.put("experience", String.valueOf(user.getExperience()));
-                }else {
-                    data = "2";//密码不同返回2
-                    map.put("result",data);
-                    return R.isFail().data(map);
+        User user = userService.selectUser(username);
+        if (user != null) {
+            if (user.getPassword().equals(MD5.MD5Encode("fr2018<%" + password  + "%>lz1220"))) {
+                data = "1";//密码相同返回1
+                String format = DateTime.getNowTimeToString();
+                Date loginTime = loginLogService.getLatestLoginLog(user.getUid());
+                String lastestTime = DateTime.getTimeByDateToString(loginTime);
+                if (!format.equals(lastestTime)){
+                    Balance balance;//根据uid查询余额
+                    int experience;//登录加1点经验
+                    balance = balanceService.selectFromBanlanceByUid(user.getUid());
+                    int count = balance.getQuantumBalance() + 1;//量子余额+1
+                    balanceService.updateQuantumBalanceByUid(user.getUid(),count);//交易写入数据库
+                    experience = user.getExperience() + 1;
+                    user.setExperience(experience);
+                        userService.updateUser(user);//写入数据库
+                        tradeLogService.insertTradeLog(balance.getBalanceId(),1,0,0,"登录奖励增加1点量子");//写入交易记录
                 }
+                    loginLogService.insertLoginLog(user.getUid());//插入登陆日志
+                map.put("result",data);
+                map.put("Myusermane",user.getUsername());
+                map.put("uid",user.getUid());
+                map.put("icon",user.getIcon());
+                map.put("experience", String.valueOf(user.getExperience()));
             }else {
-                data = "3";//信息为空返回3
+                data = "2";//密码不同返回2
                 map.put("result",data);
                 return R.isFail().data(map);
             }
+        }else {
+            data = "3";//信息为空返回3
+            map.put("result",data);
+            return R.isFail().data(map);
+        }
         return R.isOk().data(map);
     }
 
@@ -179,23 +178,19 @@ public class UserController extends Cors {
      */
 
     public R<String> emailCode(String email){
-        System.out.println("发送邮件");
         String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";//验证码筛选
         StringBuilder sb = new StringBuilder(4);
         for(int i = 0;i < 4;i++){
             char ch = str.charAt(new Random().nextInt(str.length()));
             sb.append (ch);
         }
-        System.out.println(sb.toString()); //随机生成验证码
-
         int res = Mail.sendEmail("smtp.163.com", "shiyaogame@163.com", "fr20181220", "shiyaogame@163.com", new String[]{email},
                 "短信验证",  "【方融魔方】您的验证码为：" + sb.toString() ,"text/html;charset=utf-8");//发送邮箱
-        System.out.println("\n发送结果:"+res);
-            if(res == 1) {
-                return R.isOk().data(sb.toString());
-            }else {
-                return R.isFail().msg("error");
-            }
+        if(res == 1) {
+            return R.isOk().data(sb.toString());
+        }else {
+            return R.isFail().msg("error");
+        }
     }
 
     @PostMapping("sendPhonenumberMessage")
@@ -212,8 +207,7 @@ public class UserController extends Cors {
      */
 
     public R<String> sendPhonenumberMessage(String phonenumber){
-        String message = SendMessage.sendMessage(phonenumber);
-        return R.isOk().data(message);
+        return R.isOk().data(SendMessage.sendMessage(phonenumber));
     }
 
     @PostMapping("/uploadUserIcon")
