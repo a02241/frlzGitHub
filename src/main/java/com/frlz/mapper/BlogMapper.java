@@ -17,30 +17,26 @@ public interface BlogMapper {
             " </script> ")
     int findAllCountLike(Map<String,Object> map);
 
-    @Select("<script> " +
-            "select uid,blogId,time,likes,title,summary,message,commentsNumber,forwordNumber,readNumber from blog where uid=#{uid}" +
-            " order by time desc limit ${(pageCode-1)*pageSize},${pageSize} "+
-            " </script> ")
-    @Results({
+
+    @Select("select u.icon , u.username , b.uid, b.blogId,b.time,b.likes,b.title,b.summary,b.message,b.commentsNumber,b.forwordNumber,b.readNumber from blog b inner join user u " +
+            "where b.uid = u.uid" +
+            " order by weight desc limit ${(pageCode-1)*pageSize},${pageSize} ")
+   /* @Results({
+            @Result(property = "UitlBlog"),
+            @Result(property = "username", column = "uid"),
+            @Result(property = "uid", column = "uid"),
+            @Result(property = "icon", column = "uid")
+    })*/
+    List<UitlBlog> findChoice(Map<String,Object> map);
+
+    @Select("select u.icon , u.username , b.uid, b.blogId,b.time,b.likes,b.title,b.summary,b.message,b.commentsNumber,b.forwordNumber,b.readNumber from blog b inner join user u " +
+            "where b.uid = u.uid" +
+            " order by weight desc limit ${(pageCode-1)*pageSize},${pageSize} ")
+    /*@Results({
             @Result(property = "username", column = "uid",
                     many = @Many(select = "com.frlz.mapper.UserMapper.searchUsernameById"))
-    })
+    })*/
     List<UitlBlog> find(Map<String,Object> map);
-
-    @Select("<script> " +
-            "select uid,blogId,time,likes,title,summary,message,commentsNumber,forwordNumber,readNumber from blog" +
-            " order by weight desc limit ${(pageCode-1)*pageSize},${pageSize} "+
-            " </script> ")
-    @Results({
-            @Result(property = "username", column = "uid",
-                    many = @Many(select = "com.frlz.mapper.UserMapper.searchUsernameById")),
-            @Result(property = "uid", column = "uid",
-                    many = @Many(select = "com.frlz.mapper.UserMapper.searchUidById")),
-            @Result(property = "icon", column = "uid",
-                    many = @Many(select = "com.frlz.mapper.UserMapper.searchIconById"))
-    })
-
-    List<UitlBlog> findChoice(Map<String,Object> map);
 
     @Select("<script> " +
             "select * from blog" +

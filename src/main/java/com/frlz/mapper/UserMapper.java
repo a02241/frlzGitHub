@@ -27,12 +27,6 @@ public interface UserMapper {
     @Select("select username from user where uid = #{uid}")
     String searchUsernameById(String uid);
 
-    @Select("select uid from user where uid = #{uid}")
-    String searchUidById(String uid);
-
-    @Select("select icon from user where uid = #{uid}")
-    String searchIconById(String uid);
-
     @Select("select * from user where username = #{username}")
     User selectUserByUsername(String username);
 
