@@ -20,4 +20,6 @@ public class UitlBlog {
     private String title;//标题
     private String summary;//用户摘要
     private String username;
+    private String uid;
+    private String icon;
 }
