@@ -230,7 +230,6 @@ public class UserController extends Cors {
      */
     public R<String> uploadUserIcon(String file,@Param("username") String username) throws IOException{
         MultipartFile multipartFile = Base64Decode.base64Convert(file);
-
         System.out.println(multipartFile + username);
         if (multipartFile != null) {// 检查文件是否为空
             String path;
