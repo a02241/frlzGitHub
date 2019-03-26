@@ -1,7 +1,7 @@
 package com.frlz.util;
 
-import java.util.Properties;
- 
+import com.sun.mail.util.MailSSLSocketFactory;
+
 import javax.mail.Authenticator;
 import javax.mail.Message.RecipientType;
 import javax.mail.PasswordAuthentication;
@@ -9,8 +9,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
- 
-import com.sun.mail.util.MailSSLSocketFactory;
+import java.util.Properties;
  
 public class Mail {
 	
@@ -28,9 +27,9 @@ public class Mail {
 	 */
 	public static int sendEmail(String mailServer,final String loginAccount,final String loginAuthCode,String sender,String[] recipients,
 			String emailSubject,String emailContent,String emailContentType){
-		int res=0;
+	    int res=0;
 		
-	   try {
+	    try {
     	    //跟smtp服务器建立一个连接
             Properties p = new Properties();
             //设置邮件服务器主机名
