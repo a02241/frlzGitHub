@@ -57,7 +57,9 @@ public interface UserMapper {
             "experience," +
             "fansNumber," +
             "interestNumber," +
-            "signature )" +
+            "signature," +
+            "sex," +
+            "birthday )" +
             " values( #{uid}, " +
             "#{phonenumber}, " +
             "#{username}, " +
@@ -73,7 +75,7 @@ public interface UserMapper {
             "#{registTime}, " +
             "#{experience}, " +
             "#{fansNumber}," +
-            "#{interestNumber},'快来添加你的个性签名吧！')")
+            "#{interestNumber},'快来添加你的个性签名吧！',0,#{birthday})")
     void registSave(User user);
 
     @Update("update user set icon = #{icon} where username = #{username}")
@@ -87,7 +89,9 @@ public interface UserMapper {
             "investmentage = #{investmentage} ," +
             "province = #{province} ," +
             "city = #{city} ," +
-            "experience = #{experience} " +
+            "experience = #{experience} ," +
+            "sex = #{sex} ," +
+            "birthday = #{birthday}" +
             "where uid = #{uid}")
     void updateUser(User user);
 

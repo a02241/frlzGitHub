@@ -28,4 +28,6 @@ public class User {
 	private int fansNumber;//粉丝数
 	private int interestNumber;//关注人数
 	private String signature;//个性签名
+	private int sex;//性别
+	private Date birthday;//生日
 }
