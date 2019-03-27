@@ -83,24 +83,23 @@ public class UserController extends Cors {
             user.setUsername(check);
             check = "5";
             //有邀请码
-            String MyUid = null;
-            int result = 0;
-                result = invitationService.findStateBycode(code);
-                if (code.trim().length() > 0&& result == 1){
-                    user.setExperience(0);//有邀请码经验为0
-                }else {
-                    user.setExperience(-1);//无邀请码经验为-1
-                }
-                MyUid = userService.registSave(user);
-                    if (result==1){
-                        invitationService.updateInviteState(code,MyUid);
-                    }
-                loginLogService.insertLoginLog(MyUid);//插入登陆日志
+            String MyUid;
+            int result = invitationService.findStateBycode(code);
+            if (code.trim().length() > 0&& result == 1){
+                user.setExperience(0);//有邀请码经验为0
+            }else {
+                user.setExperience(-1);//无邀请码经验为-1
+            }
+            MyUid = userService.registSave(user);
+            if (result==1){
+                invitationService.updateInviteState(code,MyUid);
+            }
+            loginLogService.insertLoginLog(MyUid);//插入登陆日志
             //创建余额账户
             Balance balance;
-                balanceService.insertBalance(0,1,0,MyUid);
-                balance = balanceService.selectFromBanlanceByUid(MyUid);
-                tradeLogService.insertTradeLog(balance.getBalanceId(),1,0,0,"登录奖励增加1点量子");//写入交易记录
+            balanceService.insertBalance(0,1,0,MyUid);
+            balance = balanceService.selectFromBanlanceByUid(MyUid);
+            tradeLogService.insertTradeLog(balance.getBalanceId(),1,0,0,"登录奖励增加1点量子");//写入交易记录
         }
         return R.isOk().msg("注册成功").data(check);
     }
@@ -267,17 +266,15 @@ public class UserController extends Cors {
 
     public R<String> updateUser(String uid,
                                 @RequestParam(defaultValue="")String username, @RequestParam(defaultValue="")String phonenumber, @RequestParam(defaultValue="")String email,
-                                @RequestParam(defaultValue="0")int investmentage, @RequestParam(defaultValue="")String profession,
-                                @RequestParam(defaultValue="")String residence, @RequestParam(defaultValue="")String province, @RequestParam(defaultValue="")String city,
-                                @RequestParam(defaultValue = "")String signature)  {
+                                @RequestParam(defaultValue="0")int investmentage, @RequestParam(defaultValue="")String profession, @RequestParam(defaultValue="")String residence,
+                                @RequestParam(defaultValue="")String province, @RequestParam(defaultValue="")String city, @RequestParam(defaultValue = "")String signature)  {
         User user = userService.selectByUid(uid);
         if(user != null) {
             if (username.trim().length() > 0) {
                 Balance balance = balanceService.selectFromBanlanceByUid(user.getUid());
                 if (balance.getQuantumBalance() > 10) {
                     user.setUsername(username);
-                        balanceService.updateQuantumBalanceByUid(user.getUid(), balance.getQuantumBalance() - 10);
-
+                    balanceService.updateQuantumBalanceByUid(user.getUid(), balance.getQuantumBalance() - 10);
                     tradeLogService.insertTradeLog(balance.getBalanceId(), -10, 0, 0, "修改昵称花费10量子");
                 } else {
                     return R.isFail().msg("量子余额不足");
@@ -372,7 +369,7 @@ public class UserController extends Cors {
             map.put("signature",user.getSignature());
             map.put("interestNumber",user.getInterestNumber());
             map.put("fansNumber",user.getFansNumber());
-        return R.isOk().data(map);
+            return R.isOk().data(map);
         }else {
             return R.isFail().data("false");
         }
@@ -399,7 +396,7 @@ public class UserController extends Cors {
         if(!m.matches()){
             return R.isFail().msg("false");
         }else {
-                userService.updatePhonenumber(uid, phonenumber);
+            userService.updatePhonenumber(uid, phonenumber);
             balanceUtil.addQuantumBalance(uid,5,"绑定手机增加5个量子");//增加5个量子
         }
         return R.isOk().msg("success");
