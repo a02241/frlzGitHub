@@ -26,11 +26,35 @@ public class QuizController {
     }
 
     @PostMapping("startQuiz")
+    /**
+     *
+     * @title startQuiz
+     * @create by: cz
+     * @description: TODO 获取所有题目
+     * @create time: 2019/3/26 17:43
+     * @Param:
+     * @throws
+     * @return com.frlz.util.R<java.util.Map>
+     * @version V1.0
+     */
+
     public R<Map> startQuiz(){
         return R.isOk().data(quizService.getAllQuestion());
     }
 
     @PostMapping("checkAnswer")//传入大写ABCD的答案字符串，返回int答对的题数
+    /**
+     *
+     * @title checkAnswer
+     * @create by: cz
+     * @description: TODO 传入大写ABCD的答案字符串，返回int答对的题数,传过来ABCDAB格式
+     * @create time: 2019/3/26 17:43
+     * @Param: answer
+     * @throws
+     * @return com.frlz.util.R<java.lang.Integer>
+     * @version V1.0
+     */
+
     public R<Integer> checkAnswer(String answer){
         return R.isOk().data(quizService.checkAnswer(answer));
     }
