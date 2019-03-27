@@ -180,6 +180,7 @@ public class UserController extends Cors {
         String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";//验证码筛选
         StringBuilder sb = new StringBuilder(4);
         for(int i = 0;i < 4;i++){
+
             char ch = str.charAt(new Random().nextInt(str.length()));
             sb.append (ch);
         }

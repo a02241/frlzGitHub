@@ -1,9 +1,13 @@
 package com.frlz.controller;
 
 import com.frlz.service.TradeLogService;
+import com.frlz.util.R;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.List;
 
 /**
  * @program: frlz
@@ -19,5 +23,10 @@ public class TradeLogController {
     @Autowired
     public TradeLogController(TradeLogService tradeLogService){
         this.tradeLogService = tradeLogService;
+    }
+
+    @PostMapping("getTradeLog")
+    public R<List> getTradeLog(String uid){
+        return R.isOk().data(tradeLogService.getTradeLogByUid(uid));
     }
 }
