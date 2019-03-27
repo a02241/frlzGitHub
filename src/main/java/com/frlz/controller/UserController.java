@@ -268,7 +268,8 @@ public class UserController extends Cors {
     public R<String> updateUser(String uid,
                                 @RequestParam(defaultValue="")String username, @RequestParam(defaultValue="")String phonenumber, @RequestParam(defaultValue="")String email,
                                 @RequestParam(defaultValue="0")int investmentage, @RequestParam(defaultValue="")String profession, @RequestParam(defaultValue="")String residence,
-                                @RequestParam(defaultValue="")String province, @RequestParam(defaultValue="")String city, @RequestParam(defaultValue = "")String signature)  {
+                                @RequestParam(defaultValue="")String province, @RequestParam(defaultValue="")String city, @RequestParam(defaultValue = "")String signature,
+                                @RequestParam(defaultValue = "0")int sex,@RequestParam(defaultValue = "")String birthday)  {
         User user = userService.selectByUid(uid);
         if(user != null) {
             if (username.trim().length() > 0) {
@@ -304,6 +305,13 @@ public class UserController extends Cors {
             }
             if (!"".equals(signature)){
                 userService.changeSignature(signature,uid);
+            }
+            if (sex!=0){
+                user.setSex(sex);
+            }
+            if (!"".equals(birthday)){
+                Date newBirthday = DateTime.getDateByString(birthday);
+                user.setBirthday(newBirthday);
             }
             userService.updateUser(user);
             return R.isOk().msg("success");
@@ -370,6 +378,8 @@ public class UserController extends Cors {
             map.put("signature",user.getSignature());
             map.put("interestNumber",user.getInterestNumber());
             map.put("fansNumber",user.getFansNumber());
+            map.put("sex",user.getSex());
+            map.put("birthday",user.getBirthday());
             return R.isOk().data(map);
         }else {
             return R.isFail().data("false");

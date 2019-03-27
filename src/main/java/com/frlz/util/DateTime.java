@@ -108,4 +108,14 @@ public class DateTime {
         return newDate;
     }
 
+    public static Date getDateByString(String dateString){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = sdf.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
 }
