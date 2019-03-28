@@ -448,6 +448,19 @@ public class UserController extends Cors {
     }
 
     @PostMapping("changeProfile")
+    /**
+     * TODO 更换头衔
+     * @title changeProfile
+     * @create by: cz
+     * @description: TODO 必填参数profile,uid
+     * @create time: 2019/3/28 10:12
+     * @Param: profile
+     * @Param: uid
+     * @throws
+     * @return com.frlz.util.R<java.lang.String>
+     * @version V1.0
+     */
+
     public R<String> changeProfile(String profile, @Valid String uid){
         String result = userService.updateProfile(profile,uid);
         if (result.equals("false")){
@@ -458,6 +471,18 @@ public class UserController extends Cors {
 
     //获取安全系数，传入uid，返回绑定信息，若无，则未绑定
     @PostMapping("getSecurity")
+    /**
+     * TODO 安全信息
+     * @title getSecurity
+     * @create by: cz
+     * @description: TODO 必填参数uid
+     * @create time: 2019/3/28 10:09
+     * @Param: uid
+     * @throws
+     * @return com.frlz.util.R
+     * @version V1.0
+     */
+
     public R getSecurity(String uid){
         return R.isOk().data(userService.getSecurity(uid));
     }
@@ -490,6 +515,18 @@ public class UserController extends Cors {
     }
 
     @PostMapping("showMyBlock")
+    /**
+     * TODO 我的方块
+     * @title showMyBlock
+     * @create by: cz
+     * @description: TODO 必填参数uid
+     * @create time: 2019/3/28 10:10
+     * @Param: uid
+     * @throws
+     * @return com.frlz.util.R<java.util.HashMap<java.lang.String,java.lang.Object>>
+     * @version V1.0
+     */
+
     public R<HashMap<String,Object>> showMyBlock(String uid){
         HashMap<String,Object> map = new HashMap<>();
         UtilBalance balance = balanceService.selectShowBanlanceByUid(uid);
