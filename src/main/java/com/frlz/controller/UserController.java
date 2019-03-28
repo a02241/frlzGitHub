@@ -363,23 +363,11 @@ public class UserController extends Cors {
         if(user != null){
             HashMap<String,Object> map = new HashMap<>();
             map.put("username",user.getUsername());
-            map.put("phonenumber",user.getPhonenumber());
-            map.put("email",user.getEmail());
             map.put("icon",user.getIcon());
-            map.put("investmentage",user.getInvestmentage());
             map.put("profile",user.getProfile());
-            map.put("profession",user.getProfession());
-            map.put("residence",user.getResidence());
-            map.put("privacy",user.getPrivacy());
-            map.put("province",user.getProvince());
-            map.put("city",user.getCity());
-            map.put("registtime",user.getRegistTime());
             map.put("signature",user.getSignature());
             map.put("interestNumber",user.getInterestNumber());
             map.put("fansNumber",user.getFansNumber());
-            map.put("sex",user.getSex());
-            map.put("birthday",user.getBirthday());
-            map.put("balance",user.getBalance());
             return R.isOk().data(map);
         }else {
             return R.isFail().data("false");
@@ -512,7 +500,7 @@ public class UserController extends Cors {
 
     @PostMapping("showMyBlock")
     /**
-     * TODO 我的方块
+         * TODO 我的方块
      * @title showMyBlock
      * @create by: cz
      * @description: TODO 必填参数uid
@@ -537,18 +525,30 @@ public class UserController extends Cors {
     }
 
     @PostMapping("personalInformation")
+    /**
+     * TODO 个人信息
+     * @title personalInformation
+     * @create by: cz
+     * @description: TODO 必填参数uid
+     * @create time: 2019/3/28 11:08
+     * @Param: uid
+     * @throws 
+     * @return com.frlz.util.R
+     * @version V1.0
+     */
+    
     public R personalInformation(String uid){
         User user = userService.selectByUid(uid);
         Map<String,String> map = new HashMap<>();
-        map.put("头像",user.getIcon());
-        map.put("昵称",user.getUsername());
-        map.put("性别",user.getSex() + "");
-        map.put("生日",user.getBirthday() + "");
-        map.put("投资年龄",user.getInvestmentage() + "");
-        map.put("职业",user.getProfession());
-        map.put("省份",user.getProvince());
-        map.put("城市",user.getCity());
-        map.put("个人签名",user.getSignature());
+        map.put("icon",user.getIcon());
+        map.put("username",user.getUsername());
+        map.put("sex",user.getSex() + "");
+        map.put("birthday",user.getBirthday() + "");
+        map.put("investmentage",user.getInvestmentage() + "");
+        map.put("profession",user.getProfession());
+        map.put("province",user.getProvince());
+        map.put("city",user.getCity());
+        map.put("signature",user.getSignature());
         return R.isOk().data(map);
     }
 }
