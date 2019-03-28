@@ -211,13 +211,15 @@ public class UserServiceImpl implements UserService {
         Map<String,String> map = new HashMap<>();
         User user = userMapper.selectByUid(uid);
         if (user.getPhonenumber() != null){
-            map.put("绑定手机",user.getPhonenumber());
+            map.put("phone",user.getPhonenumber());
         }
         if (user.getEmail() != null){
-            map.put("绑定邮箱",user.getEmail());
+            map.put("email",user.getEmail());
         }
         if (secretMapper.selectFromSecret(uid) != null){
-            map.put("密保问题","已设置密保问题");
+            map.put("secret","1");
+        }else {
+            map.put("secret","0");
         }
         return map;
     }

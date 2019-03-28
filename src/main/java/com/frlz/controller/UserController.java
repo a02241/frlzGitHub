@@ -377,7 +377,6 @@ public class UserController extends Cors {
             map.put("province",user.getProvince());
             map.put("city",user.getCity());
             map.put("registtime",user.getRegistTime());
-            map.put("experience", String.valueOf(user.getExperience()));
             map.put("signature",user.getSignature());
             map.put("interestNumber",user.getInterestNumber());
             map.put("fansNumber",user.getFansNumber());
