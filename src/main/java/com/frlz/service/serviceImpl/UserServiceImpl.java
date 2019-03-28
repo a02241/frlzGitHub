@@ -1,5 +1,6 @@
 package com.frlz.service.serviceImpl;
 
+import com.frlz.mapper.SecretMapper;
 import com.frlz.mapper.UserMapper;
 import com.frlz.pojo.User;
 import com.frlz.service.UserService;
@@ -12,7 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: frlz
@@ -25,10 +28,12 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
-
+    private final SecretMapper secretMapper;
     @Autowired
-    public UserServiceImpl(UserMapper userMapper) {
+    public UserServiceImpl(UserMapper userMapper,SecretMapper secretMapper) {
+
         this.userMapper = userMapper;
+        this.secretMapper = secretMapper;
     }
 
 
@@ -199,5 +204,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public void changeSignature(String signature, String uid) {
         userMapper.updateSignature(signature,uid);
+    }
+
+    @Override
+    public Map<String,String> getSecurity(String uid) {
+        Map<String,String> map = new HashMap<>();
+        User user = userMapper.selectByUid(uid);
+        if (user.getPhonenumber() != null){
+            map.put("绑定手机",user.getPhonenumber());
+        }
+        if (user.getEmail() != null){
+            map.put("绑定邮箱",user.getEmail());
+        }
+        if (secretMapper.selectFromSecret(uid) != null){
+            map.put("密保问题","已设置密保问题");
+        }
+        return map;
     }
 }

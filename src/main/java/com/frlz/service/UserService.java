@@ -4,6 +4,7 @@ package com.frlz.service;
 import com.frlz.pojo.User;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserService {
 
@@ -52,4 +53,6 @@ public interface UserService {
 	void deleteUserByUid(String uid);
 
 	void changeSignature(String signature,String uid);
+
+	Map<String,String> getSecurity(String uid);
 }

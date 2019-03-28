@@ -452,4 +452,10 @@ public class UserController extends Cors {
         }
         return  R.isOk().msg("更新成功");
     }
+
+    //获取安全系数，传入uid，返回绑定信息，若无，则未绑定
+    @PostMapping("getSecurity")
+    public R getSecurity(String uid){
+        return R.isOk().data(userService.getSecurity(uid));
+    }
 }
