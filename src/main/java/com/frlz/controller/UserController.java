@@ -18,10 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -536,6 +533,22 @@ public class UserController extends Cors {
         }else {
             return R.isFail().msg("uid错误");
         }
+        return R.isOk().data(map);
+    }
+
+    @PostMapping("personalInformation")
+    public R personalInformation(String uid){
+        User user = userService.selectByUid(uid);
+        Map<String,String> map = new HashMap<>();
+        map.put("头像",user.getIcon());
+        map.put("昵称",user.getUsername());
+        map.put("性别",user.getSex() + "");
+        map.put("生日",user.getBirthday() + "");
+        map.put("投资年龄",user.getInvestmentage() + "");
+        map.put("职业",user.getProfession());
+        map.put("省份",user.getProvince());
+        map.put("城市",user.getCity());
+        map.put("个人签名",user.getSignature());
         return R.isOk().data(map);
     }
 }
