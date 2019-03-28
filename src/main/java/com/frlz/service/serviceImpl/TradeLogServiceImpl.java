@@ -4,6 +4,7 @@ import com.frlz.mapper.BalanceMapper;
 import com.frlz.mapper.TradeLogMapper;
 import com.frlz.pojo.TradeLog;
 import com.frlz.service.TradeLogService;
+import com.frlz.utilPojo.UtilTradeLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -80,7 +81,7 @@ public class TradeLogServiceImpl implements TradeLogService {
     }
 
     @Override
-    public List<TradeLog> getTradeLogByUid(String uid) {
+    public List<UtilTradeLog> getTradeLogByUid(String uid) {
         return tradeLogMapper.selectTradeLog(balanceMapper.selectFromBanlanceByUid(uid).getBalanceId());
     }
 }

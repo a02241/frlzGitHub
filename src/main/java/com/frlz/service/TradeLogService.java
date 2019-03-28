@@ -1,6 +1,6 @@
 package com.frlz.service;
 
-import com.frlz.pojo.TradeLog;
+import com.frlz.utilPojo.UtilTradeLog;
 
 import java.util.List;
 
@@ -15,5 +15,5 @@ public interface TradeLogService {
 
     void insertTradeLogBlockToMagicCube(String balanceId,int block);
 
-    List<TradeLog> getTradeLogByUid(String uid);
+    List<UtilTradeLog> getTradeLogByUid(String uid);
 }

@@ -3,6 +3,7 @@ package com.frlz.service.serviceImpl;
 import com.frlz.mapper.BalanceMapper;
 import com.frlz.pojo.Balance;
 import com.frlz.service.BalanceService;
+import com.frlz.utilPojo.UtilBalance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,11 @@ public class BalanceServiceImpl implements BalanceService {
     @Override
     public Balance selectFromBanlanceByUid(String uid){
         return balanceMapper.selectFromBanlanceByUid(uid);
+    }
+
+    @Override
+    public UtilBalance selectShowBanlanceByUid(String uid) {
+        return balanceMapper.selectShowBanlanceByUid(uid);
     }
 
     @Override

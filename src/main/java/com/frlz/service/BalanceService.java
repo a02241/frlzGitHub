@@ -2,6 +2,7 @@ package com.frlz.service;
 
 
 import com.frlz.pojo.Balance;
+import com.frlz.utilPojo.UtilBalance;
 
 import java.util.List;
 
@@ -10,6 +11,8 @@ public interface BalanceService {
     void insertBalance(int blockBalance,int quantumBalance,int magicCubeBalance,String uid);
 
     Balance selectFromBanlanceByUid(String uid);
+
+    UtilBalance selectShowBanlanceByUid(String uid);
 
     void updateQuantumBalanceByUid(String uid,int quantumBalance);
 

@@ -4,6 +4,8 @@ import com.frlz.pojo.Balance;
 import com.frlz.pojo.User;
 import com.frlz.service.*;
 import com.frlz.util.*;
+import com.frlz.utilPojo.UtilBalance;
+import com.frlz.utilPojo.UtilTradeLog;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -451,5 +454,46 @@ public class UserController extends Cors {
             return R.isFail().msg("uid错误");
         }
         return  R.isOk().msg("更新成功");
+    }
+
+    @PostMapping("showMyInformation")
+    /**
+     * TODO 个人中心首页展示
+     * @title showMyInformation
+     * @create by: cz
+     * @description: TODO 必填参数 uid
+     * @create time: 2019/3/28 9:51
+     * @Param: uid
+     * @throws
+     * @return com.frlz.util.R<java.util.HashMap<java.lang.String,java.lang.Object>>
+     * @version V1.0
+     */
+
+    public R<HashMap<String,Object>> showMyInformation(String uid){
+        HashMap<String,Object> map = new HashMap<>();
+        User user = userService.selectByUid(uid);
+        UtilBalance balance = balanceService.selectShowBanlanceByUid(uid);
+        if (balance!=null&&uid!=null){
+            map.put("username",user.getUsername());
+            map.put("experience", String.valueOf(user.getExperience()));
+            map.put("blance",balance);
+        }else {
+            return R.isFail().msg("uid错误");
+        }
+        return R.isOk().data(map);
+    }
+
+    @PostMapping("showMyBlock")
+    public R<HashMap<String,Object>> showMyBlock(String uid){
+        HashMap<String,Object> map = new HashMap<>();
+        UtilBalance balance = balanceService.selectShowBanlanceByUid(uid);
+        List<UtilTradeLog> utilTradeLog = tradeLogService.getTradeLogByUid(uid);
+        if (balance!=null&&utilTradeLog!=null){
+            map.put("blance",balance);
+            map.put("tradeLog",utilTradeLog);
+        }else {
+            return R.isFail().msg("uid错误");
+        }
+        return R.isOk().data(map);
     }
 }

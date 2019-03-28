@@ -1,6 +1,7 @@
 package com.frlz.mapper;
 
 import com.frlz.pojo.Balance;
+import com.frlz.utilPojo.UtilBalance;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -15,6 +16,9 @@ public interface BalanceMapper {
 
     @Select("select * from balance where uid = #{uid}")
     Balance selectFromBanlanceByUid(String uid);
+
+    @Select("select * from balance where uid = #{uid}")
+    UtilBalance selectShowBanlanceByUid(String uid);
 
     @Update("update balance set quantumBalance = #{quantumBalance} where uid = #{uid}")
     void updateQuantumBalanceByUid(String uid,int quantumBalance);
