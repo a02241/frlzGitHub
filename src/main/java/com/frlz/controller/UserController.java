@@ -542,14 +542,14 @@ public class UserController extends Cors {
         User user = userService.selectByUid(uid);
         Map<String,String> map = new HashMap<>();
         map.put("头像",user.getIcon());
-        map.put("",user.getUsername());
-        map.put("",user.getSex() + "");
-        map.put("",user.getBirthday() + "");
-        map.put("",user.getInvestmentage() + "");
-        map.put("",user.getProfession());
-        map.put("",user.getProvince());
-        map.put("",user.getCity());
-        map.put("",user.getSignature());
+        map.put("昵称",user.getUsername());
+        map.put("性别",user.getSex() + "");
+        map.put("生日",user.getBirthday() + "");
+        map.put("投资年龄",user.getInvestmentage() + "");
+        map.put("职业",user.getProfession());
+        map.put("省份",user.getProvince());
+        map.put("城市",user.getCity());
+        map.put("个人签名",user.getSignature());
         return R.isOk().data(map);
     }
 }
