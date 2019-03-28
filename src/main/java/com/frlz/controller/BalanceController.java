@@ -29,6 +29,24 @@ public class BalanceController {
         this.tradeLogService = tradeLogService;
     }
 
+    @PostMapping("/getBalance")
+    /**
+     * 获取账户余额信息
+     * @title quantumToBlock
+     * @create by: cz
+     * @description: TODO 必填字段:uid,返回个人余额账户
+     * @create time: 2019/3/8 10:24
+     * @Param: uid
+     * @Param: quantum
+     * @throws
+     * @return java.lang.String
+     * @version V1.0
+     */
+
+    public R<Balance> getBalance(String uid){
+        return R.isOk().data(balanceService.selectFromBanlanceByUid(uid));
+    }
+
     @Transactional
     @PostMapping("/quantumToBlock")
     /**
