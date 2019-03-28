@@ -6,6 +6,7 @@ import com.frlz.pojo.User;
 import com.frlz.service.UserService;
 import com.frlz.util.GetUername;
 import com.frlz.util.MD5;
+import com.frlz.util.Security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -211,12 +212,12 @@ public class UserServiceImpl implements UserService {
         Map<String,String> map = new HashMap<>();
         User user = userMapper.selectByUid(uid);
         if (user.getPhonenumber() != null){
-            map.put("phone",user.getPhonenumber());
+            map.put("phone", Security.encrypt(user.getPhonenumber()));
         }else {
             map.put("phone","0");
         }
         if (user.getEmail() != null){
-            map.put("email",user.getEmail());
+            map.put("email",Security.encrypt(user.getEmail()));
         }else {
             map.put("email","0");
         }
