@@ -30,4 +30,5 @@ public class User {
 	private String signature;//个性签名
 	private int sex;//性别
 	private Date birthday;//生日
+	private Balance balance;
 }

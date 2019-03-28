@@ -12,7 +12,28 @@ public interface UserMapper {
     @Select("select * from user where username = #{account} or phonenumber = #{account} or email = #{account} limit 1")
     User loginSelect(String account);
 
-    @Select("select * from user where uid = #{uid} limit 1")
+    @Select("select * from user u left join balance b on u.uid = b.uid where u.uid = #{uid} limit 1")
+    @Results({
+            @Result(property = "username", column = "username"),
+            @Result(property = "phonenumber", column = "phonenumber"),
+            @Result(property = "email", column = "email"),
+            @Result(property = "icon", column = "icon"),
+            @Result(property = "investmentage", column = "investmentage"),
+            @Result(property = "profile", column = "profile"),
+            @Result(property = "profession", column = "profession"),
+            @Result(property = "residence", column = "residence"),
+            @Result(property = "privacy", column = "privacy"),
+            @Result(property = "province", column = "province"),
+            @Result(property = "registTime", column = "registTime"),
+            @Result(property = "experience", column = "experience"),
+            @Result(property = "signature", column = "signature"),
+            @Result(property = "interestNumber", column = "interestNumber"),
+            @Result(property = "fansNumber", column = "fansNumber"),
+            @Result(property = "sex", column = "sex"),
+            @Result(property = "birthday", column = "birthday"),
+            @Result(property = "balance", column = "uId",
+                    one = @One(select = "com.frlz.mapper.BalanceMapper.selectFromBanlanceByUid"))
+    })
     User selectByUid(String uid);
 
     @Select("select count(*) from user where uid = #{uid} limit 1")

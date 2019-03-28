@@ -74,18 +74,18 @@ public class UpdateDataServiceImpl implements UpdateDataService {
             PC_TTM = date.get(i).getPC_TTM();
             PB = date.get(i).getPB();
             adjust_price_f = date.get(i).getAdjust_price_f();
-            /*if (updateDataMapper.selectTrue(realCode) > 0){
-                *//*updateDataMapper.insertUpdateDate(realCode,name,time,open,high,low,close,change,volume,
+            if (updateDataMapper.selectTrue(realCode) > 0){
+                updateDataMapper.insertUpdateDate(realCode,name,time,open,high,low,close,change,volume,
                         money,traded_market_value,market_value,turnover,adjust_price,report_type,report_date
-                ,PE_TTM,PS_TTM,PC_TTM,PB,adjust_price_f);*//*
-//                updateDataMapper.deletetByDate(name,time);
+                ,PE_TTM,PS_TTM,PC_TTM,PB,adjust_price_f);
+//                updateDataMapper.deletetByDate(name,time);//删除
                 count ++;
                 System.out.println("第"+count+"次"+name+"~~~~~~~~~~");
-            }*/
-            if (updateDataMapper.selectTrue(realCode) == 0){
+            }
+            /*if (updateDataMapper.selectTrue(realCode) == 0){
                 count ++;
                 System.out.println("第"+count+"次无"+name+"表~~~~~~~~~~");
-            }
+            }*/
         }
         System.out.println(count);
         return null;

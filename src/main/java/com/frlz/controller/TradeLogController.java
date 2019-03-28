@@ -26,6 +26,18 @@ public class TradeLogController {
     }
 
     @PostMapping("getTradeLog")
+    /**
+     *
+     * @title getTradeLog
+     * @create by: cz
+     * @description: TODO 必填参数uid
+     * @create time: 2019/3/27 18:06
+     * @Param: uid
+     * @throws
+     * @return com.frlz.util.R<java.util.List>
+     * @version V1.0
+     */
+
     public R<List> getTradeLog(String uid){
         return R.isOk().data(tradeLogService.getTradeLogByUid(uid));
     }

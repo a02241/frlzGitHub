@@ -380,6 +380,7 @@ public class UserController extends Cors {
             map.put("fansNumber",user.getFansNumber());
             map.put("sex",user.getSex());
             map.put("birthday",user.getBirthday());
+            map.put("balance",user.getBalance());
             return R.isOk().data(map);
         }else {
             return R.isFail().data("false");
