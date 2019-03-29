@@ -2,11 +2,14 @@ package com.frlz.controller;
 
 import com.frlz.service.Area_ListService;
 import com.frlz.util.R;
+import com.frlz.util.TaobaoIP;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -29,6 +32,32 @@ public class Area_listController{
     @RequestMapping("selectAllShares")
     public R<List> selectAllShares (){
         return R.isOk().data(area_ListService.selectAll());
+    }
+
+    @PostMapping("getip")
+    public R getip(HttpServletRequest request){
+        String remoteAddr = request.getRemoteAddr();
+        String forwarded = request.getHeader("X-Forwarded-For");
+        String realIp = request.getHeader("X-Real-IP");
+
+        String ip = null;
+        if (realIp == null) {
+            if (forwarded == null) {
+                ip = remoteAddr;
+            } else {
+                ip = remoteAddr + "/" + forwarded.split(",")[0];
+            }
+        } else {
+            if (realIp.equals(forwarded)) {
+                ip = realIp;
+            } else {
+                if(forwarded != null){
+                    forwarded = forwarded.split(",")[0];
+                }
+                ip = realIp + "/" + forwarded;
+            }
+        }
+        return R.isOk().data(TaobaoIP.getResult(ip));
     }
 
 }
