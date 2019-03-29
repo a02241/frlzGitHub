@@ -1,9 +1,10 @@
 package com.frlz.controller;
 
 import com.frlz.pojo.Replys;
+import com.frlz.pojo.User;
 import com.frlz.service.ReplysService;
+import com.frlz.service.UserService;
 import com.frlz.util.R;
-import com.frlz.utilPojo.UtilReplys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,10 +23,12 @@ import java.util.HashMap;
 public class ReplysController {
 
     private final ReplysService replysService;
+    private final UserService userService;
 
     @Autowired
-    public ReplysController(ReplysService replysService){
+    public ReplysController(ReplysService replysService, UserService userService){
         this.replysService = replysService;
+        this.userService = userService;
     }
 
 
@@ -61,7 +64,16 @@ public class ReplysController {
      */
 
     public R<String> addReplys(Replys replys){
-        replysService.addReplys(replys);
-        return R.isOk().msg("success");
+        User user = userService.selectUserByUsername(replys.getUsername());
+        if (user != null) {
+            if (user.getExperience() > 0) {
+                replysService.addReplys(replys);
+            }else {
+                return R.isFail().msg("等级为0,答题后回复评论");
+            }
+        }else {
+            return R.isFail().msg("username错误");
+        }
+        return R.isFail().msg("参数错误");
     }
 }

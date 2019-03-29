@@ -102,17 +102,17 @@ public class BlogController {
         if(uid.trim().length() == 0 || uid == null){
             return R.isFail();
         }else {
-            int count = blogService.insertBlog(blog,uid);
-            if (count < 1){//每天发第一次贴加8经验
-                User user = userService.selectByUid(uid);
-                if (user.getExperience()<0){//0级不给经验
-                    return R.isOk().data("当前等级为0级,答题后可增加经验");
-                }else {
-                    userService.updateExperienceByUid(uid,user.getExperience() + 8);//写入数据库
+            User user = userService.selectByUid(uid);
+            if (user.getExperience() > 0) {
+                int count = blogService.insertBlog(blog, uid);
+                if (count < 1) {//每天发第一次贴加8经验
+                        userService.updateExperienceByUid(uid, user.getExperience() + 8);//写入数据库
                 }
+            }else {
+                return R.isFail().msg("当前等级为0级,答题后可写博客");
             }
+            return R.isFail().msg("uid错误");
         }
-        return R.isOk();
     }
 
 

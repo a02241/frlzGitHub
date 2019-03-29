@@ -101,19 +101,19 @@ public class CommentsController {
      */
 
     public R<HashMap<String,Object>> saveComment(Comments comments) {
-        String format = DateTime.getTimeByDateToString(new Date());//创建当前时间以yyyy-MM-dd格式
-        int count = commentsService.selectCommentTimeCountByTime(format,comments.getUsername());//返回前一次当天写博客的次数
-        if(count < 3){//回帖小于三次加8经验，超过不加
-            User user = userService.selectUserByUsername(comments.getUsername());
-            if (user.getExperience()<0){//0级不给经验
-                return R.isOk().data("当前等级为0级,答题后可增加经验");
-            }else {
+        User user = userService.selectUserByUsername(comments.getUsername());
+        if(user.getExperience() > 0){
+            String format = DateTime.getTimeByDateToString(new Date());//创建当前时间以yyyy-MM-dd格式
+            int count = commentsService.selectCommentTimeCountByTime(format,comments.getUsername());//返回前一次当天写博客的次数
+            if(count < 3){//回帖小于三次加8经验，超过不加
                 userService.updateExperienceByUid(user.getUid(),user.getExperience() + 5);//写入数据库
             }
+            blogService.updateBlogByBlogId(comments.getBlogId(),2);//评论数+1
+            commentsService.saveComment(comments);
+        }else {
+            return R.isFail().msg("当前等级为0级,答题后可写评论");
         }
-        blogService.updateBlogByBlogId(comments.getBlogId(),2);//评论数+1
-        commentsService.saveComment(comments);
-        return R.isOk().data("success");
+        return R.isFail().msg("参数错误");
     }
 
     @PostMapping("/deleteComment")

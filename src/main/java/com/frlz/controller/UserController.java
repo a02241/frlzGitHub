@@ -137,12 +137,10 @@ public class UserController extends Cors {
                     balance = balanceService.selectFromBanlanceByUid(user.getUid());
                     int count = balance.getQuantumBalance() + 1;//量子余额+1
                     balanceService.updateQuantumBalanceByUid(user.getUid(),count);//交易写入数据库
-                    if (user.getExperience() == -1){
-                        experience = -1;
-                    }else {
+                    if (user.getExperience() != -1){
                         experience = user.getExperience() + 1;
+                        userService.updateExperienceByUid(user.getUid(),experience);//写入数据库
                     }
-                    userService.updateExperienceByUid(user.getUid(),experience);//写入数据库
                     tradeLogService.insertTradeLog(balance.getBalanceId(),1,0,0,"登录奖励增加1点量子");//写入交易记录
                 }
                 loginLogService.insertLoginLog(user.getUid());//插入登陆日志
