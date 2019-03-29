@@ -100,7 +100,7 @@ public class BlogController {
 
     public R<Boolean> insertBlog(Blog blog,String uid){
         if(uid.trim().length() == 0 || uid == null){
-            return R.isFail();
+            return R.isFail().msg("uid为空");
         }else {
             User user = userService.selectByUid(uid);
             if (user.getExperience() > 0) {
