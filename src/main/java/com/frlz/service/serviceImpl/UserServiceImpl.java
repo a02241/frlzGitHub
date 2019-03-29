@@ -148,8 +148,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateExperienceByUid(String uid) {
-        userMapper.updateExperienceByUid(uid);
+    public void updateExperienceByUid(String uid,int experience) {
+        userMapper.updateExperienceByUid(uid,experience);
     }
 
     @Override

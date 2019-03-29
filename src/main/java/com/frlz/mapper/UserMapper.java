@@ -117,7 +117,7 @@ public interface UserMapper {
     void updateUser(User user);
 
     @Update("update user set experience = #{experience} where uid = #{uid}")
-    void updateExperienceByUid(String uid);
+    void updateExperienceByUid(String uid,int experience);
 
     @Update("update user set password = #{password} where uid = #{uid}")
     void updatePassword(User user);

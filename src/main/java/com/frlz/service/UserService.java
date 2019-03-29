@@ -32,8 +32,8 @@ public interface UserService {
 
 	void updateUser(User user);
 
-	void updateExperienceByUid(String uid);
-	
+	void updateExperienceByUid(String uid,int experience);
+
 	void updatePassword(User user);
 
 	void updatePhonenumber(String uid,String phonenumber);
