@@ -109,7 +109,7 @@ public class BlogController {
                     return R.isOk().data("当前等级为0级,答题后可增加经验");
                 }else {
                     user.setExperience(user.getExperience() + 8);//发帖加8经验
-                    userService.updateUser(user);//写入数据库
+                    userService.updateExperienceByUid(uid);//写入数据库
                 }
             }
         }
