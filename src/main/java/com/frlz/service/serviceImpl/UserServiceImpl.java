@@ -217,12 +217,14 @@ public class UserServiceImpl implements UserService {
         Map<String,String> map = new HashMap<>();
         User user = userMapper.selectByUid(uid);
         if (user.getPhonenumber() != null){
-            map.put("phone", Security.encrypt(user.getPhonenumber()));
+//            map.put("phone", Security.encrypt(user.getPhonenumber()));
+            map.put("phone", user.getPhonenumber());
         }else {
             map.put("phone","0");
         }
         if (user.getEmail() != null){
-            map.put("email",Security.encrypt(user.getEmail()));
+//            map.put("email",Security.encrypt(user.getEmail()));
+            map.put("email",user.getEmail());
         }else {
             map.put("email","0");
         }
