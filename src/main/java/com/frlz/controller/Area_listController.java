@@ -40,7 +40,7 @@ public class Area_listController{
         String forwarded = request.getHeader("X-Forwarded-For");
         String realIp = request.getHeader("X-Real-IP");
 
-        String ip = null;
+        String ip;
         if (realIp == null) {
             if (forwarded == null) {
                 ip = remoteAddr;
