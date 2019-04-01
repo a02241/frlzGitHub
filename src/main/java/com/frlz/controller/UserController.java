@@ -584,9 +584,7 @@ public class UserController extends Cors {
     @PostMapping("checkUser")
     public R<String> checkUser(@RequestParam(defaultValue="")String username,@RequestParam(defaultValue="")String email,@RequestParam(defaultValue="")String phonenumber){
         String regex = "\\w+@\\w+(\\.\\w{2,3})*\\.\\w{2,3}";
-        boolean tag = true;
         if (email.trim().length()> 0 && !email.matches(regex)) {
-            tag = false;
             return R.isFail().msg("邮箱格式错误");
         }
         Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0-9])|(14[5,7])| (17[0,1,3,5-8]))\\d{8}$");
