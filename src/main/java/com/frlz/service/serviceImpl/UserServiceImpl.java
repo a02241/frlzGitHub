@@ -105,6 +105,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int checkUser(String username,String email,String phoneNumber){
+        int checkPhonenumber = userMapper.checkPhonenumber(phoneNumber);
+        int checkEmail = userMapper.checkEmail(email);
+        int checkUsername = userMapper.checkUsername(username);
+        int result = 0 ;
+        if (checkUsername!=0){
+            result = 1;
+        }
+        //验证电话是否被注册
+        if(checkPhonenumber != 0) {
+            result = 2;
+        }
+        //验证邮箱是否被注册
+        if(checkEmail != 0) {
+            result = 3;
+        }
+        return result;
+    }
+
+    @Override
     public String registSave(User user){
         //默认头像
         user.setIcon("default.png");
@@ -144,7 +164,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(User user) {
-        System.out.println(user.toString()+"@@@@@@@@@@@");
         userMapper.updateUser(user);
     }
 
