@@ -64,17 +64,4 @@ public class Area_listController{
         return R.isOk().data(TaobaoIP.getResult(ip));
     }
 
-    @PostMapping("session")
-    public R session(HttpSession session){
-        session.setMaxInactiveInterval(2*30*60);
-        return R.isOk().data(session.getId());
-    }
-
-    @PostMapping("closeSession")
-    public R closeSession(HttpSession session){
-        session.invalidate();
-        sessionService.deleteSession(session.getId());
-        return R.isOk();
-    }
-
 }

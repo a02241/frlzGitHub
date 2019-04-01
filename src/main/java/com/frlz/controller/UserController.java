@@ -170,6 +170,25 @@ public class UserController extends Cors {
         return R.isOk().data(map);
     }
 
+    @PostMapping("closeSession")
+    /**
+     * TODO 关闭浏览器
+     * @title closeSession
+     * @create by: cz
+     * @description: TODO
+     * @create time: 2019/4/1 15:23
+     * @Param: session
+     * @throws
+     * @return com.frlz.util.R
+     * @version V1.0
+     */
+
+    public R closeSession(HttpSession session){
+        session.invalidate();
+        sessionService.deleteSession(session.getId());
+        return R.isOk();
+    }
+
     @PostMapping("/emailCode")
     /**
      * 发送邮箱验证码
@@ -322,6 +341,7 @@ public class UserController extends Cors {
                 Date newBirthday = DateTime.getDateByString(birthday);
                 user.setBirthday(newBirthday);
             }
+            user.setUid(uid);
             userService.updateUser(user);
             return R.isOk().msg("success");
         }else {

@@ -36,6 +36,7 @@ public interface UserMapper {
     })
     User selectByUid(String uid);
 
+
     @Select("select count(*) from user where uid = #{uid} limit 1")
     int selectByUidIsture(String uid);
 
@@ -111,7 +112,7 @@ public interface UserMapper {
             "province = #{province} ," +
             "city = #{city} ," +
             "experience = #{experience} ," +
-            "sex = #{sex} ," +
+            "sex = #{sex}, " +
             "birthday = #{birthday}" +
             "where uid = #{uid}")
     void updateUser(User user);

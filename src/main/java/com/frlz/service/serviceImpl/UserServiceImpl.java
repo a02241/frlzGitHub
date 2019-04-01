@@ -144,6 +144,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(User user) {
+        System.out.println(user.toString()+"@@@@@@@@@@@");
         userMapper.updateUser(user);
     }
 
