@@ -61,7 +61,7 @@ public class UserController extends Cors {
     }
 
     @Transactional
-    @PostMapping("/check")
+    @PostMapping("/regist")
     /**
      * 注册时校验是否注册成功
      * @title check
@@ -78,7 +78,7 @@ public class UserController extends Cors {
      * @return void
      * @throws 
      */
-    public  R<Object> check(User user ,@RequestParam(defaultValue = "0")String sentCode, @RequestParam(defaultValue = "9")String checkCode,@RequestParam(defaultValue = "")String code){
+    public  R<Object> regist(User user ,@RequestParam(defaultValue = "0")String sentCode, @RequestParam(defaultValue = "9")String checkCode,@RequestParam(defaultValue = "")String code){
         String check = userService.check(user);
         if(!sentCode.equals(checkCode)) {
             return R.isFail().data("4");
@@ -579,5 +579,33 @@ public class UserController extends Cors {
         map.put("city",user.getCity());
         map.put("signature",user.getSignature());
         return R.isOk().data(map);
+    }
+
+    @PostMapping("checkUser")
+    public R<String> checkUser(@RequestParam(defaultValue="")String username,@RequestParam(defaultValue="")String email,@RequestParam(defaultValue="")String phonenumber){
+        String regex = "\\w+@\\w+(\\.\\w{2,3})*\\.\\w{2,3}";
+        boolean tag = true;
+        if (email.trim().length()> 0 && !email.matches(regex)) {
+            tag = false;
+            return R.isFail().msg("邮箱格式错误");
+        }
+        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0-9])|(14[5,7])| (17[0,1,3,5-8]))\\d{8}$");
+        Matcher m = p.matcher(phonenumber);
+        if(phonenumber.trim().length()> 0 && !m.matches()){
+            return R.isFail().msg("手机格式错误");
+        }
+        int result = userService.checkUser(username,email,phonenumber);
+        if (phonenumber.trim().length()> 0 && phonenumber.trim().length()> 0 && username.trim().length()> 0){
+            if (result==1){
+                return R.isFail().msg("用户名已存在");
+            }else if (result==2){
+                return R.isFail().msg("手机已存在");
+            }else if (result==3){
+                return R.isFail().msg("邮箱已存在");
+            }
+        }else {
+            return R.isFail().msg("参数不正确");
+        }
+        return R.isOk().msg("success");
     }
 }
