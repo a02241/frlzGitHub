@@ -6,7 +6,7 @@ import java.util.Map;
 
 public interface SecretService {
 
-    void insertSecret(Secret secret, String uid);
+    void insertSecret(Secret secret);
 
     Map<String,String> selectFromSecret(String uid);
 

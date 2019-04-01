@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Update;
 public interface SecretMapper {
 
     @Insert("insert into secret values(default,#{questionOne},#{answerOne},#{questionTwo},#{answerTwo},#{questionThree},#{answerThree},#{uid})")
-    void insertSecret(Secret secret,String uid);
+    void insertSecret(Secret secret);
 
     @Select("select * from secret where uid = #{uid}")
     Secret selectFromSecret(String uid);

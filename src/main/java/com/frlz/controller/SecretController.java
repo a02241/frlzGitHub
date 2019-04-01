@@ -35,8 +35,8 @@ public class SecretController {
      * @version V1.0
      */
 
-    public R addSecret(String uid, Secret secret){
-        secretService.insertSecret(secret,uid);
+    public R addSecret(Secret secret){
+        secretService.insertSecret(secret);
         return R.isOk();
     }
 

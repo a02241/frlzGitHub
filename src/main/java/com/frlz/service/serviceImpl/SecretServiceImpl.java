@@ -28,8 +28,8 @@ public class SecretServiceImpl implements SecretService {
 
 
     @Override
-    public void insertSecret(Secret secret, String uid) {
-        secretMapper.insertSecret(secret,uid);
+    public void insertSecret(Secret secret) {
+        secretMapper.insertSecret(secret);
 
     }
 
