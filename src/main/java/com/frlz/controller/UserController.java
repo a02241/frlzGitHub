@@ -137,6 +137,7 @@ public class UserController extends Cors {
                 String lastestTime = DateTime.getTimeByDateToString(loginTime);
                 if (sessionService.getSession(sid) == null){
                     sessionService.addSession(sid);
+                    session.setMaxInactiveInterval(2*30*60);
                     if (!format.equals(lastestTime)){
                         Balance balance;//根据uid查询余额
                         int experience;//登录加1点经验
