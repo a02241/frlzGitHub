@@ -97,7 +97,6 @@ public class UserController extends Cors {
             if (result==1){
                 invitationService.updateInviteState(code,MyUid);
             }
-            loginLogService.insertLoginLog(MyUid);//插入登陆日志
             //创建余额账户
             Balance balance;
             balanceService.insertBalance(0,1,0,MyUid);

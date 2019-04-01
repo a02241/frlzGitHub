@@ -30,7 +30,7 @@ public interface BlogMapper {
     List<UitlBlog> findChoice(Map<String,Object> map);
 
     @Select("select u.icon , u.username , b.uid, b.blogId,b.time,b.likes,b.title,b.summary,b.message,b.commentsNumber,b.forwordNumber,b.readNumber from blog b inner join user u " +
-            "where b.uid = u.uid" +
+            "where b.uid = u.uid and u.uid = #{uid}" +
             " order by weight desc limit ${(pageCode-1)*pageSize},${pageSize} ")
     /*@Results({
             @Result(property = "username", column = "uid",
