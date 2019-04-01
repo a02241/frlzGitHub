@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
@@ -31,16 +32,18 @@ public class UserController extends Cors {
     private final LoginLogService loginLogService;
     private final TradeLogService tradeLogService;
     private final InvitationService invitationService;
+    private final SessionService sessionService;
 
     private BalanceUtil balanceUtil = new BalanceUtil();
 
     @Autowired
-    public UserController(BalanceService balanceService, UserService userService, LoginLogService loginLogService, TradeLogService tradeLogService, InvitationService invitationService){
+    public UserController(BalanceService balanceService, UserService userService, LoginLogService loginLogService, TradeLogService tradeLogService, InvitationService invitationService,SessionService sessionService){
         this.balanceService = balanceService;
         this.userService = userService;
         this.loginLogService = loginLogService;
         this.tradeLogService = tradeLogService;
         this.invitationService = invitationService;
+        this.sessionService = sessionService;
     }
     @PostMapping("/checkAccount")//注册时校验账号是否重复
     /**
@@ -121,7 +124,8 @@ public class UserController extends Cors {
      * @throws
      */
 
-    public R<HashMap<String,String>> userLogin(String username, String password) {
+    public R<HashMap<String,String>> userLogin(String username, String password, HttpSession session) {
+        String sid = session.getId();
         HashMap<String,String> map = new HashMap<>();
         String data;
         User user = userService.selectUser(username);
@@ -131,19 +135,22 @@ public class UserController extends Cors {
                 String format = DateTime.getNowTimeToString();
                 Date loginTime = loginLogService.getLatestLoginLog(user.getUid());
                 String lastestTime = DateTime.getTimeByDateToString(loginTime);
-                if (!format.equals(lastestTime)){
-                    Balance balance;//根据uid查询余额
-                    int experience;//登录加1点经验
-                    balance = balanceService.selectFromBanlanceByUid(user.getUid());
-                    int count = balance.getQuantumBalance() + 1;//量子余额+1
-                    balanceService.updateQuantumBalanceByUid(user.getUid(),count);//交易写入数据库
-                    if (user.getExperience() != -1){
-                        experience = user.getExperience() + 1;
-                        userService.updateExperienceByUid(user.getUid(),experience);//写入数据库
+                if (sessionService.getSession(sid) == null){
+                    sessionService.addSession(sid);
+                    if (!format.equals(lastestTime)){
+                        Balance balance;//根据uid查询余额
+                        int experience;//登录加1点经验
+                        balance = balanceService.selectFromBanlanceByUid(user.getUid());
+                        int count = balance.getQuantumBalance() + 1;//量子余额+1
+                        balanceService.updateQuantumBalanceByUid(user.getUid(),count);//交易写入数据库
+                        if (user.getExperience() != -1){
+                            experience = user.getExperience() + 1;
+                            userService.updateExperienceByUid(user.getUid(),experience);//写入数据库
+                        }
+                        tradeLogService.insertTradeLog(balance.getBalanceId(),1,0,0,"登录奖励增加1点量子");//写入交易记录
                     }
-                    tradeLogService.insertTradeLog(balance.getBalanceId(),1,0,0,"登录奖励增加1点量子");//写入交易记录
+                    loginLogService.insertLoginLog(user.getUid());//插入登陆日志
                 }
-                loginLogService.insertLoginLog(user.getUid());//插入登陆日志
                 map.put("result",data);
                 map.put("Myusermane",user.getUsername());
                 map.put("uid",user.getUid());
