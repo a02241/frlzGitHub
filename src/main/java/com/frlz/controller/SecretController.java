@@ -77,4 +77,9 @@ public class SecretController {
         return R.isOk().data(secretService.checkSecret(uid,answer1,answer2,answer3));
     }
 
+    public R changeSecret(Secret secret){
+        secretService.updateSecret(secret);
+        return R.isOk();
+    }
+
 }
