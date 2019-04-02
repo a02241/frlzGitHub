@@ -105,6 +105,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int selectExperienceByUid(String uid) {
+        return userMapper.selectExperienceByUid(uid);
+    }
+
+    @Override
     public int checkUser(String username,String email,String phoneNumber){
         int checkPhonenumber = userMapper.checkPhonenumber(phoneNumber);
         int checkEmail = userMapper.checkEmail(email);

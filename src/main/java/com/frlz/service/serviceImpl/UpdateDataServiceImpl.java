@@ -26,7 +26,7 @@ public class UpdateDataServiceImpl implements UpdateDataService {
     private UpdateDataMapper updateDataMapper;
 
     @Override
-    public String updateDate() {
+    public String updateData() {
         String name = "";
         int count = 0 ;
         String time = "";

@@ -26,6 +26,8 @@ public interface UserService {
 
 	String check(User user);
 
+	public int selectExperienceByUid(String uid);
+	
 	public int checkUser(String username,String email,String phoneNumber);
 
 	String registSave(User user);

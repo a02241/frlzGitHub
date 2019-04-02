@@ -19,9 +19,9 @@ public class UpdateDataController {
     @Autowired
     private UpdateDataService updateDataService;
 
-    @PostMapping("updateDate")
-    public R<String> updateDate(){
-        updateDataService.updateDate();
+    @PostMapping("updateData")
+    public R<String> updateData(){
+        updateDataService.updateData();
         return R.isOk().msg("成功");
     }
 }
