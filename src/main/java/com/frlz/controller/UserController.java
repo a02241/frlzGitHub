@@ -608,6 +608,18 @@ public class UserController extends Cors {
     }
 
     @PostMapping("showExperience")
+    /**
+     * TODO 根据uid获取经验值
+     * @title showExperience
+     * @create by: cz
+     * @description: TODO 必填参数uid
+     * @create time: 2019/4/2 10:08
+     * @Param: uid
+     * @throws
+     * @return com.frlz.util.R
+     * @version V1.0
+     */
+
     public R showExperience(String uid){
         int experience = userService.selectExperienceByUid(uid);
         return R.isOk().data(experience);
