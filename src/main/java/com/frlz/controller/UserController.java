@@ -624,4 +624,30 @@ public class UserController extends Cors {
         int experience = userService.selectExperienceByUid(uid);
         return R.isOk().data(experience);
     }
+
+    @PostMapping("showMyAttribute")
+    /**
+     * 右上角展示个人状态
+     * @title showMyAttribute
+     * @create by: cz
+     * @description: TODO 必填参数uid
+     * @create time: 2019/4/2 10:27
+     * @Param: uid
+     * @throws
+     * @return com.frlz.util.R
+     * @version V1.0
+     */
+
+    public R showMyAttribute(String uid){
+        HashMap<String,Object> map = new HashMap<>();
+        User user = userService.selectByUid(uid);
+        if (user != null){
+            map.put("username",user.getUsername());
+            map.put("icon",user.getIcon());
+            map.put("experience",user.getExperience());
+        }else {
+            return R.isFail().msg("参数错误");
+        }
+        return R.isOk().data(map);
+    }
 }
