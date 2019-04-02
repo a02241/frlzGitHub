@@ -606,4 +606,10 @@ public class UserController extends Cors {
         }
         return R.isOk().msg("success");
     }
+
+    @PostMapping("showExperience")
+    public R showExperience(String uid){
+        int experience = userService.selectExperienceByUid(uid);
+        return R.isOk().data(experience);
+    }
 }
