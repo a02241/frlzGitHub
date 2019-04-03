@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
 
 @RestControllerAdvice
 @RestController
-public class UserController extends Cors {
+public class UserController {
 
     private final BalanceService balanceService;
     private final UserService userService;
@@ -301,10 +301,10 @@ public class UserController extends Cors {
         User user = userService.selectByUid(uid);
         if(user != null) {
             if (username.trim().length() > 0) {
-                Balance balance = balanceService.selectFromBanlanceByUid(user.getUid());
+                Balance balance = balanceService.selectFromBanlanceByUid(uid);
+                user.setUsername(username);
                 if (balance.getQuantumBalance() > 10) {
-                    user.setUsername(username);
-                    balanceService.updateQuantumBalanceByUid(user.getUid(), balance.getQuantumBalance() - 10);
+                    balanceService.updateQuantumBalanceByUid(uid, balance.getQuantumBalance() - 10);
                     tradeLogService.insertTradeLog(balance.getBalanceId(), -10, 0, 0, "修改昵称花费10量子");
                 } else {
                     return R.isFail().msg("量子余额不足");
@@ -332,7 +332,7 @@ public class UserController extends Cors {
                 user.setCity(city);
             }
             if (!"".equals(signature)){
-                userService.changeSignature(signature,uid);
+                user.setSignature(signature);
             }
             if (sex!=0){
                 user.setSex(sex);

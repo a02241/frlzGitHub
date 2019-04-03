@@ -63,7 +63,7 @@ public class CommentsController {
      * @throws
      */
 
-    public R<HashMap<String,Object>> findBlog(Blog blog, @RequestParam(defaultValue="1") int pageCode, String username, String blogId) {
+    public R<HashMap<String,Object>> findBlog(Blog blog, @RequestParam(defaultValue="1") int pageCode, String blogId) {
         Map<String,Object> conditions = new HashMap<String,Object>();
         HashMap<String,Object> map;
         if(blogId.trim().length() > 0 || blogId != null) {
@@ -76,7 +76,6 @@ public class CommentsController {
         }
         List<Comments> comments =commentsService.findComments(conditions, 12, pageCode);
         map.put("comments", comments);//conditions-->>map存放数据,pageCode-->>分页条数,从第几个开始
-        map.put("username", username);
         return R.isOk().data(map);
     }
 

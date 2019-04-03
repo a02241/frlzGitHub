@@ -115,6 +115,7 @@ public interface UserMapper {
             "city = #{city} ," +
             "experience = #{experience} ," +
             "sex = #{sex}, " +
+            "signature = #{signature}, " +
             "birthday = #{birthday}" +
             "where uid = #{uid}")
     void updateUser(User user);
