@@ -250,7 +250,7 @@ public class UserController {
      * @return java.lang.String
      * @throws
      */
-    public R<String> uploadUserIcon(String file,@Param("username") String username,String uid) throws IOException{
+    public R<String> uploadUserIcon(String file,String uid) throws IOException{
         MultipartFile multipartFile = Base64Decode.base64Convert(file);
         if (multipartFile != null) {// 检查文件是否为空
             String fileName = multipartFile.getOriginalFilename();
