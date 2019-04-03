@@ -257,7 +257,7 @@ public class UserController {
             // 检查文件类型
             String type2 = fileName.indexOf(".") != -1?fileName.substring(fileName.lastIndexOf(".")+1):null;
             if (type2 != null) {
-                String path = "/usr/local/nginx/html/project/html/userImg/"+  username +".jpg";
+                String path = "/www/userImg/"+  username +".jpg";
                 File file2 = new File(path);
                 multipartFile.transferTo(file2);
                 userService.uploadUserIcon(uid,username+".jpg");
