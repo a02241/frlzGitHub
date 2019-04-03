@@ -257,10 +257,10 @@ public class UserController {
             // 检查文件类型
             String type2 = fileName.indexOf(".") != -1?fileName.substring(fileName.lastIndexOf(".")+1):null;
             if (type2 != null) {
-                String path = "/www/userImg/"+  username +".jpg";
+                String path = "/www/userImg/"+  uid +".jpg";
                 File file2 = new File(path);
                 multipartFile.transferTo(file2);
-                userService.uploadUserIcon(uid,username+".jpg");
+                userService.uploadUserIcon(uid,uid+".jpg");
                 return R.isOk().msg("上传成功");
             }else {
                 System.out.println("文件格式不正确");
