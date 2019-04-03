@@ -6,7 +6,6 @@ import com.frlz.pojo.User;
 import com.frlz.service.UserService;
 import com.frlz.util.GetUername;
 import com.frlz.util.MD5;
-import com.frlz.util.Security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -163,8 +162,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void uploadUserIcon(String username, String icon) {
-        userMapper.uploadUserIcon(username,icon);
+    public void uploadUserIcon(String uid, String icon) {
+        userMapper.uploadUserIcon(uid,icon);
     }
 
     @Override

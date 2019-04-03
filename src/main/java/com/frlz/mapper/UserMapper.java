@@ -102,8 +102,8 @@ public interface UserMapper {
             "#{interestNumber},'快来添加你的个性签名吧！',0,#{birthday})")
     void registSave(User user);
 
-    @Update("update user set icon = #{icon} where username = #{username}")
-    void uploadUserIcon(String username,String icon);
+    @Update("update user set icon = #{icon} where uid = #{uid}")
+    void uploadUserIcon(String uid,String icon);
 
     @Update("update user set username = #{username}, " +
             "phonenumber = #{phonenumber}, " +

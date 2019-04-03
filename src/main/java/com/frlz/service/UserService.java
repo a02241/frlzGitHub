@@ -32,7 +32,7 @@ public interface UserService {
 
 	String registSave(User user);
 
-	void uploadUserIcon(String username,String icon);
+	void uploadUserIcon(String uid,String icon);
 
 	void updateUser(User user);
 
