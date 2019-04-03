@@ -250,17 +250,17 @@ public class UserController {
      * @return java.lang.String
      * @throws
      */
-    public R<String> uploadUserIcon(String file,@Param("username") String username,String uid) throws IOException{
+    public R<String> uploadUserIcon(String file,String uid) throws IOException{
         MultipartFile multipartFile = Base64Decode.base64Convert(file);
         if (multipartFile != null) {// 检查文件是否为空
             String fileName = multipartFile.getOriginalFilename();
             // 检查文件类型
             String type2 = fileName.indexOf(".") != -1?fileName.substring(fileName.lastIndexOf(".")+1):null;
             if (type2 != null) {
-                String path = "/usr/local/nginx/html/project/html/userImg/"+  username +".jpg";
+                String path = "/www/userImg/"+  uid +".jpg";
                 File file2 = new File(path);
                 multipartFile.transferTo(file2);
-                userService.uploadUserIcon(uid,username+".jpg");
+                userService.uploadUserIcon(uid,uid+".jpg");
                 return R.isOk().msg("上传成功");
             }else {
                 System.out.println("文件格式不正确");
