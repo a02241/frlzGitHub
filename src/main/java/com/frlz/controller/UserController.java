@@ -593,7 +593,8 @@ public class UserController {
             return R.isFail().msg("手机格式错误");
         }
         int result = userService.checkUser(username,email,phonenumber);
-        if (phonenumber.trim().length()> 0 && phonenumber.trim().length()> 0 && username.trim().length()> 0){
+        System.out.println(email+"!!!!!");
+        if (phonenumber.trim().length()> 0 || email.trim().length()> 0 || username.trim().length()> 0){
             if (result==1){
                 return R.isFail().msg("用户名已存在");
             }else if (result==2){
