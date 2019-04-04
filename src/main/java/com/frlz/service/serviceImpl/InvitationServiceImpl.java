@@ -57,5 +57,15 @@ public class InvitationServiceImpl implements InvitationService {
         invitationMapper.updateInviteState(code,uid);
     }
 
+    @Override
+    public Invitation getOneInvitation() {
+        return invitationMapper.selectOneInvitation();
+    }
+
+    @Override
+    public void updateInviteUid(String uid, String code) {
+        invitationMapper.updateInviteUid(uid,code);
+    }
+
 
 }

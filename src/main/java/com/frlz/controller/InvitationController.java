@@ -1,9 +1,13 @@
 package com.frlz.controller;
 
+import com.frlz.pojo.Balance;
 import com.frlz.pojo.Invitation;
+import com.frlz.service.BalanceService;
 import com.frlz.service.InvitationService;
+import com.frlz.service.TradeLogService;
 import com.frlz.util.R;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,10 +20,14 @@ import java.util.List;
 public class InvitationController {
 
     private final InvitationService invitationService;
+    private final BalanceService balanceService;
+    private final TradeLogService tradeLogService;
 
     @Autowired
-    public InvitationController(InvitationService invitationService){
+    public InvitationController(InvitationService invitationService,BalanceService balanceService,TradeLogService tradeLogService){
         this.invitationService = invitationService;
+        this.balanceService = balanceService;
+        this.tradeLogService = tradeLogService;
     }
 
     @PostMapping("selectInvatationByUid")
@@ -59,15 +67,35 @@ public class InvitationController {
         if (result == 0){
             return R.isFail().data("没有该邀请码");
         }
-        if (result ==1){
+        if (result == 1){
             return R.isOk().data("邀请码未被使用");
         }
-        if (result ==2){
+        if (result == 2){
+            return R.isFail().data("邀请码已被兑换");
+        }
+        if (result == 3){
             return R.isFail().data("邀请码已被使用");
         }
         else {
             return R.isFail();
         }
+    }
+
+    //量子兑换邀请码
+    @Transactional
+    @PostMapping("exchangeInvitation")
+    public R exchangeInvitation(String uid){
+        String code;
+        Balance balance = balanceService.selectFromBanlanceByUid(uid);
+        if (balance.getQuantumBalance() >= 10){
+            code = invitationService.getOneInvitation().getCode();
+            balanceService.updateQuantumBalanceByUid(uid,balance.getQuantumBalance() - 10);
+            invitationService.updateInviteUid(uid,code);
+            tradeLogService.insertTradeLog(balance.getBalanceId(),-10,0,0,"兑换邀请码");
+        }else {
+            return R.isFail().msg("余额不足");
+        }
+        return R.isOk().data(code);
     }
 
 
