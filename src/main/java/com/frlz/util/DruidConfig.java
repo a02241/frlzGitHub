@@ -89,12 +89,8 @@ public class DruidConfig {
         reg.setServlet(new StatViewServlet());
         reg.addUrlMappings("/druid/*");
         //白名单：
-//        reg.addInitParameter("allow", "49.75.84.96,192.168.1.18");
-//        reg.addInitParameter("allow", "49.75.84.96,192.168.1.17");
-//        reg.addInitParameter("allow", "49.75.84.96,192.168.1.13");
-//        reg.addInitParameter("allow", "49.75.84.96,192.168.1.17");
-//        reg.addInitParameter("allow", "49.75.84.96,192.168.1.13");
         reg.addInitParameter("allow", "49.75.84.96,47.101.34.192");
+//        reg.addInitParameter("allow", "49.75.84.96");
         //IP黑名单 (存在共同时，deny优先于allow) : 如果满足deny的话提示:Sorry, you are not permi tted to view this page.
 //        reg.addInitParameter("deny", "49.75.84.96,192.168.1.18");
         //登录查看信息的账号密码.
