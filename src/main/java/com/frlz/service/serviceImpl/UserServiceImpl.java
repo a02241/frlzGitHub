@@ -73,6 +73,11 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectUserByUsername(username);
     }
 
+    @Override
+    public User selectUserByUid(String uid) {
+        return userMapper.selectUserByUid(uid);
+    }
+
 
     @Override
     public String searchUsernameByEmail(String email){
