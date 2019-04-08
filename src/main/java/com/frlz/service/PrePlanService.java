@@ -8,6 +8,6 @@ public interface PrePlanService {
 
     void insertIntoPrePlan(PrePlan prePlan);
 
-    PrePlan selectPrePlanByUid(String uid, Date time);
+    PrePlan selectPrePlanByUid(String uid, String time);
 
 }

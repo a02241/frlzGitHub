@@ -2,6 +2,7 @@ package com.frlz.controller;
 
 import com.frlz.pojo.PrePlan;
 import com.frlz.service.PrePlanService;
+import com.frlz.util.DateTime;
 import com.frlz.util.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,7 +42,7 @@ public class PrePlanController {
      * @version V1.0
      */
 
-    public R<PrePlan> getPrePlan(String uid, Date time){
+    public R<PrePlan> getPrePlan(String uid, String time){
         return R.isOk().data(prePlanService.selectPrePlanByUid(uid,time));
     }
 

@@ -10,10 +10,10 @@ public interface PrePlanMapper {
     @SelectKey(keyProperty = "prePlanId",resultType = String.class, before = true,
             statement = "select replace(uuid(), '-', '')")
     @Options(keyProperty = "prePlanId", useGeneratedKeys = true)
-    @Insert("insert into prePlan values(#{prePlanId},#{message},#{time},#{uid})")
+    @Insert("insert into prePlan values(#{prePlanId},#{message},now(),#{uid})")
     void insertIntoPrePlan(PrePlan prePlan);
 
-    @Select("select * from prePlan where uid = #{uid} and time = #{time}")
-    PrePlan selectPrePlanByUid(String uid, Date time);
+    @Select("select * from prePlan where uid = #{uid} and  DATEDIFF(time,#{time}) =0")
+    PrePlan selectPrePlanByUid(String uid, String time);
 
 }
