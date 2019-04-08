@@ -39,6 +39,9 @@ public interface UserMapper {
     @Select("select experience from user where uid = #{uid}")
     int selectExperienceByUid(String uid);
 
+    @Select("select * from user where uid = #{uid}")
+    User selectUserByUid(String uid);
+
     @Select("select count(*) from user where uid = #{uid} limit 1")
     int selectByUidIsture(String uid);
 
