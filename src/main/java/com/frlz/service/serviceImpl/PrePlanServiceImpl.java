@@ -30,7 +30,7 @@ public class PrePlanServiceImpl implements PrePlanService {
     }
 
     @Override
-    public PrePlan selectPrePlanByUid(String uid, Date time) {
+    public PrePlan selectPrePlanByUid(String uid, String time) {
         return prePlanMapper.selectPrePlanByUid(uid,time);
     }
 
