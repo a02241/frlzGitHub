@@ -42,10 +42,14 @@ public class FansController {
      */
 
     public R<String> interest(@PathVariable String uid,@PathVariable String fansUId){
+        if (userService.checkUserByUid(uid) != 0 && userService.checkUserByUid(fansUId) != 0){
             fansService.insertFans(uid,fansUId);
             userService.updateFansNumberAdd(uid);
             userService.updateInterestNumberAdd(fansUId);
             return R.isOk().msg("success");
+        }else {
+            return R.isFail().msg("参数错误");
+        }
     }
 
     @Transactional
@@ -64,10 +68,14 @@ public class FansController {
      */
 
     public R<String> notInterest(String uid,String fansUId) {
-        fansService.deleteFans(fansUId);
-        userService.updateFansNumberReduce(uid);
-        userService.updateInterestNumberReduce(fansUId);
-        return R.isOk().msg("success");
+        if (userService.checkUserByUid(uid) != 0 && userService.checkUserByUid(fansUId) != 0) {
+            fansService.deleteFans(fansUId);
+            userService.updateFansNumberReduce(uid);
+            userService.updateInterestNumberReduce(fansUId);
+            return R.isOk().msg("success");
+        }else {
+            return R.isFail().msg("参数错误");
+        }
     }
 
     @PostMapping("/myFans")

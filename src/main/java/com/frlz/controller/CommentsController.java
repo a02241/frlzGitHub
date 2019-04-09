@@ -48,7 +48,7 @@ public class CommentsController {
      * @param pageCode
      * @param username
      * @param blogId
-     * @Description: TODO 必填参数:blogId,username,pageCode(默认为1)
+     * @Description: TODO 必填参数:blogId,pageCode(默认为1)
      *                  返回值username,
      *                  message,
      *                  commentsNumber,
