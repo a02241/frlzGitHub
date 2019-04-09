@@ -227,6 +227,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int checkUserByUid(String uid) {
+        return userMapper.selectByUidIsture(uid);
+    }
+
+    @Override
     public String checkPasswordByUId(String uid) {
         return userMapper.checkPasswordByUId(uid);
     }

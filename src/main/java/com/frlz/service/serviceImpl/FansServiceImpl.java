@@ -3,6 +3,7 @@ package com.frlz.service.serviceImpl;
 import com.frlz.mapper.FansMapper;
 import com.frlz.pojo.Fans;
 import com.frlz.service.FansService;
+import com.frlz.utilPojo.UtilFans;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +28,11 @@ public class FansServiceImpl implements FansService {
     @Override
     public List<Fans> selectFansForOne(String uid){
         return fansMapper.selectFansForOne(uid);
+    }
+
+    @Override
+    public List<UtilFans> selectFansByUid(String uid) {
+        return fansMapper.selectFansByUid(uid);
     }
 
     @Override

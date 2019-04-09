@@ -42,6 +42,8 @@ public interface UserMapper {
     @Select("select * from user where uid = #{uid}")
     User selectUserByUid(String uid);
 
+
+
     @Select("select count(*) from user where uid = #{uid} limit 1")
     int selectByUidIsture(String uid);
 

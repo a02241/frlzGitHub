@@ -71,16 +71,23 @@ public class FansController {
     }
 
     @PostMapping("/myFans")
-    public R<List> myFans(String uid){
-        List<Map> ul = new ArrayList<>();
-        for (int i = 0,a = fansService.selectFansForOne(uid).size();i < a;i++){
-            User user = userService.selectUserByUid(fansService.selectFansForOne(uid).get(i).getFansUId());
-            Map<String,String> map = new HashMap<>();
-            map.put("username",user.getUsername());
-            map.put("uid",user.getUid());
-            map.put("icon",user.getIcon());
-            ul.add(map);
+    /**
+     * TODO 查看粉丝
+     * @title myFans
+     * @create by: cz
+     * @description: TODO 必填参数 uid
+     * @create time: 2019/4/9 10:48
+     * @Param: uid
+     * @throws
+     * @return com.frlz.util.R<java.util.List>
+     * @version V1.0
+     */
+
+    public R myFans(String uid){
+        if (userService.checkUserByUid(uid) !=0 ){
+            return R.isOk().data(fansService.selectFansByUid(uid));
+        }else {
+            return R.isFail().msg("参数错误");
         }
-        return R.isOk().data(ul);
     }
 }

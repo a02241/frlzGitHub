@@ -56,6 +56,8 @@ public interface UserService {
 
 	String updateProfile(String profile,String uid);
 
+	int checkUserByUid(String uid);
+
 	String  checkPasswordByUId(String uid);
 
 	void deleteUserByUid(String uid);
