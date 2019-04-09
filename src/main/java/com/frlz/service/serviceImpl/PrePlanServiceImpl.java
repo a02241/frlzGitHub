@@ -34,4 +34,20 @@ public class PrePlanServiceImpl implements PrePlanService {
         return prePlanMapper.selectPrePlanByUid(uid,time);
     }
 
+    @Override
+    public void updatePrePlanMessage(String message, String prePlanId) {
+        prePlanMapper.updatePrePlanMessage(message,prePlanId);
+    }
+
+    @Override
+    public int checkPrePlan(String prePlanId) {
+        return prePlanMapper.checkPrePlan(prePlanId);
+    }
+
+    @Override
+    public void deletePrePlan(String prePlanId) {
+        prePlanMapper.deletePrePlanByprePlanId(prePlanId);
+    }
+
+
 }

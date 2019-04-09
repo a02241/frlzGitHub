@@ -74,6 +74,7 @@ public class CommentsController {
         }else {
             return R.isFail().msg("blogId为空");
         }
+        conditions.put("blogId",blogId);//把blogId放入map集合中
         List<Comments> comments =commentsService.findComments(conditions, 12, pageCode);
         map.put("comments", comments);//conditions-->>map存放数据,pageCode-->>分页条数,从第几个开始
         return R.isOk().data(map);

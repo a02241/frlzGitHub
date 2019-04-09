@@ -10,4 +10,9 @@ public interface PrePlanService {
 
     PrePlan selectPrePlanByUid(String uid, String time);
 
+    void updatePrePlanMessage(String message,String prePlanId);
+
+    int checkPrePlan(String prePlanId);
+
+    void deletePrePlan(String prePlanId);
 }

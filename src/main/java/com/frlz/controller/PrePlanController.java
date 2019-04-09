@@ -51,7 +51,7 @@ public class PrePlanController {
      * 添加盘前计划
      * @title addPrePlan
      * @create by: cz
-     * @description: TODO 必填参数message，uid，time，成功返回success
+     * @description: TODO 必填参数message，uid，成功返回success
      * @create time: 2019/3/13 15:58
      * @Param: prePlan
      * @throws
@@ -60,7 +60,57 @@ public class PrePlanController {
      */
 
     public R<String> addPrePlan(PrePlan prePlan){
-        prePlanService.insertIntoPrePlan(prePlan);
-        return R.isOk().msg("success");
+        if (prePlanService.selectPrePlanByUid(prePlan.getUid(),DateTime.getNowTimeToString()) == null){
+            prePlanService.insertIntoPrePlan(prePlan);
+            return R.isOk().msg("success");
+        }else {
+            return R.isFail().msg("今天已写盘前，请修改");
+        }
+    }
+
+    @PostMapping("updatePlan")
+    /**
+     * TODO 更新盘前计划
+     * @title updatePlan
+     * @create by: cz
+     * @description: TODO 必填参数message prePlanId
+     * @create time: 2019/4/9 10:24
+     * @Param: message
+ * @Param: prePlanId
+     * @throws
+     * @return com.frlz.util.R<java.lang.String>
+     * @version V1.0
+     */
+
+    public R<String> updatePlan(String message, String prePlanId){
+        if (prePlanService.checkPrePlan(prePlanId) != 0){
+            prePlanService.updatePrePlanMessage(message,prePlanId);
+            return R.isOk().msg("success");
+        }else {
+            return R.isFail().msg("参数错误");
+        }
+    }
+
+    @PostMapping("deletePrePlan")
+    /**
+     * TODO 删除盘前计划
+     * @title deletePrePlan
+     * @create by: cz
+     * @description: TODO 必填参数 prePlanId
+     * @create time: 2019/4/9 10:27
+     * @Param: message
+     * @Param: prePlanId
+     * @throws
+     * @return com.frlz.util.R<java.lang.String>
+     * @version V1.0
+     */
+
+    public R<String> deletePrePlan(String prePlanId){
+        if (prePlanService.checkPrePlan(prePlanId) != 0){
+            prePlanService.deletePrePlan(prePlanId);
+            return R.isOk().msg("success");
+        }else {
+            return R.isFail().msg("参数错误");
+        }
     }
 }
