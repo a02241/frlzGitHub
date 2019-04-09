@@ -2,6 +2,7 @@ package com.frlz.controller;
 
 import com.frlz.service.Area_ListService;
 import com.frlz.service.SessionService;
+import com.frlz.util.GetIP;
 import com.frlz.util.R;
 import com.frlz.util.TaobaoIP;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -40,28 +40,7 @@ public class Area_listController{
 
     @PostMapping("getip")
     public R getip(HttpServletRequest request){
-        String remoteAddr = request.getRemoteAddr();
-        String forwarded = request.getHeader("X-Forwarded-For");
-        String realIp = request.getHeader("X-Real-IP");
-
-        String ip;
-        if (realIp == null) {
-            if (forwarded == null) {
-                ip = remoteAddr;
-            } else {
-                ip = remoteAddr + "/" + forwarded.split(",")[0];
-            }
-        } else {
-            if (realIp.equals(forwarded)) {
-                ip = realIp;
-            } else {
-                if(forwarded != null){
-                    forwarded = forwarded.split(",")[0];
-                }
-                ip = realIp + "/" + forwarded;
-            }
-        }
-        return R.isOk().data(TaobaoIP.getResult(ip));
+        return R.isOk().data(TaobaoIP.getResult(GetIP.getip(request)));
     }
 
 }
