@@ -43,7 +43,7 @@ public class BalanceUtil {
     public void addQuantumBalance(String uid, int count,String remarks)  {
         Balance balance = null;//根据uid查询余额
         try {
-            balance = balanceUtil.balanceService.selectFromBanlanceByUid(uid);
+            balance = balanceUtil.balanceService.selectFromBalanceByUid(uid);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -82,6 +82,6 @@ public class TradeLogServiceImpl implements TradeLogService {
 
     @Override
     public List<UtilTradeLog> getTradeLogByUid(String uid) {
-        return tradeLogMapper.selectTradeLog(balanceMapper.selectFromBanlanceByUid(uid).getBalanceId());
+        return tradeLogMapper.selectTradeLog(balanceMapper.selectFromBalanceByUid(uid).getBalanceId());
     }
 }

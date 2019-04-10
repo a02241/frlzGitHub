@@ -130,6 +130,9 @@ public class UserController {
         String data;
         User user = userService.selectUser(username);
         if (user != null) {
+            if (user.getState() == 2){
+                return R.isOk().msg("你的账号已被封停，请联系客服解封！");
+            }
             if (user.getPassword().equals(MD5.MD5Encode("fr2018<%" + password  + "%>lz1220"))) {
                 data = "1";//密码相同返回1
                 String format = DateTime.getNowTimeToString();
