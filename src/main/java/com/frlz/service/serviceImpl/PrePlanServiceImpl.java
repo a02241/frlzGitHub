@@ -31,6 +31,7 @@ public class PrePlanServiceImpl implements PrePlanService {
 
     @Override
     public PrePlan selectPrePlanByUid(String uid, String time) {
+        System.out.println();
         return prePlanMapper.selectPrePlanByUid(uid,time);
     }
 
