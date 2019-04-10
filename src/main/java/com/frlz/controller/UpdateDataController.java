@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestController
 @RestControllerAdvice
 public class UpdateDataController {
-    @Autowired
     private UpdateDataService updateDataService;
+    @Autowired
+    public UpdateDataController(UpdateDataService updateDataService){
+        this.updateDataService = updateDataService;
+    }
 
     @PostMapping("updateData")
     public R<String> updateData(){

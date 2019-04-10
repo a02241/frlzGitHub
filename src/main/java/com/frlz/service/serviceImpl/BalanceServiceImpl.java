@@ -35,13 +35,13 @@ public class BalanceServiceImpl implements BalanceService {
     }
 
     @Override
-    public Balance selectFromBanlanceByUid(String uid){
-        return balanceMapper.selectFromBanlanceByUid(uid);
+    public Balance selectFromBalanceByUid(String uid){
+        return balanceMapper.selectFromBalanceByUid(uid);
     }
 
     @Override
-    public UtilBalance selectShowBanlanceByUid(String uid) {
-        return balanceMapper.selectShowBanlanceByUid(uid);
+    public UtilBalance selectShowBalanceByUid(String uid) {
+        return balanceMapper.selectShowBalanceByUid(uid);
     }
 
     @Override

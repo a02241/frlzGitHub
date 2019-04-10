@@ -15,10 +15,10 @@ public interface BalanceMapper {
     void insertBalance(Balance balance);
 
     @Select("select * from balance where uid = #{uid}")
-    Balance selectFromBanlanceByUid(String uid);
+    Balance selectFromBalanceByUid(String uid);
 
     @Select("select * from balance where uid = #{uid}")
-    UtilBalance selectShowBanlanceByUid(String uid);
+    UtilBalance selectShowBalanceByUid(String uid);
 
     @Update("update balance set quantumBalance = #{quantumBalance} where uid = #{uid}")
     void updateQuantumBalanceByUid(String uid,int quantumBalance);

@@ -44,7 +44,7 @@ public class BalanceController {
      */
 
     public R<Balance> getBalance(String uid){
-        return R.isOk().data(balanceService.selectFromBanlanceByUid(uid));
+        return R.isOk().data(balanceService.selectFromBalanceByUid(uid));
     }
 
     @Transactional
@@ -63,7 +63,7 @@ public class BalanceController {
      */
 
     public R<String> quantumToBlock(String uid, int quantum) {
-        Balance balance = balanceService.selectFromBanlanceByUid(uid);
+        Balance balance = balanceService.selectFromBalanceByUid(uid);
         if (balance.getQuantumBalance() >= 10){
             balanceService.updateQuantumBalanceByUid(uid,balance.getQuantumBalance() - quantum);
             balanceService.updateBlockBalanceByUid(uid,balance.getBlockBalance() + quantum / 10);
@@ -91,7 +91,7 @@ public class BalanceController {
      */
 
     public R<String> blockToQuantum(String uid,int block){
-        Balance balance = balanceService.selectFromBanlanceByUid(uid);
+        Balance balance = balanceService.selectFromBalanceByUid(uid);
         if (balance.getBlockBalance() > 0){
             balanceService.updateQuantumBalanceByUid(uid,balance.getQuantumBalance() + block * 10);
             balanceService.updateBlockBalanceByUid(uid,balance.getBlockBalance() - block);
@@ -119,7 +119,7 @@ public class BalanceController {
      */
 
     public R<String> magicCubeToBlock(String uid,int magicCube){
-        Balance balance = balanceService.selectFromBanlanceByUid(uid);
+        Balance balance = balanceService.selectFromBalanceByUid(uid);
         if (balance.getMagicCubeBalance() > 0){
             balanceService.updateBlockBalanceByUid(uid,balance.getBlockBalance() + magicCube * 26);
             balanceService.updateMagicCubeBalanceByUid(uid,balance.getMagicCubeBalance() - magicCube);
@@ -147,7 +147,7 @@ public class BalanceController {
      */
 
     public R<String> blockToMagicCube(String uid,int block){
-        Balance balance = balanceService.selectFromBanlanceByUid(uid);
+        Balance balance = balanceService.selectFromBalanceByUid(uid);
         if (balance.getBlockBalance() >= 27){
             balanceService.updateBlockBalanceByUid(uid,balance.getBlockBalance() - block);
             balanceService.updateMagicCubeBalanceByUid(uid,balance.getMagicCubeBalance() + block / 27);

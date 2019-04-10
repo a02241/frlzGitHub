@@ -1,17 +1,11 @@
 package com.frlz.controller;
 
-import com.frlz.pojo.User;
 import com.frlz.service.FansService;
 import com.frlz.service.UserService;
 import com.frlz.util.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @RestControllerAdvice
 @RestController
