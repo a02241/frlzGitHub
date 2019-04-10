@@ -3,6 +3,7 @@ package com.frlz.service;
 import com.frlz.pojo.PrePlan;
 
 import java.util.Date;
+import java.util.List;
 
 public interface PrePlanService {
 
@@ -13,6 +14,10 @@ public interface PrePlanService {
     void updatePrePlanMessage(String message,String prePlanId);
 
     int checkPrePlan(String prePlanId);
+
+    int checkPrePlanByUid(String uid);
+
+    List<Date> selectTimeByMonthUid(String time , String uid);
 
     void deletePrePlan(String prePlanId);
 }

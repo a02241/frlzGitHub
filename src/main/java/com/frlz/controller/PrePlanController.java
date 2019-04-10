@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @program: frlz
@@ -76,7 +77,7 @@ public class PrePlanController {
      * @description: TODO 必填参数message prePlanId
      * @create time: 2019/4/9 10:24
      * @Param: message
- * @Param: prePlanId
+   * @Param: prePlanId
      * @throws
      * @return com.frlz.util.R<java.lang.String>
      * @version V1.0
@@ -99,7 +100,7 @@ public class PrePlanController {
      * @description: TODO 必填参数 prePlanId
      * @create time: 2019/4/9 10:27
      * @Param: message
-     * @Param: prePlanId
+    * @Param: prePlanId
      * @throws
      * @return com.frlz.util.R<java.lang.String>
      * @version V1.0
@@ -109,6 +110,29 @@ public class PrePlanController {
         if (prePlanService.checkPrePlan(prePlanId) != 0){
             prePlanService.deletePrePlan(prePlanId);
             return R.isOk().msg("success");
+        }else {
+            return R.isFail().msg("参数错误");
+        }
+    }
+
+    @PostMapping("selectTimeMonth")
+    /**
+     * TODO 盘前时间
+     * @title selectTimeMonth
+     * @create by: cz
+     * @description: TODO 必填参数 uid time
+     * @create time: 2019/4/10 14:56
+     * @Param: uid
+     * @Param: time
+     * @throws
+     * @return com.frlz.util.R<java.lang.String>
+     * @version V1.0
+     */
+
+    public R<String> selectTimeMonth(String uid,String time){
+        if (prePlanService.checkPrePlanByUid(uid) != 0){
+            List<Date> dateList = prePlanService.selectTimeByMonthUid(time,uid);
+            return R.isOk().data(dateList);
         }else {
             return R.isFail().msg("参数错误");
         }

@@ -4,6 +4,7 @@ import com.frlz.pojo.PrePlan;
 import org.apache.ibatis.annotations.*;
 
 import java.util.Date;
+import java.util.List;
 
 public interface PrePlanMapper {
 
@@ -18,6 +19,12 @@ public interface PrePlanMapper {
 
     @Select("select count(*) from prePlan where prePlanId = #{prePlanId}")
     int checkPrePlan(String prePlanId);
+
+    @Select("select count(*) from prePlan where uid = #{uid}")
+    int checkPrePlanByUid(String uid);
+
+    @Select("select time from prePlan where DATE_FORMAT(time, '%Y-%m') = #{time} and uid = #{uid}")
+    List<Date> selectTimeByMonthUid(String time , String uid);
 
     @Update("update prePlan set message = #{message} where prePlanId = #{prePlanId}")
     void updatePrePlanMessage(String message,String prePlanId);

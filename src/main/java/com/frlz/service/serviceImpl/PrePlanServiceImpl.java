@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @program: frlz
@@ -43,6 +44,16 @@ public class PrePlanServiceImpl implements PrePlanService {
     @Override
     public int checkPrePlan(String prePlanId) {
         return prePlanMapper.checkPrePlan(prePlanId);
+    }
+
+    @Override
+    public int checkPrePlanByUid(String uid) {
+        return prePlanMapper.checkPrePlan(uid);
+    }
+
+    @Override
+    public List<Date> selectTimeByMonthUid(String time, String uid) {
+        return prePlanMapper.selectTimeByMonthUid(time,uid);
     }
 
     @Override
