@@ -10,9 +10,9 @@ public interface BalanceService {
 
     void insertBalance(int blockBalance,int quantumBalance,int magicCubeBalance,String uid);
 
-    Balance selectFromBanlanceByUid(String uid);
+    Balance selectFromBalanceByUid(String uid);
 
-    UtilBalance selectShowBanlanceByUid(String uid);
+    UtilBalance selectShowBalanceByUid(String uid);
 
     void updateQuantumBalanceByUid(String uid,int quantumBalance);
 

@@ -35,9 +35,9 @@ public class SharesController {
     
     public R<Object[][]> getShares(@Param("code") String code ,@RequestParam(defaultValue="")String before ,@RequestParam(defaultValue="")String end) {
         String nowEnd = DateTime.getNowTimeToString();
-        String nowbefore = DateTime.getBeforeTwoYearTimeToString();
+        String nowBefore = DateTime.getBeforeTwoYearTimeToString();
         if ("".equals(before)){
-            before = nowbefore;
+            before = nowBefore;
         }
         if ("".equals(end)){
             end = nowEnd;

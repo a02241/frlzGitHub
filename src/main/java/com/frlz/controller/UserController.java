@@ -101,7 +101,7 @@ public class UserController {
             //创建余额账户
             Balance balance;
             balanceService.insertBalance(0,1,0,MyUid);
-            balance = balanceService.selectFromBanlanceByUid(MyUid);
+            balance = balanceService.selectFromBalanceByUid(MyUid);
             tradeLogService.insertTradeLog(balance.getBalanceId(),1,0,0,"登录奖励增加1点量子");//写入交易记录
         }
         return R.isOk().msg("注册成功").data(check);
@@ -141,7 +141,7 @@ public class UserController {
                     if (!format.equals(lastestTime)){
                         Balance balance;//根据uid查询余额
                         int experience;//登录加1点经验
-                        balance = balanceService.selectFromBanlanceByUid(user.getUid());
+                        balance = balanceService.selectFromBalanceByUid(user.getUid());
                         int count = balance.getQuantumBalance() + 1;//量子余额+1
                         balanceService.updateQuantumBalanceByUid(user.getUid(),count);//交易写入数据库
                         if (user.getExperience() != -1){
@@ -301,7 +301,7 @@ public class UserController {
         User user = userService.selectByUid(uid);
         if(user != null) {
             if (username.trim().length() > 0) {
-                Balance balance = balanceService.selectFromBanlanceByUid(uid);
+                Balance balance = balanceService.selectFromBalanceByUid(uid);
                 user.setUsername(username);
                 if (balance.getQuantumBalance() > 10) {
                     balanceService.updateQuantumBalanceByUid(uid, balance.getQuantumBalance() - 10);
@@ -516,11 +516,11 @@ public class UserController {
     public R<HashMap<String,Object>> showMyInformation(String uid){
         HashMap<String,Object> map = new HashMap<>();
         User user = userService.selectByUid(uid);
-        UtilBalance balance = balanceService.selectShowBanlanceByUid(uid);
+        UtilBalance balance = balanceService.selectShowBalanceByUid(uid);
         if (balance!=null&&uid!=null){
             map.put("username",user.getUsername());
             map.put("experience", String.valueOf(user.getExperience()));
-            map.put("blance",balance);
+            map.put("balance",balance);
         }else {
             return R.isFail().msg("uid错误");
         }
@@ -542,10 +542,10 @@ public class UserController {
 
     public R<HashMap<String,Object>> showMyBlock(String uid){
         HashMap<String,Object> map = new HashMap<>();
-        UtilBalance balance = balanceService.selectShowBanlanceByUid(uid);
+        UtilBalance balance = balanceService.selectShowBalanceByUid(uid);
         List<UtilTradeLog> utilTradeLog = tradeLogService.getTradeLogByUid(uid);
         if (balance!=null&&utilTradeLog!=null){
-            map.put("blance",balance);
+            map.put("balance",balance);
             map.put("tradeLog",utilTradeLog);
         }else {
             return R.isFail().msg("uid错误");
@@ -593,7 +593,6 @@ public class UserController {
             return R.isFail().msg("手机格式错误");
         }
         int result = userService.checkUser(username,email,phonenumber);
-        System.out.println(email+"!!!!!");
         if (phonenumber.trim().length()> 0 || email.trim().length()> 0 || username.trim().length()> 0){
             if (result==1){
                 return R.isFail().msg("用户名已存在");

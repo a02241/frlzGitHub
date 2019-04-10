@@ -86,7 +86,7 @@ public class InvitationController {
     @PostMapping("exchangeInvitation")
     public R exchangeInvitation(String uid){
         String code;
-        Balance balance = balanceService.selectFromBanlanceByUid(uid);
+        Balance balance = balanceService.selectFromBalanceByUid(uid);
         if (balance.getQuantumBalance() >= 10){
             code = invitationService.getOneInvitation().getCode();
             balanceService.updateQuantumBalanceByUid(uid,balance.getQuantumBalance() - 10);
