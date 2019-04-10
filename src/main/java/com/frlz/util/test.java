@@ -17,20 +17,24 @@ public class  test {
         int maxCount = 0;
         int minCount = 0;
         int count = 0;
+        int count2 = 0;
         for (int i = 0 ; i <= 9 ; i++){
             maxCount=i;
             for (int j = 0 ; j <= 9 ; j++) {
                 minCount=j;
                 for (int g = 0 ; g <= 9 ; g++){
                     rand=g;
-                    if (maxCount >= 8 && minCount <= 2 && rand > minCount && rand < maxCount) {
-                        count++;
-                        System.out.println(count + "~~~");
+                    if (i != j && j != g && g != i){
+                        if (maxCount >= 8 && minCount <= 2 && rand > minCount && rand < maxCount) {
+                            count++;
+                            System.out.println(minCount+"  "+ rand +"  "+maxCount);
+                        }
+                        count2++;
                     }
                 }
             }
         }
-        double result = count/ new Double(10*9*8/(3*2));
-        System.out.println(result);
+        double result2 = 6 * count/new Double (count2);
+        System.out.println(result2);
     }
 }
