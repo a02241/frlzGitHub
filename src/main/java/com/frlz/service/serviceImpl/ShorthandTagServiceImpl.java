@@ -13,6 +13,10 @@ import org.springframework.stereotype.Service;
  **/
 @Service
 public class ShorthandTagServiceImpl implements ShorthandTagService {
-    @Autowired
     private ShorthandTagMapper shorthandTagMapper;
+
+    @Autowired
+    public ShorthandTagServiceImpl(ShorthandTagMapper shorthandTagMapper){
+        this.shorthandTagMapper = shorthandTagMapper;
+    }
 }

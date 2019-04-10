@@ -14,6 +14,10 @@ import org.springframework.stereotype.Service;
  **/
 @Service
 public class ShorthandPhotoServiceImpl implements ShorthandPhotoService {
+
+    private final ShorthandPhotoMapper shorthandPhotoMapper;
     @Autowired
-    private ShorthandPhotoMapper shorthandPhotoMapper;
+    public ShorthandPhotoServiceImpl(ShorthandPhotoMapper shorthandPhotoMapper){
+        this.shorthandPhotoMapper = shorthandPhotoMapper;
+    }
 }

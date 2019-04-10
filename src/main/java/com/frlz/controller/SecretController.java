@@ -14,7 +14,7 @@ import java.util.Map;
 @RestController
 public class SecretController {
 
-    private SecretService secretService;
+    private final SecretService secretService;
 
     @Autowired
     public SecretController(SecretService secretService){
