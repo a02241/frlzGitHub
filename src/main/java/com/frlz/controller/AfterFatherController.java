@@ -1,9 +1,12 @@
 package com.frlz.controller;
 
+import com.frlz.pojo.AfterTag;
 import com.frlz.service.AfterFatherService;
 import com.frlz.service.AfterTagService;
 import com.frlz.service.UserService;
+import com.frlz.util.R;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -25,5 +28,11 @@ public class AfterFatherController {
         this.afterFatherService = afterFatherService;
         this.afterTagService = afterTagService;
         this.userService = userService;
+    }
+
+    @PostMapping("addAfterDiscuss")
+    public R addAfterDiscuss(String uid, AfterTag afterTag){
+        afterFatherService.addAfterDiscuss(uid,afterTag);
+        return R.isOk();
     }
 }
