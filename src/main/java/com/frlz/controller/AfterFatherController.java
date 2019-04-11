@@ -1,6 +1,5 @@
 package com.frlz.controller;
 
-import com.alibaba.druid.pool.vendor.SybaseExceptionSorter;
 import com.frlz.pojo.AfterTag;
 import com.frlz.service.AfterFatherService;
 import com.frlz.service.AfterTagService;
@@ -8,13 +7,10 @@ import com.frlz.service.UserService;
 import com.frlz.util.DateTime;
 import com.frlz.util.R;
 import com.frlz.utilPojo.UtilAfterFather;
-import com.frlz.util.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import java.sql.Time;
 import java.util.List;
 
 /**
@@ -38,15 +34,31 @@ public class AfterFatherController {
     }
 
     @PostMapping("addAfterDiscuss")
+    /**
+     * TODO 添加标签
+     * @title addAfterDiscuss
+     * @create by: cz
+     * @description: TODO 必填参数uid , shares ,changes,message,highest
+     * @create time: 2019/4/11 15:56
+     * @Param: uid
+     * @Param: afterTag
+     * @throws
+     * @return com.frlz.util.R
+     * @version V1.0
+     */
+
     public R addAfterDiscuss(String uid, AfterTag afterTag){
         if (afterFatherService.checkAfterFatherByUidTime(uid, DateTime.getNowTimeToString()) == 0){
             afterFatherService.addAfterDiscuss(uid);
+        }else {
+            return R.isFail().msg("参数错误");
         }
-        if (afterTagService.selectAfterTagByAfterTag(afterTag) == null){
+        if (afterTagService.selectAfterTagByAfterTag(afterTag) == null){//如果没有标签，则添加标签，否则更新
             afterTag.setAfterFatherId(afterFatherService.getAfterFatherId(uid));
             afterTagService.addAfterTag(afterTag);
+        }else {
+            afterTagService.updateAfterTag(afterTag.getMessage(), afterTagService.selectAfterTagByAfterTag(afterTag).getAfterTagId());
         }
-        afterTagService.updateAfterTag(afterTag.getMessage(),afterTagService.selectAfterTagByAfterTag(afterTag).getAfterTagId());
         return R.isOk();
     }
 
