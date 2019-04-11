@@ -1,5 +1,7 @@
 package com.frlz.service;
 
+import com.frlz.utilPojo.UtilAfterFather;
+
 import com.frlz.pojo.AfterTag;
 
 import java.util.Date;
@@ -13,4 +15,8 @@ public interface AfterFatherService {
     List<Date> selectTimeByMonthUid(String time , String uid);
 
     int checkAfterFatherByUid(String uid);
+
+    List<UtilAfterFather> selectAfterByTimeUid(String uid , String time);
+
+    int checkAfterFatherByUidTime(String uid,String time);
 }

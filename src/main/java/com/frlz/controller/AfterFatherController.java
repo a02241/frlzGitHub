@@ -6,10 +6,14 @@ import com.frlz.service.AfterFatherService;
 import com.frlz.service.AfterTagService;
 import com.frlz.service.UserService;
 import com.frlz.util.R;
+import com.frlz.utilPojo.UtilAfterFather;
+import com.frlz.util.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.List;
 
 /**
  * @program: frlz
@@ -39,5 +43,28 @@ public class AfterFatherController {
         System.out.println(afterTag);
         afterTagService.addAfterTag(afterTag);
         return R.isOk();
+    }
+
+    @PostMapping("searchAfterTag")
+    /**
+     * TODO 获取盘后观察信息
+     * @title searchAfterTag
+     * @create by: cz
+     * @description: TODO 必填参数uid,time(String)
+     * @create time: 2019/4/11 14:55
+     * @Param: uid
+     * @Param: time
+     * @throws
+     * @return com.frlz.util.R
+     * @version V1.0
+     */
+
+    public R searchAfterTag(String uid , String time){
+        if (afterFatherService.checkAfterFatherByUid(uid) != 0){
+            List<UtilAfterFather> utilAfterFathers = afterFatherService.selectAfterByTimeUid(uid,time);
+            return R.isOk().data(utilAfterFathers);
+        }else {
+            return R.isFail().msg("参数错误");
+        }
     }
 }

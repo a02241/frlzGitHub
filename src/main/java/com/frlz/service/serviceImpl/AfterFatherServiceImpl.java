@@ -5,6 +5,7 @@ import com.frlz.mapper.AfterTagMapper;
 import com.frlz.pojo.AfterFather;
 import com.frlz.pojo.AfterTag;
 import com.frlz.service.AfterFatherService;
+import com.frlz.utilPojo.UtilAfterFather;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +43,17 @@ public class AfterFatherServiceImpl implements AfterFatherService {
     @Override
     public int checkAfterFatherByUid(String uid) {
         return afterFatherMapper.checkAfterFatherByUid(uid);
+    }
+
+    @Override
+    public List<UtilAfterFather> selectAfterByTimeUid(String uid, String time) {
+
+        return afterFatherMapper.selectAfterByTimeUid(uid,time);
+    }
+
+    @Override
+    public int checkAfterFatherByUidTime(String uid, String time) {
+        return afterFatherMapper.checkAfterFatherByUidTime(uid,time);
     }
 
     @Override
