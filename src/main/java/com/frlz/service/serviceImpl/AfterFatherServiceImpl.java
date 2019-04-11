@@ -39,4 +39,9 @@ public class AfterFatherServiceImpl implements AfterFatherService {
 
         return afterFatherMapper.selectAfterByTimeUid(uid,time);
     }
+
+    @Override
+    public int checkAfterFatherByUidTime(String uid, String time) {
+        return afterFatherMapper.checkAfterFatherByUidTime(uid,time);
+    }
 }

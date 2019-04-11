@@ -33,8 +33,21 @@ public class AfterFatherController {
     }
 
     @PostMapping("searchAfterTag")
+    /**
+     * TODO 获取盘后观察信息
+     * @title searchAfterTag
+     * @create by: cz
+     * @description: TODO 必填参数uid,time(String)
+     * @create time: 2019/4/11 14:55
+     * @Param: uid
+     * @Param: time
+     * @throws
+     * @return com.frlz.util.R
+     * @version V1.0
+     */
+
     public R searchAfterTag(String uid , String time){
-        if (afterFatherService.checkAfterFatherByUid(uid) !=0){
+        if (afterFatherService.checkAfterFatherByUid(uid) != 0){
             List<UtilAfterFather> utilAfterFathers = afterFatherService.selectAfterByTimeUid(uid,time);
             return R.isOk().data(utilAfterFathers);
         }else {

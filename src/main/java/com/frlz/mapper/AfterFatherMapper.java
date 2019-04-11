@@ -13,6 +13,9 @@ public interface AfterFatherMapper {
     @Select("select count(*) from afterFather where uid = #{uid}")
     int checkAfterFatherByUid(String uid);
 
+    @Select("select count(*) from afterFather where uid = #{uid} and and DATE_FORMAT(time, '%Y-%m-%d') = #{time}")
+    int checkAfterFatherByUidTime(String uid,String time);
+
     @Select("select * from afterFather where uid = #{uid} and DATE_FORMAT(time, '%Y-%m-%d') = #{time}")
     @Results({
             @Result(property = "afterFatherId", column = "afterFatherId"),
