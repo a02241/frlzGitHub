@@ -35,7 +35,7 @@ public class AfterFatherController {
 
     @PostMapping("addAfterDiscuss")
     /**
-     * TODO 添加标签
+     * TODO 添加和更新标签
      * @title addAfterDiscuss
      * @create by: cz
      * @description: TODO 必填参数uid , shares ,changes,message,highest
