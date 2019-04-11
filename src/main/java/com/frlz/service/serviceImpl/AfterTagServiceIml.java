@@ -1,6 +1,7 @@
 package com.frlz.service.serviceImpl;
 
 import com.frlz.mapper.AfterTagMapper;
+import com.frlz.pojo.AfterTag;
 import com.frlz.service.AfterTagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,5 +22,8 @@ public class AfterTagServiceIml implements AfterTagService {
     }
 
 
-
+    @Override
+    public void addAfterTag(AfterTag afterTag) {
+        afterTagMapper.insertAfterTag(afterTag);
+    }
 }

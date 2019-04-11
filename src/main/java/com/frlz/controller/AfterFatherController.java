@@ -32,7 +32,8 @@ public class AfterFatherController {
 
     @PostMapping("addAfterDiscuss")
     public R addAfterDiscuss(String uid, AfterTag afterTag){
-        afterFatherService.addAfterDiscuss(uid,afterTag);
+        afterFatherService.addAfterDiscuss(uid);
+        afterTagService.addAfterTag(afterTag);
         return R.isOk();
     }
 }

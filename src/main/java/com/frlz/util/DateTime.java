@@ -118,4 +118,16 @@ public class DateTime {
         }
         return date;
     }
+
+    public static Date getTimeByDateToDate(Date date){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String newtime = sdf.format(date);
+        Date newDate = null;
+        try {
+            newDate = sdf.parse(newtime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return newDate;
+    }
 }

@@ -2,10 +2,14 @@ package com.frlz.service.serviceImpl;
 
 import com.frlz.mapper.AfterFatherMapper;
 import com.frlz.mapper.AfterTagMapper;
+import com.frlz.pojo.AfterFather;
 import com.frlz.pojo.AfterTag;
 import com.frlz.service.AfterFatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * @program: frlz
@@ -24,12 +28,19 @@ public class AfterFatherServiceImpl implements AfterFatherService {
     }
 
     @Override
-    public void addAfterDiscuss(String uid, AfterTag afterTag) {
-        afterFatherMapper.insertAfterFather(uid);
-        System.out.println("1111111111111");
-       /* afterTag.setAfterFatherId(afterFatherMapper.selectAfterFatherId(uid));
-        System.out.println("1111122221");
-        afterTagMapper.insertAfterTag(afterTag);
-        System.out.println("122222222222");*/
+    public void addAfterDiscuss(String uid) {
+        AfterFather afterFather = new AfterFather();
+        afterFather.setUid(uid);
+        afterFatherMapper.insertAfterFather(afterFather);
+    }
+
+    @Override
+    public List<Date> selectTimeByMonthUid(String time, String uid) {
+        return afterFatherMapper.selectTimeByMonthUid(time,uid);
+    }
+
+    @Override
+    public int checkAfterFatherByUid(String uid) {
+        return afterFatherMapper.checkAfterFatherByUid(uid);
     }
 }
