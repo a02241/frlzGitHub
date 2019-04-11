@@ -31,8 +31,8 @@ public interface UserMapper {
             @Result(property = "fansNumber", column = "fansNumber"),
             @Result(property = "sex", column = "sex"),
             @Result(property = "birthday", column = "birthday"),
-            @Result(property = "balance", column = "uId",
-                    one = @One(select = "com.frlz.mapper.BalanceMapper.selectFromBanlanceByUid"))
+            @Result(property = "balance", column = "uid",
+                    one = @One(select = "com.frlz.mapper.BalanceMapper.selectFromBalanceByUid"))
     })
     User selectByUid(String uid);
 
