@@ -48,10 +48,11 @@ public class AfterFatherController {
      */
 
     public R addAfterDiscuss(String uid, AfterTag afterTag){
+        if (userService.checkUserByUid(uid) == 0){
+            return R.isFail().msg("参数错误");
+        }
         if (afterFatherService.checkAfterFatherByUidTime(uid, DateTime.getNowTimeToString()) == 0){
             afterFatherService.addAfterDiscuss(uid);
-        }else {
-            return R.isFail().msg("参数错误");
         }
         if (afterTagService.selectAfterTagByAfterTag(afterTag) == null){//如果没有标签，则添加标签，否则更新
             afterTag.setAfterFatherId(afterFatherService.getAfterFatherId(uid));
