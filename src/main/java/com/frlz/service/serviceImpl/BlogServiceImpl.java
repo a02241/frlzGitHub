@@ -89,6 +89,7 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public int insertBlog(Blog blog, String uid)  {
+        System.out.println(uid+"~~~~~~~~~~");
         Date date = null;
         try {
             date = DateTime.getDate();
