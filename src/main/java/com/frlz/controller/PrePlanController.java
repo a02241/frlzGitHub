@@ -120,7 +120,7 @@ public class PrePlanController {
 
     @PostMapping("selectTimeMonth")
     /**
-     * TODO 盘前时间
+     * TODO 判断每月是否写盘前
      * @title selectTimeMonth
      * @create by: cz
      * @description: TODO 必填参数 uid time
