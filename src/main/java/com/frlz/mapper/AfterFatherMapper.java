@@ -16,7 +16,7 @@ public interface AfterFatherMapper {
             statement = "select replace(uuid(), '-', '')")
     @Options(keyProperty = "afterFatherId", useGeneratedKeys = true)
     @Insert("insert into afterFather" +
-            " values(  #{afterFatherId} ,now(), '4a9286e30a3e11e995e3e0d55ebbf96c')")
+            " values(  #{afterFatherId} ,now(), #{uid})")
     void insertAfterFather(AfterFather afterFather);
 
     @Select("select afterFatherId from afterFather where uid = #{uid}")

@@ -1,5 +1,6 @@
 package com.frlz.controller;
 
+import com.alibaba.druid.pool.vendor.SybaseExceptionSorter;
 import com.frlz.pojo.AfterTag;
 import com.frlz.service.AfterFatherService;
 import com.frlz.service.AfterTagService;
@@ -32,7 +33,10 @@ public class AfterFatherController {
 
     @PostMapping("addAfterDiscuss")
     public R addAfterDiscuss(String uid, AfterTag afterTag){
+
         afterFatherService.addAfterDiscuss(uid);
+        afterTag.setAfterFatherId(afterFatherService.getAfterFatherId(uid));
+        System.out.println(afterTag);
         afterTagService.addAfterTag(afterTag);
         return R.isOk();
     }

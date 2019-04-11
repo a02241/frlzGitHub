@@ -9,6 +9,6 @@ public interface AfterTagMapper {
     @SelectKey(keyProperty = "afterTagId",resultType = String.class, before = true,
             statement = "select replace(uuid(), '-', '')")
     @Options(keyProperty = "afterTagId", useGeneratedKeys = true)
-    @Insert("insert into afterTag values(#{afterTagId},#{shares},#{changes},#{time},#{message},#{afterFatherId})")
+    @Insert("insert into afterTag values(#{afterTagId},#{shares},#{changes},#{highest},#{time},#{message},#{afterFatherId})")
     void insertAfterTag(AfterTag afterTag);
 }
