@@ -26,4 +26,16 @@ public class AfterTagServiceIml implements AfterTagService {
     public void addAfterTag(AfterTag afterTag) {
         afterTagMapper.insertAfterTag(afterTag);
     }
+
+    @Override
+    public AfterTag selectAfterTagByAfterTag(AfterTag afterTag) {
+        return afterTagMapper.selectAfterTagByAfterTag(afterTag);
+    }
+
+    @Override
+    public void updateAfterTag(String message, String afterTagId) {
+        afterTagMapper.updateAfterTag(message,afterTagId);
+    }
+
+
 }
