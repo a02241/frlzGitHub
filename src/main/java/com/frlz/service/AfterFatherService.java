@@ -13,4 +13,8 @@ public interface AfterFatherService {
     List<UtilAfterFather> selectAfterByTimeUid(String uid , String time);
 
     int checkAfterFatherByUidTime(String uid,String time);
+
+    int checkAfterFatherByAfterFatherId(String afterFatherId);
+
+    void deleteAfterFatherByAfterFatherId(String afterFatherId);
 }

@@ -16,6 +16,9 @@ public interface AfterFatherMapper {
     @Select("select count(*) from afterFather where uid = #{uid} and and DATE_FORMAT(time, '%Y-%m-%d') = #{time}")
     int checkAfterFatherByUidTime(String uid,String time);
 
+    @Select("select count(afterFatherId) from afterFather where afterFatherId = #{afterFatherId}")
+    int checkAfterFatherByAfterFatherId(String afterFatherId);
+
     @Select("select * from afterFather where uid = #{uid} and DATE_FORMAT(time, '%Y-%m-%d') = #{time}")
     @Results({
             @Result(property = "afterFatherId", column = "afterFatherId"),
@@ -23,4 +26,7 @@ public interface AfterFatherMapper {
                     many = @Many(select = "com.frlz.mapper.AfterTagMapper.selectAfterTagByAftherFatherId"))
     })
     List<UtilAfterFather> selectAfterByTimeUid(String uid , String time);
+
+    @Delete("delete from afterFather where afterFatherId = #{afterFatherId}")
+    void deleteAfterFatherByAfterFatherId(String afterFatherId);
 }

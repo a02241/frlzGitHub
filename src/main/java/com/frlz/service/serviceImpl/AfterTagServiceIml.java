@@ -21,5 +21,13 @@ public class AfterTagServiceIml implements AfterTagService {
     }
 
 
+    @Override
+    public void deleteAfterTagByAfterTagId(String afterTagId) {
+        afterTagMapper.deleteAfterTagByAfterTagId(afterTagId);
+    }
 
+    @Override
+    public int checkAfterTagByAfterTagId(String afterTagId) {
+        return afterTagMapper.checkAfterTagByAfterTagId(afterTagId);
+    }
 }

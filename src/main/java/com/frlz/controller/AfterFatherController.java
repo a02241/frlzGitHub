@@ -54,4 +54,48 @@ public class AfterFatherController {
             return R.isFail().msg("参数错误");
         }
     }
+
+    @PostMapping("deleteAfterTag")
+    /**
+     * TODO 删除盘后标签
+     * @title deleteAfterTag
+     * @create by: cz
+     * @description: TODO 必填参数 afterTagId
+     * @create time: 2019/4/11 15:43
+     * @Param: afterTagId
+     * @throws
+     * @return com.frlz.util.R
+     * @version V1.0
+     */
+
+    public R deleteAfterTag(String afterTagId){
+        if (afterTagService.checkAfterTagByAfterTagId(afterTagId) != 0){
+            afterTagService.deleteAfterTagByAfterTagId(afterTagId);
+            return R.isOk().msg("success");
+        }else {
+            return R.isFail().msg("参数错误");
+        }
+    }
+
+    @PostMapping("deleteAfterFather")
+    /**
+     * TODO 删除盘后观察
+     * @title deleteAfterFather
+     * @create by: cz
+     * @description: TODO 必填参数 afterFatherId
+     * @create time: 2019/4/11 15:50
+     * @Param: afterFatherId
+     * @throws
+     * @return com.frlz.util.R
+     * @version V1.0
+     */
+
+    public R deleteAfterFather(String afterFatherId){
+        if (afterFatherService.checkAfterFatherByAfterFatherId(afterFatherId) != 0){
+            afterFatherService.deleteAfterFatherByAfterFatherId(afterFatherId);
+            return R.isOk().msg("success");
+        }else {
+            return R.isFail().msg("参数错误");
+        }
+    }
 }

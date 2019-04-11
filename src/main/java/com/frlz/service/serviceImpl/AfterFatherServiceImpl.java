@@ -44,4 +44,14 @@ public class AfterFatherServiceImpl implements AfterFatherService {
     public int checkAfterFatherByUidTime(String uid, String time) {
         return afterFatherMapper.checkAfterFatherByUidTime(uid,time);
     }
+
+    @Override
+    public int checkAfterFatherByAfterFatherId(String afterFatherId) {
+        return afterFatherMapper.checkAfterFatherByAfterFatherId(afterFatherId);
+    }
+
+    @Override
+    public void deleteAfterFatherByAfterFatherId(String afterFatherId) {
+        afterFatherMapper.deleteAfterFatherByAfterFatherId(afterFatherId);
+    }
 }
