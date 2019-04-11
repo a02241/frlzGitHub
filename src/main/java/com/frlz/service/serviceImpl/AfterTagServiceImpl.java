@@ -13,11 +13,11 @@ import org.springframework.stereotype.Service;
  * @date: 2019-04-11 10:11
  **/
 @Service
-public class AfterTagServiceIml implements AfterTagService {
+public class AfterTagServiceImpl implements AfterTagService {
     private  final AfterTagMapper afterTagMapper;
 
     @Autowired
-    public AfterTagServiceIml(AfterTagMapper afterTagMapper) {
+    public AfterTagServiceImpl(AfterTagMapper afterTagMapper) {
         this.afterTagMapper = afterTagMapper;
     }
 
