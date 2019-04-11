@@ -1,13 +1,14 @@
 package com.frlz.service.serviceImpl;
 
+import com.frlz.mapper.AfterFatherMapper;
 import com.frlz.mapper.PrePlanMapper;
 import com.frlz.pojo.PrePlan;
 import com.frlz.service.PrePlanService;
+import com.frlz.util.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @program: frlz
@@ -19,10 +20,12 @@ import java.util.List;
 public class PrePlanServiceImpl implements PrePlanService {
 
     private final PrePlanMapper prePlanMapper;
+    private final AfterFatherMapper afterFatherMapper;
 
     @Autowired
-    public PrePlanServiceImpl(PrePlanMapper prePlanMapper) {
+    public PrePlanServiceImpl(PrePlanMapper prePlanMapper, AfterFatherMapper afterFatherMapper) {
         this.prePlanMapper = prePlanMapper;
+        this.afterFatherMapper = afterFatherMapper;
     }
 
     @Override
@@ -48,12 +51,20 @@ public class PrePlanServiceImpl implements PrePlanService {
 
     @Override
     public int checkPrePlanByUid(String uid) {
-        return prePlanMapper.checkPrePlan(uid);
+        return prePlanMapper.checkPrePlanByUid(uid);
     }
 
     @Override
     public List<Date> selectTimeByMonthUid(String time, String uid) {
-        return prePlanMapper.selectTimeByMonthUid(time,uid);
+        List<Date> dateList = prePlanMapper.selectTimeByMonthUid(time,uid);
+        List<Date> dateList2 = afterFatherMapper.selectTimeByMonthUid(time,uid);
+        dateList.addAll(dateList2);
+        Set<Date> set = new HashSet<Date>();
+        for (Date date : dateList){
+            set.add(DateTime.getTimeByDateToDate(date));
+        }
+        List<Date> newDateList = new ArrayList<Date>(set);
+        return newDateList;
     }
 
     @Override

@@ -5,6 +5,9 @@ import com.frlz.service.AfterFatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.List;
+
 /**
  * @program: frlz
  * @description: 盘后主表接口实现层
@@ -18,5 +21,10 @@ public class AfterFatherServiceImpl implements AfterFatherService {
     @Autowired
     public AfterFatherServiceImpl(AfterFatherMapper afterFatherMapper) {
         this.afterFatherMapper = afterFatherMapper;
+    }
+
+    @Override
+    public List<Date> selectTimeByMonthUid(String time, String uid) {
+        return afterFatherMapper.selectTimeByMonthUid(time,uid);
     }
 }

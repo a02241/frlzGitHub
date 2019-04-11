@@ -1,6 +1,7 @@
 package com.frlz.controller;
 
 import com.frlz.pojo.PrePlan;
+import com.frlz.service.AfterFatherService;
 import com.frlz.service.PrePlanService;
 import com.frlz.util.DateTime;
 import com.frlz.util.R;
@@ -23,10 +24,12 @@ import java.util.List;
 public class PrePlanController {
 
     private final PrePlanService prePlanService;
+    private final AfterFatherService afterFatherService;
 
     @Autowired
-    public PrePlanController(PrePlanService prePlanService){
+    public PrePlanController(PrePlanService prePlanService, AfterFatherService afterFatherService){
         this.prePlanService = prePlanService;
+        this.afterFatherService = afterFatherService;
     }
 
     @PostMapping("/getPrePlan")
