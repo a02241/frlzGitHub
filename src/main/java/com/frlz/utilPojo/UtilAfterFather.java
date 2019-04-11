@@ -1,8 +1,10 @@
 package com.frlz.utilPojo;
 
+import com.frlz.pojo.AfterTag;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @program: frlz
@@ -14,4 +16,5 @@ import java.util.Date;
 public class UtilAfterFather {
     private String afterFatherId;//主键
     private Date time;//创建时间
+    private List<AfterTag> afterTag;//字表
 }
