@@ -133,7 +133,7 @@ public class PrePlanController {
      */
 
     public R<String> selectTimeMonth(String uid,String time){
-        if (prePlanService.checkPrePlanByUid(uid) != 0){
+        if (prePlanService.checkPrePlanByUid(uid) != 0 || afterFatherService.checkAfterFatherByUid(uid) !=0 ){
             List<Date> dateList = prePlanService.selectTimeByMonthUid(time,uid);
             return R.isOk().data(dateList);
         }else {

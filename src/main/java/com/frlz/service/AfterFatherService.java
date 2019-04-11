@@ -5,4 +5,6 @@ import java.util.List;
 
 public interface AfterFatherService {
     List<Date> selectTimeByMonthUid(String time , String uid);
+
+    int checkAfterFatherByUid(String uid);
 }
