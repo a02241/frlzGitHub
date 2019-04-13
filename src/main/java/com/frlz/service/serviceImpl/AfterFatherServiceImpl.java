@@ -57,8 +57,8 @@ public class AfterFatherServiceImpl implements AfterFatherService {
     }
 
     @Override
-    public String getAfterFatherId(String uid){
-        return afterFatherMapper.selectAfterFatherId(uid);
+    public String getAfterFatherId(String uid,String time){
+        return afterFatherMapper.selectAfterFatherId(uid,time);
     }
 
     @Override

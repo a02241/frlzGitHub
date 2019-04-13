@@ -21,8 +21,8 @@ public interface AfterFatherMapper {
             " values(  #{afterFatherId} ,now(), #{uid})")
     void insertAfterFather(AfterFather afterFather);
 
-    @Select("select afterFatherId from afterFather where uid = #{uid}")
-    String selectAfterFatherId(String uid);
+    @Select("select afterFatherId from afterFather where uid = #{uid} DATE_FORMAT(time, '%Y-%m-%d') = #{time}")
+    String selectAfterFatherId(String uid,String time);
 
     @Select("select time from afterFather where DATE_FORMAT(time, '%Y-%m') = #{time} and uid = #{uid}")
     List<Date> selectTimeByMonthUid(String time , String uid);

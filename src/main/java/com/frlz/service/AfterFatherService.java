@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface AfterFatherService {
-    String getAfterFatherId(String uid);
+    String getAfterFatherId(String uid,String time);
 
     void addAfterDiscuss(String uid);
 
