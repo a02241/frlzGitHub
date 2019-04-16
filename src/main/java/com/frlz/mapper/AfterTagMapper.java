@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 public interface AfterTagMapper {
-    @Select("select * from afterTag where afterFatherId = #{afterFatherId}")
+    @Select("select * from afterTag where afterFatherId = #{afterFatherId} order by insertTime")
     List<AfterTag> selectAfterTagByAftherFatherId(String afterFatherId);
 
     @Select("select count(*) from afterTag where afterTagId = #{afterTagId}")
@@ -21,7 +21,7 @@ public interface AfterTagMapper {
     @SelectKey(keyProperty = "afterTagId",resultType = String.class, before = true,
             statement = "select replace(uuid(), '-', '')")
     @Options(keyProperty = "afterTagId", useGeneratedKeys = true)
-    @Insert("insert into afterTag values(#{afterTagId},#{shares},#{changes},#{highest},#{time},#{message},#{afterFatherId})")
+    @Insert("insert into afterTag values(#{afterTagId},#{shares},#{changes},#{highest},#{time},#{message},#{afterFatherId},now())")
     void insertAfterTag(AfterTag afterTag);
 
     @Select("select * from afterTag where afterFatherId = #{afterFatherId} and shares = #{shares} and time = #{time}")
