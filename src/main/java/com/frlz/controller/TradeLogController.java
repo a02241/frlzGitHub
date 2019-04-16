@@ -19,6 +19,7 @@ import java.util.List;
  **/
 @RestControllerAdvice
 @RestController
+@Api(value="登录日志controller",tags={"登录日志信息操作接口"})
 public class TradeLogController {
 
     private TradeLogService tradeLogService;

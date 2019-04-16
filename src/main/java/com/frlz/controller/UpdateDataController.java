@@ -2,6 +2,7 @@ package com.frlz.controller;
 
 import com.frlz.service.UpdateDataService;
 import com.frlz.util.R;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  **/
 @RestController
 @RestControllerAdvice
+@Api(value="更新每日股票信息controller",tags={"更新每日股票信息信息操作接口"})
 public class UpdateDataController {
     private UpdateDataService updateDataService;
     @Autowired
