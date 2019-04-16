@@ -193,19 +193,4 @@ public class BlogController {
         blogService.updateBlogByBlogId(blogId,3);
         return R.isOk().msg("转发数+1");
     }
-
-    @PostMapping("deleteBlog")
-    @ApiOperation(value="删除博客", notes="根据url的信息来删除博客")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "blogId", value = "博客识别码", required = true, dataType = "String",paramType = "query")
-    })
-    @ApiResponses({
-            @ApiResponse(code = 400, message = "请求参数没填好"),
-            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
-    })
-    public R deleteBlog(String blogId){
-        blogService.deleteBlog(blogId);
-        return R.isOk().msg("删除成功");
-    }
-
 }
