@@ -44,7 +44,7 @@ class SwaggerConfig {
                 "苏州",
                 new Contact("cz", "", "b02241@163.com"),// 作者
                 "方融量子信息科技有限公司",//链接显示文字
-                "www.frlz.ltd"//网站链接
+                "https://www.qcube.ltd"//网站链接
         );
         return apiInfo;
     }
