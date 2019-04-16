@@ -1,80 +1,27 @@
 package com.frlz.pojo;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
+@Data
+@ApiModel(value = "ip对象",description = "IP地址对象")
 public class TaobaoIPResult {
+    @ApiModelProperty(value = "IP地址",name = "code")
     private int code;
+    @ApiModelProperty(value = "国家区域",name = "country")
     private String country;
+    @ApiModelProperty(value = "地区",name = "area")
     private String area;
+    @ApiModelProperty(value = "地域",name = "region")
     private String region;
+    @ApiModelProperty(value = "城市",name = "city")
     private String city;
+    @ApiModelProperty(value = "国家",name = "county")
     private String county;
+    @ApiModelProperty(value = "运营商",name = "isp")
     private String isp;
+    @ApiModelProperty(value = "ip",name = "ip")
     private String ip;
-
-    public TaobaoIPResult() {
-    }
-
-    public int getCode() {
-        return this.code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getCountry() {
-        return this.country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getArea() {
-        return this.area;
-    }
-
-    public void setArea(String area) {
-        this.area = area;
-    }
-
-    public String getRegion() {
-        return this.region;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
-    public String getCity() {
-        return this.city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCounty() {
-        return this.county;
-    }
-
-    public void setCounty(String county) {
-        this.county = county;
-    }
-
-    public String getIsp() {
-        return this.isp;
-    }
-
-    public void setIsp(String isp) {
-        this.isp = isp;
-    }
-
-    public String getIp() {
-        return this.ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
 
 }
