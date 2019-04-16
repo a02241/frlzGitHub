@@ -6,15 +6,11 @@ import com.frlz.service.*;
 import com.frlz.util.*;
 import com.frlz.utilPojo.UtilBalance;
 import com.frlz.utilPojo.UtilTradeLog;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
@@ -27,6 +23,7 @@ import java.util.regex.Pattern;
 
 @RestControllerAdvice
 @RestController
+@Api(value="用户controller",tags={"用户操作接口"})
 public class UserController {
 
     private final BalanceService balanceService;
@@ -47,21 +44,6 @@ public class UserController {
         this.invitationService = invitationService;
         this.sessionService = sessionService;
     }
-    @PostMapping("/checkAccount")//注册时校验账号是否重复
-    /**
-     * 注册时校验手机或者邮箱是否重复
-     * @title checkAccount
-     * @author cz
-     * @date 2019/2/28 17:34
-     * @Description: TODO 参数account(手机号或者邮箱),返回true为能注册,false不能注册
-     * @param account
-     * @return boolean
-     * @throws
-     */
-    public R<Boolean> checkAccount(@Param("account") String account)  {
-        return R.isOk().data(((userService.checkPhonenumber(account) + userService.checkEmail(account)) == 0));
-    }
-
     @Transactional
     @PostMapping("/regist")
     /**
@@ -78,9 +60,19 @@ public class UserController {
      * @Description: TODO 检查注册重复问题,必填字段:phonenumber或者email,password,sentCode(发送验证码),checkCode(填写验证码)
      *                      返回"4"为验证码错误,"5"为注册成功,2为手机被注册,3为邮箱被注册
      * @return void
-     * @throws 
+     * @throws
      */
-    public  R<Object> regist(User user ,@RequestParam(defaultValue = "0")String sentCode, @RequestParam(defaultValue = "9")String checkCode,@RequestParam(defaultValue = "")String code){
+    @ApiOperation(value="注册信息", notes="根据url的信息来创建用户信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "sentCode", value = "验证码", required = true, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "checkCode", value = "验证验证码", required = true, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "code", value = "邀请码", required = false, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
+    public  R<Object> regist(@RequestBody @ApiParam(name="用户对象",value="必填参数email或者phonenumber，password",required=true)User user , @RequestParam(defaultValue = "0")String sentCode, @RequestParam(defaultValue = "9")String checkCode, @RequestParam(defaultValue = "")String code){
         String check = userService.check(user);
         if(!sentCode.equals(checkCode)) {
             return R.isFail().data("4");
@@ -109,6 +101,29 @@ public class UserController {
         return R.isOk().msg("注册成功").data(check);
     }
 
+    @PostMapping("/checkAccount")//注册时校验账号是否重复
+    /**
+     * 注册时校验手机或者邮箱是否重复
+     * @title checkAccount
+     * @author cz
+     * @date 2019/2/28 17:34
+     * @Description: TODO 参数account(手机号或者邮箱),返回true为能注册,false不能注册
+     * @param account
+     * @return boolean
+     * @throws
+     */
+    @ApiOperation(value="注册时校验", notes="注册时校验手机或者邮箱是否重复")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "account", value = "account手机或邮箱", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
+    public R<Boolean> checkAccount(@Param("account") String account)  {
+        return R.isOk().data(((userService.checkPhonenumber(account) + userService.checkEmail(account)) == 0));
+    }
+
     @Transactional
     @PostMapping("/userLogin")
     /**
@@ -125,7 +140,15 @@ public class UserController {
      * @return java.util.HashMap<java.lang.String,java.lang.String>
      * @throws
      */
-
+    @ApiOperation(value="注册时校验", notes="注册时校验手机或者邮箱是否重复")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "username", value = "用户名", required = true, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<HashMap<String,String>> userLogin(String username, String password, HttpSession session) {
         String sid = session.getId();
         HashMap<String,String> map = new HashMap<>();
