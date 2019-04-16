@@ -155,4 +155,10 @@ public class BlogController {
         return R.isOk().msg("转发数+1");
     }
 
+
+    public R deleteBlog(String blogId){
+        blogService.deleteBlog(blogId);
+        return R.isOk().msg("删除成功");
+    }
+
 }

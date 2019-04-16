@@ -2,6 +2,8 @@ package com.frlz.pojo;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @program: frlz
  * @description: 盘后信息
@@ -17,4 +19,5 @@ public class AfterTag {
     private String time;//标签时间
     private String message;//信息
     private String afterFatherId;//外键
+    private Date insertTime;//插入时间
 }
