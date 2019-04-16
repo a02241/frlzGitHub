@@ -1,5 +1,6 @@
 package com.frlz.util;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -12,8 +13,12 @@ import java.io.Serializable;
  **/
 @Data
 public class R<T> implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @ApiModelProperty(value = "数据对象", name = "数据对象")
     private T data; //服务端数据
+    @ApiModelProperty(value = "错误码", name = "错误码")
     private int status = 0; //状态码，0：成功，1：失败
+    @ApiModelProperty(value = "错误码描述", name = "错误码描述")
     private String msg = ""; //描述信息
 
     // 省略 set get

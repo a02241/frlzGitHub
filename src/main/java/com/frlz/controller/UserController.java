@@ -6,6 +6,8 @@ import com.frlz.service.*;
 import com.frlz.util.*;
 import com.frlz.utilPojo.UtilBalance;
 import com.frlz.utilPojo.UtilTradeLog;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -531,6 +533,7 @@ public class UserController {
     }
 
     @PostMapping("showMyBlock")
+    @ApiOperation(value = "展示交易信息")
     /**
          * TODO 我的方块
      * @title showMyBlock
@@ -543,7 +546,7 @@ public class UserController {
      * @version V1.0
      */
 
-    public R<HashMap<String,Object>> showMyBlock(String uid){
+    public R<HashMap<String,Object>> showMyBlock(@RequestParam(name = "uid",required = true)String uid){
         HashMap<String,Object> map = new HashMap<>();
         UtilBalance balance = balanceService.selectShowBalanceByUid(uid);
         List<UtilTradeLog> utilTradeLog = tradeLogService.getTradeLogByUid(uid);
@@ -653,4 +656,5 @@ public class UserController {
         }
         return R.isOk().data(map);
     }
+
 }
