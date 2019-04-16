@@ -7,6 +7,7 @@ import com.frlz.service.BlogService;
 import com.frlz.service.LoginLogService;
 import com.frlz.service.UserService;
 import com.frlz.util.R;
+import io.swagger.annotations.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @RestControllerAdvice
 @RestController
+@Api(value="管理员controller",tags={"管理员信息操作接口"})
 public class ManagerController {
 
     private final UserService userService;
@@ -43,7 +45,15 @@ public class ManagerController {
      * @return java.lang.String
      * @version V1.0
      */
-
+    @ApiOperation(value="管理员登录", notes="根据url的信息来管理员登录")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "manager", value = "管理员用户名", required = true, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "password", value = "管理员密码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<String> managerLogin(@Param("manager") String manager, @Param("password") String password){
         if ("managercz".equals(manager)){
             if ("123".equals(password)){
@@ -66,7 +76,14 @@ public class ManagerController {
      * @return java.lang.String
      * @version V1.0
      */
-
+    @ApiOperation(value="删除用户", notes="根据url的信息来删除用户")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<String> deleteUser(String uid){
         userService.deleteUserByUid(uid);
         return R.isOk().msg("success");
@@ -84,7 +101,13 @@ public class ManagerController {
      * @return java.util.List<com.frlz.pojo.User>
      * @version V1.0
      */
-
+    @ApiOperation(value="查询所有用户", notes="根据url的信息来查询所有用户")
+    @ApiImplicitParams({
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<List<User>> selectAllUser(){
         return R.isOk().data(userService.getAll());
     }
@@ -96,6 +119,14 @@ public class ManagerController {
     }
 
     @PostMapping("/deleteBlog")
+    @ApiOperation(value="删除博客", notes="根据url的信息来删除博客")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "blogId", value = "博客识别码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<String> deleteBlog(String blogId){
         blogService.deleteBlog(blogId);
         return R.isOk().msg("success");
@@ -113,7 +144,14 @@ public class ManagerController {
      * @return java.util.List<com.frlz.pojo.Blog>
      * @version V1.0
      */
-
+    @ApiOperation(value="按照日期查询博客所有信息", notes="根据url的信息来按照日期查询博客所有信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "date", value = "日期(yyyy-mm)", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<List<Blog>> getBlogByDate(String date){
         return R.isOk().data(blogService.selectBlogByMonth(date));
     }
@@ -130,7 +168,14 @@ public class ManagerController {
      * @return java.util.List<com.frlz.pojo.Blog>
      * @version V1.0
      */
-
+    @ApiOperation(value="按照月份查询博客所有信息", notes="根据url的信息来按照月份查询博客所有信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "date", value = "日期(yyyy-mm-dd)", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<List<Blog>> getBlogByMonth(String date){
         return R.isOk().data(blogService.selectBlogByMonth(date));
     }
@@ -147,7 +192,13 @@ public class ManagerController {
      * @return java.util.List<com.frlz.pojo.LoginLog>
      * @version V1.0
      */
-
+    @ApiOperation(value="获取所有登录日志", notes="根据url的信息来获取所有登录日志")
+    @ApiImplicitParams({
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<List<LoginLog>> getAllLoginLog(){
         return R.isOk().data(loginLogService.getAllLoginLog());
     }
@@ -164,7 +215,14 @@ public class ManagerController {
      * @return java.util.List<com.frlz.pojo.LoginLog>
      * @version V1.0
      */
-
+    @ApiOperation(value="根据日期查询登录日志", notes="根据url的信息来根据日期查询登录日志")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "date", value = "日期(yyyy-mm-dd)", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<List<LoginLog>> getLoginLogByDate(String date){
         return R.isOk().data(loginLogService.selectLoginLogByDate(date));
     }

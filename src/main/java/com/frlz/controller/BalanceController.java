@@ -4,6 +4,7 @@ import com.frlz.pojo.Balance;
 import com.frlz.service.BalanceService;
 import com.frlz.service.TradeLogService;
 import com.frlz.util.R;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  **/
 @RestControllerAdvice
 @RestController
+@Api(value="用户余额controller",tags={"用户余额操作接口"})
 public class BalanceController {
 
     private final BalanceService balanceService;
@@ -42,7 +44,14 @@ public class BalanceController {
      * @return java.lang.String
      * @version V1.0
      */
-
+    @ApiOperation(value="获取账户余额信息", notes="根据url的信息来获取账户余额信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<Balance> getBalance(String uid){
         return R.isOk().data(balanceService.selectFromBalanceByUid(uid));
     }
@@ -61,7 +70,15 @@ public class BalanceController {
      * @return java.lang.String
      * @version V1.0
      */
-
+    @ApiOperation(value="量子换方块", notes="根据url的信息来量子换方块")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "quantum", value = "量子", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<String> quantumToBlock(String uid, int quantum) {
         Balance balance = balanceService.selectFromBalanceByUid(uid);
         if (balance.getQuantumBalance() >= 10){
@@ -89,7 +106,15 @@ public class BalanceController {
      * @return java.lang.String
      * @version V1.0
      */
-
+    @ApiOperation(value="方块换量子", notes="根据url的信息来方块换量子")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "block", value = "方块", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<String> blockToQuantum(String uid,int block){
         Balance balance = balanceService.selectFromBalanceByUid(uid);
         if (balance.getBlockBalance() > 0){
@@ -117,7 +142,15 @@ public class BalanceController {
      * @return java.lang.String
      * @version V1.0
      */
-
+    @ApiOperation(value="魔方换方块", notes="根据url的信息来魔方换方块")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "magicCube", value = "魔方", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<String> magicCubeToBlock(String uid,int magicCube){
         Balance balance = balanceService.selectFromBalanceByUid(uid);
         if (balance.getMagicCubeBalance() > 0){
@@ -145,7 +178,15 @@ public class BalanceController {
      * @return java.lang.String
      * @version V1.0
      */
-
+    @ApiOperation(value="方块换魔方", notes="根据url的信息来方块换魔方")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "block", value = "方块", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<String> blockToMagicCube(String uid,int block){
         Balance balance = balanceService.selectFromBalanceByUid(uid);
         if (balance.getBlockBalance() >= 27){

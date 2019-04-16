@@ -5,8 +5,10 @@ import com.frlz.pojo.User;
 import com.frlz.service.ReplysService;
 import com.frlz.service.UserService;
 import com.frlz.util.R;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -20,6 +22,7 @@ import java.util.HashMap;
  **/
 @RestControllerAdvice
 @RestController
+@Api(value="回复评论controller",tags={"回复评论信息操作接口"})
 public class ReplysController {
 
     private final ReplysService replysService;
@@ -44,7 +47,14 @@ public class ReplysController {
      * @return com.frlz.util.R<java.util.HashMap<java.lang.String,java.lang.Object>>
      * @version V1.0
      */
-
+    @ApiOperation(value="根据cId获取该评论的所有回复", notes="根据url的信息来根据cId获取该评论的所有回复")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "cId", value = "评论识别码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<HashMap<String,Object>> showAllRelysByCId(String cId){
         HashMap<String,Object> map = new HashMap<>();
         map.put("replys",replysService.selectRelysAllByCId(cId));
@@ -62,8 +72,14 @@ public class ReplysController {
      * @return java.lang.String
      * @throws
      */
-
-    public R<String> addReplys(Replys replys){
+    @ApiOperation(value="添加评论回复", notes="根据url的信息来添加评论回复")
+    @ApiImplicitParams({
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
+    public R<String> addReplys(@RequestBody @ApiParam(name="用户对象",value="cId(评论的主键),username,content",required=true)Replys replys){
         User user = userService.selectUserByUsername(replys.getUsername());
         if (user != null) {
             if (user.getExperience() > 0) {

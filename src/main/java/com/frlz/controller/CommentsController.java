@@ -9,12 +9,10 @@ import com.frlz.service.ReplysService;
 import com.frlz.service.UserService;
 import com.frlz.util.DateTime;
 import com.frlz.util.R;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -23,6 +21,7 @@ import java.util.Map;
 
 @RestControllerAdvice
 @RestController
+@Api(value="评论信息controller",tags={"评论信息操作接口"})
 public class CommentsController {
 
     private final CommentsService commentsService;
@@ -62,13 +61,23 @@ public class CommentsController {
      * @return java.util.HashMap<java.lang.String,java.lang.Object>
      * @throws
      */
-
-    public R<HashMap<String,Object>> findBlog(Blog blog, @RequestParam(defaultValue="1") int pageCode, String blogId) {
+    @ApiOperation(value="展示评论信息", notes="根据url的信息来展示评论信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "blogId", value = "博客识别码", required = true, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "pageCode", value = "页码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
+    public R<HashMap<String,Object>> findBlog(@RequestParam(defaultValue="1") int pageCode, String blogId) {
         Map<String,Object> conditions = new HashMap<String,Object>();
         HashMap<String,Object> map;
         if(blogId.trim().length() > 0 || blogId != null) {
             conditions.put("blogId",blogId);//把blogId放入map集合中
             int count = commentsService.findCommentsByBlogId(conditions);
+            Blog blog = new Blog();
+            blog.setBlogId(blogId);
             map = blogService.findBlog(blog);
             map.put("result",count);
         }else {
@@ -99,8 +108,14 @@ public class CommentsController {
      * @return java.util.HashMap<java.lang.String,java.lang.Object>
      * @throws
      */
-
-    public R<HashMap<String,Object>> saveComment(Comments comments) {
+    @ApiOperation(value="保存评论信息", notes="根据url的信息来保存评论信息")
+    @ApiImplicitParams({
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
+    public R<HashMap<String,Object>> saveComment(@RequestBody @ApiParam(name="评论对象",value="必填参数comments，blogId，username",required=true)Comments comments) {
         User user = userService.selectUserByUsername(comments.getUsername());
         if(user.getExperience() > 0){
             String format = DateTime.getTimeByDateToString(new Date());//创建当前时间以yyyy-MM-dd格式
@@ -127,9 +142,16 @@ public class CommentsController {
      * @return java.lang.String
      * @throws
      */
-
-    public R<HashMap<String,Object>> deleteComment(Comments comments){
-        commentsService.deleteComment(comments.getCId());
+    @ApiOperation(value="删除评论信息", notes="根据url的信息来删除评论信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "cId", value = "评论识别码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
+    public R<HashMap<String,Object>> deleteComment(String cId){
+        commentsService.deleteComment(cId);
         return R.isOk().data("success");
     }
 }

@@ -6,6 +6,7 @@ import com.frlz.service.BalanceService;
 import com.frlz.service.InvitationService;
 import com.frlz.service.TradeLogService;
 import com.frlz.util.R;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @RestControllerAdvice
 @RestController
+@Api(value="邀请码controller",tags={"邀请码信息操作接口"})
 public class InvitationController {
 
     private final InvitationService invitationService;
@@ -42,6 +44,14 @@ public class InvitationController {
      * @return java.util.List<com.frlz.pojo.Invitation>
      * @version V1.0
      */
+    @ApiOperation(value="根据uid找查兑换邀请码信息", notes="根据url的信息来根据uid找查兑换邀请码信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<List<Invitation>> selectInvatationByUid(String uid){
         return R.isOk().data(invitationService.selectInvatationByUid(uid));
     }
@@ -58,7 +68,14 @@ public class InvitationController {
      * @return java.lang.Boolean
      * @version V1.0
      */
-
+    @ApiOperation(value="找查邀请码是否被使用", notes="根据url的信息来找查邀请码是否被使用")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "code", value = "邀请码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<Boolean> findStateBycode(@RequestParam(defaultValue = "")String code){
         int result = invitationService.findStateBycode(code);
         if (code.trim().length()==0){
@@ -84,6 +101,14 @@ public class InvitationController {
     //量子兑换邀请码
     @Transactional
     @PostMapping("exchangeInvitation")
+    @ApiOperation(value="量子兑换邀请码", notes="根据url的信息来量子兑换邀请码")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R exchangeInvitation(String uid){
         String code;
         Balance balance = balanceService.selectFromBalanceByUid(uid);

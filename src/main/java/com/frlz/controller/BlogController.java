@@ -5,6 +5,7 @@ import com.frlz.pojo.User;
 import com.frlz.service.BlogService;
 import com.frlz.service.UserService;
 import com.frlz.util.R;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 
 @RestControllerAdvice
 @RestController
+@Api(value="博客controller",tags={"博客操作接口"})
 public class BlogController {
 
     private final BlogService blogService;
@@ -48,7 +50,15 @@ public class BlogController {
      * @return java.util.HashMap<java.lang.String,java.lang.Object>
      * @throws Exception
      */
-
+    @ApiOperation(value="展示博客信息", notes="根据url的信息来展示博客信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "pageCode", value = "页码(默认为1)", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<HashMap<String,Object>> searchBlog(@RequestParam(defaultValue="1") int pageCode, @RequestParam(defaultValue="")String uid)  {
         HashMap<String,Object> map = blogService.searchBlog(pageCode,uid,1);
         String username;
@@ -79,7 +89,14 @@ public class BlogController {
      * @return com.frlz.util.R<java.util.HashMap<java.lang.String,java.lang.Object>>
      * @version V1.0
      */
-
+    @ApiOperation(value="精选博客", notes="根据url的信息来展示精选博客")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "pageCode", value = "页码(默认为1)", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<HashMap<String,Object>> searchBlogChoice(@RequestParam(defaultValue="1") int pageCode) {
         HashMap<String,Object> map = blogService.searchBlog(pageCode,"",2);
         return R.isOk().data(map);
@@ -97,8 +114,15 @@ public class BlogController {
      * @return boolean
      * @throws Exception
      */
-
-    public R<Boolean> insertBlog(Blog blog,String uid){
+    @ApiOperation(value="添加博客", notes="根据url的信息来添加博客")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
+    public R<Boolean> insertBlog(@RequestBody @ApiParam(name="博客对象",value="必填参数message(内容),summary(摘要),title(主题)",required=true)Blog blog,String uid){
         if(uid.trim().length() == 0 || uid == null){
             return R.isFail().msg("uid为空");
         }else {
@@ -132,7 +156,14 @@ public class BlogController {
      * @return java.lang.String
      * @version V1.0
      */
-
+    @ApiOperation(value="增加阅读数", notes="根据url的信息来增加阅读数")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "blogId", value = "博客识别码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<String> addReadNumber(String blogId){
         blogService.updateBlogByBlogId(blogId,4);
         return R.isOk().msg("阅读数+1");
@@ -150,12 +181,28 @@ public class BlogController {
      * @return java.lang.String
      * @version V1.0
      */
+    @ApiOperation(value="增加转发数", notes="根据url的信息来增加转发数")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "blogId", value = "博客识别码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<String> addForwordNumber(String blogId) {
         blogService.updateBlogByBlogId(blogId,3);
         return R.isOk().msg("转发数+1");
     }
 
-
+    @PostMapping("deleteBlog")
+    @ApiOperation(value="删除博客", notes="根据url的信息来删除博客")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "blogId", value = "博客识别码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R deleteBlog(String blogId){
         blogService.deleteBlog(blogId);
         return R.isOk().msg("删除成功");

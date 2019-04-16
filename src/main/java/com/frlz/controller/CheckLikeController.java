@@ -3,6 +3,7 @@ package com.frlz.controller;
 import com.frlz.service.BlogService;
 import com.frlz.service.CheckLikeService;
 import com.frlz.util.R;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 @RestController
+@Api(value="点赞controller",tags={"点赞操作接口"})
 public class CheckLikeController {
 
     private final CheckLikeService checkLikeService;
@@ -36,7 +38,15 @@ public class CheckLikeController {
      * @return java.lang.String
      * @version V1.0
      */
-
+    @ApiOperation(value="点赞", notes="根据url的信息来点赞")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "blogId", value = "博客识别码", required = true, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<String> clickLike(String blogId, String uid){
         if (null == checkLikeService.selectFromCheckLike(blogId,uid)) {
             blogService.updateLikesCount(blogId);

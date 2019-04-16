@@ -5,6 +5,7 @@ import com.frlz.service.SessionService;
 import com.frlz.util.GetIP;
 import com.frlz.util.R;
 import com.frlz.util.TaobaoIP;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ import java.util.List;
  **/
 @RestControllerAdvice
 @RestController
+@Api(value="所有股票信息controller",tags={"所有股票信息操作接口"})
 public class Area_listController{
 
     private final Area_ListService area_ListService;
@@ -34,6 +36,13 @@ public class Area_listController{
     }
 
     @RequestMapping("selectAllShares")
+    @ApiOperation(value="获取所有股票信息", notes="根据url的信息来获取所有股票信息")
+    @ApiImplicitParams({
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<List> selectAllShares (){
         return R.isOk().data(area_ListService.selectAll());
     }

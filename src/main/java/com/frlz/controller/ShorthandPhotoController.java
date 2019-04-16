@@ -1,6 +1,7 @@
 package com.frlz.controller;
 
 import com.frlz.service.ShorthandPhotoService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  **/
 @RestControllerAdvice
 @RestController
+@Api(value="盘中图片信息controller",tags={"盘中图片信息操作接口"})
 public class ShorthandPhotoController {
 
     private final ShorthandPhotoService shorthandPhotoService;

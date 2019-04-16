@@ -5,8 +5,10 @@ import com.frlz.service.AfterFatherService;
 import com.frlz.service.PrePlanService;
 import com.frlz.util.DateTime;
 import com.frlz.util.R;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -21,6 +23,7 @@ import java.util.List;
  **/
 @RestControllerAdvice
 @RestController
+@Api(value="盘前controller",tags={"盘前信息操作接口"})
 public class PrePlanController {
 
     private final PrePlanService prePlanService;
@@ -45,7 +48,15 @@ public class PrePlanController {
      * @return com.frlz.pojo.PrePlan
      * @version V1.0
      */
-
+    @ApiOperation(value="根据用户uid和时间获取盘前计划", notes="根据url的信息来根据用户uid和时间获取盘前计划")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "time", value = "时间(yyyy-mm-dd)", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<PrePlan> getPrePlan(String uid, String time){
         return R.isOk().data(prePlanService.selectPrePlanByUid(uid,time));
     }
@@ -62,8 +73,14 @@ public class PrePlanController {
      * @return java.lang.String
      * @version V1.0
      */
-
-    public R<String> addPrePlan(PrePlan prePlan){
+    @ApiOperation(value="添加盘前计划", notes="根据url的信息来添加盘前计划")
+    @ApiImplicitParams({
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
+    public R<String> addPrePlan(@RequestBody @ApiParam(name="盘前对象",value="message",required=true)PrePlan prePlan){
         if (prePlanService.selectPrePlanByUid(prePlan.getUid(),DateTime.getNowTimeToString()) == null){
             prePlanService.insertIntoPrePlan(prePlan);
             return R.isOk().msg("success");
@@ -85,7 +102,15 @@ public class PrePlanController {
      * @return com.frlz.util.R<java.lang.String>
      * @version V1.0
      */
-
+    @ApiOperation(value="更新盘前计划", notes="根据url的信息来更新盘前计划")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "message", value = "盘前信息", required = true, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "prePlanId", value = "盘前识别码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<String> updatePlan(String message, String prePlanId){
         if (prePlanService.checkPrePlan(prePlanId) != 0){
             prePlanService.updatePrePlanMessage(message,prePlanId);
@@ -108,7 +133,14 @@ public class PrePlanController {
      * @return com.frlz.util.R<java.lang.String>
      * @version V1.0
      */
-
+    @ApiOperation(value="删除盘前计划", notes="根据url的信息来删除盘前计划")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "prePlanId", value = "盘前识别码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<String> deletePrePlan(String prePlanId){
         if (prePlanService.checkPrePlan(prePlanId) != 0){
             prePlanService.deletePrePlan(prePlanId);
@@ -131,7 +163,15 @@ public class PrePlanController {
      * @return com.frlz.util.R<java.lang.String>
      * @version V1.0
      */
-
+    @ApiOperation(value="判断每月是否写盘前", notes="根据url的信息来判断每月是否写盘前")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "uid", value = "盘前识别码", required = true, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "uid", value = "time(yyyy-mm)", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<String> selectTimeMonth(String uid,String time){
         if (prePlanService.checkPrePlanByUid(uid) != 0 || afterFatherService.checkAfterFatherByUid(uid) !=0 ){
             List<Date> dateList = prePlanService.selectTimeByMonthUid(time,uid);

@@ -210,7 +210,6 @@ public class UserController {
      * @return com.frlz.util.R
      * @version V1.0
      */
-
     public R closeSession(HttpSession session){
         session.invalidate();
         sessionService.deleteSession(session.getId());
@@ -231,7 +230,14 @@ public class UserController {
      * @return void
      * @throws
      */
-
+    @ApiOperation(value="发送邮箱验证码", notes="根据url的信息来发送邮箱验证码")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "email", value = "邮箱验证码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<String> emailCode(String email){
         String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";//验证码筛选
         StringBuilder sb = new StringBuilder(4);
@@ -261,7 +267,14 @@ public class UserController {
      * @return java.util.HashMap<java.lang.String,java.lang.Object>
      * @version V1.0
      */
-
+    @ApiOperation(value="发送手机验证码", notes="根据url的信息来发送手机验证码")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "phonenumber", value = "手机验证码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<String> sendPhonenumberMessage(String phonenumber){
         return R.isOk().data(SendMessage.sendMessage(phonenumber));
     }
@@ -278,6 +291,15 @@ public class UserController {
      * @return java.lang.String
      * @throws
      */
+    @ApiOperation(value="上传头像", notes="根据url的信息来上传头像")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "file", value = "文件", required = true, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<String> uploadUserIcon(String file,String uid) throws IOException{
         MultipartFile multipartFile = Base64Decode.base64Convert(file);
         if (multipartFile != null) {// 检查文件是否为空
@@ -320,7 +342,25 @@ public class UserController {
      * @return java.lang.String
      * @throws
      */
-
+    @ApiOperation(value="更新用户信息", notes="根据url的信息来更新用户信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "uid", value = "用户名", required = true, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "username", value = "用户名", required = false, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "phonenumber", value = "手机号码", required = false, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "email", value = "邮箱", required = false, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "investmentage", value = "投资年龄", required = false, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "profession", value = "职业", required = false, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "residence", value = "居住地", required = false, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "province", value = "省份", required = false, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "city", value = "城市", required = false, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "signature", value = "个性签名", required = false, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "sex", value = "性别", required = false, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "birthday", value = "生日", required = false, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<String> updateUser(String uid,
                                 @RequestParam(defaultValue="")String username, @RequestParam(defaultValue="")String phonenumber, @RequestParam(defaultValue="")String email,
                                 @RequestParam(defaultValue="0")int investmentage, @RequestParam(defaultValue="")String profession, @RequestParam(defaultValue="")String residence,
@@ -388,8 +428,15 @@ public class UserController {
      * @return java.lang.String
      * @throws
      */
-
-    public R<String> updatePassword(User user,String newPassword)  {
+    @ApiOperation(value="更换密码", notes="根据url的信息来更换密码")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "newPassword", value = "新密码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
+    public R<String> updatePassword(@RequestBody @ApiParam(name="用户对象",value="必填参数uid,password",required=true)User user,String newPassword)  {
         String uid = userService.checkPasswordByUId(user.getUid());
         if(uid.equals(MD5.MD5Encode("fr2018<%" + user.getPassword()  + "%>lz1220"))){
             user.setPassword(MD5.MD5Encode("fr2018<%" + newPassword  + "%>lz1220"));
@@ -414,7 +461,14 @@ public class UserController {
      * @return java.util.HashMap<java.lang.String,java.lang.Object>
      * @version V1.0
      */
-
+    @ApiOperation(value="根据id查询所有信息", notes="根据url的信息来根据id查询所有信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<HashMap<String,Object>> seeInformation(String uid)  {
         User user = userService.selectByUid(uid);
         if(user != null){
@@ -445,7 +499,15 @@ public class UserController {
      * @return java.lang.String
      * @version V1.0
      */
-
+    @ApiOperation(value="绑定手机", notes="根据url的信息来绑定手机")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "phonenumber", value = "手机号", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<String> boundPhone(String uid , String phonenumber)  {
         Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0-9])|(14[5,7])| (17[0,1,3,5-8]))\\d{8}$");
         Matcher m = p.matcher(phonenumber);
@@ -472,7 +534,15 @@ public class UserController {
      * @return java.lang.String
      * @version V1.0
      */
-
+    @ApiOperation(value="绑定邮箱", notes="根据url的信息来绑定邮箱")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "email", value = "邮箱", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<String> boundEmail(String uid , String email)  {
         String regex = "\\w+@\\w+(\\.\\w{2,3})*\\.\\w{2,3}";
         boolean tag = true;
@@ -501,8 +571,16 @@ public class UserController {
      * @return com.frlz.util.R<java.lang.String>
      * @version V1.0
      */
-
-    public R<String> changeProfile(String profile, @Valid String uid){
+    @ApiOperation(value="更换头衔", notes="根据url的信息来更换头衔")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "profile", value = "头衔", required = true, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
+    public R<String> changeProfile(String profile, String uid){
         String result = userService.updateProfile(profile,uid);
         if (result.equals("false")){
             return R.isFail().msg("uid错误");
@@ -523,7 +601,14 @@ public class UserController {
      * @return com.frlz.util.R
      * @version V1.0
      */
-
+    @ApiOperation(value="安全信息", notes="根据url的信息来安全信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R getSecurity(String uid){
         return R.isOk().data(userService.getSecurity(uid));
     }
@@ -540,7 +625,14 @@ public class UserController {
      * @return com.frlz.util.R<java.util.HashMap<java.lang.String,java.lang.Object>>
      * @version V1.0
      */
-
+    @ApiOperation(value="个人中心首页展示", notes="根据url的信息来个人中心首页展示")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<HashMap<String,Object>> showMyInformation(String uid){
         HashMap<String,Object> map = new HashMap<>();
         User user = userService.selectByUid(uid);
@@ -556,7 +648,6 @@ public class UserController {
     }
 
     @PostMapping("showMyBlock")
-    @ApiOperation(value = "展示交易信息")
     /**
          * TODO 我的方块
      * @title showMyBlock
@@ -568,8 +659,15 @@ public class UserController {
      * @return com.frlz.util.R<java.util.HashMap<java.lang.String,java.lang.Object>>
      * @version V1.0
      */
-
-    public R<HashMap<String,Object>> showMyBlock(@RequestParam(name = "uid",required = true)String uid){
+    @ApiOperation(value="我的方块", notes="根据url的信息来展示我的方块")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
+    public R<HashMap<String,Object>> showMyBlock(String uid){
         HashMap<String,Object> map = new HashMap<>();
         UtilBalance balance = balanceService.selectShowBalanceByUid(uid);
         List<UtilTradeLog> utilTradeLog = tradeLogService.getTradeLogByUid(uid);
@@ -594,7 +692,14 @@ public class UserController {
      * @return com.frlz.util.R
      * @version V1.0
      */
-    
+    @ApiOperation(value="个人信息", notes="根据url的信息来展示个人信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R personalInformation(String uid){
         User user = userService.selectByUid(uid);
         Map<String,String> map = new HashMap<>();
@@ -611,6 +716,16 @@ public class UserController {
     }
 
     @PostMapping("checkUser")
+    @ApiOperation(value="查询用户名邮箱手机", notes="根据url的信息来查询用户名邮箱手机是否存在")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "username", value = "用户名", required = false, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "email", value = "邮箱", required = false, dataType = "String",paramType = "query"),
+            @ApiImplicitParam(name = "phonenumber", value = "手机号码", required = false, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R<String> checkUser(@RequestParam(defaultValue="")String username,@RequestParam(defaultValue="")String email,@RequestParam(defaultValue="")String phonenumber){
         String regex = "\\w+@\\w+(\\.\\w{2,3})*\\.\\w{2,3}";
         if (email.trim().length()> 0 && !email.matches(regex)) {
@@ -648,7 +763,14 @@ public class UserController {
      * @return com.frlz.util.R
      * @version V1.0
      */
-
+    @ApiOperation(value="根据uid获取经验值", notes="根据url的信息来查询根据uid获取经验值")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "uid", value = "用户识别码", required = false, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R showExperience(String uid){
         int experience = userService.selectExperienceByUid(uid);
         return R.isOk().data(experience);
@@ -666,7 +788,14 @@ public class UserController {
      * @return com.frlz.util.R
      * @version V1.0
      */
-
+    @ApiOperation(value="右上角展示个人状态", notes="根据url的信息来查询右上角展示个人状态")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "uid", value = "用户识别码", required = false, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
     public R showMyAttribute(String uid){
         HashMap<String,Object> map = new HashMap<>();
         User user = userService.selectByUid(uid);
