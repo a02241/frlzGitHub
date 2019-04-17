@@ -35,8 +35,10 @@ public class Area_listController{
         this.sessionService = sessionService;
     }
 
-    @PostMapping("selectAllShares")
+    @RequestMapping("selectAllShares")
     @ApiOperation(value="获取所有股票信息", notes="根据url的信息来获取所有股票信息")
+    @ApiImplicitParams({
+    })
     @ApiResponses({
             @ApiResponse(code = 400, message = "请求参数没填好"),
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")

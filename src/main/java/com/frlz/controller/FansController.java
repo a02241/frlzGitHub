@@ -23,7 +23,7 @@ public class FansController {
     }
 
     @Transactional
-    @PostMapping("/interest")//关注
+    @RequestMapping("/interest")//关注
     /**
      * TODO 关注
      * @title interest
