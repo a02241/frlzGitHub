@@ -36,7 +36,8 @@ public class Blog {
 	private String uid;//用户uid主键
 	@ApiModelProperty(value = "博客摘要",name = "summary")
 	private String summary;//用户摘要
-
+	@ApiModelProperty(value = "股票代码",name = "code")
+	private String code;//股票代码
 	
 	
 }

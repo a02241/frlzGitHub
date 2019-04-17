@@ -31,25 +31,6 @@ public class BlogController {
 
     @Transactional
     @PostMapping("/searchBlog")
-    /**
-     * 展示博客信息
-     * @title searchBlog
-     * @author cz
-     * @date 2019/3/1 14:58
-     * @param blog
-     * @param pageCode
-     * @param uid
-     * @Description: TODO 必填参数uid 选填参数pageCode(分页页码，默认从第1个开始12条数据，每次请求为下12条条数据)
-     *                  返回值:uid如果显示用户名已过期,请重新登录，则uid为空，username一样
-     *                  pageBean分页类,类中datas返回Blog和User属性
-     *                  Myuid为uid
-     *                  pageCode从第几个开始
-     *                  pageSize返回blog数量
-     *                  allCount总数量
-     *                  allPages总共翻页数量
-     * @return java.util.HashMap<java.lang.String,java.lang.Object>
-     * @throws Exception
-     */
     @ApiOperation(value="展示博客信息", notes="根据url的信息来展示博客信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query"),
@@ -76,19 +57,9 @@ public class BlogController {
         return R.isOk().data(map);
     }
 
+
     @Transactional
     @PostMapping("/searchBlogChoice")
-    /**
-     * TODO 精选博客
-     * @title searchBlogChoice
-     * @create by: cz
-     * @description: TODO 选填参数pageCode 默认为1
-     * @create time: 2019/3/20 17:44
-     * @Param: pageCode
-     * @throws
-     * @return com.frlz.util.R<java.util.HashMap<java.lang.String,java.lang.Object>>
-     * @version V1.0
-     */
     @ApiOperation(value="精选博客", notes="根据url的信息来展示精选博客")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageCode", value = "页码(默认为1)", required = true, dataType = "String",paramType = "query")

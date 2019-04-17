@@ -18,7 +18,7 @@ public interface BlogMapper {
     int findAllCountLike(Map<String,Object> map);
 
 
-    @Select("select u.icon , u.username , b.uid, b.blogId,b.time,b.likes,b.title,b.summary,b.message,b.commentsNumber,b.forwordNumber,b.readNumber from blog b inner join user u " +
+    @Select("select u.icon , u.username , b.uid,b.code, b.blogId,b.time,b.likes,b.title,b.summary,b.message,b.commentsNumber,b.forwordNumber,b.readNumber from blog b inner join user u " +
             "where b.uid = u.uid" +
             " order by weight desc limit ${(pageCode-1)*pageSize},${pageSize} ")
    /* @Results({
@@ -29,7 +29,7 @@ public interface BlogMapper {
     })*/
     List<UitlBlog> findChoice(Map<String,Object> map);
 
-    @Select("select u.icon , u.username , b.uid, b.blogId,b.time,b.likes,b.title,b.summary,b.message,b.commentsNumber,b.forwordNumber,b.readNumber from blog b inner join user u " +
+    @Select("select u.icon , u.username ,b.code, b.uid, b.blogId,b.time,b.likes,b.title,b.summary,b.message,b.commentsNumber,b.forwordNumber,b.readNumber from blog b inner join user u " +
             "where b.uid = u.uid and u.uid = #{uid}" +
             " order by weight desc limit ${(pageCode-1)*pageSize},${pageSize} ")
     /*@Results({
@@ -69,7 +69,8 @@ public interface BlogMapper {
             "#{readNumber}, " +
             "#{uid}, " +
             "#{title}, " +
-            "#{summary})")
+            "#{summary}, " +
+            "#{code})")
     void insertBlog(Blog blog);
 
     @Update("update blog set likes = likes + 1,weight = weight + 0.1 where blogId = #{blogId}")
