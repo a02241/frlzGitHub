@@ -79,7 +79,7 @@ public class ReplysController {
             @ApiResponse(code = 400, message = "请求参数没填好"),
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
-    public R<String> addReplys(@RequestBody @ApiParam(name="用户对象",value="cId(评论的主键),username,content",required=true)Replys replys){
+    public R<String> addReplys( @ApiParam(name="用户对象",value="cId(评论的主键),username,content",required=true)Replys replys){
         User user = userService.selectUserByUsername(replys.getUsername());
         if (user != null) {
             if (user.getExperience() > 0) {

@@ -122,7 +122,7 @@ public class BlogController {
             @ApiResponse(code = 400, message = "请求参数没填好"),
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
-    public R<Boolean> insertBlog(@RequestBody @ApiParam(name="博客对象",value="必填参数message(内容),summary(摘要),title(主题)",required=true)Blog blog,String uid){
+    public R<Boolean> insertBlog( @ApiParam(name="博客对象",value="必填参数message(内容),summary(摘要),title(主题)",required=true)Blog blog,String uid){
         if(uid.trim().length() == 0 || uid == null){
             return R.isFail().msg("uid为空");
         }else {

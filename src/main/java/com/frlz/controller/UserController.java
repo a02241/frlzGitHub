@@ -72,7 +72,7 @@ public class UserController {
             @ApiResponse(code = 400, message = "请求参数没填好"),
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
-    public  R<Object> regist(@RequestBody @ApiParam(name="用户对象",value="必填参数email或者phonenumber，password",required=true)User user , @RequestParam(defaultValue = "0")String sentCode, @RequestParam(defaultValue = "9")String checkCode, @RequestParam(defaultValue = "")String code){
+    public  R<Object> regist( @ApiParam(name="用户对象",value="必填参数email或者phonenumber，password",required=true)User user , @RequestParam(defaultValue = "0")String sentCode, @RequestParam(defaultValue = "9")String checkCode, @RequestParam(defaultValue = "")String code){
         String check = userService.check(user);
         if(!sentCode.equals(checkCode)) {
             return R.isFail().data("4");
@@ -436,7 +436,7 @@ public class UserController {
             @ApiResponse(code = 400, message = "请求参数没填好"),
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
-    public R<String> updatePassword(@RequestBody @ApiParam(name="用户对象",value="必填参数uid,password",required=true)User user,String newPassword)  {
+    public R<String> updatePassword( @ApiParam(name="用户对象",value="必填参数uid,password",required=true)User user,String newPassword)  {
         String uid = userService.checkPasswordByUId(user.getUid());
         if(uid.equals(MD5.MD5Encode("fr2018<%" + user.getPassword()  + "%>lz1220"))){
             user.setPassword(MD5.MD5Encode("fr2018<%" + newPassword  + "%>lz1220"));

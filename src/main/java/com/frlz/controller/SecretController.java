@@ -44,7 +44,7 @@ public class SecretController {
             @ApiResponse(code = 400, message = "请求参数没填好"),
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
-    public R addSecret(@RequestBody @ApiParam(name="用户对象",value="必填参数uid,secret",required=true)Secret secret){
+    public R addSecret( @ApiParam(name="用户对象",value="必填参数uid,secret",required=true)Secret secret){
         secretService.insertSecret(secret);
         return R.isOk();
     }
@@ -112,7 +112,7 @@ public class SecretController {
             @ApiResponse(code = 400, message = "请求参数没填好"),
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
-    public R changeSecret(@RequestBody @ApiParam(name="密保对象",value="必填参数uid，选填问题和答案",required=true)Secret secret){
+    public R changeSecret( @ApiParam(name="密保对象",value="必填参数uid，选填问题和答案",required=true)Secret secret){
         secretService.updateSecret(secret);
         return R.isOk();
     }

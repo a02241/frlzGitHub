@@ -57,7 +57,7 @@ public class AfterFatherController {
             @ApiResponse(code = 400, message = "请求参数没填好"),
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
-    public R addAfterDiscuss(String uid, @RequestBody @ApiParam(name="盘和标签对象",value="必填参数shares ,changes,message,highest",required=true)AfterTag afterTag){
+    public R addAfterDiscuss(String uid, @ApiParam(name="盘和标签对象",value="必填参数shares ,changes,message,highest",required=true)AfterTag afterTag){
         if (userService.checkUserByUid(uid) == 0){
             return R.isFail().msg("参数错误");
         }

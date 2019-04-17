@@ -80,7 +80,7 @@ public class PrePlanController {
             @ApiResponse(code = 400, message = "请求参数没填好"),
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
-    public R<String> addPrePlan(@RequestBody @ApiParam(name="盘前对象",value="message",required=true)PrePlan prePlan){
+    public R<String> addPrePlan(@ApiParam(name="盘前对象",value="message",required=true)PrePlan prePlan){
         if (prePlanService.selectPrePlanByUid(prePlan.getUid(),DateTime.getNowTimeToString()) == null){
             prePlanService.insertIntoPrePlan(prePlan);
             return R.isOk().msg("success");

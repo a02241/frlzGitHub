@@ -115,7 +115,7 @@ public class CommentsController {
             @ApiResponse(code = 400, message = "请求参数没填好"),
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
-    public R<HashMap<String,Object>> saveComment(@RequestBody @ApiParam(name="评论对象",value="必填参数comments，blogId，username",required=true)Comments comments) {
+    public R<HashMap<String,Object>> saveComment( @ApiParam(name="评论对象",value="必填参数comments，blogId，username",required=true)Comments comments) {
         User user = userService.selectUserByUsername(comments.getUsername());
         if(user.getExperience() > 0){
             String format = DateTime.getTimeByDateToString(new Date());//创建当前时间以yyyy-MM-dd格式
