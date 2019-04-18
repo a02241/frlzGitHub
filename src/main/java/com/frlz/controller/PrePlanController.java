@@ -166,7 +166,7 @@ public class PrePlanController {
     @ApiOperation(value="判断每月是否写盘前", notes="根据url的信息来判断每月是否写盘前")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid", value = "盘前识别码", required = true, dataType = "String",paramType = "query"),
-            @ApiImplicitParam(name = "uid", value = "time(yyyy-mm)", required = true, dataType = "String",paramType = "query")
+            @ApiImplicitParam(name = "time", value = "time(yyyy-mm)", required = true, dataType = "String",paramType = "query")
     })
     @ApiResponses({
             @ApiResponse(code = 400, message = "请求参数没填好"),
