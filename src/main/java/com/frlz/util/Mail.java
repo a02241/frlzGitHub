@@ -34,6 +34,7 @@ public class Mail {
             Properties p = new Properties();
             //设置邮件服务器主机名
             p.setProperty("mail.host",mailServer);
+            p.put("mail.smtp.localhost", "mail.digu.com");
             //发送服务器需要身份验证,要采用指定用户名密码的方式去认证
             p.setProperty("mail.smtp.auth", "true");
             //发送邮件协议名称
