@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.List;
 
 /**
- * @program: frlz
- * @description: 盘前主表controller
- * @author: cz
- * @date: 2019-04-11 10:09
+ * @program frlz
+ * @description 盘前主表controller
+ * @author cz
+ * @date 2019-04-11 10:09
  **/
 @RestControllerAdvice
 @RestController
@@ -36,19 +36,20 @@ public class AfterFatherController {
         this.userService = userService;
     }
 
-    @PostMapping("addAfterDiscuss")
+
     /**
-     * TODO 添加和更新标签
+     *  添加和更新标签
      * @title addAfterDiscuss
      * @create by: cz
-     * @description: TODO 必填参数uid , shares ,changes,message,highest
+     * @description  必填参数uid , shares ,changes,message,highest
      * @create time: 2019/4/11 15:56
-     * @Param: uid
-     * @Param: afterTag
-     * @throws
+     * @param uid
+     * @param afterTag
+     * 
      * @return com.frlz.util.R
      * @version V1.0
      */
+    @PostMapping("addAfterDiscuss")
     @ApiOperation(value="添加和更新标签", notes="根据url的信息来添加和更新标签")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query")
@@ -76,14 +77,14 @@ public class AfterFatherController {
 
     @PostMapping("searchAfterTag")
     /**
-     * TODO 获取盘后观察信息
+     *  获取盘后观察信息
      * @title searchAfterTag
      * @create by: cz
-     * @description: TODO 必填参数uid,time(String)
+     * @description  必填参数uid,time(String)
      * @create time: 2019/4/11 14:55
-     * @Param: uid
-     * @Param: time
-     * @throws
+     * @param uid
+     * @param time
+     * 
      * @return com.frlz.util.R
      * @version V1.0
      */
@@ -107,13 +108,13 @@ public class AfterFatherController {
 
     @PostMapping("deleteAfterTag")
     /**
-     * TODO 删除盘后标签
+     *  删除盘后标签
      * @title deleteAfterTag
      * @create by: cz
-     * @description: TODO 必填参数 afterTagId
+     * @description  必填参数 afterTagId
      * @create time: 2019/4/11 15:43
-     * @Param: afterTagId
-     * @throws
+     * @param afterTagId
+     * 
      * @return com.frlz.util.R
      * @version V1.0
      */
@@ -136,13 +137,13 @@ public class AfterFatherController {
 
     @PostMapping("deleteAfterFather")
     /**
-     * TODO 删除盘后观察
+     *  删除盘后观察
      * @title deleteAfterFather
      * @create by: cz
-     * @description: TODO 必填参数 afterFatherId
+     * @description  必填参数 afterFatherId
      * @create time: 2019/4/11 15:50
-     * @Param: afterFatherId
-     * @throws
+     * @param afterFatherId
+     * 
      * @return com.frlz.util.R
      * @version V1.0
      */

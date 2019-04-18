@@ -22,20 +22,20 @@ public class FansController {
         this.userService = userService;
     }
 
-    @Transactional
-    @RequestMapping("/interest")//关注
+    
     /**
-     * TODO 关注
+     *  关注
      * @title interest
      * @create by: cz
-     * @description: TODO 必填参数uid,fansUid
+     * @description  必填参数uid,fansUid
      * @create time: 2019/3/21 10:43
-     * @Param: uid
-     * @Param: fansUId
-     * @throws
+     * @param uid
+     * @param fansUId
      * @return com.frlz.util.R<java.lang.String>
      * @version V1.0
      */
+    @Transactional
+    @RequestMapping("/interest")//关注
     @ApiOperation(value="关注", notes="根据url的信息来关注")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query"),
@@ -56,20 +56,20 @@ public class FansController {
         }
     }
 
-    @Transactional
-    @PostMapping("/notInterest")//取消关注
+    
     /**
-     * TODO 取消关注
+     *  取消关注
      * @title notInterest
      * @create by: cz
-     * @description: TODO 必填参数uid,fansUid
+     * @description  必填参数uid,fansUid
      * @create time: 2019/3/21 10:43
-     * @Param: uid
-     * @Param: fansUId
-     * @throws
+     * @param uid
+     * @param fansUId
      * @return com.frlz.util.R<java.lang.String>
      * @version V1.0
      */
+    @Transactional
+    @PostMapping("/notInterest")//取消关注
     @ApiOperation(value="取消关注", notes="根据url的信息来取消关注")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query"),
@@ -90,18 +90,18 @@ public class FansController {
         }
     }
 
-    @PostMapping("/myFans")
+
     /**
-     * TODO 查看粉丝
+     *  查看粉丝
      * @title myFans
      * @create by: cz
-     * @description: TODO 必填参数 uid
+     * @description  必填参数 uid
      * @create time: 2019/4/9 10:48
-     * @Param: uid
-     * @throws
+     * @param uid
      * @return com.frlz.util.R<java.util.List>
      * @version V1.0
      */
+    @PostMapping("/myFans")
     @ApiOperation(value="查看粉丝", notes="根据url的信息来查看粉丝")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query")

@@ -37,17 +37,15 @@ public class CommentsController {
         this.replysService = replysService;
     }
 
-    @PostMapping("findBlog")
+    
     /**
      * 展示评论信息
      * @title findBlog
      * @author cz
      * @date 2019/3/2 10:33
-     * @param blog
-     * @param pageCode
-     * @param username
      * @param blogId
-     * @Description: TODO 必填参数:blogId,pageCode(默认为1)
+     * @param pageCode
+     * @Description TODO 必填参数:blogId,pageCode(默认为1)
      *                  返回值username,
      *                  message,
      *                  commentsNumber,
@@ -59,8 +57,9 @@ public class CommentsController {
      *                  pageBean(分页类,内datas的List集合-->>评论的集合信息)
      *                  result评论总数量
      * @return java.util.HashMap<java.lang.String,java.lang.Object>
-     * @throws
+     * 
      */
+    @PostMapping("findBlog")
     @ApiOperation(value="展示评论信息", notes="根据url的信息来展示评论信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "blogId", value = "博客识别码", required = true, dataType = "String",paramType = "query"),
@@ -90,24 +89,22 @@ public class CommentsController {
     }
 
 
-    @Transactional
-    @PostMapping("saveComment")
+
     /**
      * 保存评论信息
      * @title saveComment
      * @author cz
      * @date 2019/3/2 10:47
-     * @param content
-     * @param comments
-     * @param model
-     * @param blogId
-     * @Description: TODO 必填参数comments,
+     * @param comments(comments,blogId,username)
+     * @Description TODO 必填参数comments,
      *                  blogId,
      *                  username
      *                  返回success则为注册成功
      * @return java.util.HashMap<java.lang.String,java.lang.Object>
-     * @throws
+     * 
      */
+    @Transactional
+    @PostMapping("saveComment")
     @ApiOperation(value="保存评论信息", notes="根据url的信息来保存评论信息")
     @ApiImplicitParams({
     })
@@ -131,17 +128,18 @@ public class CommentsController {
         return R.isFail().msg("参数错误");
     }
 
-    @PostMapping("/deleteComment")
+    
     /**
      * 删除评论信息
      * @title deleteComment
      * @author cz
      * @date 2019/3/2 10:50
-     * @param comments
-     * @Description: TODO 删除信息,必填字段cId删除成功返回result为success
+     * @param cId
+     * @Description TODO 删除信息,必填字段cId删除成功返回result为success
      * @return java.lang.String
-     * @throws
+     * 
      */
+    @PostMapping("/deleteComment")
     @ApiOperation(value="删除评论信息", notes="根据url的信息来删除评论信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "cId", value = "评论识别码", required = true, dataType = "String",paramType = "query")

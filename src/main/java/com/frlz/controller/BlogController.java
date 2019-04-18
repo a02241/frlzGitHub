@@ -29,6 +29,17 @@ public class BlogController {
 
 
 
+    /**
+     *
+     * @title searchBlog
+     * @create by: cz
+     * @description 必填参数 pageCode uid
+     * @create time: 2019/4/18 17:25
+     * @param pageCode
+     * @param uid
+     * @return com.frlz.util.R<java.util.HashMap<java.lang.String,java.lang.Object>>
+     * @version V1.0
+     */
     @Transactional
     @PostMapping("/searchBlog")
     @ApiOperation(value="展示博客信息", notes="根据url的信息来展示博客信息")
@@ -58,6 +69,16 @@ public class BlogController {
     }
 
 
+    /**
+     *
+     * @title searchBlogChoice
+     * @create by: cz
+     * @description 必填参数pageCode
+     * @create time: 2019/4/18 17:26
+     * @param pageCode
+     * @return com.frlz.util.R<java.util.HashMap<java.lang.String,java.lang.Object>>
+     * @version V1.0
+     */
     @Transactional
     @PostMapping("/searchBlogChoice")
     @ApiOperation(value="精选博客", notes="根据url的信息来展示精选博客")
@@ -72,19 +93,20 @@ public class BlogController {
         HashMap<String,Object> map = blogService.searchBlog(pageCode,"",2);
         return R.isOk().data(map);
     }
-    @Transactional
-    @PostMapping("/insertBlog")
+
     /**
      * 添加博客
      * @title insertBlog
      * @author cz
      * @date 2019/3/1 15:48
-     * @param blog
+     * @param blog (必填参数message(内容),summary(摘要),title(主题))
      * @param uid
-     * @Description: TODO 必填字段uid,message(内容),summary(摘要),title(主题),返回为true则成功注册,返回false则uid为空
+     * @Description  必填字段uid,message(内容),summary(摘要),title(主题),返回为true则成功注册,返回false则uid为空
      * @return boolean
-     * @throws Exception
+     *  Exception
      */
+    @Transactional
+    @PostMapping("/insertBlog")
     @ApiOperation(value="添加博客", notes="根据url的信息来添加博客")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query")
@@ -115,18 +137,19 @@ public class BlogController {
     }
 
 
-    @PostMapping("addReadNumber")
+    
     /**
      * 增加阅读数
      * @title addReadNumber
      * @create by: cz
-     * @description: TODO 必填参数blogId 返回阅读数+1字符串
+     * @Description  必填参数blogId 返回阅读数+1字符串
      * @create time: 2019/3/16 14:29
-     * @Param: blogId
-     * @throws
+     * @param blogId
+     * 
      * @return java.lang.String
      * @version V1.0
      */
+    @PostMapping("addReadNumber")
     @ApiOperation(value="增加阅读数", notes="根据url的信息来增加阅读数")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "blogId", value = "博客识别码", required = true, dataType = "String",paramType = "query")
@@ -140,18 +163,19 @@ public class BlogController {
         return R.isOk().msg("阅读数+1");
     }
 
-    @PostMapping("addForwordNumber")
+
     /**
-     * TODO 增加转发数
+     *  增加转发数
      * @title addForwordNumber
      * @create by: cz
-     * @description: TODO 必填参数blogId，返回转发数+1字符串
+     * @Description  必填参数blogId，返回转发数+1字符串
      * @create time: 2019/3/16 14:29
-     * @Param: blogId
-     * @throws
+     * @param blogId
+     * 
      * @return java.lang.String
      * @version V1.0
      */
+    @PostMapping("addForwordNumber")
     @ApiOperation(value="增加转发数", notes="根据url的信息来增加转发数")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "blogId", value = "博客识别码", required = true, dataType = "String",paramType = "query")

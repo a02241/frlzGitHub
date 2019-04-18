@@ -32,19 +32,20 @@ public class ManagerController {
         this.loginLogService = loginLogService;
     }
 
-    @PostMapping("/managerLogin")
+    
     /**
      * 管理员登录
      * @title managerLogin
      * @create by: cz
-     * @description: TODO 必填字段manager，password
+     * @description  必填字段manager，password
      * @create time: 2019/3/13 16:04
-     * @Param: manager
-     * @Param: password
-     * @throws
+     * @param manager
+     * @param password
+     * 
      * @return java.lang.String
      * @version V1.0
      */
+    @PostMapping("/managerLogin")
     @ApiOperation(value="管理员登录", notes="根据url的信息来管理员登录")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "manager", value = "管理员用户名", required = true, dataType = "String",paramType = "query"),
@@ -64,18 +65,18 @@ public class ManagerController {
         return R.isFail().msg("manager not exist");
     }
 
-    @PostMapping("/deleteUser")
+    
     /**
      * 删除用户
      * @title deleteUser
      * @create by: cz
-     * @description: TODO 必填参数uid
+     * @description  必填参数uid
      * @create time: 2019/3/13 16:08
-     * @Param: uid
-     * @throws
+     * @param uid
      * @return java.lang.String
      * @version V1.0
      */
+    @PostMapping("/deleteUser")
     @ApiOperation(value="删除用户", notes="根据url的信息来删除用户")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query")
@@ -89,18 +90,18 @@ public class ManagerController {
         return R.isOk().msg("success");
     }
 
-    @PostMapping("/selectAllUser")
+    
     /**
      * 查询所有用户
      * @title selectAllUser
      * @create by: cz
-     * @description: TODO
+     * @description  查询所有用户
      * @create time: 2019/3/13 16:10
-     * @Param:
-     * @throws
+     * @param
      * @return java.util.List<com.frlz.pojo.User>
      * @version V1.0
      */
+    @PostMapping("/selectAllUser")
     @ApiOperation(value="查询所有用户", notes="根据url的信息来查询所有用户")
     @ApiImplicitParams({
     })
@@ -118,6 +119,18 @@ public class ManagerController {
         return R.isOk().data(blogService.selectFiftyBlog((a - 1)* 20));
     }
 
+
+
+    /**
+     *
+     * @title deleteBlog
+     * @create by: cz
+     * @description 必填参数uid 删除博客
+     * @create time: 2019/4/18 17:37
+     * @param blogId
+     * @return com.frlz.util.R<java.lang.String>
+     * @version V1.0
+     */
     @PostMapping("/deleteBlog")
     @ApiOperation(value="删除博客", notes="根据url的信息来删除博客")
     @ApiImplicitParams({
@@ -132,18 +145,18 @@ public class ManagerController {
         return R.isOk().msg("success");
     }
 
-    @PostMapping("/getBlogByDate")
+
     /**
      * 按照日期查询博客所有信息
      * @title getBlogByDate
      * @create by: cz
-     * @description: TODO 必填参数:date，返回博客该日期所有数据
+     * @description  必填参数:date，返回博客该日期所有数据
      * @create time: 2019/3/14 15:24
-     * @Param: date
-     * @throws
+     * @param date
      * @return java.util.List<com.frlz.pojo.Blog>
      * @version V1.0
      */
+    @PostMapping("/getBlogByDate")
     @ApiOperation(value="按照日期查询博客所有信息", notes="根据url的信息来按照日期查询博客所有信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "date", value = "日期(yyyy-mm)", required = true, dataType = "String",paramType = "query")
@@ -156,18 +169,18 @@ public class ManagerController {
         return R.isOk().data(blogService.selectBlogByMonth(date));
     }
 
-    @PostMapping("/getBlogByMonth")
+
     /**
      * 按照月份查询博客所有信息
      * @title getBlogByMonth
      * @create by: cz
-     * @description: TODO 必填参数:date 返回博客该月份所有数据
+     * @description  必填参数:date 返回博客该月份所有数据
      * @create time: 2019/3/14 15:27
-     * @Param: date
-     * @throws
+     * @param date
      * @return java.util.List<com.frlz.pojo.Blog>
      * @version V1.0
      */
+    @PostMapping("/getBlogByMonth")
     @ApiOperation(value="按照月份查询博客所有信息", notes="根据url的信息来按照月份查询博客所有信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "date", value = "日期(yyyy-mm-dd)", required = true, dataType = "String",paramType = "query")
@@ -180,18 +193,18 @@ public class ManagerController {
         return R.isOk().data(blogService.selectBlogByMonth(date));
     }
 
-    @PostMapping("/getAllLoginLog")
+
     /**
      * 获取所有登录日志
      * @title getAllLoginLog
      * @create by: cz
-     * @description: TODO 返回所有登录日志
+     * @description  返回所有登录日志
      * @create time: 2019/3/14 15:30
-     * @Param:
-     * @throws
+     * @param
      * @return java.util.List<com.frlz.pojo.LoginLog>
      * @version V1.0
      */
+    @PostMapping("/getAllLoginLog")
     @ApiOperation(value="获取所有登录日志", notes="根据url的信息来获取所有登录日志")
     @ApiImplicitParams({
     })
@@ -203,18 +216,18 @@ public class ManagerController {
         return R.isOk().data(loginLogService.getAllLoginLog());
     }
 
-    @PostMapping("/getLoginLogByDate")
+
     /**
      * 根据日期查询登录日志
      * @title getLoginLogByDate
      * @create by: cz
-     * @description: TODO 必填参数date，返回该日期的所有登录日志
+     * @description  必填参数date，返回该日期的所有登录日志
      * @create time: 2019/3/14 15:31
-     * @Param: date
-     * @throws
+     * @param date
      * @return java.util.List<com.frlz.pojo.LoginLog>
      * @version V1.0
      */
+    @PostMapping("/getLoginLogByDate")
     @ApiOperation(value="根据日期查询登录日志", notes="根据url的信息来根据日期查询登录日志")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "date", value = "日期(yyyy-mm-dd)", required = true, dataType = "String",paramType = "query")

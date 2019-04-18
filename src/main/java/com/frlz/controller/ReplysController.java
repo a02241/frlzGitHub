@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.HashMap;
 
 /**
- * @program: frlz
- * @description: TODO 博客回复controller
- * @author: cz
- * @date: 2019-03-04 13:56
+ * @program frlz
+ * @description  博客回复controller
+ * @author cz
+ * @date 2019-03-04 13:56
  **/
 @RestControllerAdvice
 @RestController
@@ -35,18 +35,18 @@ public class ReplysController {
     }
 
 
-    @PostMapping("showAllRelysByCId")
+    
     /**
      * 根据cId获取该评论的所有回复
      * @title showAllRelysByCId
      * @create by: cz
-     * @description: TODO 必填参数cId
+     * @description  必填参数cId
      * @create time: 2019/3/25 10:23
-     * @Param: cId
-     * @throws
+     * @param cId
      * @return com.frlz.util.R<java.util.HashMap<java.lang.String,java.lang.Object>>
      * @version V1.0
      */
+    @PostMapping("showAllRelysByCId")
     @ApiOperation(value="根据cId获取该评论的所有回复", notes="根据url的信息来根据cId获取该评论的所有回复")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "cId", value = "评论识别码", required = true, dataType = "String",paramType = "query")
@@ -61,17 +61,17 @@ public class ReplysController {
         return R.isOk().data(map);
     }
 
-    @PostMapping("addReplys")
+
     /**
      * 添加评论回复
      * @title addReplys
      * @author cz
      * @date 2019/3/4 14:44
-     * @param replys
-     * @Description: TODO 回复评论,必填字段cId(评论的主键),username,content 成功则返回success
+     * @param replys(username,content)
+     * @description  回复评论,必填字段cId(评论的主键),username,content 成功则返回success
      * @return java.lang.String
-     * @throws
      */
+    @PostMapping("addReplys")
     @ApiOperation(value="添加评论回复", notes="根据url的信息来添加评论回复")
     @ApiImplicitParams({
     })
