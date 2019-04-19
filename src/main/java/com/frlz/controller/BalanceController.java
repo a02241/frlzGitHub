@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
- * @program: frlz
- * @description: 方块量子余额controller
- * @author: cz
- * @date: 2019-03-07 11:28
+ * @program frlz
+ * @description 方块量子余额controller
+ * @author cz
+ * @date 2019-03-07 11:28
  **/
 @RestControllerAdvice
 @RestController
@@ -31,19 +31,19 @@ public class BalanceController {
         this.tradeLogService = tradeLogService;
     }
 
-    @PostMapping("/getBalance")
+    
     /**
      * 获取账户余额信息
      * @title quantumToBlock
      * @create by: cz
-     * @description: TODO 必填字段:uid,返回个人余额账户
+     * @description TODO 必填字段:uid,返回个人余额账户
      * @create time: 2019/3/8 10:24
-     * @Param: uid
-     * @Param: quantum
+     * @param uid
      * @throws
      * @return java.lang.String
      * @version V1.0
      */
+    @PostMapping("/getBalance")
     @ApiOperation(value="获取账户余额信息", notes="根据url的信息来获取账户余额信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query")
@@ -56,20 +56,21 @@ public class BalanceController {
         return R.isOk().data(balanceService.selectFromBalanceByUid(uid));
     }
 
-    @Transactional
-    @PostMapping("/quantumToBlock")
+
     /**
      * 量子换方块
      * @title quantumToBlock
      * @create by: cz
-     * @description: TODO 必填字段:uid,quantum,返回中文信息
+     * @description TODO 必填字段:uid,quantum,返回中文信息
      * @create time: 2019/3/8 10:24
-     * @Param: uid
-     * @Param: quantum
+     * @param uid
+     * @param quantum
      * @throws
      * @return java.lang.String
      * @version V1.0
      */
+    @Transactional
+    @PostMapping("/quantumToBlock")
     @ApiOperation(value="量子换方块", notes="根据url的信息来量子换方块")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query"),
@@ -92,20 +93,21 @@ public class BalanceController {
 
     }
 
-    @Transactional
-    @PostMapping("/blockToQuantum")
+
     /**
      * 方块换量子
      * @title blockToQuantum
      * @create by: cz
-     * @description: TODO 必填字段uid,block,返回中文信息
+     * @description TODO 必填字段uid,block,返回中文信息
      * @create time: 2019/3/8 10:26
-     * @Param: uid
-     * @Param: block
+     * @param uid
+     * @param block
      * @throws
      * @return java.lang.String
      * @version V1.0
      */
+    @Transactional
+    @PostMapping("/blockToQuantum")
     @ApiOperation(value="方块换量子", notes="根据url的信息来方块换量子")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query"),
@@ -128,20 +130,21 @@ public class BalanceController {
 
     }
 
-    @Transactional
-    @PostMapping("/magicCubeToBlock")
+
     /**
      * 魔方换方块
      * @title magicCubeToBlock
      * @create by: cz
-     * @description: TODO 必填字段uid,magicCube,返回中文参数
+     * @description TODO 必填字段uid,magicCube,返回中文参数
      * @create time: 2019/3/8 10:27
-     * @Param: uid
-     * @Param: magicCube
+     * @param uid
+     * @param magicCube
      * @throws
      * @return java.lang.String
      * @version V1.0
      */
+    @Transactional
+    @PostMapping("/magicCubeToBlock")
     @ApiOperation(value="魔方换方块", notes="根据url的信息来魔方换方块")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query"),
@@ -164,20 +167,21 @@ public class BalanceController {
 
     }
 
-    @Transactional
-    @PostMapping("/blockToMagicCube")
+
     /**
      * 方块换魔方
      * @title blockToMagicCube
      * @create by: cz
-     * @description: TODO 必填字段uid,block,返回中文参数
+     * @description TODO 必填字段uid,block,返回中文参数
      * @create time: 2019/3/8 10:28
-     * @Param: uid
-     * @Param: block
+     * @param uid
+     * @param block
      * @throws
      * @return java.lang.String
      * @version V1.0
      */
+    @Transactional
+    @PostMapping("/blockToMagicCube")
     @ApiOperation(value="方块换魔方", notes="根据url的信息来方块换魔方")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query"),

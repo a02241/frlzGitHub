@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.Map;
 
 /**
- * @program: frlz
- * @description: 问答
- * @author: cz
- * @date: 2019-03-22 17:02
+ * @program frlz
+ * @description 问答
+ * @author cz
+ * @date 2019-03-22 17:02
  **/
 @RestControllerAdvice
 @RestController
@@ -27,18 +27,18 @@ public class QuizController {
         this.quizService = quizService;
     }
 
-    @PostMapping("startQuiz")
+
     /**
      *
      * @title startQuiz
      * @create by: cz
-     * @description: TODO 获取所有题目
+     * @description  获取所有题目
      * @create time: 2019/3/26 17:43
-     * @Param:
-     * @throws
+     * @param
      * @return com.frlz.util.R<java.util.Map>
      * @version V1.0
      */
+    @PostMapping("startQuiz")
     @ApiOperation(value="获取所有题目", notes="根据url的信息来获取所有题目")
     @ApiImplicitParams({
     })
@@ -50,18 +50,18 @@ public class QuizController {
         return R.isOk().data(quizService.getAllQuestion());
     }
 
-    @PostMapping("checkAnswer")//传入大写ABCD的答案字符串，返回int答对的题数
+
     /**
      *
      * @title checkAnswer
      * @create by: cz
-     * @description: TODO 传入大写ABCD的答案字符串，返回int答对的题数,传过来ABCDAB格式
+     * @description  传入大写ABCD的答案字符串，返回int答对的题数,传过来ABCDAB格式
      * @create time: 2019/3/26 17:43
-     * @Param: answer
-     * @throws
+     * @param answer
      * @return com.frlz.util.R<java.lang.Integer>
      * @version V1.0
      */
+    @PostMapping("checkAnswer")//传入大写ABCD的答案字符串，返回int答对的题数
     @ApiOperation(value="传入大写ABCD的答案字符串", notes="根据url的信息来传入大写ABCD的答案字符串")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "answer", value = "答案", required = true, dataType = "String",paramType = "query")

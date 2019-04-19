@@ -16,10 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * @program: frlz
- * @description: 所有股票对应信息
- * @author: cz
- * @date: 2019-03-02 10:55
+ * @program frlz
+ * @description 所有股票对应信息
+ * @author cz
+ * @date 2019-03-02 10:55
  **/
 @RestControllerAdvice
 @RestController
@@ -35,8 +35,20 @@ public class Area_listController{
         this.sessionService = sessionService;
     }
 
-    @PostMapping("selectAllShares")
+    /**
+     *
+     * @title selectAllShares
+     * @create by: cz
+     * @description
+     * @create time: 2019/3/18 17:23
+     * @param
+     * @return com.frlz.util.R<java.util.List>
+     * @version V1.0
+     */
+    @RequestMapping("selectAllShares")
     @ApiOperation(value="获取所有股票信息", notes="根据url的信息来获取所有股票信息")
+    @ApiImplicitParams({
+    })
     @ApiResponses({
             @ApiResponse(code = 400, message = "请求参数没填好"),
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")

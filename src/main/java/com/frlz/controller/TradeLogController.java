@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.List;
 
 /**
- * @program: frlz
- * @description: 交易日志controller
- * @author: cz
- * @date: 2019-03-07 15:42
+ * @program frlz
+ * @description 交易日志controller
+ * @author cz
+ * @date 2019-03-07 15:42
  **/
 @RestControllerAdvice
 @RestController
@@ -28,18 +28,18 @@ public class TradeLogController {
         this.tradeLogService = tradeLogService;
     }
 
-    @PostMapping("getTradeLog")
+    
     /**
      *
      * @title getTradeLog
      * @create by: cz
-     * @description: TODO 必填参数uid
+     * @description 必填参数uid
      * @create time: 2019/3/27 18:06
-     * @Param: uid
-     * @throws
+     * @param uid
      * @return com.frlz.util.R<java.util.List>
      * @version V1.0
      */
+    @PostMapping("getTradeLog")
     @ApiOperation(value="获取交易记录", notes="根据uid获取用户的交易记录")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid", value = "uid", required = true, dataType = "String",paramType = "query")

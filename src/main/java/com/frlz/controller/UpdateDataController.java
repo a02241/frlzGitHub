@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
- * @program: frlz
- * @description: 股票数据更新脚本
- * @author: cz
- * @date: 2019-03-26 09:20
+ * @program frlz
+ * @description 股票数据更新脚本
+ * @author cz
+ * @date 2019-03-26 09:20
  **/
 @RestController
 @RestControllerAdvice

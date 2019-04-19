@@ -32,18 +32,18 @@ public class InvitationController {
         this.tradeLogService = tradeLogService;
     }
 
-    @PostMapping("selectInvatationByUid")
+    
     /**
      * 根据uid找查兑换邀请码信息
      * @title selectInvatationByUid
      * @create by: cz
-     * @description: TODO 必填参数:uid,返回为邀请表的集合
+     * @description TODO 必填参数:uid,返回为邀请表的集合
      * @create time: 2019/3/5 16:19
-     * @Param: uid
-     * @throws
+     * @param uid
      * @return java.util.List<com.frlz.pojo.Invitation>
      * @version V1.0
      */
+    @PostMapping("selectInvatationByUid")
     @ApiOperation(value="根据uid找查兑换邀请码信息", notes="根据url的信息来根据uid找查兑换邀请码信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query")
@@ -61,10 +61,9 @@ public class InvitationController {
      * 找查邀请码是否被使用
      * @title findStateBycode
      * @create by: cz
-     * @description: 必填参数:code,返回值为true则为被使用,false则为未被使用
+     * @description 必填参数:code,返回值为true则为被使用,false则为未被使用
      * @create time: 2019/3/5 16:20
-     * @Param: code
-     * @throws
+     * @param code
      * @return java.lang.Boolean
      * @version V1.0
      */
@@ -98,6 +97,16 @@ public class InvitationController {
         }
     }
 
+    /**
+     *
+     * @title exchangeInvitation
+     * @create by: cz
+     * @description 必填参数uid
+     * @create time: 2019/4/18 17:35
+     * @param uid
+     * @return com.frlz.util.R
+     * @version V1.0
+     */
     //量子兑换邀请码
     @Transactional
     @PostMapping("exchangeInvitation")

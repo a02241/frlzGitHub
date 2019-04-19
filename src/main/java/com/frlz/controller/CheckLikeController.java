@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 @RestController
+@Transactional
 @Api(value="点赞controller",tags={"点赞操作接口"})
 public class CheckLikeController {
 
@@ -24,20 +25,20 @@ public class CheckLikeController {
         this.blogService = blogService;
     }
 
-    @Transactional
-    @PostMapping("/clickLike")
+    
     /**
      * 点赞
      * @title clickLike
      * @create by: cz
-     * @description: TODO 必填参数blogId,uid，返回未点击喜欢返回+1，已经点击过了再次点击返回-1
+     * @Description TODO 必填参数blogId,uid，返回未点击喜欢返回+1，已经点击过了再次点击返回-1
      * @create time: 2019/3/13 16:14
-     * @Param: blog
-     * @Param: uid
-     * @throws
+     * @param blogId
+     * @param uid
+     * 
      * @return java.lang.String
      * @version V1.0
      */
+    @PostMapping("/clickLike")
     @ApiOperation(value="点赞", notes="根据url的信息来点赞")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "blogId", value = "博客识别码", required = true, dataType = "String",paramType = "query"),

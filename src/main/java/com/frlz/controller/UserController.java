@@ -44,24 +44,24 @@ public class UserController {
         this.invitationService = invitationService;
         this.sessionService = sessionService;
     }
+
+    /**
+     *
+     * @title regist
+     * @create by: cz
+     * @Description   检查注册重复问题,必填字段:phonenumber或者email,password,sentCode(发送验证码),checkCode(填写验证码)
+     *                      返回"4"为验证码错误,"5"为注册成功,2为手机被注册,3为邮箱被注册
+     * @create time: 2019/4/18 16:58
+     * @param user(phonenumber或者email)
+     * @param sentCode
+     * @param checkCode
+     * @param  code
+     * 
+     * @return com.frlz.util.R<java.lang.Object>
+     * @version V1.0
+     */
     @Transactional
     @PostMapping("/regist")
-    /**
-     * 注册时校验是否注册成功
-     * @title check
-     * @author cz
-     * @date 2019/3/1 10:21
-     * @param user
-     * @param request
-     * @param response
-     * @param session
-     * @param emailCode
-     * @param checkCode
-     * @Description: TODO 检查注册重复问题,必填字段:phonenumber或者email,password,sentCode(发送验证码),checkCode(填写验证码)
-     *                      返回"4"为验证码错误,"5"为注册成功,2为手机被注册,3为邮箱被注册
-     * @return void
-     * @throws
-     */
     @ApiOperation(value="注册信息", notes="根据url的信息来创建用户信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "sentCode", value = "验证码", required = true, dataType = "String",paramType = "query"),
@@ -72,7 +72,7 @@ public class UserController {
             @ApiResponse(code = 400, message = "请求参数没填好"),
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
-    public  R<Object> regist(@RequestBody @ApiParam(name="用户对象",value="必填参数email或者phonenumber，password",required=true)User user , @RequestParam(defaultValue = "0")String sentCode, @RequestParam(defaultValue = "9")String checkCode, @RequestParam(defaultValue = "")String code){
+    public  R<Object> regist( @ApiParam(name="用户对象",value="必填参数email或者phonenumber，password",required=true)User user , @RequestParam(defaultValue = "0")String sentCode, @RequestParam(defaultValue = "9")String checkCode, @RequestParam(defaultValue = "")String code){
         String check = userService.check(user);
         if(!sentCode.equals(checkCode)) {
             return R.isFail().data("4");
@@ -101,45 +101,21 @@ public class UserController {
         return R.isOk().msg("注册成功").data(check);
     }
 
-    @PostMapping("/checkAccount")//注册时校验账号是否重复
-    /**
-     * 注册时校验手机或者邮箱是否重复
-     * @title checkAccount
-     * @author cz
-     * @date 2019/2/28 17:34
-     * @Description: TODO 参数account(手机号或者邮箱),返回true为能注册,false不能注册
-     * @param account
-     * @return boolean
-     * @throws
-     */
-    @ApiOperation(value="注册时校验", notes="注册时校验手机或者邮箱是否重复")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "account", value = "account手机或邮箱", required = true, dataType = "String",paramType = "query")
-    })
-    @ApiResponses({
-            @ApiResponse(code = 400, message = "请求参数没填好"),
-            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
-    })
-    public R<Boolean> checkAccount(@Param("account") String account)  {
-        return R.isOk().data(((userService.checkPhonenumber(account) + userService.checkEmail(account)) == 0));
-    }
 
-    @Transactional
-    @PostMapping("/userLogin")
     /**
      * 登录即10天免登陆,插入登录日志
      * @title userLogin
      * @author cz
      * @date 2019/3/1 9:16
-     * @param isRember
-     * @param request
+     * @param username
+     * @param password
      * @param session
-     * @param response
-     * @param resp
-     * @Description: TODO 用户登录,必填参数:username,password,选填:isRember-->>十天免登陆(参数“1”为勾选)
+     * @Description  用户登录,必填参数:username,password,选填:isRember-->>十天免登陆(参数“1”为勾选)
      * @return java.util.HashMap<java.lang.String,java.lang.String>
-     * @throws
+     * 
      */
+    @Transactional
+    @PostMapping("/userLogin")
     @ApiOperation(value="注册时校验", notes="注册时校验手机或者邮箱是否重复")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "username", value = "用户名", required = true, dataType = "String",paramType = "query"),
@@ -198,38 +174,59 @@ public class UserController {
         return R.isOk().data(map);
     }
 
-    @PostMapping("closeSession")
     /**
-     * TODO 关闭浏览器
+     * 注册时校验手机或者邮箱是否重复
+     * @title checkAccount
+     * @author cz
+     * @date 2019/2/28 17:34
+     * @Description  参数account(手机号或者邮箱),返回true为能注册,false不能注册
+     * @param account
+     * @return boolean
+     * 
+     */
+    @PostMapping("/checkAccount")//注册时校验账号是否重复
+    @ApiOperation(value="注册时校验", notes="注册时校验手机或者邮箱是否重复")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "account", value = "account手机或邮箱", required = true, dataType = "String",paramType = "query")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "请求参数没填好"),
+            @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
+    })
+    public R<Boolean> checkAccount(String account)  {
+        return R.isOk().data(((userService.checkPhonenumber(account) + userService.checkEmail(account)) == 0));
+    }
+
+
+    /**
+     *  关闭浏览器
      * @title closeSession
      * @create by: cz
-     * @description: TODO
+     * @Description  
      * @create time: 2019/4/1 15:23
-     * @Param: session
-     * @throws
+     * @param session
+     * 
      * @return com.frlz.util.R
      * @version V1.0
      */
+    @PostMapping("closeSession")
     public R closeSession(HttpSession session){
         session.invalidate();
         sessionService.deleteSession(session.getId());
         return R.isOk();
     }
 
-    @PostMapping("/emailCode")
     /**
-     * 发送邮箱验证码
+     *  发送邮箱验证码
      * @title emailCode
      * @author cz
      * @date 2019/2/28 17:18
      * @param email
-     * @param request
-     * @param response
-     * @param session
-     * @Description: TODO 发送邮件到邮箱 必填字段:email 发送成功返回验证码 发送失败返回error
+     * @Description  发送邮件到邮箱 必填字段:email 发送成功返回验证码 发送失败返回error
      * @return void
-     * @throws
+     * 
      */
+    @PostMapping("/emailCode")
     @ApiOperation(value="发送邮箱验证码", notes="根据url的信息来发送邮箱验证码")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "email", value = "邮箱验证码", required = true, dataType = "String",paramType = "query")
@@ -238,6 +235,7 @@ public class UserController {
             @ApiResponse(code = 400, message = "请求参数没填好"),
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
+
     public R<String> emailCode(String email){
         String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";//验证码筛选
         StringBuilder sb = new StringBuilder(4);
@@ -255,18 +253,19 @@ public class UserController {
         }
     }
 
-    @PostMapping("sendPhonenumberMessage")
+
     /**
      *
      * @title sendPhonenumberMessage
      * @create by: cz
-     * @description: TODO 必填字段phonenumber,返回sentCode(验证码)
+     * @Description  必填字段phonenumber,返回sentCode(验证码)
      * @create time: 2019/3/8 10:09
-     * @Param: phonenumber
-     * @throws
+     * @param phonenumber
+     * 
      * @return java.util.HashMap<java.lang.String,java.lang.Object>
      * @version V1.0
      */
+    @PostMapping("sendPhonenumberMessage")
     @ApiOperation(value="发送手机验证码", notes="根据url的信息来发送手机验证码")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "phonenumber", value = "手机验证码", required = true, dataType = "String",paramType = "query")
@@ -279,18 +278,19 @@ public class UserController {
         return R.isOk().data(SendMessage.sendMessage(phonenumber));
     }
 
-    @PostMapping("/uploadUserIcon")
+
     /**
      * 上传头像
      * @title uploadUserIcon
      * @author cz
      * @date 2019/3/2 12:04
      * @param file
-     * @param username
-     * @Description: TODO 用户头像上次,必填参数:username,file文件
+     * @param uid
+     * @Description  用户头像上次,必填参数:username,file文件
      * @return java.lang.String
-     * @throws
+     * 
      */
+    @PostMapping("/uploadUserIcon")
     @ApiOperation(value="上传头像", notes="根据url的信息来上传头像")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "file", value = "文件", required = true, dataType = "String",paramType = "query"),
@@ -323,25 +323,30 @@ public class UserController {
     }
 
 
-    @Transactional
-    @PostMapping("/updateUser")
+
     /**
      * 更新用户信息
      * @title updateUser
      * @author cz
      * @date 2019/3/4 11:28
      * @param uid
-     * @param usernmae
+     * @param username
      * @param phonenumber
      * @param email
      * @param investmentage
-     * @param profile
      * @param profession
      * @param residence
-     * @Description: TODO 根据传递的参数进行传值,不传值默认为数据库的值,必填参数uid
+     * @param province
+     * @param city
+     * @param signature
+     * @param sex
+     * @param birthday
+     * @Description  根据传递的参数进行传值,不传值默认为数据库的值,必填参数uid
      * @return java.lang.String
-     * @throws
+     * 
      */
+    @Transactional
+    @PostMapping("/updateUser")
     @ApiOperation(value="更新用户信息", notes="根据url的信息来更新用户信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid", value = "用户名", required = true, dataType = "String",paramType = "query"),
@@ -417,17 +422,19 @@ public class UserController {
         }
     }
 
-    @PostMapping("updatePassword")
+
     /**
      * 更换密码
      * @title updatePassword
      * @author cz
      * @date 2019/3/4 15:35
-     * @param user
-     * @Description: TODO 更新密码，必填参数uid,password，newPassword 返回success则为更改成功,false则为原密码错误
+     * @param user(uid,password)
+     * @param newPassword
+     * @Description  更新密码，必填参数uid,password，newPassword 返回success则为更改成功,false则为原密码错误
      * @return java.lang.String
-     * @throws
+     * 
      */
+    @PostMapping("updatePassword")
     @ApiOperation(value="更换密码", notes="根据url的信息来更换密码")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "newPassword", value = "新密码", required = true, dataType = "String",paramType = "query")
@@ -436,7 +443,7 @@ public class UserController {
             @ApiResponse(code = 400, message = "请求参数没填好"),
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
-    public R<String> updatePassword(@RequestBody @ApiParam(name="用户对象",value="必填参数uid,password",required=true)User user,String newPassword)  {
+    public R<String> updatePassword( @ApiParam(name="用户对象",value="必填参数uid,password",required=true)User user,String newPassword)  {
         String uid = userService.checkPasswordByUId(user.getUid());
         if(uid.equals(MD5.MD5Encode("fr2018<%" + user.getPassword()  + "%>lz1220"))){
             user.setPassword(MD5.MD5Encode("fr2018<%" + newPassword  + "%>lz1220"));
@@ -448,19 +455,18 @@ public class UserController {
     }
 
 
-
-    @PostMapping("/seeInformation")
     /**
      * 根据id查询所有信息
      * @title seeInformation
      * @create by: cz
-     * @description: TODO 根据id查询用户信息必填字段:uid，返回为user表的信息
+     * @Description  根据id查询用户信息必填字段:uid，返回为user表的信息
      * @create time: 2019/3/13 15:45
-     * @Param: uid
-     * @throws
+     * @param uid
+     * 
      * @return java.util.HashMap<java.lang.String,java.lang.Object>
      * @version V1.0
      */
+    @PostMapping("/seeInformation")
     @ApiOperation(value="根据id查询所有信息", notes="根据url的信息来根据id查询所有信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query")
@@ -485,20 +491,21 @@ public class UserController {
         }
     }
 
-    @PostMapping("boundPhone")
+
     /**
      * 绑定手机
      * @title boundPhone
      * @create by: cz
-     * @description: TODO 必填参数：uid，phonenumber
+     * @Description  必填参数：uid，phonenumber
      *                 成功返回success false为手机格式不正确
      * @create time: 2019/3/14 14:21
-     * @Param: uid
-     * @Param: phone
-     * @throws
+     * @param uid
+     * @param phonenumber
+     * 
      * @return java.lang.String
      * @version V1.0
      */
+    @PostMapping("boundPhone")
     @ApiOperation(value="绑定手机", notes="根据url的信息来绑定手机")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query"),
@@ -520,20 +527,21 @@ public class UserController {
         return R.isOk().msg("success");
     }
 
-    @PostMapping("boundEmail")
+
     /**
      * 绑定邮箱
      * @title boundEmail
      * @create by: cz
-     * @description: TODO 必填参数：uid，email
+     * @Description  必填参数：uid，email
      *                 成功返回success 邮箱格式错误返回false
      * @create time: 2019/3/14 14:28
-     * @Param: uid
-     * @Param: email
-     * @throws
+     * @param uid
+     * @param email
+     * 
      * @return java.lang.String
      * @version V1.0
      */
+    @PostMapping("boundEmail")
     @ApiOperation(value="绑定邮箱", notes="根据url的信息来绑定邮箱")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query"),
@@ -558,19 +566,20 @@ public class UserController {
         return R.isOk().msg("success");
     }
 
-    @PostMapping("changeProfile")
+
     /**
-     * TODO 更换头衔
+     *  更换头衔
      * @title changeProfile
      * @create by: cz
-     * @description: TODO 必填参数profile,uid
+     * @Description  必填参数profile,uid
      * @create time: 2019/3/28 10:12
-     * @Param: profile
-     * @Param: uid
-     * @throws
+     * @param profile
+     * @param uid
+     * 
      * @return com.frlz.util.R<java.lang.String>
      * @version V1.0
      */
+    @PostMapping("changeProfile")
     @ApiOperation(value="更换头衔", notes="根据url的信息来更换头衔")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "profile", value = "头衔", required = true, dataType = "String",paramType = "query"),
@@ -589,18 +598,19 @@ public class UserController {
     }
 
     //获取安全系数，传入uid，返回绑定信息，若无，则未绑定
-    @PostMapping("getSecurity")
+
     /**
-     * TODO 安全信息
+     *  安全信息
      * @title getSecurity
      * @create by: cz
-     * @description: TODO 必填参数uid
+     * @Description  必填参数uid
      * @create time: 2019/3/28 10:09
-     * @Param: uid
-     * @throws
+     * @param uid
+     * 
      * @return com.frlz.util.R
      * @version V1.0
      */
+    @PostMapping("getSecurity")
     @ApiOperation(value="安全信息", notes="根据url的信息来安全信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query")
@@ -613,18 +623,19 @@ public class UserController {
         return R.isOk().data(userService.getSecurity(uid));
     }
 
-    @PostMapping("showMyInformation")
+
     /**
-     * TODO 个人中心首页展示
+     *  个人中心首页展示
      * @title showMyInformation
      * @create by: cz
-     * @description: TODO 必填参数 uid
+     * @Description  必填参数 uid
      * @create time: 2019/3/28 9:51
-     * @Param: uid
-     * @throws
+     * @param uid
+     * 
      * @return com.frlz.util.R<java.util.HashMap<java.lang.String,java.lang.Object>>
      * @version V1.0
      */
+    @PostMapping("showMyInformation")
     @ApiOperation(value="个人中心首页展示", notes="根据url的信息来个人中心首页展示")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query")
@@ -638,6 +649,7 @@ public class UserController {
         User user = userService.selectByUid(uid);
         UtilBalance balance = balanceService.selectShowBalanceByUid(uid);
         if (balance!=null&&uid!=null){
+            map.put("icon",user.getIcon());
             map.put("username",user.getUsername());
             map.put("experience", String.valueOf(user.getExperience()));
             map.put("balance",balance);
@@ -647,18 +659,19 @@ public class UserController {
         return R.isOk().data(map);
     }
 
-    @PostMapping("showMyBlock")
+
     /**
-         * TODO 我的方块
+         *  我的方块
      * @title showMyBlock
      * @create by: cz
-     * @description: TODO 必填参数uid
+     * @Description  必填参数uid
      * @create time: 2019/3/28 10:10
-     * @Param: uid
-     * @throws
+     * @param uid
+     * 
      * @return com.frlz.util.R<java.util.HashMap<java.lang.String,java.lang.Object>>
      * @version V1.0
      */
+    @PostMapping("showMyBlock")
     @ApiOperation(value="我的方块", notes="根据url的信息来展示我的方块")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query")
@@ -680,15 +693,15 @@ public class UserController {
         return R.isOk().data(map);
     }
 
-    @PostMapping("personalInformation")
+
     /**
-     * TODO 个人信息
+     *  个人信息
      * @title personalInformation
      * @create by: cz
-     * @description: TODO 必填参数uid
+     * @Description  必填参数uid
      * @create time: 2019/3/28 11:08
-     * @Param: uid
-     * @throws 
+     * @param uid
+     * 
      * @return com.frlz.util.R
      * @version V1.0
      */
@@ -700,6 +713,7 @@ public class UserController {
             @ApiResponse(code = 400, message = "请求参数没填好"),
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
+    @PostMapping("personalInformation")
     public R personalInformation(String uid){
         User user = userService.selectByUid(uid);
         Map<String,String> map = new HashMap<>();
@@ -715,6 +729,19 @@ public class UserController {
         return R.isOk().data(map);
     }
 
+    /**
+     *
+     * @title checkUser
+     * @create by: cz
+     * @Description 
+     * @create time: 2019/4/18 16:28
+     * @param username
+     * @param email
+     * @param phonenumber
+     * 
+     * @return com.frlz.util.R<java.lang.String>
+     * @version V1.0
+     */
     @PostMapping("checkUser")
     @ApiOperation(value="查询用户名邮箱手机", notes="根据url的信息来查询用户名邮箱手机是否存在")
     @ApiImplicitParams({
@@ -751,18 +778,19 @@ public class UserController {
         return R.isOk().msg("success");
     }
 
-    @PostMapping("showExperience")
+
     /**
-     * TODO 根据uid获取经验值
+     *  根据uid获取经验值
      * @title showExperience
      * @create by: cz
-     * @description: TODO 必填参数uid
+     * @Description  必填参数uid
      * @create time: 2019/4/2 10:08
-     * @Param: uid
-     * @throws
+     * @param uid
+     * 
      * @return com.frlz.util.R
      * @version V1.0
      */
+    @PostMapping("showExperience")
     @ApiOperation(value="根据uid获取经验值", notes="根据url的信息来查询根据uid获取经验值")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid", value = "用户识别码", required = false, dataType = "String",paramType = "query")
@@ -776,18 +804,19 @@ public class UserController {
         return R.isOk().data(experience);
     }
 
-    @PostMapping("showMyAttribute")
+
     /**
      * 右上角展示个人状态
      * @title showMyAttribute
      * @create by: cz
-     * @description: TODO 必填参数uid
+     * @Description  必填参数uid
      * @create time: 2019/4/2 10:27
-     * @Param: uid
-     * @throws
+     * @param uid
+     * 
      * @return com.frlz.util.R
      * @version V1.0
      */
+    @PostMapping("showMyAttribute")
     @ApiOperation(value="右上角展示个人状态", notes="根据url的信息来查询右上角展示个人状态")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid", value = "用户识别码", required = false, dataType = "String",paramType = "query")

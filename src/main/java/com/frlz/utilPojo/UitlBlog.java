@@ -22,4 +22,5 @@ public class UitlBlog {
     private String username;
     private String uid;
     private String icon;
+    private String code;
 }

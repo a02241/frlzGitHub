@@ -23,17 +23,17 @@ public class SharesController {
         this.sharesService = sharesService;
     }
 
-    @PostMapping("/getShares")
+    
     /**
      * 图形化界面返回二位数组
      * @title getShares
      * @author cz
      * @date 2019/3/2 10:51
      * @param code
-     * @Description: TODO 必填参数code股票代码,before,end(格式为xxxx-xx-xx字符串格式) 返回参数为股票信息的二维数组
+     * @description TODO 必填参数code股票代码,before,end(格式为xxxx-xx-xx字符串格式) 返回参数为股票信息的二维数组
      * @return java.lang.Object[][]
-     * @throws 
      */
+    @PostMapping("/getShares")
     @ApiOperation(value="图形化界面返回二位数组", notes="根据url的信息来图形化界面返回二位数组")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "code", value = "股票代码", required = true, dataType = "String",paramType = "query"),

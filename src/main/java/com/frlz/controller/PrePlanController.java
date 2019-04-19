@@ -16,10 +16,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @program: frlz
- * @description: TODO 盘前计划controller
- * @author: cz
- * @date: 2019-03-11 15:09
+ * @program frlz
+ * @description  盘前计划controller
+ * @author cz
+ * @date 2019-03-11 15:09
  **/
 @RestControllerAdvice
 @RestController
@@ -35,19 +35,20 @@ public class PrePlanController {
         this.afterFatherService = afterFatherService;
     }
 
-    @PostMapping("/getPrePlan")
+    
     /**
      * 根据用户uid和时间获取盘前计划
      * @title getPrePlan
      * @create by: cz
-     * @description: TODO 必填参数uid,time,返回为该用户当前时间的信息
+     * @description  必填参数uid,time,返回为该用户当前时间的信息
      * @create time: 2019/3/13 15:56
-     * @Param: uid
-     * @Param: time
-     * @throws
+     * @param uid
+     * @param time
+     * 
      * @return com.frlz.pojo.PrePlan
      * @version V1.0
      */
+    @PostMapping("/getPrePlan")
     @ApiOperation(value="根据用户uid和时间获取盘前计划", notes="根据url的信息来根据用户uid和时间获取盘前计划")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid", value = "用户识别码", required = true, dataType = "String",paramType = "query"),
@@ -61,18 +62,19 @@ public class PrePlanController {
         return R.isOk().data(prePlanService.selectPrePlanByUid(uid,time));
     }
 
-    @PostMapping("/addPrePlan")
+    
     /**
      * 添加盘前计划
      * @title addPrePlan
      * @create by: cz
-     * @description: TODO 必填参数message，uid，成功返回success
+     * @description  必填参数message，uid，成功返回success
      * @create time: 2019/3/13 15:58
-     * @Param: prePlan
-     * @throws
+     * @param prePlan
+     * 
      * @return java.lang.String
      * @version V1.0
      */
+    @PostMapping("/addPrePlan")
     @ApiOperation(value="添加盘前计划", notes="根据url的信息来添加盘前计划")
     @ApiImplicitParams({
     })
@@ -80,7 +82,7 @@ public class PrePlanController {
             @ApiResponse(code = 400, message = "请求参数没填好"),
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
-    public R<String> addPrePlan(@RequestBody @ApiParam(name="盘前对象",value="message",required=true)PrePlan prePlan){
+    public R<String> addPrePlan(@ApiParam(name="盘前对象",value="message",required=true)PrePlan prePlan){
         if (prePlanService.selectPrePlanByUid(prePlan.getUid(),DateTime.getNowTimeToString()) == null){
             prePlanService.insertIntoPrePlan(prePlan);
             return R.isOk().msg("success");
@@ -89,19 +91,19 @@ public class PrePlanController {
         }
     }
 
-    @PostMapping("updatePlan")
+
     /**
-     * TODO 更新盘前计划
+     *  更新盘前计划
      * @title updatePlan
      * @create by: cz
-     * @description: TODO 必填参数message prePlanId
+     * @description  必填参数message prePlanId
      * @create time: 2019/4/9 10:24
-     * @Param: message
-   * @Param: prePlanId
-     * @throws
+     * @param message
+     * @param prePlanId
      * @return com.frlz.util.R<java.lang.String>
      * @version V1.0
      */
+    @PostMapping("updatePlan")
     @ApiOperation(value="更新盘前计划", notes="根据url的信息来更新盘前计划")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "message", value = "盘前信息", required = true, dataType = "String",paramType = "query"),
@@ -120,19 +122,18 @@ public class PrePlanController {
         }
     }
 
-    @PostMapping("deletePrePlan")
+
     /**
-     * TODO 删除盘前计划
+     *  删除盘前计划
      * @title deletePrePlan
      * @create by: cz
-     * @description: TODO 必填参数 prePlanId
+     * @description  必填参数 prePlanId
      * @create time: 2019/4/9 10:27
-     * @Param: message
-    * @Param: prePlanId
-     * @throws
+     * @param prePlanId
      * @return com.frlz.util.R<java.lang.String>
      * @version V1.0
      */
+    @PostMapping("deletePrePlan")
     @ApiOperation(value="删除盘前计划", notes="根据url的信息来删除盘前计划")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "prePlanId", value = "盘前识别码", required = true, dataType = "String",paramType = "query")
@@ -150,23 +151,23 @@ public class PrePlanController {
         }
     }
 
-    @PostMapping("selectTimeMonth")
+
     /**
-     * TODO 判断每月是否写盘前
+     *  判断每月是否写盘前
      * @title selectTimeMonth
      * @create by: cz
-     * @description: TODO 必填参数 uid time
+     * @description  必填参数 uid time
      * @create time: 2019/4/10 14:56
-     * @Param: uid
-     * @Param: time
-     * @throws
+     * @param uid
+     * @param time
      * @return com.frlz.util.R<java.lang.String>
      * @version V1.0
      */
+    @PostMapping("selectTimeMonth")
     @ApiOperation(value="判断每月是否写盘前", notes="根据url的信息来判断每月是否写盘前")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "uid", value = "盘前识别码", required = true, dataType = "String",paramType = "query"),
-            @ApiImplicitParam(name = "uid", value = "time(yyyy-mm)", required = true, dataType = "String",paramType = "query")
+            @ApiImplicitParam(name = "time", value = "time(yyyy-mm)", required = true, dataType = "String",paramType = "query")
     })
     @ApiResponses({
             @ApiResponse(code = 400, message = "请求参数没填好"),
