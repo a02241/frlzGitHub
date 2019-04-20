@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -72,7 +73,7 @@ public class UserController {
             @ApiResponse(code = 400, message = "请求参数没填好"),
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
-    public  R<Object> regist( @ApiParam(name="用户对象",value="必填参数email或者phonenumber，password",required=true)User user , @RequestParam(defaultValue = "0")String sentCode, @RequestParam(defaultValue = "9")String checkCode, @RequestParam(defaultValue = "")String code){
+    public  R<Object> regist(@ApiParam(name="用户对象",value="必填参数email或者phonenumber，password",required=true)User user , @RequestParam(defaultValue = "0")String sentCode, @RequestParam(defaultValue = "9")String checkCode, @RequestParam(defaultValue = "")String code){
         String check = userService.check(user);
         if(!sentCode.equals(checkCode)) {
             return R.isFail().data("4");

@@ -17,7 +17,7 @@ import java.util.Date;
 public class AfterFather {
     @ApiModelProperty(value = "盘后观察识别码",name = "afterFatherId")
     private String afterFatherId;//主键
-    @ApiModelProperty(value = "盘后观察发布时间",name = "time")
+    @ApiModelProperty(value = "创建时间",name = "time")
     private Date time;//创建时间
     @ApiModelProperty(value = "盘后观察发布人识别码",name = "uid")
     private String uid;//外键

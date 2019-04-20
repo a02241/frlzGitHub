@@ -115,9 +115,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int checkUser(String username,String email,String phoneNumber){
-        int checkPhonenumber = userMapper.checkPhonenumber(phoneNumber);
-        int checkEmail = userMapper.checkEmail(email);
-        int checkUsername = userMapper.checkUsername(username);
+        int checkUsername = 0;
+        int checkPhonenumber = 0;
+        int checkEmail = 0;
+        if(username.trim().length() > 0){
+            checkUsername = userMapper.checkUsername(username);
+        }
+        if (phoneNumber.trim().length() > 0){
+            checkPhonenumber = userMapper.checkPhonenumber(phoneNumber);
+        }
+        if (email.trim().length() > 0){
+            checkEmail = userMapper.checkEmail(email);
+        }
         int result = 0 ;
         if (checkUsername!=0){
             result = 1;

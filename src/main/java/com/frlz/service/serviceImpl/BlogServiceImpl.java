@@ -43,6 +43,7 @@ public class BlogServiceImpl implements BlogService {
         map.put("blogId", finBlog.getBlogId());
         map.put("summary", finBlog.getSummary());
         map.put("uid", finBlog.getUid());
+        map.put("code", finBlog.getCode());
         return map;
     }
 

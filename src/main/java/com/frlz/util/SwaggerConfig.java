@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import springfox.documentation.annotations.ApiIgnore;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -32,6 +33,7 @@ class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage("com.frlz.controller"))// 选择那些路径和api会生成document
                 .paths(PathSelectors.any()) // 对所有路径进行监控
                 .build()
+                .ignoredParameterTypes(ApiIgnore.class)
                 .apiInfo(userInfo());
     }
 
@@ -42,7 +44,7 @@ class SwaggerConfig {
                 "用户有关的接口，包括增加删除用户",//小标题
                 "0.1",//版本
                 "苏州",
-                new Contact("cz", "", "b02241@163.com"),// 作者
+               "cz",// 作者
                 "方融量子信息科技有限公司",//链接显示文字
                 "https://www.qcube.ltd"//网站链接
         );

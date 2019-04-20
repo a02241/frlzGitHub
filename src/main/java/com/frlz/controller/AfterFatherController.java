@@ -9,10 +9,8 @@ import com.frlz.util.R;
 import com.frlz.utilPojo.UtilAfterFather;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 /**
@@ -23,7 +21,7 @@ import java.util.List;
  **/
 @RestControllerAdvice
 @RestController
-@Api(value="盘后速记controller",tags={"用户操作接口"})
+@Api(value="盘后速记controller",tags={"盘后操作接口"})
 public class AfterFatherController {
     private final AfterFatherService afterFatherService;
     private final AfterTagService afterTagService;
@@ -45,7 +43,7 @@ public class AfterFatherController {
      * @create time: 2019/4/11 15:56
      * @param uid
      * @param afterTag
-     * 
+     *
      * @return com.frlz.util.R
      * @version V1.0
      */
@@ -58,7 +56,7 @@ public class AfterFatherController {
             @ApiResponse(code = 400, message = "请求参数没填好"),
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
-    public R addAfterDiscuss(String uid, @ApiParam(name="盘和标签对象",value="必填参数shares ,changes,message,highest",required=true)AfterTag afterTag){
+    public R addAfterDiscuss(@ApiParam(name="盘和标签对象",value="必填参数shares ,changes,message,highest",required=true) AfterTag afterTag , String uid){
         if (userService.checkUserByUid(uid) == 0){
             return R.isFail().msg("参数错误");
         }
@@ -84,7 +82,7 @@ public class AfterFatherController {
      * @create time: 2019/4/11 14:55
      * @param uid
      * @param time
-     * 
+     *
      * @return com.frlz.util.R
      * @version V1.0
      */

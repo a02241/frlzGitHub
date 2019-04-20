@@ -52,6 +52,8 @@ public class User {
 	private int sex;//性别
 	@ApiModelProperty(value = "生日",name = "birthday")
 	private Date birthday;//生日
+	@ApiModelProperty(value = "balance对象",name = "balance对象")
 	private Balance balance;
+	@ApiModelProperty(value = "blog对象",name = "blog对象")
 	private Blog blog;
 }
