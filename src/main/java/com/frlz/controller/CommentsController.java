@@ -73,10 +73,11 @@ public class CommentsController {
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
     public R<HashMap<String,Object>> findBlog(@RequestParam(defaultValue="1") int pageCode, String blogId) {
-        Map<String,Object> conditions = new HashMap<String,Object>();
+        Map<String,Object> conditions = new HashMap<String,Object>(10);
         HashMap<String,Object> map;
         if(blogId.trim().length() > 0 || blogId != null) {
-            conditions.put("blogId",blogId);//把blogId放入map集合中
+            //把blogId放入map集合中
+            conditions.put("blogId",blogId);
             int count = commentsService.findCommentsByBlogId(conditions);
             Blog blog = new Blog();
             blog.setBlogId(blogId);
@@ -85,9 +86,11 @@ public class CommentsController {
         }else {
             return R.isFail().msg("blogId为空");
         }
-        conditions.put("blogId",blogId);//把blogId放入map集合中
+        //把blogId放入map集合中
+        conditions.put("blogId",blogId);
         List<UtilComments> comments =commentsService.findComments(conditions, 12, pageCode);
-        map.put("comments", comments);//conditions-->>map存放数据,pageCode-->>分页条数,从第几个开始
+        //conditions-->>map存放数据,pageCode-->>分页条数,从第几个开始
+        map.put("comments", comments);
         return R.isOk().data(map);
     }
 

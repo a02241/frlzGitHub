@@ -25,9 +25,9 @@ public class QuizServiceImpl implements QuizService {
     @Override
     public Map<String,Map> getAllQuestion() {
         List<Quiz> quizList = quizMapper.selectAll();
-        Map<String,Map> questionMap = new HashMap<>();
-        for (int i = 0;i < 30;i++){
-            Map<String,String> map = new HashMap<>();
+        Map<String,Map> questionMap = new HashMap<>(10);
+        for (int i = 0,questionNumber = 30;i < questionNumber;i++){
+            Map<String,String> map = new HashMap<>(7);
             map.put("question",quizList.get(i).getQuestion());
             map.put("optionOne",quizList.get(i).getOptionOne());
             map.put("optionTwo",quizList.get(i).getOptionTwo());

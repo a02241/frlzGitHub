@@ -57,7 +57,7 @@ public class ReplysController {
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
     public R<HashMap<String,Object>> showAllRelysByCId(String cId){
-        HashMap<String,Object> map = new HashMap<>();
+        HashMap<String,Object> map = new HashMap<>(1);
         map.put("replys",replysService.selectRelysAllByCId(cId));
         return R.isOk().data(map);
     }
