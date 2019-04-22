@@ -81,7 +81,7 @@ public class UserController {
             user.setUsername(check);
             check = "5";
             //有邀请码
-            String MyUid;
+            String myUid;
             int result = invitationService.findStateBycode(code);
             if (code.trim().length() > 0&& result == 1){
                 //有邀请码经验为0
@@ -90,16 +90,16 @@ public class UserController {
                 //无邀请码经验为-1
                 user.setExperience(-1);
             }
-            MyUid = userService.registSave(user);
+            myUid = userService.registSave(user);
             if (result==1){
-                invitationService.updateInviteState(code,MyUid);
+                invitationService.updateInviteState(code,myUid);
             }
             //插入登陆日志
-            loginLogService.insertLoginLog(MyUid);
+            loginLogService.insertLoginLog(myUid);
             //创建余额账户
             Balance balance;
-            balanceService.insertBalance(0,1,0,MyUid);
-            balance = balanceService.selectFromBalanceByUid(MyUid);
+            balanceService.insertBalance(0,1,0,myUid);
+            balance = balanceService.selectFromBalanceByUid(myUid);
             //写入交易记录
             tradeLogService.insertTradeLog(balance.getBalanceId(),1,0,0,"登录奖励增加1点量子");
         }
@@ -522,8 +522,8 @@ public class UserController {
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
     public R<String> boundPhone(String uid , String phonenumber)  {
-        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0-9])|(14[5,7])| (17[0,1,3,5-8]))\\d{8}$");
-        Matcher m = p.matcher(phonenumber);
+        final Pattern P = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0-9])|(14[5,7])| (17[0,1,3,5-8]))\\d{8}$");
+        Matcher m = P.matcher(phonenumber);
         if(!m.matches()){
             return R.isFail().msg("false");
         }else {
@@ -597,7 +597,7 @@ public class UserController {
     })
     public R<String> changeProfile(String profile, String uid){
         String result = userService.updateProfile(profile,uid);
-        if (result.equals("false")){
+        if ("false".equals(result)){
             return R.isFail().msg("uid错误");
         }
         return  R.isOk().msg("更新成功");

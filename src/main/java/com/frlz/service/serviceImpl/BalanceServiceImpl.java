@@ -65,7 +65,7 @@ public class BalanceServiceImpl implements BalanceService {
     }
 
     @Override
-    public void LoginAddQuantumBalanceByUid (String uid, int quantumBalance) {
+    public void loginAddQuantumBalanceByUid (String uid, int quantumBalance) {
 
     }
 }
