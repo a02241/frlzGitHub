@@ -64,7 +64,8 @@ public class AfterFatherController {
             afterFatherService.addAfterDiscuss(uid);
         }
         afterTag.setAfterFatherId(afterFatherService.getAfterFatherId(uid,DateTime.getNowTimeToString()));
-        if (afterTagService.selectAfterTagByAfterTag(afterTag) == null){//如果没有标签，则添加标签，否则更新
+        //如果没有标签，则添加标签，否则更新
+        if (afterTagService.selectAfterTagByAfterTag(afterTag) == null){
             afterTag.setAfterFatherId(afterFatherService.getAfterFatherId(uid,DateTime.getNowTimeToString()));
             afterTagService.addAfterTag(afterTag);
         }else {
