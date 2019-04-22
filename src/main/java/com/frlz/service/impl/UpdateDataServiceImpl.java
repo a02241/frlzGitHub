@@ -1,7 +1,6 @@
-package com.frlz.service.serviceImpl;
+package com.frlz.service.impl;
 
 import com.frlz.mapper.UpdateDataMapper;
-import com.frlz.pojo.Shares;
 import com.frlz.pojo.UpdateData;
 import com.frlz.service.UpdateDataService;
 import org.springframework.beans.factory.annotation.Autowired;

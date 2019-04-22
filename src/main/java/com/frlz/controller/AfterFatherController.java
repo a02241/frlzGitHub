@@ -105,7 +105,7 @@ public class AfterFatherController {
         }
     }
 
-    @PostMapping("deleteAfterTag")
+    @PostMapping("deleteAfterTag") //AfterTag/delete
     /**
      *  删除盘后标签
      * @title deleteAfterTag
