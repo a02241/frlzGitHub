@@ -29,5 +29,5 @@ public class UtilComments {
     @ApiModelProperty(value = "提交时间",name = "commentTime")
     private Date commentTime;//提交时间
     @ApiModelProperty(value = "UtilReplys对象",name = "utilReplys")
-    private List<UtilReplys> utilReplys;
+    private UtilReplys utilReplys;
 }

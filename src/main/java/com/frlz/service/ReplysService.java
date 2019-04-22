@@ -11,7 +11,7 @@ import java.util.List;
 public interface ReplysService {
     public void addReplys(Replys replys);
 
-    public List<UtilReplys> selectRelysByCId (String cId);
+    public UtilReplys selectRelysByCId (String cId);
 
     public List<UtilReplys> selectRelysAllByCId (String cId);
 }

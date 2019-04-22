@@ -21,7 +21,7 @@ public interface CommentsMapper {
 
 
 
-    @Select("select * from comments c LEFT JOIN replys r ON c.cId = r.cId where c.blogId = #{blogId}" +
+    @Select("select * from comments c where c.blogId = #{blogId}" +
             " order by c.commentTime" +
             " limit ${(pageCode-1)*pageSize},${pageSize}")
     @Results({
@@ -34,7 +34,7 @@ public interface CommentsMapper {
             @Result(property = "icon", column = "uid",
                     one = @One(select = "com.frlz.mapper.UserMapper.searchIconById")),
             @Result(property = "utilReplys", column = "cId",
-                    many = @Many(select = "com.frlz.mapper.ReplysMapper.selectReplysByCId"))
+                    one = @One(select = "com.frlz.mapper.ReplysMapper.selectReplysByCId"))
     })
     List<UtilComments> findComments(Map<String,Object> map);
 
