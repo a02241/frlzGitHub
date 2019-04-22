@@ -5,6 +5,7 @@ import com.frlz.pojo.Comments;
 import com.frlz.service.CommentsService;
 import com.frlz.util.DateTime;
 import com.frlz.util.PageBean;
+import com.frlz.utilPojo.UtilComments;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ public class CommentsServiceImpl implements CommentsService {
     }
 
     @Override
-    public List<Comments> findComments(Map<String, Object> conditions, int pageSize, int pageCode)  {
+    public List<UtilComments> findComments(Map<String, Object> conditions, int pageSize, int pageCode)  {
         PageBean pb = new PageBean();
         int allCount = commentsMapper.findAllCountComments(conditions);//查询数据总数
         pb.setAllCount(allCount);//把数据总数放入分页类
@@ -39,7 +40,7 @@ public class CommentsServiceImpl implements CommentsService {
         pb.setPageCode(pageCode);
         conditions.put("pageSize", pageSize);
         conditions.put("pageCode", pageCode);
-        List<Comments> list = commentsMapper.findComments(conditions);
+        List<UtilComments> list = commentsMapper.findComments(conditions);
         return list;
     }
 
@@ -56,8 +57,8 @@ public class CommentsServiceImpl implements CommentsService {
     }
 
     @Override
-    public int selectCommentTimeCountByTime(String date,String username) {
-        return commentsMapper.selectCommentTimeCountByTime(date,username);
+    public int selectCommentTimeCountByTime(String date,String uid) {
+        return commentsMapper.selectCommentTimeCountByTime(date,uid);
     }
 
     @Override
