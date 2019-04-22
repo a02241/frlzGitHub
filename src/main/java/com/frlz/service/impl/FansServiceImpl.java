@@ -3,7 +3,7 @@ package com.frlz.service.impl;
 import com.frlz.mapper.FansMapper;
 import com.frlz.pojo.Fans;
 import com.frlz.service.FansService;
-import com.frlz.utilPojo.UtilFans;
+import com.frlz.dto.UtilFans;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

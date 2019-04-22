@@ -1,4 +1,4 @@
-package com.frlz.utilPojo;
+package com.frlz.dto;
 
 import com.frlz.pojo.AfterTag;
 import lombok.Data;

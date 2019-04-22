@@ -81,10 +81,7 @@ public class UpdateDataServiceImpl implements UpdateDataService {
                 count ++;
                 System.out.println("第"+count+"次"+name+"~~~~~~~~~~");
             }
-            /*if (updateDataMapper.selectTrue(realCode) == 0){
-                count ++;
-                System.out.println("第"+count+"次无"+name+"表~~~~~~~~~~");
-            }*/
+
         }
         System.out.println(count);
         return null;

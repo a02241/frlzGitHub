@@ -1,7 +1,7 @@
 package com.frlz.mapper;
 
 import com.frlz.pojo.Comments;
-import com.frlz.utilPojo.UtilComments;
+import com.frlz.dto.UtilComments;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

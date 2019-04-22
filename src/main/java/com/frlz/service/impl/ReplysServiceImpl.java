@@ -3,7 +3,7 @@ package com.frlz.service.impl;
 import com.frlz.mapper.ReplysMapper;
 import com.frlz.pojo.Replys;
 import com.frlz.service.ReplysService;
-import com.frlz.utilPojo.UtilReplys;
+import com.frlz.dto.UtilReplys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

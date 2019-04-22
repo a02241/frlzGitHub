@@ -3,7 +3,7 @@ package com.frlz.service.impl;
 import com.frlz.mapper.BalanceMapper;
 import com.frlz.pojo.Balance;
 import com.frlz.service.BalanceService;
-import com.frlz.utilPojo.UtilBalance;
+import com.frlz.dto.UtilBalance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

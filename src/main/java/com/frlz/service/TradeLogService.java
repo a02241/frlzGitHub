@@ -1,6 +1,6 @@
 package com.frlz.service;
 
-import com.frlz.utilPojo.UtilTradeLog;
+import com.frlz.dto.UtilTradeLog;
 
 import java.util.List;
 /**

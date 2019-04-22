@@ -1,8 +1,7 @@
 package com.frlz.service;
 
-import com.frlz.pojo.Comments;
 import com.frlz.pojo.Replys;
-import com.frlz.utilPojo.UtilReplys;
+import com.frlz.dto.UtilReplys;
 
 import java.util.List;
 /**

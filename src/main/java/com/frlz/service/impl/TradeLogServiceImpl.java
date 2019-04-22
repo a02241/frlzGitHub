@@ -4,7 +4,7 @@ import com.frlz.mapper.BalanceMapper;
 import com.frlz.mapper.TradeLogMapper;
 import com.frlz.pojo.TradeLog;
 import com.frlz.service.TradeLogService;
-import com.frlz.utilPojo.UtilTradeLog;
+import com.frlz.dto.UtilTradeLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

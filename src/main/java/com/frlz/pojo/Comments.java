@@ -1,6 +1,6 @@
 package com.frlz.pojo;
 
-import com.frlz.utilPojo.UtilReplys;
+import com.frlz.dto.UtilReplys;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

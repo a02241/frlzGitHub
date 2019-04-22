@@ -18,7 +18,6 @@ public class SendMessage {
         IAcsClient client = new DefaultAcsClient(profile);
         String verifyCode = String.valueOf(new Random().nextInt(899999) + 100000);
         CommonRequest request = new CommonRequest();
-        //request.setProtocol(ProtocolType.HTTPS);
         request.setMethod(MethodType.POST);
         request.setDomain("dysmsapi.aliyuncs.com");
         request.setVersion("2017-05-25");

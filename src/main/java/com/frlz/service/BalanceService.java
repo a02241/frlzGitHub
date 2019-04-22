@@ -2,7 +2,7 @@ package com.frlz.service;
 
 
 import com.frlz.pojo.Balance;
-import com.frlz.utilPojo.UtilBalance;
+import com.frlz.dto.UtilBalance;
 
 import java.util.List;
 /**

@@ -1,7 +1,7 @@
 package com.frlz.mapper;
 
 import com.frlz.pojo.Balance;
-import com.frlz.utilPojo.UtilBalance;
+import com.frlz.dto.UtilBalance;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

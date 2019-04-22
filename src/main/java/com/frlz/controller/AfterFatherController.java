@@ -6,7 +6,7 @@ import com.frlz.service.AfterTagService;
 import com.frlz.service.UserService;
 import com.frlz.util.DateTime;
 import com.frlz.util.R;
-import com.frlz.utilPojo.UtilAfterFather;
+import com.frlz.dto.UtilAfterFather;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
