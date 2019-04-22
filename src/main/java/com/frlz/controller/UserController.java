@@ -132,7 +132,7 @@ public class UserController {
     })
     public R<HashMap<String,String>> userLogin(String username, String password, HttpSession session) {
         String sid = session.getId();
-        HashMap<String,String> map = new HashMap<>();
+        HashMap<String,String> map = new HashMap<>(10);
         String data;
         User user = userService.selectUser(username);
         if (user != null) {
@@ -484,7 +484,7 @@ public class UserController {
     public R<HashMap<String,Object>> seeInformation(String uid)  {
         User user = userService.selectByUid(uid);
         if(user != null){
-            HashMap<String,Object> map = new HashMap<>();
+            HashMap<String,Object> map = new HashMap<>(7);
             map.put("username",user.getUsername());
             map.put("icon",user.getIcon());
             map.put("profile",user.getProfile());
@@ -651,7 +651,7 @@ public class UserController {
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
     public R<HashMap<String,Object>> showMyInformation(String uid){
-        HashMap<String,Object> map = new HashMap<>();
+        HashMap<String,Object> map = new HashMap<>(7);
         User user = userService.selectByUid(uid);
         UtilBalance balance = balanceService.selectShowBalanceByUid(uid);
         if (balance!=null&&uid!=null){
@@ -687,7 +687,7 @@ public class UserController {
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
     public R<HashMap<String,Object>> showMyBlock(String uid){
-        HashMap<String,Object> map = new HashMap<>();
+        HashMap<String,Object> map = new HashMap<>(10);
         UtilBalance balance = balanceService.selectShowBalanceByUid(uid);
         List<UtilTradeLog> utilTradeLog = tradeLogService.getTradeLogByUid(uid);
         if (balance!=null&&utilTradeLog!=null){
@@ -722,7 +722,7 @@ public class UserController {
     @PostMapping("personalInformation")
     public R personalInformation(String uid){
         User user = userService.selectByUid(uid);
-        Map<String,String> map = new HashMap<>();
+        Map<String,String> map = new HashMap<>(10);
         map.put("icon",user.getIcon());
         map.put("username",user.getUsername());
         map.put("sex",user.getSex() + "");
@@ -832,7 +832,7 @@ public class UserController {
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
     public R showMyAttribute(String uid){
-        HashMap<String,Object> map = new HashMap<>();
+        HashMap<String,Object> map = new HashMap<>(7);
         User user = userService.selectByUid(uid);
         if (user != null){
             map.put("username",user.getUsername());

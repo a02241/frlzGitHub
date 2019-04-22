@@ -36,7 +36,7 @@ public class SecretServiceImpl implements SecretService {
     @Override
     public Map<String,String> selectFromSecret(String uid) {
         Secret secret = secretMapper.selectFromSecret(uid);
-        Map<String,String> secretMap = new HashMap<>();
+        Map<String,String> secretMap = new HashMap<>(3);
         secretMap.put("questionOne",secret.getQuestionOne());
         secretMap.put("questionTwo",secret.getQuestionTwo());
         secretMap.put("questionThree",secret.getQuestionThree());

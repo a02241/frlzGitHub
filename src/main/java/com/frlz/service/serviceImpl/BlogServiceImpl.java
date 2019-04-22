@@ -33,7 +33,7 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public HashMap<String,Object> findBlog(Blog blog)  {
-        HashMap<String,Object> map = new HashMap<>();
+        HashMap<String,Object> map = new HashMap<>(10);
         Blog finBlog = blogMapper.findBlog(blog);
         map.put("message", finBlog.getMessage());
         map.put("readNumber", finBlog.getReadNumber());
@@ -54,16 +54,21 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public HashMap<String, Object> searchBlog(int pageCode,String uid,int choice) {
-        HashMap<String,Object> map = new HashMap<>();
-        Map<String,Object> conditions = new HashMap<String,Object>();
+        HashMap<String,Object> map = new HashMap<>(10);
+        Map<String,Object> conditions = new HashMap<String,Object>(10);
         if(uid.trim().length() > 0 || uid != null) {
-            conditions.put("uid",uid);//把uid放入map集合中
+            //把uid放入map集合中
+            conditions.put("uid",uid);
         }
         PageBean pb = new PageBean();
-        int allCount = blogMapper.findAllCountLike(conditions);//查询数据总数
-        pb.setAllCount(allCount);//把数据总数放入分页类
-        pb.setPageSize(12);//把页面放入分页类
-        if(pageCode > pb.getAllPages()) {//判断页码
+        //查询数据总数
+        int allCount = blogMapper.findAllCountLike(conditions);
+        //把数据总数放入分页类
+        pb.setAllCount(allCount);
+        //把页面放入分页类
+        pb.setPageSize(12);
+        //判断页码
+        if(pageCode > pb.getAllPages()) {
             pageCode = pb.getAllPages();
         }
         pb.setPageCode(pageCode);
