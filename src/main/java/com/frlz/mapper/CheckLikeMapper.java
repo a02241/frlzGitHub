@@ -4,7 +4,9 @@ import com.frlz.pojo.CheckLike;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
-
+/**
+ * @author cz
+ */
 public interface CheckLikeMapper {
 
     @Insert("insert into checkLike values(default,#{blogId},#{uid},#{state})")

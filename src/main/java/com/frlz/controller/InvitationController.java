@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
-
+/**
+ * @author cz
+ */
 @RestControllerAdvice
 @RestController
 @Api(value="邀请码controller",tags={"邀请码信息操作接口"})

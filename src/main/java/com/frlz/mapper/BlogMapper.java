@@ -6,7 +6,9 @@ import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 import java.util.Map;
-
+/**
+ * @author cz
+ */
 public interface BlogMapper {
 
     @Select("<script> " +
@@ -21,21 +23,11 @@ public interface BlogMapper {
     @Select("select u.icon , u.username , b.uid,b.code, b.blogId,b.time,b.likes,b.title,b.summary,b.message,b.commentsNumber,b.forwordNumber,b.readNumber from blog b inner join user u " +
             "where b.uid = u.uid" +
             " order by weight desc limit ${(pageCode-1)*pageSize},${pageSize} ")
-   /* @Results({
-            @Result(property = "UitlBlog"),
-            @Result(property = "username", column = "uid"),
-            @Result(property = "uid", column = "uid"),
-            @Result(property = "icon", column = "uid")
-    })*/
     List<UitlBlog> findChoice(Map<String,Object> map);
 
     @Select("select u.icon , u.username ,b.code, b.uid, b.blogId,b.time,b.likes,b.title,b.summary,b.message,b.commentsNumber,b.forwordNumber,b.readNumber from blog b inner join user u " +
             "where b.uid = u.uid and u.uid = #{uid}" +
             " order by weight desc limit ${(pageCode-1)*pageSize},${pageSize} ")
-    /*@Results({
-            @Result(property = "username", column = "uid",
-                    many = @Many(select = "com.frlz.mapper.UserMapper.searchUsernameById"))
-    })*/
     List<UitlBlog> find(Map<String,Object> map);
 
     @Select("<script> " +

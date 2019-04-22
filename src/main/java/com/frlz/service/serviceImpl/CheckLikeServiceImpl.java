@@ -6,7 +6,9 @@ import com.frlz.pojo.CheckLike;
 import com.frlz.service.CheckLikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+/**
+ * @author cz
+ */
 @Service
 public class CheckLikeServiceImpl implements CheckLikeService {
 

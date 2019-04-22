@@ -6,7 +6,9 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
-
+/**
+ * @author cz
+ */
 public interface InvitationMapper {
 
     @Select("select * from invitation where uid = #{uid}")

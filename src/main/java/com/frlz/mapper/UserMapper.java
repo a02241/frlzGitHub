@@ -4,7 +4,9 @@ import com.frlz.pojo.User;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
-
+/**
+ * @author cz
+ */
 public interface UserMapper {
     @Select("select * from user")
     List<User> selectAll();
@@ -56,8 +58,8 @@ public interface UserMapper {
     @Select("select username from user where uid = #{uid}")
     String searchUsernameById(String uid);
 
-    @Select("select username from user where uid = #{uid}")
-    String searchAllUsernameById(String uid);
+    @Select("select icon from user where uid = #{uid}")
+    String searchIconById(String uid);
 
     @Select("select * from user where username = #{username}")
     User selectUserByUsername(String username);

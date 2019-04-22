@@ -8,7 +8,9 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
 
 import java.util.List;
-
+/**
+ * @author cz
+ */
 public interface ReplysMapper {
 
     @Select("select * from replys where cId = #{cId} order by contentTime limit 1,1")

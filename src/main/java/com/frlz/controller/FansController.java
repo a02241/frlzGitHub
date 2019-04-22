@@ -7,7 +7,9 @@ import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
+/**
+ * @author cz
+ */
 @RestControllerAdvice
 @RestController
 @Api(value="粉丝controller",tags={"粉丝信息操作接口"})

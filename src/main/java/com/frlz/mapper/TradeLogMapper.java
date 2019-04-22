@@ -8,7 +8,9 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
-
+/**
+ * @author cz
+ */
 public interface TradeLogMapper {
 
     @Insert("insert into tradelog values(default,now(),#{balanceId},#{tradeQuantum},#{tradeBlock},#{tradeMagicCube},#{remarks})")

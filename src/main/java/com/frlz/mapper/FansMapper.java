@@ -6,7 +6,9 @@ import org.apache.ibatis.annotations.*;
 
 import javax.rmi.CORBA.Util;
 import java.util.List;
-
+/**
+ * @author cz
+ */
 public interface FansMapper {
 
     @Insert("insert into fans values(default,#{uid},#{fansUId})")

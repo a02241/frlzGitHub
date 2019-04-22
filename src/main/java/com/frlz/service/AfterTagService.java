@@ -1,7 +1,9 @@
 package com.frlz.service;
 
 import com.frlz.pojo.AfterTag;
-
+/**
+ * @author cz
+ */
 public interface AfterTagService {
     void deleteAfterTagByAfterTagId(String afterTagId);
 

@@ -3,7 +3,9 @@ package com.frlz.service;
 import com.frlz.pojo.Area_List;
 
 import java.util.List;
-
+/**
+ * @author cz
+ */
 public interface Area_ListService {
     public String selectCode(String name);
 

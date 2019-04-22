@@ -5,7 +5,9 @@ import com.frlz.pojo.LoginLog;
 
 import java.util.Date;
 import java.util.List;
-
+/**
+ * @author cz
+ */
 public interface LoginLogService {
 
     void insertLoginLog(String uid);

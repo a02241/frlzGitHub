@@ -6,7 +6,9 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.Date;
 import java.util.List;
-
+/**
+ * @author cz
+ */
 public interface LoginLogMapper {
     @Insert("insert into loginlog(uid,logintime) values(#{uid},now())")
     void insertLoginLog(String uid);

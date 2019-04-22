@@ -3,7 +3,9 @@ package com.frlz.service;
 import com.frlz.pojo.Invitation;
 
 import java.util.List;
-
+/**
+ * @author cz
+ */
 public interface InvitationService {
 
     public List<Invitation> selectInvatationByUid(String uid);

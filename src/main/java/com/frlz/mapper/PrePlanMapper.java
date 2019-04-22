@@ -5,7 +5,9 @@ import org.apache.ibatis.annotations.*;
 
 import java.util.Date;
 import java.util.List;
-
+/**
+ * @author cz
+ */
 public interface PrePlanMapper {
 
     @SelectKey(keyProperty = "prePlanId",resultType = String.class, before = true,

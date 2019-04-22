@@ -1,5 +1,7 @@
 package com.frlz.util;
-
+/**
+ * @author cz
+ */
 public class Security {
     public static String encrypt(String code){
         char[] s = code.toCharArray();

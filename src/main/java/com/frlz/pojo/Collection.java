@@ -5,7 +5,9 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.Date;
-
+/**
+ * @author cz
+ */
 @Data
 @ApiModel(value = "collection对象",description = "收藏对象")
 public class Collection {

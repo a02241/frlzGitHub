@@ -5,7 +5,9 @@ import com.frlz.pojo.User;
 
 import java.util.List;
 import java.util.Map;
-
+/**
+ * @author cz
+ */
 public interface UserService {
 
 	List<User> getAll();

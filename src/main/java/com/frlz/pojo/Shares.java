@@ -3,7 +3,9 @@ package com.frlz.pojo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
+/**
+ * @author cz
+ */
 @Data
 @ApiModel(value = "shares对象",description = "股票对象")
 public class Shares {

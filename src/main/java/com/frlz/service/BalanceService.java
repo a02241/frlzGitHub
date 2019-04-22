@@ -5,7 +5,9 @@ import com.frlz.pojo.Balance;
 import com.frlz.utilPojo.UtilBalance;
 
 import java.util.List;
-
+/**
+ * @author cz
+ */
 public interface BalanceService {
 
     void insertBalance(int blockBalance,int quantumBalance,int magicCubeBalance,String uid);

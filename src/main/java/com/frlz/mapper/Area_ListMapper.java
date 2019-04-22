@@ -4,7 +4,9 @@ import com.frlz.pojo.Area_List;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
-
+/**
+ * @author cz
+ */
 public interface Area_ListMapper {
 
     @Select("select code from area_list where name = #{name}")

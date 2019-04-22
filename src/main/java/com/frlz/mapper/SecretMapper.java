@@ -4,7 +4,9 @@ import com.frlz.pojo.Secret;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-
+/**
+ * @author cz
+ */
 public interface SecretMapper {
 
     @Insert("insert into secret values(default,#{questionOne},#{answerOne},#{questionTwo},#{answerTwo},#{questionThree},#{answerThree},#{uid})")

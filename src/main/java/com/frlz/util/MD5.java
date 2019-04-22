@@ -1,7 +1,9 @@
 package com.frlz.util;
 
 import java.security.MessageDigest;
-
+/**
+ * @author cz
+ */
 public class MD5 {
 	/**
 	 * 数据加密工具类:采用MD5加密规则

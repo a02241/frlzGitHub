@@ -6,7 +6,9 @@ import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 import java.util.Map;
-
+/**
+ * @author cz
+ */
 public interface CommentsMapper {
 
     @Select("<script> " +
@@ -29,6 +31,8 @@ public interface CommentsMapper {
             @Result(property = "uid", column = "uid"),
             @Result(property = "username", column = "uid",
                     one = @One(select = "com.frlz.mapper.UserMapper.searchUsernameById")),
+            @Result(property = "icon", column = "uid",
+                    one = @One(select = "com.frlz.mapper.UserMapper.searchIconById")),
             @Result(property = "utilReplys", column = "cId",
                     many = @Many(select = "com.frlz.mapper.ReplysMapper.selectReplysByCId"))
     })

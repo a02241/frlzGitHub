@@ -3,7 +3,9 @@ package com.frlz.service;
 import com.frlz.utilPojo.UtilTradeLog;
 
 import java.util.List;
-
+/**
+ * @author cz
+ */
 public interface TradeLogService {
     void insertTradeLog(String balanceId,int tradeQuantum,int tradeBlock,int tradeMagicCube,String remarks);
 

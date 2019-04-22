@@ -3,7 +3,9 @@ package com.frlz.pojo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
+/**
+ * @author cz
+ */
 @Data
 @ApiModel(value = "ip对象",description = "IP地址对象")
 public class TaobaoIPResult {

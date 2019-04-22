@@ -22,6 +22,10 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static java.util.regex.Pattern.*;
+/**
+ * @author cz
+ */
 @RestControllerAdvice
 @RestController
 @Api(value="用户controller",tags={"用户操作接口"})
@@ -33,7 +37,7 @@ public class UserController {
     private final TradeLogService tradeLogService;
     private final InvitationService invitationService;
     private final SessionService sessionService;
-
+    private static Pattern NUMBER_PATTERN = compile("^((13[0-9])|(15[^4,\\D])|(18[0-9])|(14[5,7])| (17[0,1,3,5-8]))\\d{8}$");
     private BalanceUtil balanceUtil = new BalanceUtil();
 
     @Autowired
@@ -517,7 +521,7 @@ public class UserController {
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
     public R<String> boundPhone(String uid , String phonenumber)  {
-        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0-9])|(14[5,7])| (17[0,1,3,5-8]))\\d{8}$");
+        Pattern p = compile("^((13[0-9])|(15[^4,\\D])|(18[0-9])|(14[5,7])| (17[0,1,3,5-8]))\\d{8}$");
         Matcher m = p.matcher(phonenumber);
         if(!m.matches()){
             return R.isFail().msg("false");
@@ -759,7 +763,7 @@ public class UserController {
         if (email.trim().length()> 0 && !email.matches(regex)) {
             return R.isFail().msg("邮箱格式错误");
         }
-        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0-9])|(14[5,7])| (17[0,1,3,5-8]))\\d{8}$");
+        Pattern p = compile("^((13[0-9])|(15[^4,\\D])|(18[0-9])|(14[5,7])| (17[0,1,3,5-8]))\\d{8}$");
         Matcher m = p.matcher(phonenumber);
         if(phonenumber.trim().length()> 0 && !m.matches()){
             return R.isFail().msg("手机格式错误");

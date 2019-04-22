@@ -5,7 +5,9 @@ import com.frlz.pojo.Replys;
 import com.frlz.utilPojo.UtilReplys;
 
 import java.util.List;
-
+/**
+ * @author cz
+ */
 public interface ReplysService {
     public void addReplys(Replys replys);
 

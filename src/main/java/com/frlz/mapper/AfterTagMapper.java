@@ -8,7 +8,9 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
-
+/**
+ * @author cz
+ */
 public interface AfterTagMapper {
     @Select("select * from afterTag where afterFatherId = #{afterFatherId} order by insertTime")
     List<AfterTag> selectAfterTagByAftherFatherId(String afterFatherId);
