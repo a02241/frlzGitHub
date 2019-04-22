@@ -122,10 +122,10 @@ public class CommentsController {
             }
             blogService.updateBlogByBlogId(comments.getBlogId(),2);//评论数+1
             commentsService.saveComment(comments);
+            return R.isOk();
         }else {
             return R.isFail().msg("当前等级为0级,答题后可写评论");
         }
-        return R.isFail().msg("参数错误");
     }
 
     
