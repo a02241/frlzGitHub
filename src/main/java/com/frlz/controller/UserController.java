@@ -84,20 +84,24 @@ public class UserController {
             String MyUid;
             int result = invitationService.findStateBycode(code);
             if (code.trim().length() > 0&& result == 1){
-                user.setExperience(0);//有邀请码经验为0
+                //有邀请码经验为0
+                user.setExperience(0);
             }else {
-                user.setExperience(-1);//无邀请码经验为-1
+                //无邀请码经验为-1
+                user.setExperience(-1);
             }
             MyUid = userService.registSave(user);
             if (result==1){
                 invitationService.updateInviteState(code,MyUid);
             }
-            loginLogService.insertLoginLog(MyUid);//插入登陆日志
+            //插入登陆日志
+            loginLogService.insertLoginLog(MyUid);
             //创建余额账户
             Balance balance;
             balanceService.insertBalance(0,1,0,MyUid);
             balance = balanceService.selectFromBalanceByUid(MyUid);
-            tradeLogService.insertTradeLog(balance.getBalanceId(),1,0,0,"登录奖励增加1点量子");//写入交易记录
+            //写入交易记录
+            tradeLogService.insertTradeLog(balance.getBalanceId(),1,0,0,"登录奖励增加1点量子");
         }
         return R.isOk().msg("注册成功").data(check);
     }
@@ -136,7 +140,8 @@ public class UserController {
                 return R.isOk().msg("你的账号已被封停，请联系客服解封！");
             }
             if (user.getPassword().equals(MD5.MD5Encode("fr2018<%" + password  + "%>lz1220"))) {
-                data = "1";//密码相同返回1
+                //密码相同返回1
+                data = "1";
                 String format = DateTime.getNowTimeToString();
                 Date loginTime = loginLogService.getLatestLoginLog(user.getUid());
                 String lastestTime = DateTime.getTimeByDateToString(loginTime);
