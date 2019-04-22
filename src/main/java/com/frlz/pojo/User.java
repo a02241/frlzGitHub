@@ -6,7 +6,9 @@ import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-
+/**
+ * @author cz
+ */
 @Data
 @ApiModel(value="user对象",description="用户对象user")
 public class User {

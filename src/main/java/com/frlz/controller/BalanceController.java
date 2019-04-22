@@ -69,7 +69,7 @@ public class BalanceController {
      * @return java.lang.String
      * @version V1.0
      */
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @PostMapping("/quantumToBlock")
     @ApiOperation(value="量子换方块", notes="根据url的信息来量子换方块")
     @ApiImplicitParams({
@@ -80,7 +80,7 @@ public class BalanceController {
             @ApiResponse(code = 400, message = "请求参数没填好"),
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
-    public R<String> quantumToBlock(String uid, int quantum) {
+    public R quantumToBlock(String uid, int quantum) {
         Balance balance = balanceService.selectFromBalanceByUid(uid);
         if (balance.getQuantumBalance() >= 10){
             balanceService.updateQuantumBalanceByUid(uid,balance.getQuantumBalance() - quantum);
@@ -106,7 +106,7 @@ public class BalanceController {
      * @return java.lang.String
      * @version V1.0
      */
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @PostMapping("/blockToQuantum")
     @ApiOperation(value="方块换量子", notes="根据url的信息来方块换量子")
     @ApiImplicitParams({
@@ -117,7 +117,7 @@ public class BalanceController {
             @ApiResponse(code = 400, message = "请求参数没填好"),
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
-    public R<String> blockToQuantum(String uid,int block){
+    public R blockToQuantum(String uid, int block){
         Balance balance = balanceService.selectFromBalanceByUid(uid);
         if (balance.getBlockBalance() > 0){
             balanceService.updateQuantumBalanceByUid(uid,balance.getQuantumBalance() + block * 10);
@@ -154,7 +154,7 @@ public class BalanceController {
             @ApiResponse(code = 400, message = "请求参数没填好"),
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
-    public R<String> magicCubeToBlock(String uid,int magicCube){
+    public R magicCubeToBlock(String uid, int magicCube){
         Balance balance = balanceService.selectFromBalanceByUid(uid);
         if (balance.getMagicCubeBalance() > 0){
             balanceService.updateBlockBalanceByUid(uid,balance.getBlockBalance() + magicCube * 26);
@@ -191,7 +191,7 @@ public class BalanceController {
             @ApiResponse(code = 400, message = "请求参数没填好"),
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
-    public R<String> blockToMagicCube(String uid,int block){
+    public R blockToMagicCube(String uid, int block){
         Balance balance = balanceService.selectFromBalanceByUid(uid);
         if (balance.getBlockBalance() >= 27){
             balanceService.updateBlockBalanceByUid(uid,balance.getBlockBalance() - block);

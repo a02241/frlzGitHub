@@ -7,7 +7,9 @@ import lombok.Data;
 
 import java.util.Date;
 import java.util.List;
-
+/**
+ * @author cz
+ */
 @Data
 @ApiModel(value = "comments对象",description = "评论对象")
 public class Comments {

@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
-
+/**
+ * @author cz
+ */
 @RestControllerAdvice
 @RestController
 @Api(value="管理员controller",tags={"管理员信息操作接口"})

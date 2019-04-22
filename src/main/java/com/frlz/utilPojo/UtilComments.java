@@ -24,8 +24,10 @@ public class UtilComments {
     private String username;//用户名
     @ApiModelProperty(value = "用户识别码",name = "uid")
     private String uid;//用户识别码
+    @ApiModelProperty(value = "用户头像",name = "icon")
+    private String icon;//用户头像
     @ApiModelProperty(value = "提交时间",name = "commentTime")
     private Date commentTime;//提交时间
     @ApiModelProperty(value = "UtilReplys对象",name = "utilReplys")
-    private List<UtilReplys> utilReplys;
+    private UtilReplys utilReplys;
 }

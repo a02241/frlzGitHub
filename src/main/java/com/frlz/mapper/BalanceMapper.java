@@ -5,7 +5,9 @@ import com.frlz.utilPojo.UtilBalance;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
-
+/**
+ * @author cz
+ */
 public interface BalanceMapper {
 
     @SelectKey(keyProperty = "balanceId",resultType = String.class, before = true,

@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+/**
+ * @author cz
+ */
 @Transactional
 @Service
 public class FansServiceImpl implements FansService {

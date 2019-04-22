@@ -7,7 +7,9 @@ import com.frlz.utilPojo.UtilComments;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * @author cz
+ */
 public interface CommentsService {
 
     public List<UtilComments> findComments(Map<String, Object> conditions , int pageSize, int pageCode);

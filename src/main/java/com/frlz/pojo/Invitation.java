@@ -5,7 +5,9 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.Date;
-
+/**
+ * @author cz
+ */
 @Data
 @ApiModel(value = "invitation对象",description = "邀请码对象")
 public class Invitation {

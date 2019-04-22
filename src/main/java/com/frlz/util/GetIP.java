@@ -1,7 +1,9 @@
 package com.frlz.util;
 
 import javax.servlet.http.HttpServletRequest;
-
+/**
+ * @author cz
+ */
 public class GetIP {
     public static String getip(HttpServletRequest request){
         String remoteAddr = request.getRemoteAddr();

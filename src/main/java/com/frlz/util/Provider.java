@@ -1,5 +1,7 @@
 package com.frlz.util;
-
+/**
+ * @author cz
+ */
 public class Provider {
     public String queryShares(String code ,String before ,String end){
         StringBuilder sb = new StringBuilder();

@@ -4,7 +4,9 @@ import com.frlz.pojo.Fans;
 import com.frlz.utilPojo.UtilFans;
 
 import java.util.List;
-
+/**
+ * @author cz
+ */
 public interface FansService {
 
     void insertFans(String uid,String fansUId);

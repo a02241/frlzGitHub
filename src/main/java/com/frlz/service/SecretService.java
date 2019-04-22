@@ -3,7 +3,9 @@ package com.frlz.service;
 import com.frlz.pojo.Secret;
 
 import java.util.Map;
-
+/**
+ * @author cz
+ */
 public interface SecretService {
 
     void insertSecret(Secret secret);

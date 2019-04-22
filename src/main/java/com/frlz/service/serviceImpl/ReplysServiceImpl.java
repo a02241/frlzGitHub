@@ -46,7 +46,7 @@ public class ReplysServiceImpl implements ReplysService {
     }
 
     @Override
-    public List<UtilReplys> selectRelysByCId(String cId) {
+    public UtilReplys selectRelysByCId(String cId) {
         return replysMapper.selectReplysByCId(cId);
     }
 

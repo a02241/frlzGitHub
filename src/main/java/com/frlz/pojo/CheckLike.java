@@ -3,7 +3,9 @@ package com.frlz.pojo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
+/**
+ * @author cz
+ */
 @Data
 @ApiModel(value = "checkLike对象",description = "点赞对象")
 public class CheckLike {

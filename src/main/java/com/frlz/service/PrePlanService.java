@@ -4,7 +4,9 @@ import com.frlz.pojo.PrePlan;
 
 import java.util.Date;
 import java.util.List;
-
+/**
+ * @author cz
+ */
 public interface PrePlanService {
 
     void insertIntoPrePlan(PrePlan prePlan);

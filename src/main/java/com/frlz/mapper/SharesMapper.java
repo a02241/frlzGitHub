@@ -5,7 +5,9 @@ import com.frlz.util.Provider;
 import org.apache.ibatis.annotations.SelectProvider;
 
 import java.util.List;
-
+/**
+ * @author cz
+ */
 public interface SharesMapper {
 
     @SelectProvider(type = Provider.class,method = "queryShares")

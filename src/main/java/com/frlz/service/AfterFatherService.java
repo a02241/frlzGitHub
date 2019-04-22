@@ -6,7 +6,9 @@ import com.frlz.pojo.AfterTag;
 
 import java.util.Date;
 import java.util.List;
-
+/**
+ * @author cz
+ */
 public interface AfterFatherService {
     String getAfterFatherId(String uid,String time);
 

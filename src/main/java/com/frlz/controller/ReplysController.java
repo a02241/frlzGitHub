@@ -7,8 +7,8 @@ import com.frlz.service.UserService;
 import com.frlz.util.R;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -22,6 +22,7 @@ import java.util.HashMap;
  **/
 @RestControllerAdvice
 @RestController
+@Transactional
 @Api(value="回复评论controller",tags={"回复评论信息操作接口"})
 public class ReplysController {
 
@@ -74,22 +75,24 @@ public class ReplysController {
     @PostMapping("addReplys")
     @ApiOperation(value="添加评论回复", notes="根据url的信息来添加评论回复")
     @ApiImplicitParams({
+            @ApiImplicitParam(name = "uid", value = "用户别码", required = true, dataType = "String",paramType = "query")
     })
     @ApiResponses({
             @ApiResponse(code = 400, message = "请求参数没填好"),
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
-    public R<String> addReplys( @ApiParam(name="用户对象",value="cId(评论的主键),username,content",required=true)Replys replys){
-        User user = userService.selectUserByUsername(replys.getUsername());
+    public R addReplys(@ApiParam(name="用户对象",value="cId(评论的主键),content",required=true)Replys replys, String uid){
+        User user = userService.selectUserByUid(uid);
         if (user != null) {
             if (user.getExperience() > 0) {
+                replys.setUsername(user.getUsername());
                 replysService.addReplys(replys);
+                return R.isOk().msg("success");
             }else {
                 return R.isFail().msg("等级为0,答题后回复评论");
             }
         }else {
             return R.isFail().msg("username错误");
         }
-        return R.isFail().msg("参数错误");
     }
 }
