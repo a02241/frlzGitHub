@@ -54,14 +54,15 @@ public class BlogController {
     public R<HashMap<String,Object>> searchBlog(@RequestParam(defaultValue="1") int pageCode, @RequestParam(defaultValue="")String uid)  {
         HashMap<String,Object> map = blogService.searchBlog(pageCode,uid,1);
         String username;
-        if(uid.equals("")) {
+        if("".equals(uid)) {
             map.put("uid","用户名已过期,请重新登录");
             return R.isOk().data(map);
         }else {
-            username = userService.searchUsernameById(uid);//根据uid查询用户名
+            //根据uid查询用户名
+            username = userService.searchUsernameById(uid);
         }
         map.put("username", username);
-        if(username.equals("")) {
+        if("".equals(username)) {
             map.put("username","用户名已过期,请重新登录");
             return R.isOk().data(map);
         }
