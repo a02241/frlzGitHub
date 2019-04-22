@@ -17,8 +17,8 @@ public class Comments {
 	private String blogId;//外键
 	@ApiModelProperty(value = "信息",name = "comments")
 	private String comments;//信息
-	@ApiModelProperty(value = "用户名",name = "username")
-	private String username;//用户名
+	@ApiModelProperty(value = "用户名",name = "uid")
+	private String uid;//用户名
 	@ApiModelProperty(value = "提交时间",name = "commentTime")
 	private Date commentTime;//提交时间
 	@ApiModelProperty(value = "UtilReplys对象",name = "utilReplys")

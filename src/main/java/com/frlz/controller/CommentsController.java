@@ -9,6 +9,7 @@ import com.frlz.service.ReplysService;
 import com.frlz.service.UserService;
 import com.frlz.util.DateTime;
 import com.frlz.util.R;
+import com.frlz.utilPojo.UtilComments;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -83,7 +84,7 @@ public class CommentsController {
             return R.isFail().msg("blogId为空");
         }
         conditions.put("blogId",blogId);//把blogId放入map集合中
-        List<Comments> comments =commentsService.findComments(conditions, 12, pageCode);
+        List<UtilComments> comments =commentsService.findComments(conditions, 12, pageCode);
         map.put("comments", comments);//conditions-->>map存放数据,pageCode-->>分页条数,从第几个开始
         return R.isOk().data(map);
     }
@@ -112,13 +113,13 @@ public class CommentsController {
             @ApiResponse(code = 400, message = "请求参数没填好"),
             @ApiResponse(code = 404, message = "请求路径没有或页面跳转路径不对")
     })
-    public R<HashMap<String,Object>> saveComment( @ApiParam(name="评论对象",value="必填参数comments，blogId，username",required=true)Comments comments) {
-        User user = userService.selectUserByUsername(comments.getUsername());
+    public R<HashMap<String,Object>> saveComment( @ApiParam(name="评论对象",value="必填参数comments，blogId，uid",required=true)Comments comments) {
+        User user = userService.selectUserByUid(comments.getUid());
         if(user.getExperience() > 0){
             String format = DateTime.getTimeByDateToString(new Date());//创建当前时间以yyyy-MM-dd格式
-            int count = commentsService.selectCommentTimeCountByTime(format,comments.getUsername());//返回前一次当天写博客的次数
+            int count = commentsService.selectCommentTimeCountByTime(format,comments.getUid());//返回前一次当天写博客的次数
             if(count < 3){//回帖小于三次加8经验，超过不加
-                userService.updateExperienceByUid(user.getUid(),user.getExperience() + 5);//写入数据库
+                userService.updateExperienceByUid(comments.getUid(),user.getExperience() + 5);//写入数据库
             }
             blogService.updateBlogByBlogId(comments.getBlogId(),2);//评论数+1
             commentsService.saveComment(comments);

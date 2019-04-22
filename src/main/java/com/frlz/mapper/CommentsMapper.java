@@ -1,6 +1,7 @@
 package com.frlz.mapper;
 
 import com.frlz.pojo.Comments;
+import com.frlz.utilPojo.UtilComments;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -25,25 +26,27 @@ public interface CommentsMapper {
             @Result(property = "cId", column = "cId"),
             @Result(property = "blogId", column = "blogId"),
             @Result(property = "comments", column = "comments"),
-            @Result(property = "username", column = "username"),
+            @Result(property = "uid", column = "uid"),
+            @Result(property = "username", column = "uid",
+                    one = @One(select = "com.frlz.mapper.UserMapper.searchUsernameById")),
             @Result(property = "utilReplys", column = "cId",
                     many = @Many(select = "com.frlz.mapper.ReplysMapper.selectReplysByCId"))
     })
-    List<Comments> findComments(Map<String,Object> map);
+    List<UtilComments> findComments(Map<String,Object> map);
 
 
 
 
-    @Select("select count(*) from comments where DATE_FORMAT(commentTime, '%Y-%m-%d') = #{date} and username = #{username}")
-    int selectCommentTimeCountByTime(String date,String username);
+    @Select("select count(*) from comments where DATE_FORMAT(commentTime, '%Y-%m-%d') = #{date} and uid = #{uid}")
+    int selectCommentTimeCountByTime(String date,String uid);
 
 
 
     @SelectKey(keyProperty = "cId",resultType = String.class, before = true,
             statement = "select replace(uuid(), '-', '')")
     @Options(keyProperty = "cId", useGeneratedKeys = true)
-    @Insert("insert into comments(blogId, comments,cId,username,commentTime)" +
-            " values( #{blogId},#{comments}, #{cId}, #{username}, #{commentTime})")
+    @Insert("insert into comments(blogId, comments,cId,uid,commentTime)" +
+            " values( #{blogId},#{comments}, #{cId}, #{uid}, #{commentTime})")
     void saveComment(Comments comments);
 
 
