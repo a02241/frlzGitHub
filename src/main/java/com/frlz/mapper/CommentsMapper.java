@@ -25,10 +25,6 @@ public interface CommentsMapper {
             " order by c.commentTime" +
             " limit ${(pageCode-1)*pageSize},${pageSize}")
     @Results({
-            @Result(property = "cId", column = "cId"),
-            @Result(property = "blogId", column = "blogId"),
-            @Result(property = "comments", column = "comments"),
-            @Result(property = "uid", column = "uid"),
             @Result(property = "username", column = "uid",
                     one = @One(select = "com.frlz.mapper.UserMapper.searchUsernameById")),
             @Result(property = "icon", column = "uid",
