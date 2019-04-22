@@ -27,8 +27,8 @@ public class DateTime {
     public static String getNowTimeToString(){
         Date date= new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String NowTime = sdf.format(date);
-        return NowTime;
+        String nowTime = sdf.format(date);
+        return nowTime;
     }
 
     /**
@@ -67,14 +67,14 @@ public class DateTime {
 
     public static Date getDateToDate(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String SDate = sdf.format(date);
-        Date NewDate = null;
+        String sDate = sdf.format(date);
+        Date newDate = null;
         try {
-            NewDate = sdf.parse(SDate);
+            newDate = sdf.parse(sDate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return NewDate;
+        return newDate;
     }
 
     /**
@@ -91,8 +91,8 @@ public class DateTime {
 
     public static String getTimeByDateToString(Date date){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String NowTime = sdf.format(date);
-        return NowTime;
+        String nowTime = sdf.format(date);
+        return nowTime;
     }
 
     public static Date getDate(){

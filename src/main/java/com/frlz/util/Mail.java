@@ -50,6 +50,7 @@ public class Mail {
  
             // 创建session
             Session session = Session.getDefaultInstance(p, new Authenticator() {
+                @Override
                 protected PasswordAuthentication getPasswordAuthentication() {
                     //用户名可以用QQ账号也可以用邮箱的别名:第一个参数为邮箱账号,第二个为授权码
                     PasswordAuthentication pa = new PasswordAuthentication(loginAccount,loginAuthCode);

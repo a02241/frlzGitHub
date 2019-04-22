@@ -24,5 +24,5 @@ public interface BalanceService {
 
     List<Balance> selectAllBalance();
 
-    void LoginAddQuantumBalanceByUid(String uid,int quantumBalance);
+    void loginAddQuantumBalanceByUid(String uid,int quantumBalance);
 }
