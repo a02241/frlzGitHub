@@ -40,6 +40,7 @@ public class Blog {
 	private String summary;//用户摘要
 	@ApiModelProperty(value = "股票代码",name = "code")
 	private String code;//股票代码
+	private String blogTag;//博客标签
 	
 	
 }

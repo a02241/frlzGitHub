@@ -62,7 +62,7 @@ public interface BlogMapper {
             "#{uid}, " +
             "#{title}, " +
             "#{summary}, " +
-            "#{code})")
+            "#{code},#{blogTag})")
     void insertBlog(Blog blog);
 
     @Update("update blog set likes = likes + 1,weight = weight + 0.1 where blogId = #{blogId}")
