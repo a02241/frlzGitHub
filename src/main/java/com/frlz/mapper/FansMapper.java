@@ -1,10 +1,9 @@
 package com.frlz.mapper;
 
 import com.frlz.pojo.Fans;
-import com.frlz.utilPojo.UtilFans;
+import com.frlz.dto.UtilFans;
 import org.apache.ibatis.annotations.*;
 
-import javax.rmi.CORBA.Util;
 import java.util.List;
 /**
  * @author cz

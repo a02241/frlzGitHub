@@ -1,4 +1,4 @@
-package com.frlz.service.serviceImpl;
+package com.frlz.service.impl;
 
 import com.frlz.mapper.AfterFatherMapper;
 import com.frlz.mapper.PrePlanMapper;

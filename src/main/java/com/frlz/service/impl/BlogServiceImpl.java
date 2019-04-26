@@ -1,11 +1,11 @@
-package com.frlz.service.serviceImpl;
+package com.frlz.service.impl;
 
 import com.frlz.mapper.BlogMapper;
 import com.frlz.pojo.Blog;
 import com.frlz.service.BlogService;
 import com.frlz.util.DateTime;
 import com.frlz.util.PageBean;
-import com.frlz.utilPojo.UitlBlog;
+import com.frlz.dto.UitlBlog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

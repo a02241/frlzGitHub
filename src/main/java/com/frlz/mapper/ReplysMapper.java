@@ -1,7 +1,7 @@
 package com.frlz.mapper;
 
 import com.frlz.pojo.Replys;
-import com.frlz.utilPojo.UtilReplys;
+import com.frlz.dto.UtilReplys;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;

@@ -70,7 +70,6 @@ public class Mail {
             
             //2收件人:可以多个
             //一个的收件人
-            //msg.setRecipient(RecipientType.TO, new InternetAddress("956134606@qq.com"));
             
             InternetAddress[] receptientsEmail=new InternetAddress[recipients.length];
             for(int i=0;i<recipients.length;i++){

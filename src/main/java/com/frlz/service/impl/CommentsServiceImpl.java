@@ -1,11 +1,11 @@
-package com.frlz.service.serviceImpl;
+package com.frlz.service.impl;
 
 import com.frlz.mapper.CommentsMapper;
 import com.frlz.pojo.Comments;
 import com.frlz.service.CommentsService;
 import com.frlz.util.DateTime;
 import com.frlz.util.PageBean;
-import com.frlz.utilPojo.UtilComments;
+import com.frlz.dto.UtilComments;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

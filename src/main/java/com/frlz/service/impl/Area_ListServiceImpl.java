@@ -1,4 +1,4 @@
-package com.frlz.service.serviceImpl;
+package com.frlz.service.impl;
 
 import com.frlz.mapper.Area_ListMapper;
 import com.frlz.pojo.Area_List;

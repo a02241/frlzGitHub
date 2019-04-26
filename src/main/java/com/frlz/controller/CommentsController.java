@@ -9,7 +9,7 @@ import com.frlz.service.ReplysService;
 import com.frlz.service.UserService;
 import com.frlz.util.DateTime;
 import com.frlz.util.R;
-import com.frlz.utilPojo.UtilComments;
+import com.frlz.dto.UtilComments;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;

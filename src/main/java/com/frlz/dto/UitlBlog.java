@@ -1,6 +1,5 @@
-package com.frlz.utilPojo;
+package com.frlz.dto;
 
-import com.frlz.pojo.User;
 import lombok.Data;
 
 /**

@@ -6,7 +6,7 @@ import com.frlz.service.AfterTagService;
 import com.frlz.service.UserService;
 import com.frlz.util.DateTime;
 import com.frlz.util.R;
-import com.frlz.utilPojo.UtilAfterFather;
+import com.frlz.dto.UtilAfterFather;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -64,7 +64,8 @@ public class AfterFatherController {
             afterFatherService.addAfterDiscuss(uid);
         }
         afterTag.setAfterFatherId(afterFatherService.getAfterFatherId(uid,DateTime.getNowTimeToString()));
-        if (afterTagService.selectAfterTagByAfterTag(afterTag) == null){//如果没有标签，则添加标签，否则更新
+        //如果没有标签，则添加标签，否则更新
+        if (afterTagService.selectAfterTagByAfterTag(afterTag) == null){
             afterTag.setAfterFatherId(afterFatherService.getAfterFatherId(uid,DateTime.getNowTimeToString()));
             afterTagService.addAfterTag(afterTag);
         }else {
@@ -104,7 +105,7 @@ public class AfterFatherController {
         }
     }
 
-    @PostMapping("deleteAfterTag")
+    @PostMapping("deleteAfterTag") //AfterTag/delete
     /**
      *  删除盘后标签
      * @title deleteAfterTag

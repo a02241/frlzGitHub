@@ -1,7 +1,7 @@
 package com.frlz.mapper;
 
 import com.frlz.pojo.Blog;
-import com.frlz.utilPojo.UitlBlog;
+import com.frlz.dto.UitlBlog;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

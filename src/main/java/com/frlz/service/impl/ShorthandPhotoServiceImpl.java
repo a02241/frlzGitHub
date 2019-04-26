@@ -1,8 +1,7 @@
-package com.frlz.service.serviceImpl;
+package com.frlz.service.impl;
 
 import com.frlz.mapper.ShorthandPhotoMapper;
 import com.frlz.service.ShorthandPhotoService;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

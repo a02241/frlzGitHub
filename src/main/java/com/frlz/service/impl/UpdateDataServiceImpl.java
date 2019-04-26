@@ -1,7 +1,6 @@
-package com.frlz.service.serviceImpl;
+package com.frlz.service.impl;
 
 import com.frlz.mapper.UpdateDataMapper;
-import com.frlz.pojo.Shares;
 import com.frlz.pojo.UpdateData;
 import com.frlz.service.UpdateDataService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,10 +81,7 @@ public class UpdateDataServiceImpl implements UpdateDataService {
                 count ++;
                 System.out.println("第"+count+"次"+name+"~~~~~~~~~~");
             }
-            /*if (updateDataMapper.selectTrue(realCode) == 0){
-                count ++;
-                System.out.println("第"+count+"次无"+name+"表~~~~~~~~~~");
-            }*/
+
         }
         System.out.println(count);
         return null;

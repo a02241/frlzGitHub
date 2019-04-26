@@ -1,7 +1,7 @@
 package com.frlz.service;
 
 import com.frlz.pojo.Fans;
-import com.frlz.utilPojo.UtilFans;
+import com.frlz.dto.UtilFans;
 
 import java.util.List;
 /**

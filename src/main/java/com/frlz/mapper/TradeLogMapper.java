@@ -1,7 +1,7 @@
 package com.frlz.mapper;
 
 import com.frlz.pojo.TradeLog;
-import com.frlz.utilPojo.UtilTradeLog;
+import com.frlz.dto.UtilTradeLog;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;

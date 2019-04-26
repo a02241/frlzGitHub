@@ -1,4 +1,4 @@
-package com.frlz.service.serviceImpl;
+package com.frlz.service.impl;
 
 import com.frlz.mapper.SecretMapper;
 import com.frlz.mapper.UserMapper;
@@ -157,7 +157,8 @@ public class UserServiceImpl implements UserService {
         SimpleDateFormat sdf;
         sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String format = sdf.format(date);
-        Date newDate = null;//创建当前时间以yyyy-MM-dd HH:mm:ss格式
+        //创建当前时间以yyyy-MM-dd HH:mm:ss格式
+        Date newDate = null;
         try {
             newDate = sdf.parse(format);
         } catch (ParseException e) {

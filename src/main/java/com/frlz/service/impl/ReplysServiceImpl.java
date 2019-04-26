@@ -1,16 +1,14 @@
-package com.frlz.service.serviceImpl;
+package com.frlz.service.impl;
 
 import com.frlz.mapper.ReplysMapper;
-import com.frlz.pojo.Comments;
 import com.frlz.pojo.Replys;
 import com.frlz.service.ReplysService;
-import com.frlz.utilPojo.UtilReplys;
+import com.frlz.dto.UtilReplys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

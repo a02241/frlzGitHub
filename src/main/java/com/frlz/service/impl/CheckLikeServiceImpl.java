@@ -1,7 +1,6 @@
-package com.frlz.service.serviceImpl;
+package com.frlz.service.impl;
 
 import com.frlz.mapper.CheckLikeMapper;
-import com.frlz.pojo.Blog;
 import com.frlz.pojo.CheckLike;
 import com.frlz.service.CheckLikeService;
 import org.springframework.beans.factory.annotation.Autowired;
